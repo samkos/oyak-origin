@@ -4,13 +4,22 @@ import os
 def txt2sql(fileName,tableName,what):
     origFileh = open(fileName,"r")
     sqlFileh = open(fileName+"_sql.sql","w")
-                     
-    fileList = origFileh.readlines()
+
+    # lecture d'un gros fichier
+    l=""
+    chunk=origFileh.read(10000)
+    while (len(chunk)>0):
+        l=l+chunk
+        #print len(o)
+        chunk=origFileh.read(10000)
+    #print len(l)
+    #print o
+    
 
     nbArticles=0
     sqlFileh.write("use oyak; \n")
     sqlFileh.write("TRUNCATE %s; \n"%tableName)
-    for l in fileList:
+    if len(l)>0:
         l=l.replace("'","\\'")
         articles=string.split(l,"=")
         for a in articles:
@@ -34,6 +43,7 @@ def txt2sql(fileName,tableName,what):
     sqlFileh.close()
 
     print "%d articles trouves dans %s "%(nbArticles,fileName)
+
 
 def sqlbatch(job,comment):
     mysql_cmd="\"c:\\Program Files\\easyPHP1-8\\mysql\\bin\\mysql\" -u root < %s"%job
