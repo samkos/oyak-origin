@@ -34,12 +34,12 @@ else:
     raiseError=1
     isReadFromServer=1
     website_address="http://127.0.0.1/phpmyfactures"
-    fichierIp="c:/Program Files/EasyPHP1-8/www/cible/a copier/Platform/test/S24Profiles.reg"
-    fichierIpBackup="c:/Program Files/EasyPHP1-8/www/cible/a copier/Platform/test/S24old.reg"
-    fichierIpNew="c:/Program Files/EasyPHP1-8/www/cible/a copier/Platform/test/S24new.reg"
-    fichierIpTemplate="c:/Program Files/EasyPHP1-8/www/cible/a copier/Application/Oyak/S24Profiles.reg"
-    fichierAppTemplate="c:/Program Files/EasyPHP1-8/www/cible/a copier/Application/Oyak/Data/%s.bak"
-    fichierAppOldTemplate="c:/Program Files/EasyPHP1-8/www/cible/a copier/Application/Oyak/Data/%s.old"
+    fichierIp="c:/Program Files/EasyPHP1-8/www/phpmyfactures/device/a copier/Platform/test/S24Profiles.reg"
+    fichierIpBackup="c:/Program Files/EasyPHP1-8/www/phpmyfactures/device/a copier/Platform/test/S24old.reg"
+    fichierIpNew="c:/Program Files/EasyPHP1-8/www/phpmyfactures/device/a copier/Platform/test/S24new.reg"
+    fichierIpTemplate="c:/Program Files/EasyPHP1-8/www/phpmyfactures/device/a copier/Application/Oyak/S24Profiles.reg"
+    fichierAppTemplate="c:/Program Files/EasyPHP1-8/www/phpmyfactures/device/a copier/Application/Oyak/Data/%s.bak"
+    fichierAppOldTemplate="c:/Program Files/EasyPHP1-8/www/phpmyfactures/device/a copier/Application/Oyak/Data/%s.old"
 
 myVendeur=0
 myClient=0;

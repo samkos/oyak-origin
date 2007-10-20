@@ -107,10 +107,10 @@ if (!$message) { $message="&nbsp;";}
 <br />
 </td> </tr>
 <tr >
-    <td /> <a href="./perform_sql.php?order=base_init">Initialiser la base</a></td>
+    <td /> <a href="./perform_sql.php?order=../sql/base_init">Initialiser la base</a></td>
 </tr>
 <tr >
-    <td /> <a href="./perform_sql.php?order=base_exemple">Créer une base d'exemple</a></td>
+    <td /> <a href="./perform_sql.php?order=../sql/base_exemple">Créer une base d'exemple</a></td>
 </tr>
 <tr >
     <td /> <a href="../produits/check.php">Verifier la base</a></td>
