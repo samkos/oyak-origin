@@ -1,0 +1,3891 @@
+HKEY_LOCAL_MACHINE
+<0000> 	[PMail]
+<0000> 		[MessageStore]
+(0000) 				Moving = 0x00000000
+<0001> 	[TAPI]
+<0000> 		[TSP]
+(0000) 				PPID = 0x00000001
+<0000> 			[unimodem.dll]
+(0000) 					PPID = 0x00000001
+<0002> 	[nls]
+(0000) 			DefaultLCID = 0x00000409
+(0001) 			ExtraCurrency = 0x000020ac
+<0000> 		[overrides]
+<0003> 	[MUI]
+(0000) 			Enable = 0x00000001
+(0001) 			SysLang = 0x00000409
+<0004> 	[init]
+(0000) 			Launch20 = "device.exe"
+(0001) 			Launch30 = "gwes.exe"
+(0002) 			Depend30 = hex: 14,00
+(0003) 			Launch60 = "services.exe"
+(0004) 			Depend60 = hex: 14,00
+(0005) 			Launch50 = "explorer.exe"
+(0006) 			Depend50 = hex: 14,00,1e,00
+(0007) 			Launch70 = "Startup.exe"
+(0008) 			Depend70 = hex: 32,00
+<0005> 	[Drivers]
+(0000) 			RootKey = "Drivers\BuiltIn"
+<0000> 		[Active]
+<0000> 			[39]
+(0000) 					Hnd = 0x0068be60
+(0001) 					Name = "NDS1:"
+(0002) 					Key = "Drivers\PCMCIA\Symbol-Spectrum24_LA4100_Series_WLAN_PC_Card-E063"
+(0003) 					Sckt = DWORD of invalid size: 2
+
+(0004) 					PnpId = "Symbol-Spectrum24_LA4100_Series_WLAN_PC_Card-E063"
+(0005) 					RegenumParms = MULTI_SZ: 
+							"Sckt"
+							"PnpId"
+							"RegenumParms"
+
+(0006) 					InterfaceType = 0x00000008
+<0001> 			[38]
+(0000) 					Hnd = 0x0068bb80
+(0001) 					Name = "ETM1:"
+(0002) 					Key = "Drivers\BuiltIn\Ethman"
+(0003) 					InterfaceType = 0xffffffff
+<0002> 			[37]
+(0000) 					Hnd = 0x0068bae0
+(0001) 					Name = "NPW1:"
+(0002) 					Key = "Drivers\BuiltIn\NdisPower"
+(0003) 					InterfaceType = 0xffffffff
+<0003> 			[36]
+(0000) 					Hnd = 0x006863d0
+(0001) 					Key = "Drivers\BuiltIn\PCMCIA"
+(0002) 					InterfaceType = 0xffffffff
+<0004> 			[35]
+(0000) 					Hnd = 0x00686330
+(0001) 					Name = "PSK1:"
+(0002) 					Key = "Drivers\BuiltIn\PSKWLAN"
+(0003) 					InterfaceType = 0xffffffff
+<0005> 			[34]
+(0000) 					Hnd = 0x00686290
+(0001) 					Name = "LEP1:"
+(0002) 					Key = "Drivers\BuiltIn\EAPWLAN"
+(0003) 					InterfaceType = 0xffffffff
+<0006> 			[33]
+(0000) 					Hnd = 0x00686010
+(0001) 					Name = "ZCF1:"
+(0002) 					Key = "Drivers\BuiltIn\ZeroConfig"
+(0003) 					InterfaceType = 0xffffffff
+<0007> 			[32]
+(0000) 					Hnd = 0x0005ef40
+(0001) 					Name = "ARS1:"
+(0002) 					Key = "Drivers\BuiltIn\autoras"
+(0003) 					InterfaceType = 0xffffffff
+<0008> 			[31]
+(0000) 					Hnd = 0x0005e440
+(0001) 					Name = "PRT1:"
+(0002) 					Key = "Drivers\BuiltIn\TRANS"
+(0003) 					InterfaceType = 0xffffffff
+<0009> 			[30]
+(0000) 					Hnd = 0x00685110
+(0001) 					Name = "UIO1:"
+(0002) 					Key = "Drivers\BuiltIn\NDISUIO"
+(0003) 					InterfaceType = 0xffffffff
+<0010> 			[29]
+(0000) 					Hnd = 0x006846c0
+(0001) 					Name = "KBD1:"
+(0002) 					Key = "Drivers\BuiltIn\Keyboard"
+(0003) 					InterfaceType = 0xffffffff
+<0011> 			[28]
+(0000) 					Hnd = 0x00683c70
+(0001) 					Name = "TCH1:"
+(0002) 					Key = "Drivers\BuiltIn\Touch"
+(0003) 					InterfaceType = 0xffffffff
+<0012> 			[27]
+(0000) 					Hnd = 0x00683bd0
+(0001) 					Name = "SML1:"
+(0002) 					Key = "Drivers\BuiltIn\sdmmcloader"
+(0003) 					InterfaceType = 0xffffffff
+<0013> 			[26]
+(0000) 					Hnd = 0x0005a730
+(0001) 					Name = "KLT1:"
+(0002) 					Key = "Drivers\BuiltIn\KeyLightDrv"
+(0003) 					InterfaceType = 0xffffffff
+<0014> 			[25]
+(0000) 					Hnd = 0x0005e500
+(0001) 					Name = "BKL1:"
+(0002) 					Key = "Drivers\BuiltIn\Backlight"
+(0003) 					InterfaceType = 0xffffffff
+<0015> 			[24]
+(0000) 					Hnd = 0x0005beb0
+(0001) 					Name = "WLP1:"
+(0002) 					Key = "Drivers\BuiltIn\WLAN"
+(0003) 					InterfaceType = 0xffffffff
+<0016> 			[23]
+(0000) 					Hnd = 0x00046430
+(0001) 					Name = "BAT1:"
+(0002) 					Key = "Drivers\BuiltIn\Battery"
+(0003) 					InterfaceType = 0xffffffff
+<0017> 			[22]
+(0000) 					Hnd = 0x000446e0
+(0001) 					Name = "COM2:"
+(0002) 					Key = "Drivers\BuiltIn\USB"
+(0003) 					InterfaceType = 0xffffffff
+<0018> 			[21]
+(0000) 					Hnd = 0x00043830
+(0001) 					Name = "COM5:"
+(0002) 					Key = "Drivers\BuiltIn\VCom5"
+(0003) 					InterfaceType = 0xffffffff
+<0019> 			[20]
+(0000) 					Hnd = 0x000429a0
+(0001) 					Name = "COM3:"
+(0002) 					Key = "Drivers\BuiltIn\VCom3"
+(0003) 					InterfaceType = 0xffffffff
+<0020> 			[19]
+(0000) 					Hnd = 0x00041b10
+(0001) 					Name = "COM1:"
+(0002) 					Key = "Drivers\BuiltIn\VCom1"
+(0003) 					InterfaceType = 0xffffffff
+<0021> 			[17]
+(0000) 					Hnd = 0x0003d3d0
+(0001) 					Name = "SCN1:"
+(0002) 					Key = "Drivers\BuiltIn\BarCodeReader"
+(0003) 					InterfaceType = 0xffffffff
+<0022> 			[16]
+(0000) 					Hnd = 0x0003d300
+(0001) 					Name = "SYS1:"
+(0002) 					Key = "Drivers\BuiltIn\Power"
+(0003) 					InterfaceType = 0xffffffff
+<0023> 			[14]
+(0000) 					Hnd = 0x0003d230
+(0001) 					Name = "SIP0:"
+(0002) 					Key = "Drivers\BuiltIn\SIP"
+(0003) 					InterfaceType = 0xffffffff
+<0024> 			[13]
+(0000) 					Hnd = 0x00038c10
+(0001) 					Name = "WAM1:"
+(0002) 					Key = "Drivers\BuiltIn\WAPIMAN"
+(0003) 					InterfaceType = 0xffffffff
+<0025> 			[12]
+(0000) 					Hnd = 0x00038b60
+(0001) 					Key = "Drivers\BuiltIn\TAPI"
+(0002) 					InterfaceType = 0xffffffff
+<0026> 			[11]
+(0000) 					Hnd = 0x00037560
+(0001) 					Name = "NDS0:"
+(0002) 					Key = "Drivers\BuiltIn\NDIS"
+(0003) 					InterfaceType = 0xffffffff
+<0027> 			[10]
+(0000) 					Hnd = 0x00035690
+(0001) 					Name = "SER5:"
+(0002) 					Key = "Drivers\BuiltIn\Serial5"
+(0003) 					InterfaceType = 0xffffffff
+<0028> 			[09]
+(0000) 					Hnd = 0x000337c0
+(0001) 					Name = "SER3:"
+(0002) 					Key = "Drivers\BuiltIn\Serial3"
+(0003) 					InterfaceType = 0xffffffff
+<0029> 			[08]
+(0000) 					Hnd = 0x000316d0
+(0001) 					Name = "SER1:"
+(0002) 					Key = "Drivers\BuiltIn\Serial1"
+(0003) 					InterfaceType = 0xffffffff
+<0030> 			[07]
+(0000) 					Hnd = 0x00031630
+(0001) 					Name = "SPI1:"
+(0002) 					Key = "Drivers\BuiltIn\SPI"
+(0003) 					InterfaceType = 0xffffffff
+<0031> 			[05]
+(0000) 					Hnd = 0x00030670
+(0001) 					Name = "RCM1:"
+(0002) 					Key = "Drivers\BuiltIn\ResCoord"
+(0003) 					InterfaceType = 0xffffffff
+<0032> 			[03]
+(0000) 					Hnd = 0x00030610
+(0001) 					Name = "DSK2:"
+(0002) 					Key = "Drivers\BuiltIn\FlashFX2"
+(0003) 					InterfaceType = 0xffffffff
+<0033> 			[02]
+(0000) 					Hnd = 0x00030570
+(0001) 					Name = "DSK1:"
+(0002) 					Key = "Drivers\BuiltIn\FlashFX"
+(0003) 					InterfaceType = 0xffffffff
+<0034> 			[01]
+(0000) 					Hnd = 0x00030410
+(0001) 					Key = "Drivers\BuiltIn"
+(0002) 					ClientInfo = 0x00000000
+<0001> 		[BuiltIn]
+(0000) 				Dll = "RegEnum.dll"
+<0000> 			[Imager]
+<0000> 				[CONFIG0]
+<0001> 			[LPCD]
+(0000) 					Dll = "lpcd.dll"
+(0001) 					Order = 0x00000007
+(0002) 					Keep = 0x00000001
+(0003) 					Entry = "LPCDInitialize"
+<0002> 			[NDIS]
+(0000) 					Dll = "NDIS.Dll"
+(0001) 					Prefix = "NDS"
+(0002) 					Index = 0x00000000
+(0003) 					Order = 0x00000001
+(0004) 					IClass = "{A32942B7-920C-486b-B0E6-92A702A99B35}"
+<0003> 			[autoras]
+(0000) 					Prefix = "ARS"
+(0001) 					Dll = "autoras.dll"
+(0002) 					Index = 0x00000001
+(0003) 					Order = 0x00000004
+<0004> 			[NDISUIO]
+(0000) 					Prefix = "UIO"
+(0001) 					Dll = "ndisuio.dll"
+(0002) 					Index = 0x00000001
+(0003) 					Order = 0x00000003
+<0005> 			[NdisPower]
+(0000) 					Prefix = "NPW"
+(0001) 					Dll = "NDISPWR.dll"
+(0002) 					Index = 0x00000001
+(0003) 					Order = 0x00000005
+<0006> 			[ZeroConfig]
+(0000) 					Prefix = "ZCF"
+(0001) 					Dll = "WZCSVC.dll"
+(0002) 					Index = 0x00000001
+(0003) 					Order = 0x00000004
+<0007> 			[Ethman]
+(0000) 					Prefix = "ETM"
+(0001) 					Dll = "ethman.dll"
+(0002) 					Index = 0x00000001
+(0003) 					Order = 0x00000005
+<0008> 			[AFD]
+(0000) 					Dll = "AFD.Dll"
+(0001) 					Order = 0x00000002
+(0002) 					Keep = 0x00000001
+(0003) 					Entry = "AfdInitialize"
+<0009> 			[SNMP]
+(0000) 					Dll = "snmp.dll"
+(0001) 					Order = 0x00000003
+(0002) 					Keep = 0x00000001
+(0003) 					Entry = "SnmpInitialize"
+<0010> 			[TAPI]
+(0000) 					Dll = "TAPI.dll"
+(0001) 					Order = 0x00000001
+<0011> 			[PCI]
+<0000> 				[Template]
+<0000> 					[NE2000]
+(0000) 							Dll = "NDIS.dll"
+(0001) 							Class = 0x00000002
+(0002) 							SubClass = 0x00000000
+(0003) 							ProgIF = 0x00000000
+(0004) 							VendorID = MULTI_SZ: 
+									"10ec"
+									"1050"
+
+(0005) 							DeviceID = MULTI_SZ: 
+									"8029"
+									"0940"
+
+(0006) 							Entry = "NdisPCIBusDeviceInit"
+(0007) 							Transceiver = 0x00000003
+<0012> 			[WAPIMAN]
+(0000) 					Prefix = "WAM"
+(0001) 					Dll = "waveapi.dll"
+(0002) 					Index = 0x00000001
+(0003) 					Order = 0x00000001
+(0004) 					Priority256 = 0x00000096
+<0000> 				[Clicks]
+(0000) 						ClickDLL = "WavClick.dll"
+(0001) 						KeyLoud = 0x00000064
+(0002) 						KeySoft = 0x00000065
+(0003) 						TouchLoud = 0x00000066
+(0004) 						TouchSoft = 0x00000067
+<0013> 			[SIP]
+(0000) 					Prefix = "SIP"
+(0001) 					Dll = "softkb.DLL"
+(0002) 					Order = 0x00000001
+(0003) 					Index = 0x00000000
+<0014> 			[SymPrint1]
+(0000) 					DeviceName = "QL420"
+(0001) 					Prefix = "PRN"
+(0002) 					Index = 0x00000001
+(0003) 					Order = 0x00000001
+(0004) 					Dll = "PrintMDD.Dll"
+(0005) 					DeviceType = 0x00000000
+(0006) 					DeviceArrayIndex = 0x00000000
+<0015> 			[SymPrint]
+<0000> 				[Cameo_Series]
+(0000) 						PddDll = "PrintPDDComtec.dll"
+(0001) 						DlgDLL = ""
+(0002) 						WakeupTimeoutInSeconds = 0x00000005
+(0003) 						TldDLL = "PrintTLDSerial.dll"
+(0004) 						PrintPort = "COM1: 19200"
+<0000> 					[Fonts]
+<0000> 						[Addr]
+(0000) 								FaceName = "1"
+(0001) 								Height = 0x0000000a
+(0002) 								Width = 0x00000008
+<0001> 						[Text]
+(0000) 								FaceName = "0"
+(0001) 								Width = 0x0000000a
+(0002) 								Height = 0x0000000c
+<0002> 						[Title]
+(0000) 								FaceName = "4"
+(0001) 								Width = 0x0000000a
+(0002) 								Height = 0x0000000a
+<0003> 						[Font0]
+(0000) 								FaceName = "0"
+(0001) 								Width = 0x0000000a
+(0002) 								Height = 0x0000000a
+<0004> 						[Font1]
+(0000) 								FaceName = "1"
+(0001) 								Width = 0x0000000a
+(0002) 								Height = 0x0000000a
+<0005> 						[Font2]
+(0000) 								FaceName = "2"
+(0001) 								Width = 0x0000000a
+(0002) 								Height = 0x0000000a
+<0006> 						[Font3]
+(0000) 								FaceName = "3"
+(0001) 								Width = 0x0000000a
+(0002) 								Height = 0x0000000a
+<0007> 						[Font4]
+(0000) 								FaceName = "4"
+(0001) 								Width = 0x0000000a
+(0002) 								Height = 0x0000000a
+<0008> 						[Font5]
+(0000) 								FaceName = "5"
+(0001) 								Width = 0x0000000a
+(0002) 								Height = 0x0000000a
+<0009> 						[Font6]
+(0000) 								FaceName = "6"
+(0001) 								Width = 0x0000000a
+(0002) 								Height = 0x0000000a
+<0010> 						[Font7]
+(0000) 								FaceName = "7"
+(0001) 								Width = 0x0000000a
+(0002) 								Height = 0x0000000a
+<0001> 					[PageSize]
+(0000) 							Height = 0x0000032c
+<0001> 				[Comtec_RP3]
+(0000) 						PddDll = "PrintPDDComtec.dll"
+(0001) 						DlgDLL = ""
+(0002) 						WakeupTimeoutInSeconds = 0x00000002
+(0003) 						TldDLL = "PrintTLDSerial.dll"
+(0004) 						PrintPort = "COM1: 19200"
+<0000> 					[Fonts]
+<0000> 						[Addr]
+(0000) 								FaceName = "1"
+(0001) 								Height = 0x0000000a
+(0002) 								Width = 0x00000008
+<0001> 						[Text]
+(0000) 								FaceName = "0"
+(0001) 								Width = 0x0000000a
+(0002) 								Height = 0x0000000c
+<0002> 						[Title]
+(0000) 								FaceName = "4"
+(0001) 								Width = 0x0000000a
+(0002) 								Height = 0x0000000a
+<0003> 						[Font0]
+(0000) 								FaceName = "0"
+(0001) 								Width = 0x0000000a
+(0002) 								Height = 0x0000000a
+<0004> 						[Font1]
+(0000) 								FaceName = "1"
+(0001) 								Width = 0x0000000a
+(0002) 								Height = 0x0000000a
+<0005> 						[Font2]
+(0000) 								FaceName = "2"
+(0001) 								Width = 0x0000000a
+(0002) 								Height = 0x0000000a
+<0006> 						[Font3]
+(0000) 								FaceName = "3"
+(0001) 								Width = 0x0000000a
+(0002) 								Height = 0x0000000a
+<0007> 						[Font4]
+(0000) 								FaceName = "4"
+(0001) 								Width = 0x0000000a
+(0002) 								Height = 0x0000000a
+<0008> 						[Font5]
+(0000) 								FaceName = "5"
+(0001) 								Width = 0x0000000a
+(0002) 								Height = 0x0000000a
+<0009> 						[Font6]
+(0000) 								FaceName = "6"
+(0001) 								Width = 0x0000000a
+(0002) 								Height = 0x0000000a
+<0010> 						[Font7]
+(0000) 								FaceName = "7"
+(0001) 								Width = 0x0000000a
+(0002) 								Height = 0x0000000a
+<0001> 					[PageSize]
+(0000) 							Height = 0x0000032c
+<0002> 				[Encore_Series]
+(0000) 						PddDll = "PrintPDDComtec.dll"
+(0001) 						DlgDLL = ""
+(0002) 						WakeupTimeoutInSeconds = 0x00000005
+(0003) 						TldDLL = "PrintTLDSerial.dll"
+(0004) 						PrintPort = "COM1: 19200"
+<0000> 					[Fonts]
+<0000> 						[Addr]
+(0000) 								FaceName = "1"
+(0001) 								Height = 0x0000000a
+(0002) 								Width = 0x00000008
+<0001> 						[Text]
+(0000) 								FaceName = "0"
+(0001) 								Width = 0x0000000a
+(0002) 								Height = 0x0000000c
+<0002> 						[Title]
+(0000) 								FaceName = "4"
+(0001) 								Width = 0x0000000a
+(0002) 								Height = 0x0000000a
+<0003> 						[Font0]
+(0000) 								FaceName = "0"
+(0001) 								Width = 0x0000000a
+(0002) 								Height = 0x0000000a
+<0004> 						[Font1]
+(0000) 								FaceName = "1"
+(0001) 								Width = 0x0000000a
+(0002) 								Height = 0x0000000a
+<0005> 						[Font2]
+(0000) 								FaceName = "2"
+(0001) 								Width = 0x0000000a
+(0002) 								Height = 0x0000000a
+<0006> 						[Font3]
+(0000) 								FaceName = "3"
+(0001) 								Width = 0x0000000a
+(0002) 								Height = 0x0000000a
+<0007> 						[Font4]
+(0000) 								FaceName = "4"
+(0001) 								Width = 0x0000000a
+(0002) 								Height = 0x0000000a
+<0008> 						[Font5]
+(0000) 								FaceName = "5"
+(0001) 								Width = 0x0000000a
+(0002) 								Height = 0x0000000a
+<0009> 						[Font6]
+(0000) 								FaceName = "6"
+(0001) 								Width = 0x0000000a
+(0002) 								Height = 0x0000000a
+<0010> 						[Font7]
+(0000) 								FaceName = "7"
+(0001) 								Width = 0x0000000a
+(0002) 								Height = 0x0000000a
+<0001> 					[PageSize]
+(0000) 							Height = 0x0000032c
+<0003> 				[Monarch9460]
+(0000) 						PddDll = "PrintPDDMonarch9490.dll"
+(0001) 						DlgDLL = ""
+(0002) 						ConfigurePrinterMemory = 0x00000001
+(0003) 						TldDLL = "PrintTLDSerial.dll"
+(0004) 						PrintPort = "COM1: 19200"
+(0005) 						FlowControlType = 0x00000002
+<0000> 					[Fonts]
+<0000> 						[Addr]
+(0000) 								FaceName = "10"
+(0001) 								Height = 0x00000001
+(0002) 								Width = 0x00000001
+<0001> 						[Text]
+(0000) 								FaceName = "2"
+(0001) 								Height = 0x00000001
+(0002) 								Width = 0x00000001
+<0002> 						[Title]
+(0000) 								FaceName = "1"
+(0001) 								Height = 0x00000001
+(0002) 								Width = 0x00000001
+<0003> 						[Standard]
+(0000) 								FaceName = "1"
+(0001) 								Height = 0x00000001
+(0002) 								Width = 0x00000001
+<0004> 						[Reduced]
+(0000) 								FaceName = "2"
+(0001) 								Height = 0x00000001
+(0002) 								Width = 0x00000001
+<0005> 						[Bold]
+(0000) 								FaceName = "3"
+(0001) 								Height = 0x00000001
+(0002) 								Width = 0x00000001
+<0006> 						[OCRA-like]
+(0000) 								FaceName = "4"
+(0001) 								Height = 0x00000001
+(0002) 								Width = 0x00000001
+<0007> 						[HR1]
+(0000) 								FaceName = "5"
+(0001) 								Height = 0x00000001
+(0002) 								Width = 0x00000001
+<0008> 						[HR2]
+(0000) 								FaceName = "6"
+(0001) 								Height = 0x00000001
+(0002) 								Width = 0x00000001
+<0009> 						[EFFSwissBold]
+(0000) 								FaceName = "50"
+(0001) 								Height = 0x00000001
+(0002) 								Width = 0x00000001
+<0001> 					[PageSize]
+(0000) 							Height = 0x0000032c
+<0004> 				[Monarch9490]
+(0000) 						PddDll = "PrintPDDMonarch9490.dll"
+(0001) 						DlgDLL = ""
+(0002) 						ConfigurePrinterMemory = 0x00000001
+(0003) 						TldDLL = "PrintTLDSerial.dll"
+(0004) 						PrintPort = "COM1: 19200"
+(0005) 						FlowControlType = 0x00000000
+<0000> 					[Fonts]
+<0000> 						[Addr]
+(0000) 								FaceName = "10"
+(0001) 								Height = 0x00000001
+(0002) 								Width = 0x00000001
+<0001> 						[Text]
+(0000) 								FaceName = "2"
+(0001) 								Height = 0x00000001
+(0002) 								Width = 0x00000001
+<0002> 						[Title]
+(0000) 								FaceName = "1"
+(0001) 								Height = 0x00000001
+(0002) 								Width = 0x00000001
+<0003> 						[Standard]
+(0000) 								FaceName = "1"
+(0001) 								Height = 0x00000001
+(0002) 								Width = 0x00000001
+<0004> 						[Reduced]
+(0000) 								FaceName = "2"
+(0001) 								Height = 0x00000001
+(0002) 								Width = 0x00000001
+<0005> 						[Bold]
+(0000) 								FaceName = "3"
+(0001) 								Height = 0x00000001
+(0002) 								Width = 0x00000001
+<0006> 						[OCRA-like]
+(0000) 								FaceName = "4"
+(0001) 								Height = 0x00000001
+(0002) 								Width = 0x00000001
+<0007> 						[HR1]
+(0000) 								FaceName = "5"
+(0001) 								Height = 0x00000001
+(0002) 								Width = 0x00000001
+<0008> 						[HR2]
+(0000) 								FaceName = "6"
+(0001) 								Height = 0x00000001
+(0002) 								Width = 0x00000001
+<0009> 						[EFFSwissBold]
+(0000) 								FaceName = "50"
+(0001) 								Height = 0x00000001
+(0002) 								Width = 0x00000001
+<0001> 					[PageSize]
+(0000) 							Height = 0x0000032c
+<0005> 				[QL320]
+(0000) 						PddDll = "PrintPDDComtec.dll"
+(0001) 						DlgDLL = ""
+(0002) 						WakeupTimeoutInSeconds = 0x00000014
+(0003) 						TldDLL = "PrintTLDSerial.dll"
+(0004) 						PrintPort = "COM1: 19200"
+<0000> 					[Fonts]
+<0000> 						[Addr]
+(0000) 								FaceName = "1"
+(0001) 								Height = 0x0000000a
+(0002) 								Width = 0x00000008
+<0001> 						[Text]
+(0000) 								FaceName = "0"
+(0001) 								Width = 0x0000000a
+(0002) 								Height = 0x0000000c
+<0002> 						[Title]
+(0000) 								FaceName = "4"
+(0001) 								Width = 0x0000000a
+(0002) 								Height = 0x0000000a
+<0003> 						[Font0]
+(0000) 								FaceName = "0"
+(0001) 								Width = 0x0000000a
+(0002) 								Height = 0x0000000a
+<0004> 						[Font1]
+(0000) 								FaceName = "1"
+(0001) 								Width = 0x0000000a
+(0002) 								Height = 0x0000000a
+<0005> 						[Font2]
+(0000) 								FaceName = "2"
+(0001) 								Width = 0x0000000a
+(0002) 								Height = 0x0000000a
+<0006> 						[Font3]
+(0000) 								FaceName = "3"
+(0001) 								Width = 0x0000000a
+(0002) 								Height = 0x0000000a
+<0007> 						[Font4]
+(0000) 								FaceName = "4"
+(0001) 								Width = 0x0000000a
+(0002) 								Height = 0x0000000a
+<0008> 						[Font5]
+(0000) 								FaceName = "5"
+(0001) 								Width = 0x0000000a
+(0002) 								Height = 0x0000000a
+<0009> 						[Font6]
+(0000) 								FaceName = "6"
+(0001) 								Width = 0x0000000a
+(0002) 								Height = 0x0000000a
+<0010> 						[Font7]
+(0000) 								FaceName = "7"
+(0001) 								Width = 0x0000000a
+(0002) 								Height = 0x0000000a
+<0001> 					[PageSize]
+(0000) 							Height = 0x0000032c
+<0006> 				[QL420]
+(0000) 						PddDll = "PrintPDDComtec.dll"
+(0001) 						DlgDLL = ""
+(0002) 						WakeupTimeoutInSeconds = 0x00000005
+(0003) 						TldDLL = "PrintTLDSerial.dll"
+(0004) 						PrintPort = "COM1: 19200"
+<0000> 					[Fonts]
+<0000> 						[Addr]
+(0000) 								FaceName = "1"
+(0001) 								Height = 0x0000000a
+(0002) 								Width = 0x00000008
+<0001> 						[Text]
+(0000) 								FaceName = "0"
+(0001) 								Width = 0x0000000a
+(0002) 								Height = 0x0000000c
+<0002> 						[Title]
+(0000) 								FaceName = "4"
+(0001) 								Width = 0x0000000a
+(0002) 								Height = 0x0000000a
+<0003> 						[Font0]
+(0000) 								FaceName = "0"
+(0001) 								Width = 0x0000000a
+(0002) 								Height = 0x0000000a
+<0004> 						[Font1]
+(0000) 								FaceName = "1"
+(0001) 								Width = 0x0000000a
+(0002) 								Height = 0x0000000a
+<0005> 						[Font2]
+(0000) 								FaceName = "2"
+(0001) 								Width = 0x0000000a
+(0002) 								Height = 0x0000000a
+<0006> 						[Font3]
+(0000) 								FaceName = "3"
+(0001) 								Width = 0x0000000a
+(0002) 								Height = 0x0000000a
+<0007> 						[Font4]
+(0000) 								FaceName = "4"
+(0001) 								Width = 0x0000000a
+(0002) 								Height = 0x0000000a
+<0008> 						[Font5]
+(0000) 								FaceName = "5"
+(0001) 								Width = 0x0000000a
+(0002) 								Height = 0x0000000a
+<0009> 						[Font6]
+(0000) 								FaceName = "6"
+(0001) 								Width = 0x0000000a
+(0002) 								Height = 0x0000000a
+<0010> 						[Font7]
+(0000) 								FaceName = "7"
+(0001) 								Width = 0x0000000a
+(0002) 								Height = 0x0000000a
+<0001> 					[PageSize]
+(0000) 							Height = 0x0000032c
+<0016> 			[SymbolBT]
+(0000) 					SilentRunning = 0x00000001
+<0017> 			[WLAN]
+(0000) 					WLANSlot = 0x00000000
+(0001) 					Slot1ResetOnResume = 0x00000001
+(0002) 					Slot0ResetOnResume = 0x00000001
+(0003) 					APIWakeupFlag = 0x00000001
+(0004) 					TimeoutWakeupFlag = 0x00000001
+(0005) 					PowerKeyWakeupFlag = 0x00000001
+(0006) 					EnableWLANWakeup = 0x00000001
+(0007) 					Slot0ResetWait = 0x00000500
+(0008) 					Slot1ResetWait = 0x00000500
+(0009) 					Prefix = "WLP"
+(0010) 					Dll = "PmProxy.Dll"
+(0011) 					Order = 0x00000002
+(0012) 					Index = 0x00000001
+(0013) 					DeviceArrayIndex = 0x00000004
+(0014) 					Flags = 0x00000008
+(0015) 					IClass = MULTI_SZ: 
+							"{A32942B7-920C-486b-B0E6-92A702A99B35}"
+							"{f8a6ba98-087a-43ac-a9d8-b7f13c5bae31}"
+							"{94107D70-34CF-419a-BABA-1E5096185347}"
+
+(0016) 					FriendlyName = "WLAN Proxy Driver"
+(0017) 					SupportedStates = 0x00000019
+(0018) 					InitialState = 0x00000000
+(0019) 					InitFlags = 0x00000000
+<0000> 				[CONFIG0]
+(0000) 						WLANSlot = 0x00000000
+<0001> 				[CONFIG1]
+(0000) 						WLANSlot = 0x00000001
+<0002> 				[ActivityEvents]
+(0000) 						PowerManager/ActivityTimer/SystemActivity = ""
+<0018> 			[EAPWLAN]
+(0000) 					Order = 0x00000004
+(0001) 					Index = 0x00000001
+(0002) 					Dll = "EAPWLAN.dll"
+(0003) 					Prefix = "LEP"
+<0019> 			[TRANS]
+(0000) 					Order = 0x00000003
+(0001) 					Index = 0x00000001
+(0002) 					Dll = "TRANS.dll"
+(0003) 					Prefix = "PRT"
+<0020> 			[PSKWLAN]
+(0000) 					Order = 0x00000004
+(0001) 					Index = 0x00000001
+(0002) 					Dll = "PSKWLAN.dll"
+(0003) 					Prefix = "PSK"
+<0021> 			[PCMCIA]
+(0000) 					Order = 0x00000004
+(0001) 					NoAccess0 = 0x00000001
+(0002) 					Dll = "PCMCIA.dll"
+(0003) 					IClass = MULTI_SZ: 
+							"{6BEAB08A-8914-42fd-B33F-61968B9AAB32}=PCMCIA Card Services"
+
+<0022> 			[Power]
+(0000) 					Prefix = "SYS"
+(0001) 					Dll = "SysPwr.Dll"
+(0002) 					Order = 0x00000001
+(0003) 					FriendlyName = "System Power Device Driver"
+<0000> 				[Wakeups]
+<0000> 					[PCMCIA0]
+(0000) 							HardwareWakeupId = 0x00000804
+(0001) 							Enabled = 0x00000001
+(0002) 							FriendlyName = "PCMCIA Slot A"
+<0023> 			[BarCodeReader]
+(0000) 					Prefix = "SCN"
+(0001) 					Dll = "ScanMDD.dll"
+(0002) 					Order = 0x00000001
+(0003) 					Index = 0x00000001
+(0004) 					NLEDDirect = 0x00000001
+(0005) 					PDDPath = "ImgScanPDD.dll"
+(0006) 					ImgHALPath = "XScaleImgHal.dll"
+(0007) 					FriendlyName = "Pico Imaging Driver"
+(0008) 					DecoderDLL = "PixDll.dll"
+<0000> 				[ActivityEvents]
+(0000) 						PowerManager/ActivityTimer/UserActivity = ""
+(0001) 						PowerManager/ActivityTimer/Backlight/TriggerActivity = ""
+(0002) 						PowerManager/ActivityTimer/Keylight/TriggerActivity = ""
+<0001> 				[Configuration]
+<0000> 					[configtype0]
+(0000) 							DecoderDLL = "decoder1d.dll"
+(0001) 							FriendlyName = "1D Scanner Driver"
+(0002) 							PDDPath = "QSScanPDD1D.dll"
+(0003) 							NLEDDirect = 0x00000001
+(0004) 							Index = 0x00000001
+(0005) 							Order = 0x00000001
+(0006) 							Dll = "ScanMDD.dll"
+(0007) 							Prefix = "SCN"
+<0000> 						[Settings]
+(0000) 								NLEDNum = 0x00000001
+(0001) 								ControlLED = 0x00000001
+(0002) 								DisablePowerSave = 0x00000001
+(0003) 								TriPlusSM = 0x72ea62ba
+(0004) 								Capabilities = 0x00000001
+(0005) 								MaxPower = 0x00000001
+(0006) 								Triggers = 0x00001f00
+<0001> 						[ActivityEvents]
+(0000) 								PowerManager/ActivityTimer/Keylight/TriggerActivity = ""
+(0001) 								PowerManager/ActivityTimer/Backlight/TriggerActivity = ""
+(0002) 								PowerManager/ActivityTimer/UserActivity = ""
+<0001> 					[configtype1]
+(0000) 							FriendlyName = "SSI Scanner Driver"
+(0001) 							PDDPath = "SsiPDD.dll"
+(0002) 							NLEDDirect = 0x00000001
+(0003) 							Index = 0x00000001
+(0004) 							Order = 0x00000001
+(0005) 							Dll = "ScanMDD.dll"
+(0006) 							Prefix = "SCN"
+<0000> 						[Settings]
+(0000) 								ScanKitVersion = 0x000001a8
+(0001) 								NLEDNum = 0x00000001
+(0002) 								ControlLED = 0x00000001
+(0003) 								PortName = "COM5:"
+(0004) 								Capabilities = 0x00000003
+(0005) 								MaxPower = 0x00000001
+(0006) 								Triggers = 0x00001f00
+<0001> 						[ActivityEvents]
+(0000) 								PowerManager/ActivityTimer/Keylight/TriggerActivity = ""
+(0001) 								PowerManager/ActivityTimer/Backlight/TriggerActivity = ""
+(0002) 								PowerManager/ActivityTimer/UserActivity = ""
+<0002> 					[configtype3]
+(0000) 							FriendlyName = "SSI Scanner Driver"
+(0001) 							PDDPath = "SsiPDD.dll"
+(0002) 							NLEDDirect = 0x00000001
+(0003) 							Index = 0x00000001
+(0004) 							Order = 0x00000001
+(0005) 							Dll = "ScanMDD.dll"
+(0006) 							Prefix = "SCN"
+<0000> 						[Settings]
+(0000) 								ScanKitVersion = 0x000001a8
+(0001) 								NLEDNum = 0x00000001
+(0002) 								ControlLED = 0x00000001
+(0003) 								PortName = "COM5:"
+(0004) 								Capabilities = 0x00000003
+(0005) 								MaxPower = 0x00000001
+(0006) 								Triggers = 0x00001f00
+<0001> 						[ActivityEvents]
+(0000) 								PowerManager/ActivityTimer/Keylight/TriggerActivity = ""
+(0001) 								PowerManager/ActivityTimer/Backlight/TriggerActivity = ""
+(0002) 								PowerManager/ActivityTimer/UserActivity = ""
+<0003> 					[configtype4]
+(0000) 							DecoderDLL = "decoder2d.dll"
+(0001) 							FriendlyName = "2D Scanner Driver"
+(0002) 							PDDPath = "QSScanPDD2D.dll"
+(0003) 							NLEDDirect = 0x00000001
+(0004) 							Index = 0x00000001
+(0005) 							Order = 0x00000001
+(0006) 							Dll = "ScanMDD.dll"
+(0007) 							Prefix = "SCN"
+<0000> 						[Settings]
+(0000) 								NLEDNum = 0x00000001
+(0001) 								ControlLED = 0x00000001
+(0002) 								DisablePowerSave = 0x00000001
+(0003) 								Capabilities = 0x00000005
+(0004) 								MaxPower = 0x00000001
+(0005) 								Triggers = 0x00001f00
+<0001> 						[ActivityEvents]
+(0000) 								PowerManager/ActivityTimer/Keylight/TriggerActivity = ""
+(0001) 								PowerManager/ActivityTimer/Backlight/TriggerActivity = ""
+(0002) 								PowerManager/ActivityTimer/UserActivity = ""
+<0004> 					[configtype5]
+(0000) 							FriendlyName = "SSI Scanner Driver"
+(0001) 							PDDPath = "SsiPDD.dll"
+(0002) 							NLEDDirect = 0x00000001
+(0003) 							Index = 0x00000001
+(0004) 							Order = 0x00000004
+(0005) 							Dll = "ScanMDD.dll"
+(0006) 							Prefix = "SCN"
+<0000> 						[Settings]
+(0000) 								ScanKitVersion = 0x000001a8
+(0001) 								NLEDNum = 0x00000001
+(0002) 								ControlLED = 0x00000001
+(0003) 								BaudRate = "9600"
+(0004) 								PortName = "COM1:"
+(0005) 								Capabilities = 0x00000003
+(0006) 								MaxPower = 0x00000001
+(0007) 								Triggers = 0x00001f00
+<0001> 						[ActivityEvents]
+(0000) 								PowerManager/ActivityTimer/Keylight/TriggerActivity = ""
+(0001) 								PowerManager/ActivityTimer/Backlight/TriggerActivity = ""
+(0002) 								PowerManager/ActivityTimer/UserActivity = ""
+<0005> 					[configtype6]
+(0000) 							FriendlyName = "SSI Scanner Driver"
+(0001) 							PDDPath = "SsiPDD.dll"
+(0002) 							NLEDDirect = 0x00000001
+(0003) 							Index = 0x00000001
+(0004) 							Order = 0x00000001
+(0005) 							Dll = "ScanMDD.dll"
+(0006) 							Prefix = "SCN"
+<0000> 						[Settings]
+(0000) 								ScanKitVersion = 0x000001a8
+(0001) 								NLEDNum = 0x00000001
+(0002) 								ControlLED = 0x00000001
+(0003) 								PortName = "COM5:"
+(0004) 								Capabilities = 0x00000001
+(0005) 								MaxPower = 0x00000001
+(0006) 								Triggers = 0x00001f00
+<0001> 						[ActivityEvents]
+(0000) 								PowerManager/ActivityTimer/Keylight/TriggerActivity = ""
+(0001) 								PowerManager/ActivityTimer/Backlight/TriggerActivity = ""
+(0002) 								PowerManager/ActivityTimer/UserActivity = ""
+<0006> 					[configtype7]
+(0000) 							DecoderDLL = "PixDll.dll"
+(0001) 							FriendlyName = "Pico Imaging Driver"
+(0002) 							ImgHALPath = "XScaleImgHal.dll"
+(0003) 							PDDPath = "ImgScanPDD.dll"
+(0004) 							NLEDDirect = 0x00000001
+(0005) 							Index = 0x00000001
+(0006) 							Order = 0x00000001
+(0007) 							Dll = "ScanMDD.dll"
+(0008) 							Prefix = "SCN"
+<0000> 						[Settings]
+(0000) 								NLEDNum = 0x00000001
+(0001) 								ControlLED = 0x00000001
+(0002) 								Capabilities = 0x00000015
+(0003) 								MaxPower = 0x00000001
+(0004) 								Triggers = 0x00001f00
+<0001> 						[ActivityEvents]
+(0000) 								PowerManager/ActivityTimer/Keylight/TriggerActivity = ""
+(0001) 								PowerManager/ActivityTimer/Backlight/TriggerActivity = ""
+(0002) 								PowerManager/ActivityTimer/UserActivity = ""
+<0002> 				[Settings]
+(0000) 						Triggers = 0x00001f00
+(0001) 						MaxPower = 0x00000001
+(0002) 						Capabilities = 0x00000015
+(0003) 						ControlLED = 0x00000001
+(0004) 						NLEDNum = 0x00000001
+<0024> 			[FlashFX]
+(0000) 					DLL = "FlashFX.DLL"
+(0001) 					FSD = "FATFSD.DLL"
+(0002) 					Prefix = "DSK"
+(0003) 					Ioctl = 0x00000004
+(0004) 					Order = 0x00000000
+(0005) 					Index = 0x00000001
+(0006) 					IClass = "{A4E7EDDA-E575-4252-9D6B-4195D48BB865}"
+(0007) 					ProfileName = "FlashFXDisk1Profile"
+<0025> 			[FlashFX2]
+(0000) 					DLL = "FlashFX2.DLL"
+(0001) 					FSD = "FATFSD.DLL"
+(0002) 					Prefix = "DSK"
+(0003) 					Ioctl = 0x00000004
+(0004) 					Order = 0x00000000
+(0005) 					Index = 0x00000002
+(0006) 					IClass = "{A4E7EDDA-E575-4252-9D6B-4195D48BB865}"
+(0007) 					ProfileName = "FlashFXDisk2Profile"
+<0026> 			[REGMERGE]
+(0000) 					SkipMerge = 0x00000001
+(0001) 					Dll = "regmerge.dll"
+(0002) 					Order = 0x00000000
+(0003) 					Prefix = "REG"
+(0004) 					Index = 0x00000001
+(0005) 					RequiredPaths = MULTI_SZ: 
+							"\Platform\"
+							"\Application\"
+
+(0006) 					Timeout = 0x00000005
+(0007) 					RegSearchPath = MULTI_SZ: 
+							"\Platform\"
+							"\Application\"
+							"\Platform\Regs\"
+							"\Application\Regs\"
+
+(0008) 					WinCopyPath = MULTI_SZ: 
+							"\Platform\CopyToRAM\*.*"
+							"\Application\CopyToRAM\*.*"
+							"\Platform\*.wav"
+							"\Platform\*.ttf"
+
+<0000> 				[ReloadEvents]
+(0000) 						PowerManager/ReloadActivityTimeouts = "PM Reload event"
+<0027> 			[ResCoord]
+(0000) 					Index = 0x00000001
+(0001) 					Order = 0x00000000
+(0002) 					Dll = "ResCoord.dll"
+(0003) 					Prefix = "RCM"
+(0004) 					FriendlyName = "Resource Coordinator"
+(0005) 					IClass = MULTI_SZ: 
+							"{A32942B7-920C-486b-B0E6-92A702A99B35}"
+							"{f8a6ba98-087a-43ac-a9d8-b7f13c5bae31}"
+							"{C3C98325-6C19-414d-BC5E-9042B475461D}"
+
+(0006) 					SupportedStates = 0x00000019
+(0007) 					InitialState = 0x00000000
+(0008) 					InitFlags = 0x00000000
+<0000> 				[ActivityEvents]
+(0000) 						PowerManager/ActivityTimer/UserActivity = ""
+(0001) 						PowerManager/ActivityTimer/Backlight/TriggerActivity = ""
+(0002) 						PowerManager/ActivityTimer/Keylight/TriggerActivity = ""
+<0001> 				[Settings]
+(0000) 						Triggers = 0x00000001
+(0001) 						TotalPower = 0x00000500
+(0002) 						7500TrigBug = 0x00000001
+(0003) 						ScannerConfig = 0x00000000
+(0004) 						UartConfig = 0x00000000
+(0005) 						DisplayConfig = 0x00000000
+(0006) 						KeyboardConfig = 0x00000000
+(0007) 						TerminalConfig = 0x00000000
+(0008) 						TriggerConfig = 0x0000000e
+<0028> 			[COPYFILES]
+(0000) 					CpySearchPath = MULTI_SZ: 
+							"\Platform\"
+							"\Application\"
+							"\Platform\Cpy\"
+							"\Application\Cpy\"
+							"\Platform\Alias\"
+
+(0001) 					SkipCopy = 0x00000001
+(0002) 					Dll = "copyfiles.dll"
+(0003) 					Order = 0x00000000
+(0004) 					Prefix = "CPY"
+(0005) 					Index = 0x00000001
+(0006) 					RequiredPaths = MULTI_SZ: 
+							"\Platform\"
+							"\Application\"
+
+(0007) 					Timeout = 0x00000005
+<0000> 				[config0]
+(0000) 						CpySearchPath = MULTI_SZ: 
+								"\Platform\"
+								"\Application\"
+								"\Platform\Cpy\"
+								"\Application\Cpy\"
+								"\Platform\Alias\"
+
+<0001> 				[config1]
+(0000) 						CpySearchPath = MULTI_SZ: 
+								"\Platform\"
+								"\Application\"
+								"\Platform\Cpy\"
+								"\Application\Cpy\"
+
+<0029> 			[SPI]
+(0000) 					Prefix = "SPI"
+(0001) 					Dll = "SPI.Dll"
+(0002) 					Order = 0x00000000
+<0030> 			[WaveDev]
+(0000) 					Aliasing = 0x00000001
+(0001) 					Prefix = "WAV"
+(0002) 					Dll = "wavedev.dll"
+(0003) 					Index = 0x00000001
+(0004) 					Order = 0x00000001
+(0005) 					Priority256 = 0x00000095
+(0006) 					IClass = MULTI_SZ: 
+							"{A32942B7-920C-486b-B0E6-92A702A99B35}"
+							"{f8a6ba98-087a-43ac-a9d8-b7f13c5bae31}"
+
+(0007) 					FriendlyName = "WaveDev2 Driver"
+(0008) 					SupportedStates = 0x0000001f
+(0009) 					InitialState = 0x00000001
+(0010) 					InitFlags = 0x00000000
+<0000> 				[config0]
+(0000) 						Aliasing = 0x00000001
+<0001> 				[config1]
+(0000) 						Aliasing = 0x00000000
+<0031> 			[Serial1]
+(0000) 					DeviceArrayIndex = 0x00000000
+(0001) 					IoBase = 0xbf400380
+(0002) 					Irq = 0x00000000
+(0003) 					Prefix = "SER"
+(0004) 					DevicePowerDllName = "PrimSerPwr.Dll"
+(0005) 					DeviceName = "Accessory"
+(0006) 					Index = 0x00000001
+(0007) 					Flags = 0x00000008
+(0008) 					Dll = "Serialdrv.Dll"
+(0009) 					Order = 0x00000000
+(0010) 					IoLen = 0x00000024
+(0011) 					Priority256 = 0x00000067
+(0012) 					DeviceType = 0x00000002
+(0013) 					FriendlyName = "Serial Cable on SER1:"
+(0014) 					DevConfig = hex: 10,00,00,00,05,00,00,00,10,01,00,00,00,4b,00,00,00,00,08,00,00,00,00,00,00
+(0015) 					SkipEnum = 0x00000001
+(0016) 					IClass = MULTI_SZ: 
+							"{f8a6ba98-087a-43ac-a9d8-b7f13c5bae31}"
+							"{A32942B7-920C-486b-B0E6-92A702A99B35}"
+							"{C3C98325-6C19-414d-BC5E-9042B475461D}"
+
+(0017) 					SupportedStates = 0x00000019
+(0018) 					InitialState = 0x00000004
+(0019) 					InitFlags = 0x00000002
+(0020) 					Wakeup = "COM1:"
+<0032> 			[Serial3]
+(0000) 					DeviceArrayIndex = 0x00000006
+(0001) 					Dll = "Serialdrv.Dll"
+(0002) 					IoBase = 0xa6400000
+(0003) 					Irq = 0x00000016
+(0004) 					IoLen = 0x00000024
+(0005) 					Prefix = "SER"
+(0006) 					Index = 0x00000003
+(0007) 					Flags = 0x00000008
+(0008) 					DevicePowerDllName = "BtPwr.DLL"
+(0009) 					DeviceName = "BlueTooth"
+(0010) 					Order = 0x00000000
+(0011) 					Priority256 = 0x00000067
+(0012) 					DeviceType = 0x00000002
+(0013) 					FriendlyName = "Bluetooth UART on SER3:"
+(0014) 					DevConfig = hex: 10,00,00,00,05,00,00,00,10,01,00,00,00,4b,00,00,00,00,08,00,00,00,00,00,00
+(0015) 					SkipEnum = 0x00000001
+(0016) 					IClass = MULTI_SZ: 
+							"{f8a6ba98-087a-43ac-a9d8-b7f13c5bae31}"
+							"{A32942B7-920C-486b-B0E6-92A702A99B35}"
+							"{C3C98325-6C19-414d-BC5E-9042B475461D}"
+
+(0017) 					SupportedStates = 0x00000019
+(0018) 					InitialState = 0x00000000
+(0019) 					InitFlags = 0x00000002
+(0020) 					Wakeup = "COM3:"
+<0033> 			[Serial5]
+(0000) 					DeviceArrayIndex = 0x00000003
+(0001) 					Dll = "Serialdrv.Dll"
+(0002) 					IoBase = 0xa6300000
+(0003) 					Irq = 0x00000016
+(0004) 					IoLen = 0x00000024
+(0005) 					Prefix = "SER"
+(0006) 					DevicePowerDllName = "ScanPwr.Dll"
+(0007) 					DeviceName = "SE1224"
+(0008) 					Index = 0x00000005
+(0009) 					Flags = 0x00000008
+(0010) 					Order = 0x00000000
+(0011) 					Priority256 = 0x00000067
+(0012) 					DeviceType = 0x00000002
+(0013) 					FriendlyName = "Internal Scanner on SER5:"
+(0014) 					DevConfig = hex: 10,00,00,00,05,00,00,00,10,01,00,00,00,4b,00,00,00,00,08,00,00,00,00,00,00
+(0015) 					SkipEnum = 0x00000001
+(0016) 					IClass = MULTI_SZ: 
+							"{f8a6ba98-087a-43ac-a9d8-b7f13c5bae31}"
+							"{A32942B7-920C-486b-B0E6-92A702A99B35}"
+							"{C3C98325-6C19-414d-BC5E-9042B475461D}"
+
+(0017) 					SupportedStates = 0x00000011
+(0018) 					InitialState = 0x00000004
+<0034> 			[VCom1]
+(0000) 					Prefix = "COM"
+(0001) 					Order = 0x00000001
+(0002) 					Dll = "VCom.dll"
+(0003) 					Index = 0x00000001
+(0004) 					Tsp = "Unimodem.dll"
+(0005) 					DeviceType = 0x00000000
+(0006) 					TargetPort = "SER1:"
+(0007) 					FriendlyName = "Serial Cable on COM1:"
+(0008) 					SetStateTimeoutCount = 0x00000028
+(0009) 					GetStateTimeoutCount = 0x00000028
+(0010) 					IClass = MULTI_SZ: 
+							"{A32942B7-920C-486b-B0E6-92A702A99B35}"
+							"{f8a6ba98-087a-43ac-a9d8-b7f13c5bae31}"
+							"{94107D70-34CF-419a-BABA-1E5096185347}"
+
+(0011) 					SupportedStates = 0x00000019
+(0012) 					InitialState = 0x00000004
+(0013) 					InitFlags = 0x00000000
+<0035> 			[VCom3]
+(0000) 					Prefix = "COM"
+(0001) 					Order = 0x00000001
+(0002) 					Dll = "VCom.dll"
+(0003) 					Index = 0x00000003
+(0004) 					Tsp = "Unimodem.dll"
+(0005) 					DeviceType = 0x00000000
+(0006) 					TargetPort = "SER3:"
+(0007) 					DevicePowerDllName = "BtPwr.DLL"
+(0008) 					DeviceName = "BlueTooth"
+(0009) 					FriendlyName = "Bluetooth UART on COM3:"
+(0010) 					SetStateTimeoutCount = 0x00000008
+(0011) 					GetStateTimeoutCount = 0x00000008
+(0012) 					IClass = MULTI_SZ: 
+							"{A32942B7-920C-486b-B0E6-92A702A99B35}"
+							"{f8a6ba98-087a-43ac-a9d8-b7f13c5bae31}"
+							"{94107D70-34CF-419a-BABA-1E5096185347}"
+
+(0013) 					SupportedStates = 0x00000019
+(0014) 					InitialState = 0x00000000
+(0015) 					InitFlags = 0x00000000
+<0036> 			[VCom5]
+(0000) 					Prefix = "COM"
+(0001) 					Order = 0x00000001
+(0002) 					Dll = "VCom.dll"
+(0003) 					Index = 0x00000005
+(0004) 					Tsp = "Unimodem.dll"
+(0005) 					DeviceType = 0x00000000
+(0006) 					TargetPort = "SER5:"
+(0007) 					FriendlyName = "Internal Scanner on COM5:"
+(0008) 					SetStateTimeoutCount = 0x00000010
+(0009) 					GetStateTimeoutCount = 0x00000010
+(0010) 					IClass = MULTI_SZ: 
+							"{A32942B7-920C-486b-B0E6-92A702A99B35}"
+							"{f8a6ba98-087a-43ac-a9d8-b7f13c5bae31}"
+							"{94107D70-34CF-419a-BABA-1E5096185347}"
+
+(0011) 					SupportedStates = 0x00000011
+(0012) 					InitialState = 0x00000004
+<0037> 			[USB]
+(0000) 					Dll = "symbol_usb_ser.Dll"
+(0001) 					Irq = 0x00000011
+(0002) 					IoLen = 0x00001000
+(0003) 					Tsp = "Unimodem.dll"
+(0004) 					DeviceArrayIndex = 0x00000000
+(0005) 					Prefix = "COM"
+(0006) 					Order = 0x00000001
+(0007) 					DeviceType = 0x00000000
+(0008) 					FriendlyName = "USB Cable:"
+(0009) 					DevConfig = hex: 10,00,00,00,05,00,00,00,00,01,00,00,00,4b,00,00,00,00,08,00,00,00,00,00,00
+<0038> 			[Backlight]
+(0000) 					Prefix = "BKL"
+(0001) 					Dll = "BacklightDrv.Dll"
+(0002) 					Order = 0x00000002
+(0003) 					Index = 0x00000001
+(0004) 					PWMChannel = 0x00000001
+(0005) 					IClass = MULTI_SZ: 
+							"{A32942B7-920C-486b-B0E6-92A702A99B35}"
+							"{f8a6ba98-087a-43ac-a9d8-b7f13c5bae31}"
+							"{94107D70-34CF-419a-BABA-1E5096185347}"
+
+(0006) 					FriendlyName = "Backlight Driver"
+(0007) 					SupportedStates = 0x00000019
+(0008) 					InitialState = 0x00000000
+(0009) 					InitFlags = 0x00000001
+(0010) 					ReloadEventName = "BackLightChangeEvent"
+(0011) 					TimeoutSection = 0x80000001
+(0012) 					TimeoutPath = "ControlPanel\BackLight"
+(0013) 					TimeoutMultiplier = 0x000003e8
+(0014) 					BatteryTimeoutName = "BatteryTimeout"
+(0015) 					ACTimeoutName = "ACTimeout"
+<0000> 				[Activities]
+<0000> 					[User]
+(0000) 							EventName = "UserActivityEvent"
+(0001) 							FriendlyName = "User Activity"
+(0002) 							ACFlagName = "ACBacklightOnTap"
+(0003) 							BatteryFlagName = "BacklightOnTap"
+(0004) 							FlagPath = "ControlPanel\Backlight"
+(0005) 							FlagSection = 0x80000001
+<0001> 					[Keyboard]
+(0000) 							EventName = "PowerManager/ActivityTimer/Backlight/KeyboardActivity"
+(0001) 							FriendlyName = "Keyboard Activity"
+(0002) 							ACFlagName = "ACBacklightOnKeyboard"
+(0003) 							BatteryFlagName = "BacklightOnKeyboard"
+(0004) 							FlagPath = "ControlPanel\Backlight"
+(0005) 							FlagSection = 0x80000001
+<0002> 					[Touch]
+(0000) 							EventName = "PowerManager/ActivityTimer/Backlight/TouchActivity"
+(0001) 							FriendlyName = "Touch Activity"
+(0002) 							ACFlagName = "ACBacklightOnTouch"
+(0003) 							BatteryFlagName = "BacklightOnTouch"
+(0004) 							FlagPath = "ControlPanel\Backlight"
+(0005) 							FlagSection = 0x80000001
+<0003> 					[Trigger]
+(0000) 							EventName = "PowerManager/ActivityTimer/Backlight/TriggerActivity"
+(0001) 							FriendlyName = "Trigger Activity"
+(0002) 							ACFlagName = "ACBacklightOnTrigger"
+(0003) 							BatteryFlagName = "BacklightOnTrigger"
+(0004) 							FlagPath = "ControlPanel\Backlight"
+(0005) 							FlagSection = 0x80000001
+<0039> 			[KeyLightDrv]
+(0000) 					Prefix = "KLT"
+(0001) 					Dll = "KeylightDrv.dll"
+(0002) 					Order = 0x00000002
+(0003) 					Index = 0x00000001
+(0004) 					IClass = MULTI_SZ: 
+							"{A32942B7-920C-486b-B0E6-92A702A99B35}"
+							"{f8a6ba98-087a-43ac-a9d8-b7f13c5bae31}"
+							"{94107D70-34CF-419a-BABA-1E5096185347}"
+
+(0005) 					FriendlyName = "Keylight Driver"
+(0006) 					SupportedStates = 0x00000019
+(0007) 					InitialState = 0x00000000
+(0008) 					InitFlags = 0x00000001
+(0009) 					ReloadEventName = "KeyLightChangeEvent"
+(0010) 					TimeoutSection = 0x80000001
+(0011) 					TimeoutPath = "ControlPanel\KeyLight"
+(0012) 					TimeoutMultiplier = 0x00000001
+(0013) 					BatteryTimeoutName = "BatteryTimeout"
+(0014) 					ACTimeoutName = "ACTimeout"
+<0000> 				[Activities]
+<0000> 					[User]
+(0000) 							EventName = "UserActivity"
+(0001) 							FriendlyName = "User Activity"
+(0002) 							ACFlagName = "ACKeylightOnTap"
+(0003) 							BatteryFlagName = "KeylightOnTap"
+(0004) 							FlagPath = "ControlPanel\Keylight"
+(0005) 							FlagSection = 0x80000001
+<0001> 					[Keyboard]
+(0000) 							EventName = "PowerManager/ActivityTimer/Keylight/KeyboardActivity"
+(0001) 							FriendlyName = "Keyboard Activity"
+(0002) 							ACFlagName = "ACKeylightOnKeyboard"
+(0003) 							BatteryFlagName = "KeylightOnKeyboard"
+(0004) 							FlagPath = "ControlPanel\Keylight"
+(0005) 							FlagSection = 0x80000001
+<0002> 					[Touch]
+(0000) 							EventName = "PowerManager/ActivityTimer/Keylight/TouchActivity"
+(0001) 							FriendlyName = "Touch Activity"
+(0002) 							ACFlagName = "ACKeylightOnTouch"
+(0003) 							BatteryFlagName = "KeylightOnTouch"
+(0004) 							FlagPath = "ControlPanel\Keylight"
+(0005) 							FlagSection = 0x80000001
+<0003> 					[Trigger]
+(0000) 							EventName = "PowerManager/ActivityTimer/Keylight/TriggerActivity"
+(0001) 							FriendlyName = "Trigger Activity"
+(0002) 							ACFlagName = "ACKeylightOnTrigger"
+(0003) 							BatteryFlagName = "KeylightOnTrigger"
+(0004) 							FlagPath = "ControlPanel\Keylight"
+(0005) 							FlagSection = 0x80000001
+<0040> 			[sdmmcloader]
+(0000) 					Dll = "sdmmc_loader.dll"
+(0001) 					Prefix = "SML"
+(0002) 					Order = 0x00000002
+<0041> 			[Touch]
+(0000) 					Prefix = "TCH"
+(0001) 					Dll = "PmProxy.Dll"
+(0002) 					Order = 0x00000002
+(0003) 					Index = 0x00000001
+(0004) 					DeviceArrayIndex = 0x00000000
+(0005) 					Flags = 0x00000008
+(0006) 					IClass = MULTI_SZ: 
+							"{f8a6ba98-087a-43ac-a9d8-b7f13c5bae31}"
+							"{94107D70-34CF-419a-BABA-1E5096185347}"
+
+(0007) 					Interface = "{A32942B7-920C-486b-B0E6-92A702A99B35}"
+(0008) 					FriendlyName = "Touch Proxy Driver"
+(0009) 					SupportedStates = 0x00000019
+(0010) 					InitialState = 0x00000000
+(0011) 					InitFlags = 0x00000000
+<0042> 			[Keyboard]
+(0000) 					Prefix = "KBD"
+(0001) 					Dll = "PmProxy.Dll"
+(0002) 					Order = 0x00000002
+(0003) 					Index = 0x00000001
+(0004) 					DeviceArrayIndex = 0x00000001
+(0005) 					Flags = 0x00000008
+(0006) 					IClass = MULTI_SZ: 
+							"{f8a6ba98-087a-43ac-a9d8-b7f13c5bae31}"
+							"{94107D70-34CF-419a-BABA-1E5096185347}"
+
+(0007) 					Interface = "{A32942B7-920C-486b-B0E6-92A702A99B35}"
+(0008) 					FriendlyName = "Keyboard Proxy Driver"
+(0009) 					SupportedStates = 0x00000019
+(0010) 					InitialState = 0x00000000
+(0011) 					InitFlags = 0x00000000
+<0043> 			[Battery]
+(0000) 					Prefix = "BAT"
+(0001) 					Dll = "battdrvr.dll"
+(0002) 					Flags = 0x00000008
+(0003) 					Order = 0x00000001
+(0004) 					IClass = "{DD176277-CD34-4980-91EE-67DBEF3D8913}"
+(0005) 					BackupBatteryInfo = hex: ff,00,00,00,5c,12,00,00,64,00,00,00,a0,0f,00,00,4b,00,00,00,3c,0f,00,00,32,00,00,00,d8,0e,00,00,19,00,00,00,74,0e,00,00
+<0002> 		[Unimodem]
+(0000) 				DevConfig = hex: 10,00,00,00,78,00,00,00,10,01,00,00,00,4b,00,00,00,00,08,00,00,00,00,00,00
+<0000> 			[Init]
+(0000) 					1 = "AT<cr>"
+(0001) 					2 = "ATE0V1&C1&D2<cr>"
+<0001> 			[Settings]
+(0000) 					Prefix = "AT"
+(0001) 					Terminator = "<cr>"
+(0002) 					DialPrefix = "D"
+(0003) 					DialSuffix = ";"
+(0004) 					Pulse = "P"
+(0005) 					Tone = "T"
+(0006) 					Blind_Off = "X4"
+(0007) 					Blind_On = "X3"
+(0008) 					CallSetupFailTimeout = "ATS7=<#><cr>"
+(0009) 					Reset = "ATZ<cr>"
+<0003> 		[PCMCIA]
+(0000) 				Slot0KeepPowerOnSuspend = 0x00000000
+(0001) 				Slot1KeepPowerOnSuspend = 0x00000000
+(0002) 				Slot0SuppressMultipleReset = 0x00000001
+(0003) 				Slot1SuppressMultipleReset = 0x00000001
+(0004) 				NoBatteryCheck = 0x00000001
+<0000> 			[Modem]
+(0000) 					DeviceArrayIndex = 0x00000001
+(0001) 					Prefix = "COM"
+(0002) 					Dll = "Serial.Dll"
+(0003) 					ResetDelay = 0x00000300
+<0000> 				[Unimodem]
+(0000) 						Tsp = "Unimodem.dll"
+(0001) 						DeviceType = 0x00000003
+<0001> 			[Serial]
+(0000) 					DeviceArrayIndex = 0x00000001
+(0001) 					Prefix = "COM"
+(0002) 					Dll = "Serial.Dll"
+(0003) 					ResetDelay = 0x00000300
+<0000> 				[Unimodem]
+(0000) 						Tsp = "Unimodem.dll"
+(0001) 						DeviceType = 0x00000000
+<0002> 			[NTT_DoCoMo-MFCard96F1-A093]
+(0000) 					DeviceArrayIndex = 0x00000001
+(0001) 					Prefix = "COM"
+(0002) 					Dll = "Serial.Dll"
+(0003) 					ResetDelay = 0x00000300
+(0004) 					NoIntrPend = 0x00000001
+<0000> 				[Unimodem]
+(0000) 						Tsp = "Unimodem.dll"
+(0001) 						DeviceType = 0x00000003
+<0003> 			[Hayes-OPTIMA_288_+_FAX_for_PCMCIA_with_EZ-4FA5]
+(0000) 					DeviceArrayIndex = 0x00000001
+(0001) 					Prefix = "COM"
+(0002) 					Dll = "Serial.dll"
+<0000> 				[Unimodem]
+(0000) 						Tsp = "Unimodem.dll"
+(0001) 						FriendlyName = "Hayes 28.8 + Fax"
+(0002) 						DeviceType = 0x00000003
+<0000> 					[Init]
+(0000) 							3 = "AT&F E0 V1 &C1 &D2<cr>"
+(0001) 							4 = "ATW0 S95=0<cr>"
+<0001> 					[Settings]
+(0000) 							FlowHard = "AT&K3<cr>"
+(0001) 							FlowSoft = "AT&K4<cr>"
+(0002) 							FlowOff = "AT&K0<cr>"
+<0004> 			[MEGAHERTZ-XJ2288-9E81]
+(0000) 					DeviceArrayIndex = 0x00000001
+(0001) 					Prefix = "COM"
+(0002) 					Dll = "Serial.dll"
+<0000> 				[Unimodem]
+(0000) 						Tsp = "Unimodem.dll"
+(0001) 						FriendlyName = "Megahertz 28.8"
+(0002) 						DeviceType = 0x00000003
+<0000> 					[Init]
+(0000) 							3 = "ATW2B1\V<cr>"
+<0001> 					[Settings]
+(0000) 							FlowHard = "AT&K3<cr>"
+(0001) 							FlowSoft = "AT&K4<cr>"
+(0002) 							FlowOff = "AT&K0<cr>"
+<0005> 			[MEGAHERTZ-XJ3288-26C7]
+(0000) 					DeviceArrayIndex = 0x00000001
+(0001) 					Prefix = "COM"
+(0002) 					Dll = "Serial.dll"
+<0000> 				[Unimodem]
+(0000) 						Tsp = "Unimodem.dll"
+(0001) 						FriendlyName = "Megahertz 28.8 Cellular"
+(0002) 						DeviceType = 0x00000003
+<0000> 					[Init]
+(0000) 							3 = "ATW2B1\V1<cr>"
+<0001> 					[Settings]
+(0000) 							FlowHard = "AT&K3<cr>"
+(0001) 							FlowSoft = "AT&K4<cr>"
+(0002) 							FlowOff = "AT&K0<cr>"
+<0006> 			[MEGAHERTZ-Megahertz_28.8-73E3]
+(0000) 					DeviceArrayIndex = 0x00000001
+(0001) 					Prefix = "COM"
+(0002) 					Dll = "Serial.dll"
+<0000> 				[Unimodem]
+(0000) 						Tsp = "Unimodem.dll"
+(0001) 						FriendlyName = "Megahertz Cruise Card 28.8"
+(0002) 						DeviceType = 0x00000003
+<0000> 					[Init]
+(0000) 							3 = "ATW2B1\V1<cr>"
+<0001> 					[Settings]
+(0000) 							FlowHard = "AT&K3<cr>"
+(0001) 							FlowSoft = "AT&K4<cr>"
+(0002) 							FlowOff = "AT&K0<cr>"
+<0007> 			[MEGAHERTZ-XJ1144-5C3E]
+(0000) 					DeviceArrayIndex = 0x00000001
+(0001) 					Prefix = "COM"
+(0002) 					Dll = "Serial.Dll"
+<0000> 				[Unimodem]
+(0000) 						Tsp = "Unimodem.dll"
+(0001) 						FriendlyName = "Megahertz 14.4"
+(0002) 						DeviceType = 0x00000003
+<0008> 			[USRobotics-PCMCIA_28800_Data/Fax-92A2]
+(0000) 					DeviceArrayIndex = 0x00000001
+(0001) 					Prefix = "COM"
+(0002) 					Dll = "Serial.dll"
+(0003) 					ResetDelay = 0x00000800
+<0000> 				[Unimodem]
+(0000) 						Tsp = "Unimodem.dll"
+(0001) 						FriendlyName = "Sportster 28.8"
+(0002) 						DeviceType = 0x00000003
+<0000> 					[Init]
+(0000) 							3 = "AT &F1 E0 V1 &C1 &D2 &B1 &A3 S0=0<cr>"
+<0001> 					[Settings]
+(0000) 							FlowHard = "AT&K3<cr>"
+(0001) 							FlowSoft = "AT&K4<cr>"
+(0002) 							FlowOff = "AT&K0<cr>"
+<0009> 			[Practical_Peripherals_Inc-PPI_PC288T2EZ_PCMCIA-F382]
+(0000) 					DeviceArrayIndex = 0x00000001
+(0001) 					Prefix = "COM"
+(0002) 					Dll = "Serial.dll"
+<0000> 				[Unimodem]
+(0000) 						Tsp = "Unimodem.dll"
+(0001) 						FriendlyName = "ProClass 28.8"
+(0002) 						DeviceType = 0x00000003
+<0000> 					[Init]
+<0001> 					[Settings]
+<0010> 			[Practical_Peripherals_Inc-PPI_PC288T2EZ_PCMCIA-DAE6]
+(0000) 					DeviceArrayIndex = 0x00000001
+(0001) 					Prefix = "COM"
+(0002) 					Dll = "Serial.dll"
+<0000> 				[Unimodem]
+(0000) 						Tsp = "Unimodem.dll"
+(0001) 						FriendlyName = "ProClass 28.8"
+(0002) 						DeviceType = 0x00000003
+<0000> 					[Init]
+<0001> 					[Settings]
+<0011> 			[Xircom-CreditCard_Modem_33.6-5347]
+(0000) 					DeviceArrayIndex = 0x00000001
+(0001) 					Prefix = "COM"
+(0002) 					Dll = "Serial.dll"
+<0000> 				[Unimodem]
+(0000) 						Tsp = "Unimodem.dll"
+(0001) 						FriendlyName = "Xircom 33.6"
+(0002) 						DeviceType = 0x00000003
+<0000> 					[Init]
+<0001> 					[Settings]
+<0012> 			[Socket_Communications_Inc-Serial_Port_Adapter_Revision_B-5E3E]
+(0000) 					DeviceArrayIndex = 0x00000001
+(0001) 					Prefix = "COM"
+(0002) 					Dll = "Serial.dll"
+<0000> 				[Unimodem]
+(0000) 						Tsp = "Unimodem.dll"
+(0001) 						FriendlyName = "Socket I/O Serial"
+(0002) 						DeviceType = 0x00000000
+<0013> 			[Xircom-CreditCard_Ethernet+Modem_33.6-05DD]
+(0000) 					Dll = "regenum.dll"
+<0000> 				[1]
+(0000) 						DeviceArrayIndex = 0x00000001
+(0001) 						Prefix = "COM"
+(0002) 						Dll = "Serial.dll"
+<0000> 					[Unimodem]
+(0000) 							Tsp = "Unimodem.dll"
+(0001) 							FriendlyName = "Xircom Ether Modem 33.6"
+(0002) 							DeviceType = 0x00000003
+<0000> 						[Init]
+<0001> 						[Settings]
+<0014> 			[Motorola-MONTANA_V.34_FAX/MODEM-9E9C]
+(0000) 					DeviceArrayIndex = 0x00000001
+(0001) 					Prefix = "COM"
+(0002) 					Dll = "Serial.dll"
+<0000> 				[Unimodem]
+(0000) 						Tsp = "Unimodem.dll"
+(0001) 						FriendlyName = "Motorola Montana 28.8"
+(0002) 						DeviceType = 0x00000003
+<0000> 					[Init]
+(0000) 							3 = "ATS7=60M1<cr>"
+<0001> 					[Settings]
+(0000) 							FlowHard = "AT\Q3<cr>"
+(0001) 							FlowSoft = "AT\Q1<cr>"
+(0002) 							FlowOff = "AT\Q<cr>"
+<0015> 			[MOTOROLA-POWER_14.4-8980]
+(0000) 					DeviceArrayIndex = 0x00000001
+(0001) 					Prefix = "COM"
+(0002) 					Dll = "Serial.dll"
+<0000> 				[Unimodem]
+(0000) 						Tsp = "Unimodem.dll"
+(0001) 						FriendlyName = "Motorola Power 14.4"
+(0002) 						DeviceType = 0x00000003
+<0000> 					[Init]
+(0000) 							3 = "ATS7=60S19=0M1<cr>"
+<0001> 					[Settings]
+(0000) 							FlowHard = "AT\Q3<cr>"
+(0001) 							FlowSoft = "AT\Q1<cr>"
+(0002) 							FlowOff = "AT\Q<cr>"
+<0016> 			[ATADisk]
+(0000) 					Dll = "ATADISK.DLL"
+(0001) 					Prefix = "DSK"
+(0002) 					Ioctl = 0x00000004
+(0003) 					Profile = "PCMCIA"
+(0004) 					IClass = MULTI_SZ: 
+							"{8DD679CE-8AB4-43c8-A14A-EA4963FAA715}"
+							"{A4E7EDDA-E575-4252-9D6B-4195D48BB865}"
+
+<0017> 			[Detect]
+<0000> 				[10]
+(0000) 						Dll = "SERIAL.DLL"
+(0001) 						Entry = "DetectModem"
+<0001> 				[50]
+(0000) 						Dll = "ATADISK.DLL"
+(0001) 						Entry = "DetectATADisk"
+<0002> 				[60]
+(0000) 						Dll = "NE2000.DLL"
+(0001) 						Entry = "DetectNE2000"
+<0003> 				[41]
+(0000) 						Dll = "pcx500.DLL"
+(0001) 						Entry = "DetectPCX500"
+<0018> 			[NE2000]
+(0000) 					Dll = "ndis.dll"
+(0001) 					Prefix = "NDS"
+(0002) 					Miniport = "NE2000"
+<0019> 			[CISCO]
+(0000) 					Dll = "ndis.dll"
+(0001) 					Prefix = "NDS"
+(0002) 					Miniport = "Cisco"
+<0020> 			[Symbol-Spectrum24_WLAN_Adapter-F871]
+(0000) 					Index = 0x00000001
+(0001) 					Miniport = "SLACE"
+(0002) 					Prefix = "NDS"
+(0003) 					Dll = "ndis.dll"
+<0021> 			[Config0]
+(0000) 					Slot1KeepPowerOnSuspend = 0x00000000
+(0001) 					Slot0KeepPowerOnSuspend = 0x00000000
+<0022> 			[Config2]
+(0000) 					Slot1KeepPowerOnSuspend = 0x00000000
+(0001) 					Slot0KeepPowerOnSuspend = 0x00000000
+<0023> 			[Config1]
+(0000) 					Slot1KeepPowerOnSuspend = 0x00000000
+(0001) 					Slot0KeepPowerOnSuspend = 0x00000000
+<0024> 			[Symbol_Technologies-LA4111_Spectrum24_Wireless_LAN_PC_Card-077d]
+(0000) 					Index = 0x00000001
+(0001) 					Miniport = "NETWLAN"
+(0002) 					Prefix = "NDS"
+(0003) 					Dll = "NDIS.dll"
+<0025> 			[Symbol-Spectrum24_LA4100_Series_WLAN_PC_Card-e063]
+(0000) 					Index = 0x00000001
+(0001) 					Miniport = "NETWLAN"
+(0002) 					Prefix = "NDS"
+(0003) 					Dll = "NDIS.dll"
+<0026> 			[Socket-CF+_LP_WLAN_Card_Rev_A-09DF]
+(0000) 					Index = 0x00000001
+(0001) 					Miniport = "NETWLAN"
+(0002) 					Prefix = "NDS"
+(0003) 					Dll = "NDIS.dll"
+<0004> 		[Console]
+(0000) 				Font = "Courier New"
+(0001) 				Size = 0x00000008
+(0002) 				PaintRow = 0x00000000
+<0005> 		[Wavedev]
+<0000> 			[Alias]
+<0000> 				[ledon]
+(0000) 						Action = 0x00000001
+(0001) 						LedNum = 0x00000000
+(0002) 						OffOnBlink = 0x00000001
+(0003) 						TotalCycleTime = 0x00000000
+(0004) 						OnTime = 0x000f4240
+(0005) 						OffTime = 0x00000000
+(0006) 						MetaCycleOn = 0x00000000
+(0007) 						MetaCycleOff = 0x00000000
+<0001> 				[ledoff]
+(0000) 						Action = 0x00000001
+(0001) 						LedNum = 0x00000000
+(0002) 						OffOnBlink = 0x00000000
+(0003) 						TotalCycleTime = 0x00000000
+(0004) 						OnTime = 0x00000000
+(0005) 						OffTime = 0x00000000
+(0006) 						MetaCycleOn = 0x00000000
+(0007) 						MetaCycleOff = 0x00000000
+<0002> 				[ledblink]
+(0000) 						Action = 0x00000001
+(0001) 						LedNum = 0x00000000
+(0002) 						OffOnBlink = 0x00000002
+(0003) 						TotalCycleTime = 0x00000000
+(0004) 						OnTime = 0x000f4240
+(0005) 						OffTime = 0x0007a120
+(0006) 						MetaCycleOn = 0x00000004
+(0007) 						MetaCycleOff = 0x00000004
+<0003> 				[beep]
+(0000) 						Action = 0x00000001
+(0001) 						LedNum = 0x00000006
+(0002) 						OffOnBlink = 0x00000002
+(0003) 						TotalCycleTime = 0x00000000
+(0004) 						OnTime = 0x000003e8
+(0005) 						OffTime = 0x000001f4
+(0006) 						MetaCycleOn = 0x00000000
+(0007) 						MetaCycleOff = 0x00000000
+<0004> 				[Generic]
+(0000) 						Action = 0x00000001
+(0001) 						LedNum = 0x00000006
+(0002) 						OffOnBlink = 0x00000002
+(0003) 						TotalCycleTime = 0x00000001
+(0004) 						OnTime = 0x00000064
+(0005) 						OffTime = 0x00000875
+(0006) 						MetaCycleOn = 0x00000000
+(0007) 						MetaCycleOff = 0x00000000
+<0005> 				[Asterisk]
+(0000) 						Action = 0x00000001
+(0001) 						LedNum = 0x00000006
+(0002) 						OffOnBlink = 0x00000002
+(0003) 						TotalCycleTime = 0x00000001
+(0004) 						OnTime = 0x00000064
+(0005) 						OffTime = 0x00000550
+(0006) 						MetaCycleOn = 0x00000000
+(0007) 						MetaCycleOff = 0x00000000
+<0006> 				[Close]
+(0000) 						Action = 0x00000001
+(0001) 						LedNum = 0x00000006
+(0002) 						OffOnBlink = 0x00000002
+(0003) 						TotalCycleTime = 0x00000001
+(0004) 						OnTime = 0x00000064
+(0005) 						OffTime = 0x00000064
+(0006) 						MetaCycleOn = 0x00000000
+(0007) 						MetaCycleOff = 0x00000000
+<0007> 				[Critical]
+(0000) 						Action = 0x00000001
+(0001) 						LedNum = 0x00000006
+(0002) 						OffOnBlink = 0x00000002
+(0003) 						TotalCycleTime = 0x00000001
+(0004) 						OnTime = 0x00000064
+(0005) 						OffTime = 0x00000c50
+(0006) 						MetaCycleOn = 0x00000000
+(0007) 						MetaCycleOff = 0x00000000
+<0008> 				[Infbeg]
+(0000) 						Action = 0x00000001
+(0001) 						LedNum = 0x00000006
+(0002) 						OffOnBlink = 0x00000002
+(0003) 						TotalCycleTime = 0x00000001
+(0004) 						OnTime = 0x00000064
+(0005) 						OffTime = 0x00000a28
+(0006) 						MetaCycleOn = 0x00000000
+(0007) 						MetaCycleOff = 0x00000000
+<0009> 				[Infintr]
+(0000) 						Action = 0x00000001
+(0001) 						LedNum = 0x00000006
+(0002) 						OffOnBlink = 0x00000002
+(0003) 						TotalCycleTime = 0x00000001
+(0004) 						OnTime = 0x00000064
+(0005) 						OffTime = 0x00000600
+(0006) 						MetaCycleOn = 0x00000000
+(0007) 						MetaCycleOff = 0x00000000
+<0010> 				[Infend]
+(0000) 						Action = 0x00000001
+(0001) 						LedNum = 0x00000006
+(0002) 						OffOnBlink = 0x00000002
+(0003) 						TotalCycleTime = 0x00000001
+(0004) 						OnTime = 0x00000058
+(0005) 						OffTime = 0x00000620
+(0006) 						MetaCycleOn = 0x00000000
+(0007) 						MetaCycleOff = 0x00000000
+<0011> 				[Nled]
+(0000) 						Action = 0x00000001
+(0001) 						LedNum = 0x00000006
+(0002) 						OffOnBlink = 0x00000002
+(0003) 						TotalCycleTime = 0x00000001
+(0004) 						OnTime = 0x00000064
+(0005) 						OffTime = 0x00000700
+(0006) 						MetaCycleOn = 0x00000000
+(0007) 						MetaCycleOff = 0x00000000
+<0012> 				[Default]
+(0000) 						Action = 0x00000001
+(0001) 						LedNum = 0x00000006
+(0002) 						OffOnBlink = 0x00000002
+(0003) 						TotalCycleTime = 0x00000001
+(0004) 						OnTime = 0x00000064
+(0005) 						OffTime = 0x00000064
+(0006) 						MetaCycleOn = 0x00000000
+(0007) 						MetaCycleOff = 0x00000000
+<0013> 				[Empty]
+(0000) 						Action = 0x00000001
+(0001) 						LedNum = 0x00000006
+(0002) 						OffOnBlink = 0x00000002
+(0003) 						TotalCycleTime = 0x00000001
+(0004) 						OnTime = 0x00000064
+(0005) 						OffTime = 0x00000800
+(0006) 						MetaCycleOn = 0x00000000
+(0007) 						MetaCycleOff = 0x00000000
+<0014> 				[Exclam]
+(0000) 						Action = 0x00000001
+(0001) 						LedNum = 0x00000006
+(0002) 						OffOnBlink = 0x00000002
+(0003) 						TotalCycleTime = 0x00000001
+(0004) 						OnTime = 0x00000064
+(0005) 						OffTime = 0x00000850
+(0006) 						MetaCycleOn = 0x00000000
+(0007) 						MetaCycleOff = 0x00000000
+<0015> 				[Menupop]
+(0000) 						Action = 0x00000001
+(0001) 						LedNum = 0x00000006
+(0002) 						OffOnBlink = 0x00000002
+(0003) 						TotalCycleTime = 0x00000001
+(0004) 						OnTime = 0x00000064
+(0005) 						OffTime = 0x00000900
+(0006) 						MetaCycleOn = 0x00000000
+(0007) 						MetaCycleOff = 0x00000000
+<0016> 				[Menusel]
+(0000) 						Action = 0x00000001
+(0001) 						LedNum = 0x00000006
+(0002) 						OffOnBlink = 0x00000002
+(0003) 						TotalCycleTime = 0x00000001
+(0004) 						OnTime = 0x00000064
+(0005) 						OffTime = 0x00000950
+(0006) 						MetaCycleOn = 0x00000000
+(0007) 						MetaCycleOff = 0x00000000
+<0017> 				[Openprog]
+(0000) 						Action = 0x00000001
+(0001) 						LedNum = 0x00000006
+(0002) 						OffOnBlink = 0x00000002
+(0003) 						TotalCycleTime = 0x00000001
+(0004) 						OnTime = 0x00000064
+(0005) 						OffTime = 0x00000a00
+(0006) 						MetaCycleOn = 0x00000000
+(0007) 						MetaCycleOff = 0x00000000
+<0018> 				[Question]
+(0000) 						Action = 0x00000001
+(0001) 						LedNum = 0x00000006
+(0002) 						OffOnBlink = 0x00000002
+(0003) 						TotalCycleTime = 0x00000001
+(0004) 						OnTime = 0x00000064
+(0005) 						OffTime = 0x00000a50
+(0006) 						MetaCycleOn = 0x00000000
+(0007) 						MetaCycleOff = 0x00000000
+<0019> 				[Startup]
+(0000) 						Action = 0x00000001
+(0001) 						LedNum = 0x00000006
+(0002) 						OffOnBlink = 0x00000002
+(0003) 						TotalCycleTime = 0x00000001
+(0004) 						OnTime = 0x00000064
+(0005) 						OffTime = 0x00000b00
+(0006) 						MetaCycleOn = 0x00000000
+(0007) 						MetaCycleOff = 0x00000000
+<0020> 				[Windmax]
+(0000) 						Action = 0x00000001
+(0001) 						LedNum = 0x00000006
+(0002) 						OffOnBlink = 0x00000002
+(0003) 						TotalCycleTime = 0x00000001
+(0004) 						OnTime = 0x00000064
+(0005) 						OffTime = 0x00000b50
+(0006) 						MetaCycleOn = 0x00000000
+(0007) 						MetaCycleOff = 0x00000000
+<0021> 				[Windmin]
+(0000) 						Action = 0x00000001
+(0001) 						LedNum = 0x00000006
+(0002) 						OffOnBlink = 0x00000002
+(0003) 						TotalCycleTime = 0x00000001
+(0004) 						OnTime = 0x00000064
+(0005) 						OffTime = 0x00000c00
+(0006) 						MetaCycleOn = 0x00000000
+(0007) 						MetaCycleOff = 0x00000000
+<0006> 		[Resources]
+<0000> 			[IRQ]
+(0000) 					Identifier = 0x00000001
+(0001) 					Minimum = 0x00000001
+(0002) 					Space = 0x00000020
+(0003) 					Ranges = "1-0x20"
+<0001> 			[IO]
+(0000) 					Identifier = 0x00000002
+(0001) 					Minimum = 0x00000000
+(0002) 					Space = 0x00010000
+(0003) 					Ranges = "0-0xFFFF"
+<0007> 		[Display]
+<0000> 			[Intel]
+(0000) 					Bpp = 0x00000004
+(0001) 					CyScreen = 0x00000140
+(0002) 					CxScreen = 0x000000f0
+(0003) 					DisplayType = "EW50301FLWP"
+<0000> 				[LQ038Q7DB03]
+(0000) 						DisplayType = "LQ038Q7DB03"
+(0001) 						CxScreen = 0x000000f0
+(0002) 						CyScreen = 0x00000140
+(0003) 						Bpp = 0x00000010
+<0001> 				[EW50301FLWP]
+(0000) 						DisplayType = "EW50301FLWP"
+(0001) 						CxScreen = 0x000000f0
+(0002) 						CyScreen = 0x00000140
+(0003) 						Bpp = 0x00000004
+<0002> 				[EW50301FLWPPPD]
+(0000) 						DisplayType = "EW50301FLWPPPD"
+(0001) 						CxScreen = 0x000000f0
+(0002) 						CyScreen = 0x00000140
+(0003) 						Bpp = 0x00000004
+<0003> 				[GAMEX]
+(0000) 						ptStart = "202,758"
+(0001) 						ptC = "145,742"
+(0002) 						ptB = "92,742"
+(0003) 						ptA = "35,742"
+(0004) 						ptRight = "189,454"
+(0005) 						ptLeft = "53,454"
+(0006) 						ptDown = "150,411"
+(0007) 						ptUp = "92,411"
+(0008) 						vkStart = 0x0000000d
+(0009) 						vkC = 0x00000033
+(0010) 						vkB = 0x00000032
+(0011) 						vkA = 0x00000031
+(0012) 						vkRight = 0x00000027
+(0013) 						vkLeft = 0x00000025
+(0014) 						vkDown = 0x00000028
+(0015) 						vkUp = 0x00000026
+<0000> 					[default]
+(0000) 							vkUp = 0x00000026
+(0001) 							vkDown = 0x00000028
+(0002) 							vkLeft = 0x00000025
+(0003) 							vkRight = 0x00000027
+(0004) 							vkA = 0x00000031
+(0005) 							vkB = 0x00000032
+(0006) 							vkC = 0x00000033
+(0007) 							vkStart = 0x0000000d
+(0008) 							ptUp = "92,411"
+(0009) 							ptDown = "150,411"
+(0010) 							ptLeft = "53,454"
+(0011) 							ptRight = "189,454"
+(0012) 							ptA = "35,742"
+(0013) 							ptB = "92,742"
+(0014) 							ptC = "145,742"
+(0015) 							ptStart = "202,758"
+<0001> 					[53Key]
+(0000) 							vkUp = 0x00000026
+(0001) 							vkDown = 0x00000028
+(0002) 							vkLeft = 0x00000025
+(0003) 							vkRight = 0x00000027
+(0004) 							vkA = 0x00000031
+(0005) 							vkB = 0x00000032
+(0006) 							vkC = 0x00000033
+(0007) 							vkStart = 0x0000000d
+(0008) 							ptUp = "92,411"
+(0009) 							ptDown = "150,411"
+(0010) 							ptLeft = "53,454"
+(0011) 							ptRight = "189,454"
+(0012) 							ptA = "35,742"
+(0013) 							ptB = "92,742"
+(0014) 							ptC = "145,742"
+(0015) 							ptStart = "202,758"
+<0002> 					[43Key]
+(0000) 							vkUp = 0x00000026
+(0001) 							vkDown = 0x00000028
+(0002) 							vkLeft = 0x00000025
+(0003) 							vkRight = 0x00000027
+(0004) 							vkA = 0x00000031
+(0005) 							vkB = 0x00000032
+(0006) 							vkC = 0x00000033
+(0007) 							vkStart = 0x0000000d
+(0008) 							ptUp = "92,411"
+(0009) 							ptDown = "150,411"
+(0010) 							ptLeft = "53,454"
+(0011) 							ptRight = "189,454"
+(0012) 							ptA = "35,742"
+(0013) 							ptB = "92,742"
+(0014) 							ptC = "145,742"
+(0015) 							ptStart = "202,758"
+<0003> 					[28Key]
+(0000) 							vkUp = 0x00000026
+(0001) 							vkDown = 0x00000028
+(0002) 							vkLeft = 0x00000025
+(0003) 							vkRight = 0x00000027
+(0004) 							vkA = 0x00000031
+(0005) 							vkB = 0x00000032
+(0006) 							vkC = 0x00000033
+(0007) 							vkStart = 0x0000000d
+(0008) 							ptUp = "101,430"
+(0009) 							ptDown = "158,430"
+(0010) 							ptLeft = "62,469"
+(0011) 							ptRight = "198,469"
+(0012) 							ptA = "44,596"
+(0013) 							ptB = "97,596"
+(0014) 							ptC = "154,596"
+(0015) 							ptStart = "215,731"
+<0006> 	[System]
+<0000> 		[Ceddk]
+(0000) 				StallCounter = 0x00000039
+<0001> 		[Events]
+(0000) 				SYSTEM/PowerManagerReady = "Power Manager APIs"
+(0001) 				SYSTEM/GweApiSetReady = "Event triggered after GWES registers its API sets"
+(0002) 				SYSTEM/ShellAPIReady = "Shell APIs"
+(0003) 				SYSTEM/BatteryAPIsReady = "Battery Interface APIs"
+<0002> 		[CurrentControlSet]
+<0000> 			[Control]
+<0000> 				[Power]
+(0000) 						SystemPriority256 = 0x000000f8
+(0001) 						DisableGwesPowerOff = 0x00000001
+(0002) 						SystemIdleTimerResetEvent = "PowerManager/SystemIdleTimerReset"
+(0003) 						SuspendPriority256 = 0x00000064
+<0000> 					[Interfaces]
+(0000) 							{A32942B7-920C-486b-B0E6-92A702A99B35} = "Generic power-manageable devices"
+(0001) 							{8DD679CE-8AB4-43c8-A14A-EA4963FAA715} = "Power-manageable block devices"
+(0002) 							{98C5250D-C29A-4985-AE5F-AFE5367E5006} = "Power-manageable NDIS miniports"
+(0003) 							{EB91C7C9-8BF6-4a2d-9AB8-69724EED97D1} = "Power-manageable display"
+<0001> 					[State]
+<0000> 						[On]
+(0000) 								Default = 0x00000000
+(0001) 								Flags = 0x00010000
+<0001> 						[Suspend]
+(0000) 								Default = 0x00000003
+(0001) 								Flags = 0x00200000
+(0002) 								com3: = 0x00000004
+<0000> 							[{98C5250D-C29A-4985-AE5F-AFE5367E5006}]
+(0000) 									Default = 0x00000004
+<0002> 						[Reboot]
+(0000) 								Default = 0x00000004
+(0001) 								Flags = 0x00800000
+<0003> 						[ScreenOff]
+(0000) 								Default = 0x00000000
+(0001) 								Flags = 0x00100000
+(0002) 								bkl1: = 0x00000004
+(0003) 								klt1: = 0x00000004
+<0000> 							[{EB91C7C9-8BF6-4a2d-9AB8-69724EED97D1}]
+(0000) 									Default = 0x00000004
+<0004> 						[Unattended]
+(0000) 								Default = 0x00000000
+(0001) 								Flags = 0x00000000
+(0002) 								wav1: = 0x00000004
+(0003) 								bkl1: = 0x00000004
+(0004) 								klt1: = 0x00000004
+<0000> 							[{EB91C7C9-8BF6-4a2d-9AB8-69724EED97D1}]
+(0000) 									Default = 0x00000004
+<0005> 						[Resuming]
+(0000) 								Default = 0x00000002
+(0001) 								Flags = 0x00000000
+(0002) 								wav1: = 0x00000000
+(0003) 								bkl1: = 0x00000004
+(0004) 								klt1: = 0x00000004
+<0000> 							[{EB91C7C9-8BF6-4a2d-9AB8-69724EED97D1}]
+(0000) 									Default = 0x00000004
+<0006> 						[Background]
+(0000) 								Default = 0x00000000
+(0001) 								Flags = 0x00100000
+(0002) 								bkl1: = 0x00000004
+(0003) 								klt1: = 0x00000004
+<0000> 							[{EB91C7C9-8BF6-4a2d-9AB8-69724EED97D1}]
+(0000) 									Default = 0x00000004
+<0002> 					[ActivityTimers]
+<0000> 						[UserActivity]
+(0000) 								Timeout = 0x0000000a
+<0003> 					[Timeouts]
+(0000) 							ACSuspendTimeout = 0x00000000
+(0001) 							ACResumingSuspendTimeout = 0x0000000f
+(0002) 							BattSuspendTimeout = 0x000000b4
+(0003) 							BattResumingSuspendTimeout = 0x0000000f
+(0004) 							ChangeEvent = "PowerManager/ReloadActivityTimeouts"
+(0005) 							BatteryPoll = 0x000007d0
+<0001> 			[Services]
+<0000> 				[SNMP]
+<0000> 					[Parameters]
+<0000> 						[ValidCommunities]
+(0000) 								public = 0x00000004
+<0001> 						[ExtensionAgents]
+(0000) 								1 = "SOFTWARE\Microsoft\MIBII\CurrentVersion"
+(0001) 								2 = "SOFTWARE\Microsoft\HostMIB\CurrentVersion"
+<0002> 						[EnableAuthenticationTraps]
+(0000) 								switch = 0x00000001
+<0003> 						[TrapConfiguration]
+<0000> 							[public]
+<0004> 						[TrapVersion]
+(0000) 								DefaultVersion = 0x00000000
+<0005> 						[PermittedManagers]
+<0001> 					[RFC1156Agent]
+(0000) 							sysContact = "Your System Contact Here"
+(0001) 							sysLocation = "Your Location Here"
+<0003> 		[GWE]
+(0000) 				ActivityEvent = "PowerManager/ActivityTimer/UserActivity"
+(0001) 				PORepaint = 0x00000001
+<0000> 			[Menu]
+(0000) 					BarTMrg = 0x00000002
+<0000> 				[BarFnt]
+(0000) 						Nm = "Tahoma"
+(0001) 						Ht = 0xfffffff4
+(0002) 						It = 0x00000000
+(0003) 						Wt = 0x000002bc
+(0004) 						CS = 0x00000000
+<0001> 				[PopFnt]
+(0000) 						Nm = "Tahoma"
+(0001) 						Ht = 0xfffffff4
+(0002) 						It = 0x00000000
+(0003) 						Wt = 0x00000190
+(0004) 						CS = 0x00000000
+<0001> 			[OOMFnt]
+(0000) 					Nm = "Tahoma"
+(0001) 					Ht = 0xfffffff4
+(0002) 					It = 0x00000000
+(0003) 					Wt = 0x00000190
+(0004) 					CS = 0x00000000
+<0002> 			[Button]
+(0000) 					FontWeight = 0x000002bc
+<0003> 			[Commctrl]
+<0000> 				[DragMetrics]
+(0000) 						CXDrag = 0x0000001e
+(0001) 						CYDrag = 0x0000001e
+<0004> 		[StorageManager]
+(0000) 				Dll = "fsdmgr.dll"
+(0001) 				PNPUnloadDelay = 0x00001000
+<0000> 			[FATFS]
+(0000) 					FriendlyName = "FAT FileSystem"
+(0001) 					Dll = "fatfsd.dll"
+(0002) 					Flags = 0x00000024
+(0003) 					Paging = 0x00000001
+(0004) 					EnableCache = 0x00000001
+(0005) 					CacheSize = 0x00000000
+(0006) 					Util = "fatutil.dll"
+<0001> 			[Profiles]
+(0000) 					AutoMount = 0x00000001
+(0001) 					AutoPart = 0x00000000
+(0002) 					AutoFormat = 0x00000000
+(0003) 					MountFlags = 0x00000000
+(0004) 					DefaultFileSystem = ""
+(0005) 					PartitionDriver = "mspart.dll"
+(0006) 					Folder = "Mounted Volume"
+<0000> 				[PCMCIA]
+(0000) 						Name = "PCMCIA/Compact Flash Device"
+(0001) 						Folder = "Storage Card"
+<0001> 				[SDMMC]
+(0000) 						Name = "SD/MMC Card"
+(0001) 						Folder = "MMC Card"
+<0000> 					[FATFS]
+<0000> 						[Filters]
+<0000> 							[SDFILTER]
+(0000) 									Dll = "SDFILTER.dll"
+(0001) 									Order = 0x00000000
+<0002> 				[CDProfile]
+(0000) 						Name = "IDE CDROM/DVD Drive"
+(0001) 						Folder = "CDROM Drive"
+(0002) 						DefaultFileSystem = "UDFS"
+(0003) 						PartitionDriver = ""
+<0000> 					[PartitionTable]
+<0003> 				[FlashFXDisk1Profile]
+(0000) 						AutoMount = 0x00000001
+(0001) 						AutoPart = 0x00000000
+(0002) 						AutoFormat = 0x00000001
+(0003) 						MountFlags = 0x00000000
+(0004) 						Name = "Datalight FlashFX"
+(0005) 						Folder = "Platform"
+(0006) 						DefaultFileSystem = "FATFS"
+(0007) 						PartitionDriver = "mspart.dll"
+<0004> 				[FlashFXDisk2Profile]
+(0000) 						AutoMount = 0x00000001
+(0001) 						AutoPart = 0x00000000
+(0002) 						AutoFormat = 0x00000001
+(0003) 						MountFlags = 0x00000000
+(0004) 						Name = "Datalight FlashFX"
+(0005) 						Folder = "Application"
+(0006) 						DefaultFileSystem = "FATFS"
+(0007) 						PartitionDriver = "mspart.dll"
+<0002> 			[PartitionTable]
+(0000) 					01 = "FATFS"
+(0001) 					04 = "FATFS"
+(0002) 					06 = "FATFS"
+(0003) 					07 = "NTFS"
+(0004) 					0B = "FATFS"
+(0005) 					0C = "FATFS"
+(0006) 					0E = "FATFS"
+(0007) 					0F = "FATFS"
+(0008) 					20 = "BOOT"
+(0009) 					21 = "BINFS"
+(0010) 					22 = "XIP"
+<0005> 		[GDI]
+(0000) 				ClearType = 0x00000001
+(0001) 				Gamma = 0x00000001
+<0000> 			[DRIVERS]
+(0000) 					MainDisplay = "DDI.DLL"
+<0001> 			[SYSFNT]
+(0000) 					Nm = "Tahoma"
+(0001) 					Ht = 0xfffffff4
+(0002) 					It = 0x00000000
+(0003) 					Wt = 0x00000190
+(0004) 					CS = 0x00000000
+<0006> 		[Hibernate]
+(0000) 				Bytes = 0x00020000
+(0001) 				Pages = 0x00000028
+<0007> 	[Comm]
+(0000) 			BootCount = 0x00000007
+<0000> 		[USB Cable:]
+<0000> 			[Parms]
+<0000> 				[TcpIp]
+(0000) 						DNS = MULTI_SZ: 
+								"127.0.0.1"
+
+(0001) 						DefaultGateway = MULTI_SZ: 
+								"192.168.55.100"
+
+(0002) 						Subnetmask = MULTI_SZ: 
+								"255.255.255.0"
+
+(0003) 						IpAddress = MULTI_SZ: 
+								"192.168.55.101"
+
+(0004) 						DontAddDefaultGateway = 0x00000000
+(0005) 						UseZeroBroadcast = 0x00000000
+(0006) 						EnableDHCP = 0x00000000
+<0001> 		[AFD]
+(0000) 				Stacks = MULTI_SZ: 
+						"tcpstk"
+						"tcpip6"
+						"irdastk"
+						"btd"
+
+<0002> 		[CXPort]
+(0000) 				NoIdleTimerReset = 0x00000000
+<0003> 		[Autoras]
+(0000) 				Dialer = "rnaapp.exe"
+(0001) 				NoPromptOpt = "-p"
+(0002) 				RasEntryOpt = "-e"
+<0004> 		[EAP]
+<0000> 			[Extension]
+<0000> 				[4]
+(0000) 						FriendlyName = "MD5-Challenge"
+(0001) 						InvokePasswordDialog = 0x00000001
+(0002) 						InvokeUserNameDialog = 0x00000001
+(0003) 						Path = "eapchap.dll"
+<0001> 				[26]
+(0000) 						FriendlyName = "MSV2-Challenge"
+(0001) 						InvokePasswordDialog = 0x00000001
+(0002) 						InvokeUserNameDialog = 0x00000001
+(0003) 						Path = "eapchap.dll"
+(0004) 						InteractiveUIPath = "eapchap.dll"
+<0002> 				[13]
+(0000) 						InvokePasswordDialog = 0x00000001
+(0001) 						InvokeUserNameDialog = 0x00000001
+(0002) 						FriendlyName = "TLS"
+(0003) 						ConfigUIPath = "netui.dll"
+(0004) 						InteractiveUIPath = "netui.dll"
+(0005) 						Path = "eaptls.dll"
+<0003> 				[25]
+(0000) 						FriendlyName = "PEAP"
+(0001) 						InvokeUserNameDialog = 0x00000001
+(0002) 						InvokePasswordDialog = 0x00000001
+(0003) 						ConfigUIPath = "eaptls.dll"
+(0004) 						Path = "eaptls.dll"
+(0005) 						InteractiveUIPath = "eaptls.dll"
+(0006) 						EAPMSCHAPv2Only = 0x00000001
+<0005> 		[WS2]
+<0000> 			[LSP]
+<0000> 				[SSL]
+(0000) 						Dll = "ssllsp.dll"
+(0001) 						Flags = 0x00000001
+<0006> 		[NE2000]
+(0000) 				DisplayName = "NE2000 Compatible Ethernet Driver"
+(0001) 				Group = "NDIS"
+(0002) 				ImagePath = "ne2000.dll"
+<0000> 			[Linkage]
+(0000) 					Route = MULTI_SZ: 
+							"NE20001"
+
+<0007> 		[NE20001]
+(0000) 				DisplayName = "NE2000 Compatible Ethernet Driver"
+(0001) 				Group = "NDIS"
+(0002) 				ImagePath = "ne2000.dll"
+<0000> 			[Parms]
+(0000) 					BusNumber = 0x00000000
+(0001) 					BusType = 0x00000008
+(0002) 					InterruptNumber = 0x00000003
+(0003) 					IoBaseAddress = 0x00000300
+(0004) 					Transceiver = 0x00000003
+(0005) 					CardType = 0x00000001
+<0008> 		[cisco]
+(0000) 				DisplayName = "Cisco 802.11 miniport"
+(0001) 				Group = "NDIS"
+(0002) 				ImagePath = "pcx500.dll"
+<0009> 		[cisco1]
+(0000) 				DisplayName = "Cisco 802.11 miniport"
+(0001) 				Group = "NDIS"
+(0002) 				ImagePath = "pcx500.dll"
+<0000> 			[Linkage]
+(0000) 					Route = MULTI_SZ: 
+							"cisco1"
+
+<0001> 			[Parms]
+(0000) 					BusNumber = 0x00000000
+(0001) 					BusType = 0x00000008
+(0002) 					InterruptNumber = 0x00000003
+(0003) 					IoBaseAddress = 0x00000300
+(0004) 					Transceiver = 0x00000003
+(0005) 					CardType = 0x00000001
+<0000> 				[TcpIp]
+(0000) 						DhcpInitDelayInterval = 0x00000000
+<0010> 		[Tcpip]
+<0000> 			[Hosts]
+<0000> 				[ppp_peer]
+(0000) 						aliases = MULTI_SZ: 
+
+(0001) 						ipaddr = hex: c0,a8,37,64
+<0001> 			[Parms]
+(0000) 					IpEnableRouter = 0x00000000
+(0001) 					TcpWindowSize = 0x00008000
+(0002) 					EnableDHCP = 0x00000001
+<0011> 		[AsyncMac]
+(0000) 				DisplayName = "AsyncMac NDISWAN Miniport"
+(0001) 				Group = "NDIS"
+(0002) 				ImagePath = "AsyncMac.dll"
+<0000> 			[Linkage]
+(0000) 					Route = MULTI_SZ: 
+							"AsyncMac1"
+
+<0012> 		[AsyncMac1]
+(0000) 				DisplayName = "AsyncMac NDISWAN Miniport"
+(0001) 				Group = "NDIS"
+<0000> 			[Parms]
+(0000) 					BusNumber = 0x00000000
+(0001) 					BusType = 0x00000000
+(0002) 					DisablePowerManagement = 0x00000001
+<0013> 		[PPTP]
+(0000) 				DisplayName = "PPTP NDISWAN Miniport"
+(0001) 				Group = "NDIS"
+(0002) 				ImagePath = "pptp.dll"
+<0000> 			[Linkage]
+(0000) 					Route = MULTI_SZ: 
+							"PPTP1"
+
+<0014> 		[PPTP1]
+(0000) 				DisplayName = "PPTP NDISWAN Miniport"
+(0001) 				Group = "NDIS"
+<0000> 			[Parms]
+(0000) 					BusNumber = 0x00000000
+(0001) 					BusType = 0x00000000
+(0002) 					DisablePowerManagement = 0x00000001
+<0015> 		[PPPOE]
+(0000) 				DisplayName = "Microsoft PPPoE driver"
+(0001) 				Group = "NDIS"
+(0002) 				ImagePath = "pppoe.dll"
+<0000> 			[Linkage]
+(0000) 					Route = MULTI_SZ: 
+							"PPPOE1"
+
+<0016> 		[PPPOE1]
+(0000) 				DisplayName = "Microsoft PPPoE driver"
+(0001) 				Group = "NDIS"
+<0000> 			[Parms]
+(0000) 					BusNumber = 0x00000000
+(0001) 					BusType = 0x00000000
+(0002) 					DisablePowerManagement = 0x00000001
+<0017> 		[SecurityProviders]
+(0000) 				Providers = "schannel.dll, ntlmssp.dll, kerberos.dll, spnego.dll"
+<0000> 			[SCHANNEL]
+(0000) 					RNG = hex: ab,d4,cf,3d,c0,32,31,a9,6a,0c,ca,1e,4a,6c,46,31,5b,c8,41,01,a3,84,c5,2e,02,34,46,1b,e5,fd,ac,31
+(0001) 					ClientCacheTime = 0x005b8d80
+<0018> 		[Security]
+<0000> 			[Crypto]
+(0000) 					Seed = hex: 56,50,1b,22,b0,cf,06,d4,3f,8f,74,f4,97,82,0d,f5,10,66,9c,8f
+<0000> 				[Defaults]
+<0000> 					[Provider]
+<0000> 						[Microsoft Base Cryptographic Provider v1.0]
+(0000) 								Image Path = "\Windows\rsaenh.dll"
+(0001) 								Type = 0x00000001
+(0002) 								Signature = hex: 8e,0d,be,dd,e0,ca,f6,4b,6c,45,cf,0c,1c,df,72,69,6c,d3,48,f3,a9,0a,04,1f,c5,7b,f2,b4,84,86,a6,69,d4,54,fd,52,1f,58,f6,41,7d,48,e7,64,fa,6b,6b,b8,1a,be,b9,f8,d9,d6,69,f3,f4,0f,73,dc,ce,4b,23,25,df,91,47,dc,89,ee,c6,c2,5a,19,33,9d,6c,34,2f,8a,e7,5a,09,d6,3f,8d,c7,ab,7e,5b,a6,8d,43,ac,83,25,59,3c,49,61,4e,3d,de,04,a8,b3,51,4b,6d,de,04,37,08,ad,ab,74,a7,d3,a4,33,a3,13,21,13,12,c9,19,6b,00,00,00,00,00,00,00,00
+<0001> 						[Microsoft Enhanced Cryptographic Provider v1.0]
+(0000) 								Image Path = "\Windows\rsaenh.dll"
+(0001) 								Type = 0x00000001
+(0002) 								Signature = hex: 8e,0d,be,dd,e0,ca,f6,4b,6c,45,cf,0c,1c,df,72,69,6c,d3,48,f3,a9,0a,04,1f,c5,7b,f2,b4,84,86,a6,69,d4,54,fd,52,1f,58,f6,41,7d,48,e7,64,fa,6b,6b,b8,1a,be,b9,f8,d9,d6,69,f3,f4,0f,73,dc,ce,4b,23,25,df,91,47,dc,89,ee,c6,c2,5a,19,33,9d,6c,34,2f,8a,e7,5a,09,d6,3f,8d,c7,ab,7e,5b,a6,8d,43,ac,83,25,59,3c,49,61,4e,3d,de,04,a8,b3,51,4b,6d,de,04,37,08,ad,ab,74,a7,d3,a4,33,a3,13,21,13,12,c9,19,6b,00,00,00,00,00,00,00,00
+<0001> 					[Provider Types]
+<0000> 						[Type 001]
+(0000) 								Name = "Microsoft Enhanced Cryptographic Provider v1.0"
+<0001> 				[UI]
+(0000) 						Dll = "\Windows\cplmain.cpl"
+<0001> 			[SystemCertificates]
+<0000> 				[Root]
+(0000) 						InitFile = "\windows\sysroots.p7b"
+<0019> 		[HTTPD]
+(0000) 				MaxLogSize = 0x00008000
+(0001) 				LogFileDirectory = "\windows\www"
+(0002) 				NTLM = 0x00000001
+(0003) 				Basic = 0x00000000
+<0000> 			[VROOTS]
+<0000> 				[/]
+(0000) 						Default = "\windows\www\wwwpub\"
+(0001) 						a = 0x00000000
+<0001> 				[/WebAdmin]
+(0000) 						Default = "\windows\httpdadm.dll"
+(0001) 						a = 0x00000002
+<0002> 				[/MsmqAdmin]
+(0000) 						Default = "\windows\msmqadmext.dll"
+(0001) 						a = 0x00000002
+<0003> 				[/Msmq]
+(0000) 						Default = "\windows\srmpIsapi.dll"
+<0004> 				[/SysAdmin]
+(0000) 						Default = "\windows\sysisapi.dll"
+(0001) 						a = 0x00000002
+<0001> 			[ScriptMap]
+(0000) 					.wsdl = "soapisap.dll"
+(0001) 					.wsml = "soapisap.dll"
+<0020> 		[UDP2TCP]
+(0000) 				Port = 0x00001d0e
+<0000> 			[DNS]
+(0000) 					Port = 0x00000035
+<0021> 		[ApplicationDownload]
+(0000) 				Version = "1.0"
+(0001) 				EnableEditServer = 0x00000001
+(0002) 				RetryTime = "00-00-00 00:03:00"
+(0003) 				MaxRetry = 0x00000005
+(0004) 				AuthCookie = "0"
+(0005) 				TimestampCookie = "0"
+(0006) 				SvrFmt = "http://%s/devicemgmt/server.aspx"
+<0000> 			[InfoSrc]
+<0000> 				[0000]
+(0000) 						Default = "\Windows\dminfos.dll"
+<0022> 		[SLACE]
+(0000) 				DisplayName = "Spectrum24 FH Wireless LAN PC Card"
+(0001) 				Group = "NDIS"
+(0002) 				ImagePath = "SLACE.DLL"
+<0000> 			[Linkage]
+(0000) 					Route = MULTI_SZ: 
+							"SLACE1"
+
+<0023> 		[SLACE1]
+(0000) 				DisplayName = "Spectrum24 FH Wireless LAN PC Card"
+(0001) 				Group = "NDIS"
+(0002) 				ImagePath = "SLACE.DLL"
+<0000> 			[Parms]
+(0000) 					ProtocolsToBindTo = MULTI_SZ: 
+							"NOT"
+							"NDISUIO"
+
+(0001) 					BT_TIME = 0x00000030
+(0002) 					ForceFirmwareDnld = 0x00000000
+(0003) 					Transceiver = 0x00000003
+(0004) 					SlotNumber = 0x00000000
+(0005) 					Pcmcia = 0x00000001
+(0006) 					PCCARDPacketFilter = 0x0000000b
+(0007) 					PCCARDMemoryWindowOffset = 0x00000000
+(0008) 					PCCARDAttributeMemorySize = 0x00001001
+(0009) 					PCCARDAttributeMemoryOffset = 0x00000000
+(0010) 					MediaType = 0x00000001
+(0011) 					Hop_Set = 0x00000001
+(0012) 					IoLength = 0x00000020
+(0013) 					IoAdapterBaseAddress = 0x00000300
+(0014) 					AdapterProtocol = 0x00000000
+(0015) 					SlaVersion = "4.2.0.12"
+(0016) 					AttrMask = "05017F9EAB26CB8047"
+(0017) 					NetworkAddress = "00A0F8A37E21"
+(0018) 					Preferred_BSS_ID = "0"
+(0019) 					Mandatory_BSS_ID = "0"
+(0020) 					Preferred_AP_ID = 0x00000000
+(0021) 					Mandatory_AP_ID = 0x00000000
+(0022) 					Diversity = 0x00000000
+(0023) 					CardType = 0x00000000
+(0024) 					InterruptNumber = 0x0000000a
+(0025) 					PCCARDAttributeMemoryAddress = 0x000d0000
+(0026) 					IoBaseAddress = 0x00000340
+(0027) 					MBIT_1 = 0x00000001
+(0028) 					MBIT_2 = 0x00000001
+(0029) 					MicroAP = 0x00000000
+(0030) 					MicroAP_BaseRate1 = 0x00000001
+(0031) 					MicroAP_BaseRate2 = 0x00000000
+(0032) 					Net_Id = 0x00000101
+(0033) 					MicroAP_Hop_Seq = 0x000000ff
+(0034) 					MicroAP_BDelay = 0x0000000a
+(0035) 					MicroAP_Hop_Set = 0x00000001
+(0036) 					MicroAP_Id = 0x000000ff
+(0037) 					Hop_Sequence = 0x000000ff
+(0038) 					DTIM_Delay = 0x00000001
+(0039) 					RTS_Threshold = 0x00000640
+(0040) 					MAPEncryptionAlgorithm = 0x00000001
+(0041) 					MUEncryptionAlgorithm = 0x00000001
+(0042) 					EncryptionKeyId = 0x00000002
+(0043) 					EncryptionKey1 = "2631EC2DA1302B7D72B03604D2"
+(0044) 					EncryptionKey2 = "32E567E6B6AB76B335172A04E7"
+(0045) 					EncryptionKey3 = "11E2DDF4F35505BA31A44E04F8"
+(0046) 					EncryptionKey4 = "30B2F0E3CF870B8435CDC90506"
+(0047) 					Password = "1D3AB98795FCCA97969ADBA402BD1298FC47C063100E1E14EC2D15E6AA66207AC39E1325CE10CD"
+(0048) 					BusType = 0x00000008
+(0049) 					BusNumber = 0x00000000
+(0050) 					FirmwareType = 0x00000001
+(0051) 					BeaconAlgorithm = 0x0000000b
+(0052) 					BeaconMinimum = 0x00000001
+(0053) 					BeaconMaximum = 0x0000000a
+(0054) 					PowerMode = 0x00000001
+(0055) 					ESS_ID = "101"
+(0056) 					AdapterModel = "Spectrum24 FH Wireless LAN PC Card"
+<0000> 				[TcpIp]
+(0000) 						ConnectDampingInterval = 0x00000002
+(0001) 						DisconnectDampInterval = 0x00000002
+(0002) 						UseZeroBroadcast = 0x00000000
+(0003) 						AutoCfg = 0x00000000
+(0004) 						DhcpInitDelayInterval = 0x00002710
+(0005) 						DhcpRetryDialogue = 0xffffffff
+(0006) 						DhcpMaxRetry = 0x00000001
+(0007) 						EnableDHCP = 0x00000001
+<0024> 		[NETWLAN1]
+(0000) 				Group = "NDIS"
+(0001) 				ImagePath = "NETWLAN.dll"
+(0002) 				DisplayName = "802.11b Wireless LAN"
+<0000> 			[Parms]
+(0000) 					NetworkAddress = "00A0F8B98A36"
+(0001) 					BusNumber = 0x00000000
+(0002) 					BusType = 0x00000008
+(0003) 					ProtocolsToBindTo = MULTI_SZ: 
+							"NOT"
+							"NDISUIO"
+							"EAPWLAN"
+
+(0004) 					Profile = "ocean-netgear"
+(0005) 					Index = 0x00000000
+(0006) 					ChannelMask = 0x0000fbff
+(0007) 					Adhoc_TxPower = 0x00000000
+(0008) 					Ess_TxPower = 0x00000000
+(0009) 					PowerIndex = 0x00000001
+(0010) 					MUPMK = "3390F4F044D235CCD23CC668F3BDB4B9A1E608E8EC1FD1BB8F23D6DE7F6A48A9A245B29A34FAADF8D15E558C4DFD35D047EBB4A6C1181F3424298983548C2F40A51DC2"
+(0011) 					EncryptionKey4 = "04C06715D563684A2BEFEA88E0A8C7133E958758557B21793FBDB20C1B"
+(0012) 					EncryptionKey3 = "1357D4B87EA21E00F24176174F581D83DD6641A36F30C88995F0C70BF6"
+(0013) 					EncryptionKey2 = "24FD79279003351FD606994B8F820F79DA621683D4389EE767DEA80C15"
+(0014) 					EncryptionKey1 = "13773798D88220207D615B37EC78C2A33746068333103FA9F9D0210BAF"
+(0015) 					KerbAbs4 = 0xffffffff
+(0016) 					KerbAbs3 = 0xffffffff
+(0017) 					KerbAbs2 = 0xffffffff
+(0018) 					KerbAbs1 = 0xffffffff
+(0019) 					KerbRelRadCk = 0x00000001
+(0020) 					CredOptsKerb = 0x00000000
+(0021) 					KerbRel = 0x0000000f
+(0022) 					IntlRoaming = 0x00000000
+(0023) 					Channel = 0x0000000b
+(0024) 					LongPreamble = 0x00000000
+(0025) 					PortType = 0x00000001
+(0026) 					EncryptionKeyId = 0x00000001
+(0027) 					MUAuthenticationAlgorithm = 0x00000003
+(0028) 					MUEncryptionAlgorithm = 0x00000006
+(0029) 					ESS_ID = "ocean-netgear"
+(0030) 					ResetOnResume = 0x00000000
+(0031) 					HostPowerDown = 0x00000000
+(0032) 					RogueAPDetection = 0x00000001
+(0033) 					Password = "3745A4CA1FD2D1CFC10041C7576C0E6423A815E6D4D094C8D87441C26A6C0211153DDE9C851085"
+(0034) 					IoLength = 0x00000046
+(0035) 					IoBaseAddress = 0x00000300
+(0036) 					CardType = 0x00000000
+(0037) 					Version = "3.7.11.4"
+(0038) 					AdapterModel = "802.11b Wireless LAN"
+(0039) 					LTimeoutMinutes = 0x00000000
+(0040) 					LCachePwd = 0x00000001
+(0041) 					BT_TIME = 0x00000030
+(0042) 					Diversity = 0x00000000
+(0043) 					IOMapping = 0x00000000
+(0044) 					RebindOnResume = 0x00000000
+(0045) 					WOLAN = 0x00000001
+(0046) 					SerialKey = "3FBA67E6FAAE76AA001A5CB9D1639D128F3DF39FA1FA9FD999798AEFA92683036C0334C35EE211F50912CB"
+<0000> 				[TcpIp]
+(0000) 						DhcpDNS = MULTI_SZ: 
+
+(0001) 						DNS = MULTI_SZ: 
+								"192.168.111.1"
+
+(0002) 						WINS = MULTI_SZ: 
+
+(0003) 						DefaultGateway = MULTI_SZ: 
+								"192.168.111.1"
+
+(0004) 						Subnetmask = MULTI_SZ: 
+								"255.255.255.0"
+
+(0005) 						IpAddress = MULTI_SZ: 
+								"192.168.111.112"
+
+(0006) 						EnableDHCP = 0x00000000
+(0007) 						UseZeroBroadcast = 0x00000000
+(0008) 						DhcpInitDelayInterval = 0x00000000
+(0009) 						DhcpRetryDialogue = 0xffffffff
+(0010) 						DhcpMaxRetry = 0x00000001
+(0011) 						AutoCfg = 0x00000000
+<0025> 		[Redir]
+(0000) 				RegisterFSRoot = 0x00000001
+<0026> 		[NETWLAN]
+(0000) 				Group = "NDIS"
+(0001) 				ImagePath = "NETWLAN.dll"
+(0002) 				DisplayName = "802.11b Wireless LAN"
+<0000> 			[Linkage]
+(0000) 					Route = MULTI_SZ: 
+							"NETWLAN1"
+
+<0027> 		[USB]
+<0000> 			[Linkage]
+(0000) 					Bind = MULTI_SZ: 
+							"SAUSB1"
+
+<0028> 		[SAUSB]
+(0000) 				DisplayName = "XScale USB Function Driver"
+(0001) 				Group = "Serial"
+(0002) 				ImagePath = "symbol_usb_ser.dll"
+<0000> 			[Linkage]
+(0000) 					Route = MULTI_SZ: 
+							"SAUSB1"
+
+<0029> 		[SAUSB1]
+<0000> 			[Parms]
+<0030> 		[VMini1]
+<0000> 			[Parms]
+(0000) 					DisablePowerManagement = 0x00000001
+<0008> 	[SOFTWARE]
+<0000> 		[Python25]
+<0000> 			[PythonCore]
+<0000> 				[2.5]
+<0000> 					[InstallPath]
+(0000) 							MajorVersion = "\Program Files\Python25"
+<0001> 		[Symbol Technologies, Inc.]
+<0000> 			[Profiles]
+(0000) 					ProfileVersion = "3.9.2.0"
+(0001) 					Password = "295E6B91D66EEB7B2C9DA95403F521B7BBE3EF875FF55FBF4CD3FC71104DECCFBED6D4C9ED1181"
+(0002) 					CurrentProfileName = "ocean-netgear"
+<0000> 				[ocean-netgear]
+(0000) 						EnableDHCP = 0x00000000
+(0001) 						Aps = 0x00000001
+(0002) 						TkipWPAPSK = "2DFD316BC48E730DFCEB65529D9875CE9D412F5AD53FB7659B28EF844FBF44D6FB27E43B2F47D37DDDB519D95D0762BE87EBCE5A93007DAE46D6EF9C540A8958801E0D"
+(0003) 						EncryptionKey4 = "292EC0E5101C1E09ECEE1557AA8A20B5C3EA138CCE8D43C241DC820C4C"
+(0004) 						EncryptionKey3 = "30C2F093CFF70BF435BDC9A5B005B94295C7CADB96C4DB0C02BD120C60"
+(0005) 						EncryptionKey2 = "30D2368392E767E4B6AD76B535152A52EAD7DDCBF3D4051C31AD4E0C3D"
+(0006) 						EncryptionKey1 = "1EA2F6DDA8B4E9BEF9F6809172CB40118D396E257938EC75A1B82B0C5B"
+(0007) 						KerbAbs4 = 0xffffffff
+(0008) 						KerbAbs3 = 0xffffffff
+(0009) 						KerbAbs2 = 0xffffffff
+(0010) 						KerbAbs1 = 0xffffffff
+(0011) 						KerbRelRadCk = 0x00000001
+(0012) 						KerbRel = 0x0000000f
+(0013) 						CredOptsKerb = 0x00000000
+(0014) 						TxPower = 0x00000000
+(0015) 						WINS = MULTI_SZ: 
+
+(0016) 						Subnetmask = MULTI_SZ: 
+								"255.255.255.0"
+
+(0017) 						IpAddress = MULTI_SZ: 
+								"192.168.111.112"
+
+(0018) 						DNS = MULTI_SZ: 
+								"192.168.111.1"
+
+(0019) 						DefaultGateway = MULTI_SZ: 
+								"192.168.111.1"
+
+(0020) 						PowerIndex = 0x00000001
+(0021) 						IntlRoaming = 0x00000000
+(0022) 						Channel = 0x0000000b
+(0023) 						LongPreamble = 0x00000000
+(0024) 						PortType = 0x00000001
+(0025) 						Index = 0x00000000
+(0026) 						EncryptionKeyId = 0x00000001
+(0027) 						MUAuthenticationAlgorithm = 0x00000001
+(0028) 						MUEncryptionAlgorithm = 0x00000004
+(0029) 						KeyguardMCM = 0x00000000
+(0030) 						CountryCode = "FR"
+(0031) 						ESS_ID = "ocean-netgear"
+(0032) 						MaybeVLan = 0x00000000
+(0033) 						Enabled = 0x00000001
+(0034) 						KerberosRealm = "realm"
+(0035) 						KerberosKDC = "krbtgt"
+<0001> 				[Default]
+(0000) 						KerbAbs4 = 0xffffffff
+(0001) 						KerbAbs3 = 0xffffffff
+(0002) 						KerbAbs2 = 0xffffffff
+(0003) 						KerbAbs1 = 0xffffffff
+(0004) 						KerbRel = 0x0000000f
+(0005) 						KerbRelRadCk = 0x00000001
+(0006) 						CredOptsKerb = 0x00000000
+(0007) 						KerbID = "KerbUser"
+(0008) 						KerberosRealm = "realm"
+(0009) 						KerberosKDC = "krbtgt"
+(0010) 						EncryptionKeyId = 0x00000001
+(0011) 						EncryptionKey1 = "11C2DDD4F375059A31844E260963F035CF760BAD3544C981B016B90BF2"
+(0012) 						EncryptionKey2 = "04A06E757903EC2AA18F2BE872C8367392F56738B61B761935DD2A0C05"
+(0013) 						EncryptionKey3 = "36035A4450CD63D191CA3202D8B7F662A819E9D0F99E80D972C2400BFB"
+(0014) 						EncryptionKey4 = "132733C8F4D20D704C31E667052839F3211610D3734011F98B80D00B97"
+(0015) 						KeyguardMCM = 0x00000000
+(0016) 						TkipWPAPSK = "3D0077"
+(0017) 						MUEncryptionAlgorithm = 0x00000001
+(0018) 						MUAuthenticationAlgorithm = 0x00000001
+(0019) 						EnableDHCP = 0x00000001
+(0020) 						PowerIndex = 0x00000001
+(0021) 						Aps = 0x00000001
+(0022) 						LongPreamble = 0x00000000
+(0023) 						Channel = 0x0000000b
+(0024) 						IntlRoaming = 0x00000000
+(0025) 						CountryCode = "US"
+(0026) 						TxPower = 0x00000000
+(0027) 						PortType = 0x00000001
+(0028) 						MaybeVLan = 0x00000000
+(0029) 						ESS_ID = "101"
+(0030) 						Enabled = 0x00000001
+(0031) 						Index = 0x00000001
+<0001> 			[NICTT]
+(0000) 					ManualConfig = 0x00000000
+(0001) 					EnhancedAdHocNetworks = 0x00000000
+(0002) 					AdHocNetworks = 0x00000001
+(0003) 					APNetworks = 0x00000001
+(0004) 					Sounds = 0x00000000
+(0005) 					AutoOpen = 0x00000000
+(0006) 					EncryptionMask = 0x0000001f
+<0002> 		[Microsoft]
+<0000> 			[Tasks]
+<0000> 				[TeamMan]
+(0000) 						TeamMan = 0x00000000
+<0001> 			[Shell]
+<0000> 				[OnTop]
+(0000) 						Default = 0x00000001
+<0001> 				[AutoHide]
+(0000) 						Default = 0x00000000
+<0002> 			[MIBII]
+<0000> 				[CurrentVersion]
+(0000) 						Pathname = "snmp_mibii.dll"
+<0003> 			[HostMIB]
+<0000> 				[CurrentVersion]
+(0000) 						Pathname = "snmp_hostmib.dll"
+(0001) 						HrSwRunCacheMaxAge = 0x00000078
+<0004> 			[International]
+(0000) 					LCID = 0x00000409
+(0001) 					ACP = 0x000004e4
+<0005> 			[Bluetooth]
+<0000> 				[sys]
+(0000) 						COD = 0x00920100
+<0001> 				[device]
+(0000) 						DefaultMtu = 0x00000400
+(0001) 						DefaultAuth = 0x00000001
+(0002) 						DefaultEncrypt = 0x00000001
+<0000> 					[modem]
+(0000) 							DefaultMtu = 0x00000400
+(0001) 							DefaultAuth = 0x00000001
+(0002) 							DefaultEncrypt = 0x00000001
+<0001> 					[printer]
+(0000) 							DefaultMtu = 0x00000800
+(0001) 							DefaultAuth = 0x00000000
+(0002) 							DefaultEncrypt = 0x00000000
+<0002> 					[lan_access]
+(0000) 							DefaultMtu = 0x00000800
+(0001) 							DefaultAuth = 0x00000001
+(0002) 							DefaultEncrypt = 0x00000001
+<0003> 					[headset]
+(0000) 							DefaultMtu = 0x00000000
+(0001) 							DefaultAuth = 0x00000000
+(0002) 							DefaultEncrypt = 0x00000000
+<0004> 					[activesync]
+(0000) 							DefaultMtu = 0x00000800
+(0001) 							DefaultAuth = 0x00000001
+(0002) 							DefaultEncrypt = 0x00000001
+<0005> 					[hid]
+(0000) 							DefaultMtu = 0x00000000
+(0001) 							DefaultAuth = 0x00000001
+(0002) 							DefaultEncrypt = 0x00000001
+<0002> 				[l2cap]
+(0000) 						RTX = 0x0000003c
+(0001) 						ERTX = 0x0000012c
+(0002) 						IdlePhys = 0x0000000a
+(0003) 						IdleConnect = 0x0000000a
+(0004) 						ConfigTimeout = 0x00000078
+(0005) 						NoRoleSwitch = 0x00000000
+(0006) 						LinkPolicy = 0x0000000f
+(0007) 						PicoCapable = 0x00000000
+(0008) 						ConnectPacketType = 0x00000000
+(0009) 						ScanModeControl = 0x00000003
+<0003> 				[rfcomm]
+(0000) 						timeout = 0x00000000
+<0004> 				[HCI]
+(0000) 						flags = 0x00000004
+(0001) 						Name = "COM3:"
+(0002) 						baud = 0x0001c200
+(0003) 						resetdelay = 0x00001388
+(0004) 						SpecV11 = 0x00000002
+<0005> 				[Transports]
+<0000> 					[BuiltIn]
+<0000> 						[2]
+(0000) 								driver = "bthuart.dll"
+(0001) 								flags = 0x00000004
+(0002) 								name = "COM3:"
+(0003) 								baud = 0x0001c200
+(0004) 								resetdelay = 0x00001388
+<0006> 			[SDK]
+<0000> 				[{DF45005F-95E6-4272-9F7C-091A275F04AF}]
+(0000) 						Default = "MSFT-Standard SDK"
+<0007> 			[Windows]
+<0000> 				[CurrentVersion]
+<0000> 					[Internet Settings]
+(0000) 							MinorVersion = ";CE.net;"
+<0000> 						[5.0]
+<0000> 							[User Agent]
+(0000) 									Default = "Mozilla/4.0"
+(0001) 									Compatible = "compatible"
+(0002) 									Version = "MSIE 5.5"
+(0003) 									Platform = "Windows CE"
+(0004) 									UA-Language = "JavaScript"
+<0001> 						[ZoneMap]
+(0000) 								Default = ""
+(0001) 								ProxyByPass = 0x00000001
+(0002) 								IntranetName = 0x00000001
+(0003) 								UNCAsIntranet = 0x00000001
+<0000> 							[Domains]
+(0000) 									Default = ""
+<0001> 							[ProtocolDefaults]
+(0000) 									Default = ""
+(0001) 									http = 0x00000003
+(0002) 									https = 0x00000003
+(0003) 									ftp = 0x00000003
+(0004) 									file = 0x00000001
+(0005) 									@ivt = 0x00000001
+<0002> 							[Ranges]
+(0000) 									Default = ""
+<0002> 						[Zones]
+<0000> 							[0]
+(0000) 									Default = ""
+(0001) 									DisplayName = "My Computer"
+(0002) 									Description = "Your computer"
+(0003) 									Icon = "explorer.exe#0100"
+(0004) 									CurrentLevel = 0x00000000
+(0005) 									Flags = 0x00000021
+(0006) 									1001 = 0x00000003
+(0007) 									1004 = 0x00000003
+(0008) 									1200 = 0x00000000
+(0009) 									1201 = 0x00000000
+(0010) 									1400 = 0x00000000
+(0011) 									1402 = 0x00000000
+(0012) 									1405 = 0x00000000
+(0013) 									1406 = 0x00000000
+(0014) 									1407 = 0x00000000
+(0015) 									1601 = 0x00000000
+(0016) 									1604 = 0x00000003
+(0017) 									1605 = 0x00000000
+(0018) 									1606 = 0x00000000
+(0019) 									1607 = 0x00000000
+(0020) 									1800 = 0x00000000
+(0021) 									1802 = 0x00000000
+(0022) 									1803 = 0x00000000
+(0023) 									1804 = 0x00000000
+(0024) 									1805 = 0x00000000
+(0025) 									1A00 = 0x00000000
+(0026) 									1A02 = 0x00000000
+(0027) 									1A03 = 0x00000000
+(0028) 									1A04 = 0x00000000
+(0029) 									1C00 = 0x00020000
+(0030) 									1E05 = 0x00030000
+<0001> 							[1]
+(0000) 									Default = ""
+(0001) 									DisplayName = "Local intranet"
+(0002) 									Description = "Local"
+(0003) 									Icon = "shell32.dll#0018"
+(0004) 									CurrentLevel = 0x00010500
+(0005) 									MinLevel = 0x00010000
+(0006) 									RecommendedLevel = 0x00010500
+(0007) 									Flags = 0x000000db
+(0008) 									1001 = 0x00000003
+(0009) 									1004 = 0x00000003
+(0010) 									1200 = 0x00000000
+(0011) 									1201 = 0x00000003
+(0012) 									1400 = 0x00000000
+(0013) 									1402 = 0x00000000
+(0014) 									1405 = 0x00000000
+(0015) 									1406 = 0x00000001
+(0016) 									1407 = 0x00000000
+(0017) 									1601 = 0x00000000
+(0018) 									1604 = 0x00000003
+(0019) 									1605 = 0x00000000
+(0020) 									1606 = 0x00000000
+(0021) 									1607 = 0x00000000
+(0022) 									1800 = 0x00000001
+(0023) 									1802 = 0x00000000
+(0024) 									1803 = 0x00000000
+(0025) 									1804 = 0x00000001
+(0026) 									1805 = 0x00000000
+(0027) 									1A00 = 0x00020000
+(0028) 									1A02 = 0x00000000
+(0029) 									1A03 = 0x00000000
+(0030) 									1A04 = 0x00000000
+(0031) 									1C00 = 0x00020000
+(0032) 									1E05 = 0x00020000
+<0002> 							[2]
+(0000) 									Default = ""
+(0001) 									DisplayName = "Trusted sites"
+(0002) 									Description = "Trusted"
+(0003) 									Icon = "inetcpl.cpl#00004480"
+(0004) 									CurrentLevel = 0x00010000
+(0005) 									MinLevel = 0x00010000
+(0006) 									RecommendedLevel = 0x00010000
+(0007) 									Flags = 0x00000047
+(0008) 									1001 = 0x00000003
+(0009) 									1004 = 0x00000003
+(0010) 									1200 = 0x00000000
+(0011) 									1201 = 0x00000003
+(0012) 									1400 = 0x00000000
+(0013) 									1402 = 0x00000000
+(0014) 									1405 = 0x00000000
+(0015) 									1406 = 0x00000000
+(0016) 									1407 = 0x00000000
+(0017) 									1601 = 0x00000000
+(0018) 									1604 = 0x00000003
+(0019) 									1605 = 0x00000000
+(0020) 									1606 = 0x00000000
+(0021) 									1607 = 0x00000000
+(0022) 									1800 = 0x00000000
+(0023) 									1802 = 0x00000000
+(0024) 									1803 = 0x00000000
+(0025) 									1804 = 0x00000000
+(0026) 									1805 = 0x00000000
+(0027) 									1A00 = 0x00000000
+(0028) 									1A02 = 0x00000000
+(0029) 									1A03 = 0x00000000
+(0030) 									1A04 = 0x00000000
+(0031) 									1C00 = 0x00030000
+(0032) 									1E05 = 0x00030000
+<0003> 							[3]
+(0000) 									Default = ""
+(0001) 									DisplayName = "Internet"
+(0002) 									Description = "Other"
+(0003) 									Icon = "inetcpl.cpl#001313"
+(0004) 									CurrentLevel = 0x00011000
+(0005) 									MinLevel = 0x00011000
+(0006) 									RecommendedLevel = 0x00011000
+(0007) 									Flags = 0x00000001
+(0008) 									1001 = 0x00000003
+(0009) 									1004 = 0x00000003
+(0010) 									1200 = 0x00000000
+(0011) 									1201 = 0x00000003
+(0012) 									1400 = 0x00000000
+(0013) 									1402 = 0x00000000
+(0014) 									1405 = 0x00000000
+(0015) 									1406 = 0x00000003
+(0016) 									1407 = 0x00000001
+(0017) 									1601 = 0x00000001
+(0018) 									1604 = 0x00000003
+(0019) 									1605 = 0x00000000
+(0020) 									1606 = 0x00000000
+(0021) 									1607 = 0x00000000
+(0022) 									1800 = 0x00000001
+(0023) 									1802 = 0x00000000
+(0024) 									1803 = 0x00000000
+(0025) 									1804 = 0x00000001
+(0026) 									1805 = 0x00000001
+(0027) 									1A00 = 0x00020000
+(0028) 									1A02 = 0x00000000
+(0029) 									1A03 = 0x00000000
+(0030) 									1A04 = 0x00000003
+(0031) 									1C00 = 0x00010000
+(0032) 									1E05 = 0x00020000
+<0004> 							[4]
+(0000) 									Default = ""
+(0001) 									DisplayName = "Restricted sites"
+(0002) 									Description = "Restricted sites"
+(0003) 									Icon = "inetcpl.cpl#00004481"
+(0004) 									CurrentLevel = 0x00012000
+(0005) 									MinLevel = 0x00012000
+(0006) 									RecommendedLevel = 0x00012000
+(0007) 									Flags = 0x00000003
+(0008) 									1001 = 0x00000003
+(0009) 									1004 = 0x00000003
+(0010) 									1200 = 0x00000003
+(0011) 									1201 = 0x00000003
+(0012) 									1400 = 0x00000003
+(0013) 									1402 = 0x00000003
+(0014) 									1405 = 0x00000000
+(0015) 									1406 = 0x00000003
+(0016) 									1407 = 0x00000003
+(0017) 									1601 = 0x00000001
+(0018) 									1604 = 0x00000003
+(0019) 									1605 = 0x00000000
+(0020) 									1606 = 0x00000003
+(0021) 									1607 = 0x00000003
+(0022) 									1800 = 0x00000003
+(0023) 									1802 = 0x00000001
+(0024) 									1803 = 0x00000003
+(0025) 									1804 = 0x00000003
+(0026) 									1805 = 0x00000001
+(0027) 									1A00 = 0x00010000
+(0028) 									1A02 = 0x00000003
+(0029) 									1A03 = 0x00000003
+(0030) 									1A04 = 0x00000003
+(0031) 									1C00 = 0x00010000
+(0032) 									1E05 = 0x00010000
+<0008> 			[Internet Explorer]
+(0000) 					ProductID = "71929-932-2000023-12347"
+<0000> 				[Security]
+<0000> 					[Basic]
+(0000) 							SecurityName = "Basic Authentication"
+(0001) 							DLLFile = "wininet.dll"
+(0002) 							SchemeList = "Basic"
+(0003) 							Flags = hex: 00,00,00,00
+<0001> 					[NTLM]
+(0000) 							SecurityName = "NTLM SSPI Authentication"
+(0001) 							DLLFile = "ntlmssp.dll"
+(0002) 							SchemeList = "NTLM"
+(0003) 							Flags = hex: 08,00,00,00
+<0001> 				[AboutURLs]
+(0000) 						blank = "res://mshtml.dll/blank.htm"
+(0001) 						repost = "res://mshtml.dll/repost.htm"
+(0002) 						PostNotCached = "res://mshtml.dll/repost.htm"
+(0003) 						NavigationFailure = "res://shdocvw.dll/navcancl.htm"
+(0004) 						DesktopItemNavigationFailure = "res://shdocvw.dll/navcancl.htm"
+(0005) 						NavigationCanceled = "res://shdocvw.dll/navcancl.htm"
+(0006) 						OfflineInformation = "res://shdocvw.dll/offcancl.htm"
+<0002> 				[ActiveX Compatibility]
+(0000) 						Version = "5.17"
+(0001) 						EnableInlineData = 0x00000000
+<0000> 					[{0002E510-0000-0000-C000-000000000046}]
+(0000) 							Compatibility Flags = 0x00040000
+<0001> 					[{00080000-B1BA-11CE-ABC6-F5B2E79D9E3F}]
+(0000) 							Compatibility Flags = 0x00004000
+<0002> 					[{009541A0-3B81-101C-92F3-040224009C02}]
+(0000) 							Compatibility Flags = 0x00000400
+<0003> 					[{02466323-75ed-11cf-a267-0020af2546ea}]
+(0000) 							Compatibility Flags = 0x00000008
+<0004> 					[{025B1052-CB0B-11CF-A071-00A0C9A06E05}]
+(0000) 							Compatibility Flags = 0x00000180
+<0005> 					[{03405265-b4e2-11d0-8a77-00aa00a4fbc5}]
+(0000) 							Compatibility Flags = 0x00000020
+<0006> 					[{03405269-b4e2-11d0-8a77-00aa00a4fbc5}]
+(0000) 							Compatibility Flags = 0x00000020
+<0007> 					[{05589fa1-c356-11ce-bf01-00aa0055595a}]
+(0000) 							Compatibility Flags = 0x00010000
+<0008> 					[{06A7EC63-4E21-11D0-A112-00A0C90543AA}]
+(0000) 							Compatibility Flags = 0x00000400
+<0009> 					[{06DD38D3-D187-11CF-A80D-00C04FD74AD8}]
+(0000) 							Compatibility Flags = 0x00000020
+<0010> 					[{0713E8A2-850A-101B-AFC0-4210102A8DA7}]
+(0000) 							Compatibility Flags = 0x00000820
+<0011> 					[{0713E8D2-850A-101B-AFC0-4210102A8DA7}]
+(0000) 							Compatibility Flags = 0x00000820
+<0012> 					[{08B0e5c0-4FCB-11CF-AAA5-00401C608501}]
+(0000) 							Compatibility Flags = 0x00010000
+<0013> 					[{105C7D20-FE19-11D2-ACB6-0080C877D9B9}]
+(0000) 							Compatibility Flags = 0x00200000
+<0014> 					[{130D7743-5F5A-11D1-B676-00A0C9697233}]
+(0000) 							Compatibility Flags = 0x00000400
+<0015> 					[{16E349E0-702C-11CF-A3A9-00A0C9034920}]
+(0000) 							Compatibility Flags = 0x00000400
+<0016> 					[{1D2B4F40-1F10-11D1-9E88-00C04FDCAB92}]
+(0000) 							Compatibility Flags = 0x00020000
+<0017> 					[{1DF67C43-AEAA-11CF-BA92-444553540000}]
+(0000) 							Compatibility Flags = 0x00000820
+<0018> 					[{22D6F312-B0F6-11D0-94AB-0080C74C7E95}]
+(0000) 							Compatibility Flags = 0x00000020
+<0019> 					[{238f6f83-b8b4-11cf-8771-00a024541ee3}]
+(0000) 							Compatibility Flags = 0x00001000
+<0020> 					[{275E2FE0-7486-11D0-89D6-00A0C90C9B67}]
+(0000) 							Compatibility Flags = 0x00000020
+<0021> 					[{2BD0D2F2-52EC-11D1-8C69-0E16BC000000}]
+(0000) 							Compatibility Flags = 0x00000400
+<0022> 					[{3050f4d8-98b5-11cf-BB82-00AA00BDCE0B}]
+(0000) 							Compatibility Flags = 0x00000400
+<0023> 					[{3B7C8860-D78F-101B-B9B5-04021C009402}]
+(0000) 							Compatibility Flags = 0x00000400
+<0024> 					[{46646B43-EA16-11CF-870C-00201801DDD6}]
+(0000) 							Compatibility Flags = 0x00002020
+<0025> 					[{4FA211A0-FD53-11D2-ACB6-0080C877D9B9}]
+(0000) 							Compatibility Flags = 0x00200000
+<0026> 					[{50E5E3D1-C07E-11D0-B9FD-00A0249F6B00}]
+(0000) 							Compatibility Flags = 0x00000400
+<0027> 					[{58DA8D8A-9D6A-101B-AFC0-4210102A8DA7}]
+(0000) 							Compatibility Flags = 0x00000820
+<0028> 					[{58DA8D8F-9D6A-101B-AFC0-4210102A8DA7}]
+(0000) 							Compatibility Flags = 0x00000820
+<0029> 					[{59CCB4A0-727D-11CF-AC36-00AA00A47DD2}]
+(0000) 							Compatibility Flags = 0x00000020
+<0030> 					[{5A20858B-000D-11D0-8C01-444553540000}]
+(0000) 							Compatibility Flags = 0x00000008
+<0031> 					[{5B84FC03-E639-11CF-B8A0-00A024186BF1}]
+(0000) 							Compatibility Flags = 0x00002000
+<0032> 					[{6059B947-EC52-11CF-B509-00A024488F73}]
+(0000) 							Compatibility Flags = 0x00004000
+<0033> 					[{6B7E638F-850A-101B-AFC0-4210102A8DA7}]
+(0000) 							Compatibility Flags = 0x00000820
+<0034> 					[{6D940280-9F11-11CE-83FD-02608C3EC08A}]
+(0000) 							Compatibility Flags = 0x00000400
+<0035> 					[{6D940285-9F11-11CE-83FD-02608C3EC08A}]
+(0000) 							Compatibility Flags = 0x00000400
+<0036> 					[{73822330-B759-11D0-9E3D-00A0C911C819}]
+(0000) 							Compatibility Flags = 0x00000400
+<0037> 					[{7823A620-9DD9-11CF-A662-00AA00C066D2}]
+(0000) 							Compatibility Flags = 0x00000020
+<0038> 					[{78A9B22E-E0F4-11D0-B5DA-00C0F00AD7F8}]
+(0000) 							Compatibility Flags = 0x00000400
+<0039> 					[{7B9379D2-E1E4-11D0-8444-00401C6075AA}]
+(0000) 							Compatibility Flags = 0x00200000
+<0040> 					[{812AE312-8B8E-11CF-93C8-00AA00C08FDF}]
+(0000) 							Compatibility Flags = 0x00000002
+<0041> 					[{84926CA0-2941-101C-816F-0E6013114B7F}]
+(0000) 							Compatibility Flags = 0x00000400
+<0042> 					[{8856F961-340A-11D0-A96B-00C04FD705A2}]
+(0000) 							Compatibility Flags = 0x00000021
+<0043> 					[{8BD21D50-EC42-11CE-9E0D-00AA006002F3}]
+(0000) 							Compatibility Flags = 0x00000001
+<0044> 					[{8F2C1D40-C3CD-11D1-A08F-006097BD9970}]
+(0000) 							Compatibility Flags = 0x00080000
+<0045> 					[{913C89C0-492C-11D4-911A-009027370674}]
+(0000) 							Compatibility Flags = 0x00000400
+<0046> 					[{928626A3-6B98-11CF-90B4-00AA00A4011F}]
+(0000) 							Compatibility Flags = 0x00000040
+<0047> 					[{9590092D-8811-11CF-8075-444553540000}]
+(0000) 							Compatibility Flags = 0x00004000
+<0048> 					[{96B9602E-BD20-11D2-AC89-00C04F7989D6}]
+(0000) 							Compatibility Flags = 0x00100000
+<0049> 					[{99B42120-6EC7-11CF-A6C7-00AA00A47DD2}]
+(0000) 							Compatibility Flags = 0x00040000
+<0050> 					[{A123D693-256A-11d0-9DFE-00C04FD7BF41}]
+(0000) 							Compatibility Flags = 0x00000020
+<0051> 					[{AAD093B2-F9CA-11CF-9C85-0000C09300C4}]
+(0000) 							Compatibility Flags = 0x00002000
+<0052> 					[{AE24FDAE-03C6-11D1-8B76-0080C744F389}]
+(0000) 							Compatibility Flags = 0x00000020
+<0053> 					[{B283E214-2CB3-11D0-ADA6-00400520799C}]
+(0000) 							Compatibility Flags = 0x00004000
+<0054> 					[{B2F87B84-26A6-11D0-B50A-00A024488F73}]
+(0000) 							Compatibility Flags = 0x00004000
+<0055> 					[{B3F8F451-788A-11D0-89D9-00A0C90C9B67}]
+(0000) 							Compatibility Flags = 0x00000820
+<0056> 					[{B75FEF72-0C54-11D2-B14E-00C04FB9358B}]
+(0000) 							Compatibility Flags = 0x00000400
+<0057> 					[{B9D029D3-CDE3-11CF-855E-00A0C908FAF9}]
+(0000) 							Compatibility Flags = 0x00000020
+<0058> 					[{CA8A9780-280D-11CF-A24D-444553540000}]
+(0000) 							Compatibility Flags = 0x00008008
+<0059> 					[{CFCDAA03-8BE4-11cf-B84B-0020AFBBCCFA}]
+(0000) 							Compatibility Flags = 0x00010000
+<0060> 					[{D2F97240-C9F4-11CF-BFC4-00A0C90C2BDB}]
+(0000) 							Compatibility Flags = 0x00000010
+<0061> 					[{D306C3B7-2AD5-11D1-9E9A-00805F200005}]
+(0000) 							Compatibility Flags = 0x00000400
+<0062> 					[{E1A6B8A0-3603-101C-AC6E-040224009C02}]
+(0000) 							Compatibility Flags = 0x00000400
+<0063> 					[{E5DF9D10-3B52-11D1-83E8-00A0C90DC849}]
+(0000) 							Compatibility Flags = 0x00020000
+<0064> 					[{EFBD14F0-6BFB-11CF-9177-00805F8813FF}]
+(0000) 							Compatibility Flags = 0x00000240
+(0001) 							MiscStatus Flags = 0x00000180
+<0065> 					[{F72A7B0E-0DD8-11D1-BD6E-00AA00B92AF1}]
+(0000) 							Compatibility Flags = 0x00000400
+<0066> 					[{3523c2fb-4031-44e4-9a3b-f1e94986ee7f}]
+(0000) 							Compatibility Flags = 0x00000820
+(0001) 							MiscStatus Flags = 0x00000128
+<0009> 			[WebAdmin]
+(0000) 					VRootsReadOnlyPath = "/WebAdmin/;/NetworkAdmin/;/Msmq/;/UPnP/;/UPnPIsapi/;/MsmqAdmin/;/btconfig/;/SysAdmin/;/Admin2/"
+<0010> 			[Obex]
+(0000) 					LogSize = 0x00000010
+(0001) 					DebugOutputMask = 0x00000000
+(0002) 					DebugOutputChannels = 0x00000004
+(0003) 					protocols = "bth"
+<0000> 				[Services]
+<0000> 					[{00000000-0000-0000-0000-000000000000}]
+(0000) 							BaseDir = "\My Documents\DefaultInbox"
+(0001) 							Server = "obexinbx.dll"
+(0002) 							BluetoothSdpRecord = hex: 35,59,09,00,01,35,03,19,11,05,09,00,04,35,11,35,03,19,01,00,35,05,19,00,03,08,0a,35,03,19,00,08,09,00,06,35,09,09,65,6e,09,00,6a,09,01,00,09,00,09,35,08,35,06,19,11,05,09,01,00,09,01,00,25,10,4f,42,45,58,20,4f,62,6a,65,63,74,20,50,75,73,68,09,03,03,35,06,08,01,08,02,08,03
+<0001> 				[Transports]
+<0000> 					[{30a7bc04-59b6-40bb-aa2b-89eb49ef274e}]
+(0000) 							Name = "IP"
+<0001> 					[{30a7bc03-59b6-40bb-aa2b-89eb49ef274e}]
+(0000) 							Name = "Bluetooth"
+<0011> 			[Terminal Server Client]
+(0000) 					CEConfig = "Maxall"
+<0012> 			[Clock]
+(0000) 					Default = ""
+<0013> 			[Pim]
+(0000) 					Version = "3.1"
+<0000> 				[Outlook]
+(0000) 						Outlook = 0x00000001
+<0014> 			[Windows CE Services]
+(0000) 					ExcludeExts = "lnk,tmp,cdb,mdb"
+(0001) 					RasTimeoutResponse = 0x0000003c
+(0002) 					Version = 0x00020000
+(0003) 					PIMRTF = 0x00000001
+(0004) 					NoSubFolderIn = "\My Documents\"
+(0005) 					FileSyncPath = "\My Documents"
+<0000> 				[Partners]
+(0000) 						PCur = 0x00000001
+<0000> 					[P2]
+<0001> 					[P1]
+(0000) 							PName = "JACKJACK"
+(0001) 							DataSourceID = "{00000000-0000-0000-0000-000000000000}"
+(0002) 							PId = 0x663d5b63
+<0015> 			[.NETCompactFramework]
+<0000> 				[Installer]
+<0000> 					[Assemblies]
+<0000> 						[Global]
+(0000) 								System.Data.Common, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=969DB8053D3322AC = MULTI_SZ: 
+										"\windows\GAC_System.Data.Common_v1_0_5000_0_cneutral_1.dll"
+										"System.Data.Common.dll"
+
+(0001) 								System.Data.SqlServerCe, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=969DB8053D3322AC = MULTI_SZ: 
+										"\windows\GAC_System.Data.SqlServerCe_v1_0_5000_0_cneutral_1.dll"
+										"System.Data.SqlServerCe.dll"
+
+<0001> 						[ROM]
+(0000) 								System.Data.Common, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=969DB8053D3322AC = MULTI_SZ: 
+										"\windows\GAC_System.Data.Common_v1_0_5000_0_cneutral_1.dll"
+										"System.Data.Common.dll"
+
+(0001) 								System.Data.SqlServerCe, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=969DB8053D3322AC = MULTI_SZ: 
+										"\windows\GAC_System.Data.SqlServerCe_v1_0_5000_0_cneutral_1.dll"
+										"System.Data.SqlServerCe.dll"
+
+<0016> 			[MSSQLServerCE]
+<0000> 				[2.0]
+<0000> 					[Engines]
+<0000> 						[MSISAM 1.x]
+(0000) 								PageTimeout = 0x00001388
+(0001) 								LockRetry = 0x00000014
+(0002) 								MaxBufferSize = 0x00000000
+(0003) 								Threads = 0x00000003
+(0004) 								ExclusiveAsyncDelay = 0x000007d0
+(0005) 								SharedAsyncDelay = 0x00000032
+(0006) 								FlushTransactionTimeout = 0x000001f4
+(0007) 								MaxLocksPerFile = 0x0000251c
+(0008) 								LockDelay = 0x00000064
+(0009) 								RecycleLVs = 0x00000000
+(0010) 								PagesLockedToTableLock = 0x00000000
+(0011) 								UserCommitSync = "yes"
+(0012) 								ImplicitCommitSync = "no"
+<0003> 		[Apps]
+<0000> 			[PythonCE Python25]
+(0000) 					Instl = 0x00000001
+(0001) 					CmdFile = "\Windows\AppMgr\PythonCE Python25.DAT"
+(0002) 					CabFile = "\Windows\StartUp\Python25.CAB"
+(0003) 					InstlDirCnt = 0x00000001
+(0004) 					InstallDir = "\Program Files\Python25"
+(0005) 					InstlDir = "\Program Files\Python25"
+<0001> 			[Shared]
+<0002> 			[Microsoft Application Installer]
+(0000) 					fAskOptions = 0x00000000
+(0001) 					fAskDest = 0x00000001
+(0002) 					nDynamicDelete = 0x00000002
+<0004> 		[AIRBEAM]
+(0000) 				PACKAGE = ""
+(0001) 				PACKAGE2 = ""
+(0002) 				PACKAGE3 = ""
+(0003) 				PACKAGE4 = ""
+(0004) 				PACKAGE5 = ""
+(0005) 				PACKAGE6 = ""
+(0006) 				PACKAGE7 = ""
+(0007) 				PACKAGE8 = ""
+(0008) 				PUTPACKAGE = ""
+(0009) 				SERVERIP = ""
+(0010) 				PACKAGEDIR = ""
+(0011) 				FTPUSER = ""
+(0012) 				FTPPASSWORD = ""
+(0013) 				AUTOLOAD = "0"
+(0014) 				RAMMGT = "1"
+(0015) 				SUPPRESSSEP = "0"
+(0016) 				TFTP = "0"
+(0017) 				WNMS = "0"
+(0018) 				INUSETEST = "1"
+(0019) 				AUTORETRY = "0"
+(0020) 				RETRYDELAY = "0"
+(0021) 				WAITWELCOME = "1"
+(0022) 				CLOSEAPPS = "1"
+(0023) 				IGNORESERVER = "1"
+(0024) 				IGNOREPACKAGE = "1"
+(0025) 				SCHEDULEMODE = "0"
+(0026) 				SCHEDULETIME = "0"
+(0027) 				SCHEDULEPROMPT = "0"
+(0028) 				PASSIVEMODE = "0"
+(0029) 				ASCENDINGONLY = "0"
+<0005> 		[Symbol]
+<0000> 			[AppCenter]
+(0000) 					{B6235F29-5B71-4389-A0A6-ACF2758AC1DC} = hex: 00,00,00,00
+(0001) 					{2EACC9DF-C9BF-428E-9074-D50B57D0D747} = hex: 2f,00,53,00,22,00,24,00,3b,00,3b,00,41,00,13,00,07,00,1f,00,17,00,3c,00,2b,00,25,00,27,00,25,00,16,00,0a,00,3c,00,3d,00,0d,00,2a,00,3e,00,25,00,37,00,21,00,08,00,06,00,19,00,11,00,0c,00,57,00
+(0002) 					BrowseAllShortcuts = 0x00000001
+(0003) 					BrowseExtensions = "exe|vb"
+(0004) 					BrowseFolders = "\Program Files|\Windows"
+(0005) 					AdminLoginDisabled = 0x00000000
+(0006) 					AlternateTitle = ""
+(0007) 					UnresponsiveAppTimeout = 0x00000005
+(0008) 					AdapterName = "NETWLAN1"
+(0009) 					DisplayIpAddress = 0x00000000
+(0010) 					DisplayMacAddress = 0x00000000
+(0011) 					TitleBold = 0x00000001
+(0012) 					TitleFontSize = 0x0000000b
+(0013) 					24HourTimeFormat = 0x00000000
+(0014) 					BatteryPercentFormat = 0x00000000
+(0015) 					MobileCompanionMode = 0x00000002
+(0016) 					FusionMode = 0x00000000
+(0017) 					ShowKeyStates = 0x00000000
+(0018) 					RegFileName = "\Application\AppCenter.reg"
+(0019) 					LogFileName = "\AppCenterLog.txt"
+(0020) 					AdminLoginHotKey = 0x00000000
+<0001> 			[Audio]
+(0000) 					BeeperVolumeLevels = 0x00000004
+(0001) 					BeeperVolume = 0x00000001
+<0002> 			[Display]
+(0000) 					ContrastLevels = 0x00000010
+(0001) 					ContrastMin = 0x0000000c
+(0002) 					ContrastMax = 0x0000001e
+(0003) 					Contrast = 0x00000007
+(0004) 					BacklightLevels = 0x00000004
+(0005) 					BacklightMin = 0x00000006
+(0006) 					BacklightMax = 0x0000001d
+(0007) 					BacklightIntensity = 0x00000006
+(0008) 					BacklightState = 0x00000000
+<0000> 				[Config0]
+<0001> 				[Config1]
+(0000) 						ContrastMin = 0x0000000a
+(0001) 						ContrastMax = 0x00000019
+(0002) 						Contrast = 0x00000008
+<0002> 				[Config2]
+(0000) 						ContrastLevels = 0x00000000
+<0003> 			[Bluetooth]
+<0000> 				[None]
+(0000) 						Name = ""
+(0001) 						Command = ""
+(0002) 						Continue = 0x00000001
+(0003) 						ColdBootOnly = 0x00000000
+<0004> 			[Notification]
+(0000) 					Capabilities = 0x000000bf
+<0000> 				[Object00]
+(0000) 						Name = "Green Decode LED"
+(0001) 						Type = "LED"
+(0002) 						Index = 0x00000000
+(0003) 						OnDuration = 0x000003e8
+(0004) 						OffDuration = 0x000001f4
+(0005) 						Count = 0x00000005
+<0001> 				[Object01]
+(0000) 						Name = "FUNC LED"
+(0001) 						Type = "LED"
+(0002) 						Index = 0x00000002
+(0003) 						OnDuration = 0x000003e8
+(0004) 						OffDuration = 0x000001f4
+(0005) 						Count = 0x00000005
+<0002> 				[Object02]
+(0000) 						Name = "SHIFT LED"
+(0001) 						Type = "LED"
+(0002) 						Index = 0x00000003
+(0003) 						OnDuration = 0x000003e8
+(0004) 						OffDuration = 0x000001f4
+(0005) 						Count = 0x00000005
+<0003> 				[Object03]
+(0000) 						Name = "CNTL LED"
+(0001) 						Type = "LED"
+(0002) 						Index = 0x00000004
+(0003) 						OnDuration = 0x000003e8
+(0004) 						OffDuration = 0x000001f4
+(0005) 						Count = 0x00000005
+<0004> 				[Object04]
+(0000) 						Name = "COMM LED"
+(0001) 						Type = "LED"
+(0002) 						Index = 0x00000005
+(0003) 						OnDuration = 0x000003e8
+(0004) 						OffDuration = 0x000001f4
+(0005) 						Count = 0x00000005
+<0005> 				[Object05]
+(0000) 						Name = "Beeper"
+(0001) 						Type = "BEEPER"
+(0002) 						Index = 0x00000006
+(0003) 						Duration = 0x000003e8
+(0004) 						Frequency = 0x00000bb8
+(0005) 						Volume = 0x00000001
+<0005> 			[StorageMemory]
+(0000) 					Percent = 0x00000023
+(0001) 					Pages = 0x00000000
+<0006> 			[SerPwr]
+<0000> 				[Accessory]
+(0000) 						CradleDetectPollInterval = 0x000003e8
+(0001) 						CradleDetectSettleTimeout = 0x00000096
+(0002) 						PrePowerOnDelay = 0x000003e8
+(0003) 						DevicePowerName = "COM1:"
+(0004) 						ForcePower = 0x00000000
+<0001> 				[SE1224]
+(0000) 						PostPowerOnDelay = 0x00000005
+<0007> 			[NLED]
+<0000> 				[NLED00]
+(0000) 						IOBase = 0x10000000
+(0001) 						IOSize = 0x00000400
+(0002) 						Type = 0x00000000
+(0003) 						Desc = "GREEN LED"
+(0004) 						SupportsInfo = hex: 00,00,00,00,01,00,00,00,01,00,00,00,01,00,00,00,01,00,00,00,01,00,00,00
+(0005) 						IOOffset = 0x00000118
+(0006) 						IOMask = 0x00000004
+(0007) 						MaskAction = 0x00000000
+(0008) 						IOEnableReg = 0x00000180
+(0009) 						IODisableReg = 0x00000184
+(0010) 						IOEnable = 0x00000800
+(0011) 						IODisable = 0x00000800
+(0012) 						IOCtlMask = 0x00000000
+<0001> 				[NLED01]
+(0000) 						IOBase = 0x10000000
+(0001) 						IOSize = 0x00000400
+(0002) 						Type = 0x00000000
+(0003) 						Desc = "RED LED"
+(0004) 						SupportsInfo = hex: 00,00,00,00,01,00,00,00,01,00,00,00,01,00,00,00,01,00,00,00,01,00,00,00
+(0005) 						IOOffset = 0x00000118
+(0006) 						IOMask = 0x00000008
+(0007) 						MaskAction = 0x00000000
+(0008) 						IOEnableReg = 0x00000180
+(0009) 						IODisableReg = 0x00000184
+(0010) 						IOEnable = 0x00001000
+(0011) 						IODisable = 0x00001000
+(0012) 						IOCtlMask = 0x00000000
+<0002> 				[NLED02]
+(0000) 						IOBase = 0x10000000
+(0001) 						IOSize = 0x00000400
+(0002) 						Type = 0x00000000
+(0003) 						Desc = "FUNC LED"
+(0004) 						SupportsInfo = hex: 00,00,00,00,01,00,00,00,01,00,00,00,01,00,00,00,01,00,00,00,01,00,00,00
+(0005) 						IOOffset = 0x00000118
+(0006) 						IOMask = 0x00000002
+(0007) 						MaskAction = 0x00000000
+(0008) 						IOEnableReg = 0x00000180
+(0009) 						IODisableReg = 0x00000184
+(0010) 						IOEnable = 0x00000400
+(0011) 						IODisable = 0x00000400
+(0012) 						IOCtlMask = 0x00000000
+<0003> 				[NLED03]
+(0000) 						IOBase = 0x114e0000
+(0001) 						IOSize = 0x00000400
+(0002) 						Type = 0x00000000
+(0003) 						Desc = "SHIFT LED"
+(0004) 						SupportsInfo = hex: 00,00,00,00,01,00,00,00,01,00,00,00,01,00,00,00,01,00,00,00,01,00,00,00
+(0005) 						IOOffset = 0x00000000
+(0006) 						IOMask = 0x00000000
+(0007) 						MaskAction = 0x00000000
+(0008) 						IOEnableReg = 0x00000000
+(0009) 						IODisableReg = 0x00000000
+(0010) 						IOEnable = 0x10000000
+(0011) 						IODisable = 0x00000000
+(0012) 						IOCtlMask = 0x10000000
+<0004> 				[NLED04]
+(0000) 						IOBase = 0x114e0000
+(0001) 						IOSize = 0x00000400
+(0002) 						Type = 0x00000000
+(0003) 						Desc = "CNTL LED"
+(0004) 						SupportsInfo = hex: 00,00,00,00,01,00,00,00,01,00,00,00,01,00,00,00,01,00,00,00,01,00,00,00
+(0005) 						IOOffset = 0x00000000
+(0006) 						IOMask = 0x00000000
+(0007) 						MaskAction = 0x00000000
+(0008) 						IOEnableReg = 0x00000000
+(0009) 						IODisableReg = 0x00000000
+(0010) 						IOEnable = 0x08000000
+(0011) 						IODisable = 0x00000000
+(0012) 						IOCtlMask = 0x08000000
+<0005> 				[NLED05]
+(0000) 						IOBase = 0x10000000
+(0001) 						IOSize = 0x00000400
+(0002) 						Type = 0x00000000
+(0003) 						Desc = "COMM LED"
+(0004) 						SupportsInfo = hex: 00,00,00,00,01,00,00,00,01,00,00,00,01,00,00,00,01,00,00,00,01,00,00,00
+(0005) 						IOOffset = 0x00000118
+(0006) 						IOMask = 0x00000020
+(0007) 						MaskAction = 0x00000000
+(0008) 						IOEnableReg = 0x00000108
+(0009) 						IODisableReg = 0x00000108
+(0010) 						IOEnable = 0x0000000f
+(0011) 						IODisable = 0x000000f0
+(0012) 						IOCtlMask = 0x000000ff
+<0006> 				[NLED06]
+(0000) 						UseSpeaker = 0x00000000
+(0001) 						IOBase = 0x10000000
+(0002) 						IOSize = 0x00000400
+(0003) 						Type = 0x00000002
+(0004) 						Desc = "BEEPER"
+(0005) 						SupportsInfo = hex: 00,00,00,00,01,00,00,00,01,00,00,00,01,00,00,00,01,00,00,00,01,00,00,00
+(0006) 						IOBeeperControlReg = 0x00000104
+(0007) 						IOBeeperFreqReg = 0x0000010c
+(0008) 						IOBeeperControl = 0x00000000
+(0009) 						IOBeeperFreq = 0x00000000
+(0010) 						MAXBeeperFreq = 0x00000fa0
+<0000> 					[CONFIG0]
+(0000) 							UseSpeaker = 0x00000000
+<0001> 					[CONFIG1]
+(0000) 							UseSpeaker = 0x00000001
+<0009> 	[ExtModems]
+<0000> 		[HayesCompat]
+(0000) 				Port = "COM1:"
+(0001) 				DeviceType = 0x00000001
+(0002) 				FriendlyName = "Hayes Compatible on COM1:"
+<0001> 		[bluetooth_dcn]
+(0000) 				port = "COM8:"
+(0001) 				DeviceType = 0x00000000
+(0002) 				FriendlyName = "BluetoothDCN"
+<0002> 		[bluetooth_dun]
+(0000) 				port = "COM8:"
+(0001) 				DeviceType = 0x00000001
+(0002) 				FriendlyName = "BluetoothDUN"
+<0010> 	[Printers]
+<0000> 		[Ports]
+(0000) 				Port1 = "COM1: 9600"
+(0001) 				Port2 = "COM1: 57600"
+(0002) 				Port3 = "IRDA"
+(0003) 				Port4 = "NET0:"
+<0011> 	[Services]
+<0000> 		[BTSVC]
+(0000) 				Dll = "BTSVC.Dll"
+(0001) 				Order = 0x00000009
+(0002) 				Keep = 0x00000001
+(0003) 				Prefix = "BTS"
+(0004) 				Index = 0x00000001
+<0001> 		[HTTPD]
+(0000) 				Context = 0x00000001
+(0001) 				Dll = "HTTPD.DLL"
+(0002) 				Order = 0x00000008
+(0003) 				Keep = 0x00000001
+(0004) 				Prefix = "HTP"
+(0005) 				Index = 0x00000000
+<0000> 			[Accept]
+<0000> 				[TCP-80]
+(0000) 						SockAddr = hex: 02,00,00,50,00,00,00,00,00,00,00,00,00,00,00,00
+<0001> 				[TCP-443]
+(0000) 						SockAddr = hex: 02,00,01,bb,00,00,00,00,00,00,00,00,00,00,00,00
+<0002> 		[OBEX]
+(0000) 				DLL = "OBEXSrVr.dll"
+(0001) 				Keep = 0x00000001
+(0002) 				Order = 0x00000009
+(0003) 				Prefix = "OBX"
+(0004) 				Index = 0x00000000
+<0003> 		[MSMQD]
+(0000) 				Dll = "MSMQD.Dll"
+(0001) 				Order = 0x00000009
+(0002) 				Keep = 0x00000001
+(0003) 				Prefix = "MMQ"
+(0004) 				Index = 0x00000001
+<0012> 	[Explorer]
+(0000) 			QVGA = 0x00000001
+(0001) 			RecycleBinSize = 0x0000000a
+(0002) 			ShowExt = 0x00000000
+(0003) 			ShowSys = 0x00000000
+(0004) 			UseCompatibleBGImage = 0x00000001
+(0005) 			UseRecycleBin = 0x00000001
+(0006) 			ViewAll = 0x00000000
+(0007) 			ExpandControlPanel = 0x00000000
+<0000> 		[Shell Folders]
+(0000) 				Application Data = "\Application Data"
+(0001) 				Desktop = "\Windows\Desktop"
+(0002) 				Favorites = "\Windows\Favorites"
+(0003) 				Fonts = "\Windows\Fonts"
+(0004) 				My Documents = "\My Documents"
+(0005) 				Program Files = "\Program Files"
+(0006) 				Programs = "\Windows\Programs"
+(0007) 				Recent = "\Windows\Recent"
+(0008) 				StartUp = "\Windows\StartUp"
+(0009) 				Windows = "\Windows"
+<0001> 		[RunHistory]
+(0000) 				Default = ""
+<0002> 		[Desktop]
+(0000) 				{000214A0-0000-0000-C000-000000000046} = "My Computer"
+(0001) 				{000214A1-0000-0000-C000-000000000046} = "Recycle Bin"
+<0013> 	[Ident]
+(0000) 			OrigName = "WindowsCE"
+(0001) 			Username = "guest"
+(0002) 			Desc = "WindowsCE Device"
+(0003) 			Name = "WindowsCE"
+<0014> 	[Time Zones]
+(0000) 			Default = "Pacific Standard Time"
+<0000> 		[Dateline Standard Time]
+(0000) 				Display = "(GMT-12:00) International Date Line West"
+(0001) 				Dlt = "Dateline Daylight Time"
+(0002) 				TZI = hex: d0,02,00,00,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+<0001> 		[Samoa Standard Time]
+(0000) 				Display = "(GMT-11:00) Midway Island, Samoa"
+(0001) 				Dlt = "Samoa Daylight Time"
+(0002) 				TZI = hex: 94,02,00,00,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+<0002> 		[Hawaiian Standard Time]
+(0000) 				Display = "(GMT-10:00) Hawaii"
+(0001) 				Dlt = "Hawaiian Daylight Time"
+(0002) 				TZI = hex: 58,02,00,00,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+<0003> 		[Alaskan Standard Time]
+(0000) 				Display = "(GMT-09:00) Alaska"
+(0001) 				Dlt = "Alaskan Daylight Time"
+(0002) 				TZI = hex: 1c,02,00,00,00,00,00,00,c4,ff,ff,ff,00,00,0a,00,00,00,05,00,02,00,00,00,00,00,00,00,00,00,04,00,00,00,01,00,02,00,00,00,00,00,00,00
+<0004> 		[Pacific Standard Time]
+(0000) 				Display = "(GMT-08:00) Pacific Time (US & Canada); Tijuana"
+(0001) 				Dlt = "Pacific Daylight Time"
+(0002) 				TZI = hex: e0,01,00,00,00,00,00,00,c4,ff,ff,ff,00,00,0a,00,00,00,05,00,02,00,00,00,00,00,00,00,00,00,04,00,00,00,01,00,02,00,00,00,00,00,00,00
+<0005> 		[Mountain Standard Time]
+(0000) 				Display = "(GMT-07:00) Mountain Time (US & Canada)"
+(0001) 				Dlt = "Mountain Daylight Time"
+(0002) 				TZI = hex: a4,01,00,00,00,00,00,00,c4,ff,ff,ff,00,00,0a,00,00,00,05,00,02,00,00,00,00,00,00,00,00,00,04,00,00,00,01,00,02,00,00,00,00,00,00,00
+<0006> 		[Mexico Standard Time 2]
+(0000) 				Display = "(GMT-07:00) Chihuahua, La Paz, Mazatlan"
+(0001) 				Dlt = "Mexico Daylight Time 2"
+(0002) 				TZI = hex: a4,01,00,00,00,00,00,00,c4,ff,ff,ff,00,00,09,00,00,00,05,00,02,00,00,00,00,00,00,00,00,00,05,00,00,00,01,00,02,00,00,00,00,00,00,00
+<0007> 		[US Mountain Standard Time]
+(0000) 				Display = "(GMT-07:00) Arizona"
+(0001) 				Dlt = "US Mountain Daylight Time"
+(0002) 				TZI = hex: a4,01,00,00,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+<0008> 		[Central Standard Time]
+(0000) 				Display = "(GMT-06:00) Central Time (US & Canada)"
+(0001) 				Dlt = "Central Daylight Time"
+(0002) 				TZI = hex: 68,01,00,00,00,00,00,00,c4,ff,ff,ff,00,00,0a,00,00,00,05,00,02,00,00,00,00,00,00,00,00,00,04,00,00,00,01,00,02,00,00,00,00,00,00,00
+<0009> 		[Canada Central Standard Time]
+(0000) 				Display = "(GMT-06:00) Saskatchewan"
+(0001) 				Dlt = "Canada Central Daylight Time"
+(0002) 				TZI = hex: 68,01,00,00,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+<0010> 		[Mexico Standard Time]
+(0000) 				Display = "(GMT-06:00) Guadalajara, Mexico City, Monterrey"
+(0001) 				Dlt = "Mexico Daylight Time"
+(0002) 				TZI = hex: 68,01,00,00,00,00,00,00,c4,ff,ff,ff,00,00,09,00,00,00,05,00,02,00,00,00,00,00,00,00,00,00,05,00,00,00,01,00,02,00,00,00,00,00,00,00
+<0011> 		[Central America Standard Time]
+(0000) 				Display = "(GMT-06:00) Central America"
+(0001) 				Dlt = "Central America Daylight Time"
+(0002) 				TZI = hex: 68,01,00,00,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+<0012> 		[Eastern Standard Time]
+(0000) 				Display = "(GMT-05:00) Eastern Time (US & Canada)"
+(0001) 				Dlt = "Eastern Daylight Time"
+(0002) 				TZI = hex: 2c,01,00,00,00,00,00,00,c4,ff,ff,ff,00,00,0a,00,00,00,05,00,02,00,00,00,00,00,00,00,00,00,04,00,00,00,01,00,02,00,00,00,00,00,00,00
+<0013> 		[US Eastern Standard Time]
+(0000) 				Display = "(GMT-05:00) Indiana (East)"
+(0001) 				Dlt = "US Eastern Daylight Time"
+(0002) 				TZI = hex: 2c,01,00,00,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+<0014> 		[SA Pacific Standard Time]
+(0000) 				Display = "(GMT-05:00) Bogota, Lima, Quito"
+(0001) 				Dlt = "SA Pacific Daylight Time"
+(0002) 				TZI = hex: 2c,01,00,00,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+<0015> 		[Atlantic Standard Time]
+(0000) 				Display = "(GMT-04:00) Atlantic Time (Canada)"
+(0001) 				Dlt = "Atlantic Daylight Time"
+(0002) 				TZI = hex: f0,00,00,00,00,00,00,00,c4,ff,ff,ff,00,00,0a,00,00,00,05,00,02,00,00,00,00,00,00,00,00,00,04,00,00,00,01,00,02,00,00,00,00,00,00,00
+<0016> 		[SA Western Standard Time]
+(0000) 				Display = "(GMT-04:00) Caracas, La Paz"
+(0001) 				Dlt = "SA Western Daylight Time"
+(0002) 				TZI = hex: f0,00,00,00,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+<0017> 		[Pacific SA Standard Time]
+(0000) 				Display = "(GMT-04:00) Santiago"
+(0001) 				Dlt = "Pacific SA Daylight Time"
+(0002) 				TZI = hex: f0,00,00,00,00,00,00,00,c4,ff,ff,ff,00,00,03,00,06,00,02,00,00,00,00,00,00,00,00,00,00,00,0a,00,06,00,02,00,00,00,00,00,00,00,00,00
+<0018> 		[Newfoundland Standard Time]
+(0000) 				Display = "(GMT-03:30) Newfoundland"
+(0001) 				Dlt = "Newfoundland Daylight Time"
+(0002) 				TZI = hex: d2,00,00,00,00,00,00,00,c4,ff,ff,ff,00,00,0a,00,00,00,05,00,02,00,00,00,00,00,00,00,00,00,04,00,00,00,01,00,02,00,00,00,00,00,00,00
+<0019> 		[E. South America Standard Time]
+(0000) 				Display = "(GMT-03:00) Brasilia"
+(0001) 				Dlt = "E. South America Daylight Time"
+(0002) 				TZI = hex: b4,00,00,00,00,00,00,00,c4,ff,ff,ff,00,00,02,00,00,00,02,00,02,00,00,00,00,00,00,00,00,00,0a,00,00,00,03,00,02,00,00,00,00,00,00,00
+<0020> 		[SA Eastern Standard Time]
+(0000) 				Display = "(GMT-03:00) Buenos Aires, Georgetown"
+(0001) 				Dlt = "SA Eastern Daylight Time"
+(0002) 				TZI = hex: b4,00,00,00,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+<0021> 		[Greenland Standard Time]
+(0000) 				Display = "(GMT-03:00) Greenland"
+(0001) 				Dlt = "Greenland Daylight Time"
+(0002) 				TZI = hex: b4,00,00,00,00,00,00,00,c4,ff,ff,ff,00,00,0a,00,00,00,05,00,02,00,00,00,00,00,00,00,00,00,04,00,00,00,01,00,02,00,00,00,00,00,00,00
+<0022> 		[Mid-Atlantic Standard Time]
+(0000) 				Display = "(GMT-02:00) Mid-Atlantic"
+(0001) 				Dlt = "Mid-Atlantic Daylight Time"
+(0002) 				TZI = hex: 78,00,00,00,00,00,00,00,c4,ff,ff,ff,00,00,09,00,00,00,05,00,02,00,00,00,00,00,00,00,00,00,03,00,00,00,05,00,02,00,00,00,00,00,00,00
+<0023> 		[Azores Standard Time]
+(0000) 				Display = "(GMT-01:00) Azores"
+(0001) 				Dlt = "Azores Daylight Time"
+(0002) 				TZI = hex: 3c,00,00,00,00,00,00,00,c4,ff,ff,ff,00,00,0a,00,00,00,05,00,03,00,00,00,00,00,00,00,00,00,03,00,00,00,05,00,02,00,00,00,00,00,00,00
+<0024> 		[Cape Verde Standard Time]
+(0000) 				Display = "(GMT-01:00) Cape Verde Is."
+(0001) 				Dlt = "Cape Verde Daylight Time"
+(0002) 				TZI = hex: 3c,00,00,00,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+<0025> 		[GMT Standard Time]
+(0000) 				Display = "(GMT) Greenwich Mean Time : Dublin, Edinburgh, Lisbon, London"
+(0001) 				Dlt = "GMT Daylight Time"
+(0002) 				TZI = hex: 00,00,00,00,00,00,00,00,c4,ff,ff,ff,00,00,0a,00,00,00,05,00,02,00,00,00,00,00,00,00,00,00,03,00,00,00,05,00,01,00,00,00,00,00,00,00
+<0026> 		[Greenwich Standard Time]
+(0000) 				Display = "(GMT) Casablanca, Monrovia"
+(0001) 				Dlt = "Greenwich Daylight Time"
+(0002) 				TZI = hex: 00,00,00,00,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+<0027> 		[Central Europe Standard Time]
+(0000) 				Display = "(GMT+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague"
+(0001) 				Dlt = "Central Europe Daylight Time"
+(0002) 				TZI = hex: c4,ff,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,0a,00,00,00,05,00,03,00,00,00,00,00,00,00,00,00,03,00,00,00,05,00,02,00,00,00,00,00,00,00
+<0028> 		[Central European Standard Time]
+(0000) 				Display = "(GMT+01:00) Sarajevo, Skopje, Warsaw, Zagreb"
+(0001) 				Dlt = "Central European Daylight Time"
+(0002) 				TZI = hex: c4,ff,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,0a,00,00,00,05,00,03,00,00,00,00,00,00,00,00,00,03,00,00,00,05,00,02,00,00,00,00,00,00,00
+<0029> 		[Romance Standard Time]
+(0000) 				Display = "(GMT+01:00) Brussels, Copenhagen, Madrid, Paris"
+(0001) 				Dlt = "Romance Daylight Time"
+(0002) 				TZI = hex: c4,ff,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,0a,00,00,00,05,00,03,00,00,00,00,00,00,00,00,00,03,00,00,00,05,00,02,00,00,00,00,00,00,00
+<0030> 		[W. Europe Standard Time]
+(0000) 				Display = "(GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna"
+(0001) 				Dlt = "W. Europe Daylight Time"
+(0002) 				TZI = hex: c4,ff,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,0a,00,00,00,05,00,03,00,00,00,00,00,00,00,00,00,03,00,00,00,05,00,02,00,00,00,00,00,00,00
+<0031> 		[W. Central Africa Standard Time]
+(0000) 				Display = "(GMT+01:00) West Central Africa"
+(0001) 				Dlt = "W. Central Africa Daylight Time"
+(0002) 				TZI = hex: c4,ff,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+<0032> 		[E. Europe Standard Time]
+(0000) 				Display = "(GMT+02:00) Bucharest"
+(0001) 				Dlt = "E. Europe Daylight Time"
+(0002) 				TZI = hex: 88,ff,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,0a,00,00,00,05,00,01,00,00,00,00,00,00,00,00,00,03,00,00,00,05,00,00,00,00,00,00,00,00,00
+<0033> 		[Egypt Standard Time]
+(0000) 				Display = "(GMT+02:00) Cairo"
+(0001) 				Dlt = "Egypt Daylight Time"
+(0002) 				TZI = hex: 88,ff,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,09,00,03,00,05,00,02,00,00,00,00,00,00,00,00,00,05,00,05,00,01,00,02,00,00,00,00,00,00,00
+<0034> 		[FLE Standard Time]
+(0000) 				Display = "(GMT+02:00) Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius"
+(0001) 				Dlt = "FLE Daylight Time"
+(0002) 				TZI = hex: 88,ff,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,0a,00,00,00,05,00,04,00,00,00,00,00,00,00,00,00,03,00,00,00,05,00,03,00,00,00,00,00,00,00
+<0035> 		[GTB Standard Time]
+(0000) 				Display = "(GMT+02:00) Athens, Istanbul, Minsk"
+(0001) 				Dlt = "GTB Daylight Time"
+(0002) 				TZI = hex: 88,ff,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,0a,00,00,00,05,00,03,00,00,00,00,00,00,00,00,00,03,00,00,00,05,00,02,00,00,00,00,00,00,00
+<0036> 		[Jerusalem Standard Time]
+(0000) 				Display = "(GMT+02:00) Jerusalem"
+(0001) 				Dlt = "Jerusalem Daylight Time"
+(0002) 				TZI = hex: 88,ff,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+<0037> 		[South Africa Standard Time]
+(0000) 				Display = "(GMT+02:00) Harare, Pretoria"
+(0001) 				Dlt = "South Africa Daylight Time"
+(0002) 				TZI = hex: 88,ff,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+<0038> 		[Russian Standard Time]
+(0000) 				Display = "(GMT+03:00) Moscow, St. Petersburg, Volgograd"
+(0001) 				Dlt = "Russian Daylight Time"
+(0002) 				TZI = hex: 4c,ff,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,0a,00,00,00,05,00,03,00,00,00,00,00,00,00,00,00,03,00,00,00,05,00,02,00,00,00,00,00,00,00
+<0039> 		[Arab Standard Time]
+(0000) 				Display = "(GMT+03:00) Kuwait, Riyadh"
+(0001) 				Dlt = "Arab Daylight Time"
+(0002) 				TZI = hex: 4c,ff,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+<0040> 		[E. Africa Standard Time]
+(0000) 				Display = "(GMT+03:00) Nairobi"
+(0001) 				Dlt = "E. Africa Daylight Time"
+(0002) 				TZI = hex: 4c,ff,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+<0041> 		[Arabic Standard Time]
+(0000) 				Display = "(GMT+03:00) Baghdad"
+(0001) 				Dlt = "Arabic Daylight Time"
+(0002) 				TZI = hex: 4c,ff,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,0a,00,00,00,01,00,04,00,00,00,00,00,00,00,00,00,04,00,00,00,01,00,03,00,00,00,00,00,00,00
+<0042> 		[Iran Standard Time]
+(0000) 				Display = "(GMT+03:30) Tehran"
+(0001) 				Dlt = "Iran Daylight Time"
+(0002) 				TZI = hex: 2e,ff,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,09,00,02,00,04,00,02,00,00,00,00,00,00,00,00,00,03,00,00,00,01,00,02,00,00,00,00,00,00,00
+<0043> 		[Arabian Standard Time]
+(0000) 				Display = "(GMT+04:00) Abu Dhabi, Muscat"
+(0001) 				Dlt = "Arabian Daylight Time"
+(0002) 				TZI = hex: 10,ff,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+<0044> 		[Caucasus Standard Time]
+(0000) 				Display = "(GMT+04:00) Baku, Tbilisi, Yerevan"
+(0001) 				Dlt = "Caucasus Daylight Time"
+(0002) 				TZI = hex: 10,ff,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,0a,00,00,00,05,00,03,00,00,00,00,00,00,00,00,00,03,00,00,00,05,00,02,00,00,00,00,00,00,00
+<0045> 		[Afghanistan Standard Time]
+(0000) 				Display = "(GMT+04:30) Kabul"
+(0001) 				Dlt = "Afghanistan Daylight Time"
+(0002) 				TZI = hex: f2,fe,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+<0046> 		[Ekaterinburg Standard Time]
+(0000) 				Display = "(GMT+05:00) Ekaterinburg"
+(0001) 				Dlt = "Ekaterinburg Daylight Time"
+(0002) 				TZI = hex: d4,fe,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,0a,00,00,00,05,00,03,00,00,00,00,00,00,00,00,00,03,00,00,00,05,00,02,00,00,00,00,00,00,00
+<0047> 		[West Asia Standard Time]
+(0000) 				Display = "(GMT+05:00) Islamabad, Karachi, Tashkent"
+(0001) 				Dlt = "West Asia Daylight Time"
+(0002) 				TZI = hex: d4,fe,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+<0048> 		[India Standard Time]
+(0000) 				Display = "(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi"
+(0001) 				Dlt = "India Daylight Time"
+(0002) 				TZI = hex: b6,fe,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+<0049> 		[Nepal Standard Time]
+(0000) 				Display = "(GMT+05:45) Kathmandu"
+(0001) 				Dlt = "Nepal Daylight Time"
+(0002) 				TZI = hex: a7,fe,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+<0050> 		[Central Asia Standard Time]
+(0000) 				Display = "(GMT+06:00) Astana, Dhaka"
+(0001) 				Dlt = "Central Asia Daylight Time"
+(0002) 				TZI = hex: 98,fe,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+<0051> 		[Sri Lanka Standard Time]
+(0000) 				Display = "(GMT+06:00) Sri Jayawardenepura"
+(0001) 				Dlt = "Sri Lanka Daylight Time"
+(0002) 				TZI = hex: 98,fe,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+<0052> 		[N. Central Asia Standard Time]
+(0000) 				Display = "(GMT+06:00) Almaty, Novosibirsk"
+(0001) 				Dlt = "N. Central Asia Daylight Time"
+(0002) 				TZI = hex: 98,fe,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,0a,00,00,00,05,00,03,00,00,00,00,00,00,00,00,00,03,00,00,00,05,00,02,00,00,00,00,00,00,00
+<0053> 		[Myanmar Standard Time]
+(0000) 				Display = "(GMT+06:30) Rangoon"
+(0001) 				Dlt = "Myanmar Daylight Time"
+(0002) 				TZI = hex: 7a,fe,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+<0054> 		[SE Asia Standard Time]
+(0000) 				Display = "(GMT+07:00) Bangkok, Hanoi, Jakarta"
+(0001) 				Dlt = "SE Asia Daylight Time"
+(0002) 				TZI = hex: 5c,fe,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+<0055> 		[North Asia Standard Time]
+(0000) 				Display = "(GMT+07:00) Krasnoyarsk"
+(0001) 				Dlt = "North Asia Daylight Time"
+(0002) 				TZI = hex: 5c,fe,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,0a,00,00,00,05,00,03,00,00,00,00,00,00,00,00,00,03,00,00,00,05,00,02,00,00,00,00,00,00,00
+<0056> 		[China Standard Time]
+(0000) 				Display = "(GMT+08:00) Beijing, Chongqing, Hong Kong, Urumqi"
+(0001) 				Dlt = "China Daylight Time"
+(0002) 				TZI = hex: 20,fe,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+<0057> 		[Malay Peninsula Standard Time]
+(0000) 				Display = "(GMT+08:00) Kuala Lumpur, Singapore"
+(0001) 				Dlt = "Malay Peninsula Daylight Time"
+(0002) 				TZI = hex: 20,fe,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+<0058> 		[Taipei Standard Time]
+(0000) 				Display = "(GMT+08:00) Taipei"
+(0001) 				Dlt = "Taipei Daylight Time"
+(0002) 				TZI = hex: 20,fe,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+<0059> 		[W. Australia Standard Time]
+(0000) 				Display = "(GMT+08:00) Perth"
+(0001) 				Dlt = "W. Australia Daylight Time"
+(0002) 				TZI = hex: 20,fe,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+<0060> 		[North Asia East Standard Time]
+(0000) 				Display = "(GMT+08:00) Irkutsk, Ulaan Bataar"
+(0001) 				Dlt = "North Asia East Daylight Time"
+(0002) 				TZI = hex: 20,fe,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,0a,00,00,00,05,00,03,00,00,00,00,00,00,00,00,00,03,00,00,00,05,00,02,00,00,00,00,00,00,00
+<0061> 		[Korea Standard Time]
+(0000) 				Display = "(GMT+09:00) Seoul"
+(0001) 				Dlt = "Korea Daylight Time"
+(0002) 				TZI = hex: e4,fd,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+<0062> 		[Tokyo Standard Time]
+(0000) 				Display = "(GMT+09:00) Osaka, Sapporo, Tokyo"
+(0001) 				Dlt = "Tokyo Daylight Time"
+(0002) 				TZI = hex: e4,fd,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+<0063> 		[Yakutsk Standard Time]
+(0000) 				Display = "(GMT+09:00) Yakutsk"
+(0001) 				Dlt = "Yakutsk Daylight Time"
+(0002) 				TZI = hex: e4,fd,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,0a,00,00,00,05,00,03,00,00,00,00,00,00,00,00,00,03,00,00,00,05,00,02,00,00,00,00,00,00,00
+<0064> 		[AUS Central Standard Time]
+(0000) 				Display = "(GMT+09:30) Darwin"
+(0001) 				Dlt = "AUS Central Daylight Time"
+(0002) 				TZI = hex: c6,fd,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+<0065> 		[Cen. Australia Standard Time]
+(0000) 				Display = "(GMT+09:30) Adelaide"
+(0001) 				Dlt = "Cen. Australia Daylight Time"
+(0002) 				TZI = hex: c6,fd,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,03,00,00,00,05,00,02,00,00,00,00,00,00,00,00,00,0a,00,00,00,05,00,02,00,00,00,00,00,00,00
+<0066> 		[AUS Eastern Standard Time]
+(0000) 				Display = "(GMT+10:00) Canberra, Melbourne, Sydney"
+(0001) 				Dlt = "AUS Eastern Daylight Time"
+(0002) 				TZI = hex: a8,fd,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,03,00,00,00,05,00,02,00,00,00,00,00,00,00,00,00,0a,00,00,00,05,00,02,00,00,00,00,00,00,00
+<0067> 		[E. Australia Standard Time]
+(0000) 				Display = "(GMT+10:00) Brisbane"
+(0001) 				Dlt = "E. Australia Daylight Time"
+(0002) 				TZI = hex: a8,fd,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+<0068> 		[Tasmania Standard Time]
+(0000) 				Display = "(GMT+10:00) Hobart"
+(0001) 				Dlt = "Tasmania Daylight Time"
+(0002) 				TZI = hex: a8,fd,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,03,00,00,00,05,00,02,00,00,00,00,00,00,00,00,00,0a,00,00,00,01,00,02,00,00,00,00,00,00,00
+<0069> 		[Vladivostok Standard Time]
+(0000) 				Display = "(GMT+10:00) Vladivostok"
+(0001) 				Dlt = "Vladivostok Daylight Time"
+(0002) 				TZI = hex: a8,fd,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,0a,00,00,00,05,00,03,00,00,00,00,00,00,00,00,00,03,00,00,00,05,00,02,00,00,00,00,00,00,00
+<0070> 		[West Pacific Standard Time]
+(0000) 				Display = "(GMT+10:00) Guam, Port Moresby"
+(0001) 				Dlt = "West Pacific Daylight Time"
+(0002) 				TZI = hex: a8,fd,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+<0071> 		[Central Pacific Standard Time]
+(0000) 				Display = "(GMT+11:00) Magadan, Solomon Is., New Caledonia"
+(0001) 				Dlt = "Central Pacific Daylight Time"
+(0002) 				TZI = hex: 6c,fd,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+<0072> 		[Fiji Standard Time]
+(0000) 				Display = "(GMT+12:00) Fiji, Kamchatka, Marshall Is."
+(0001) 				Dlt = "Fiji Daylight Time"
+(0002) 				TZI = hex: 30,fd,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+<0073> 		[New Zealand Standard Time]
+(0000) 				Display = "(GMT+12:00) Auckland, Wellington"
+(0001) 				Dlt = "New Zealand Daylight Time"
+(0002) 				TZI = hex: 30,fd,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,03,00,00,00,03,00,02,00,00,00,00,00,00,00,00,00,0a,00,00,00,01,00,02,00,00,00,00,00,00,00
+<0074> 		[Tonga Standard Time]
+(0000) 				Display = "(GMT+13:00) Nuku'alofa"
+(0001) 				Dlt = "Tonga Daylight Time"
+(0002) 				TZI = hex: f4,fc,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+<0015> 	[Drivers32]
+(0000) 			msacm.msgsm610 = "msgsm610.dll"
+<0016> 	[AudioCompressionManager]
+<0000> 		[DriverCache]
+<0000> 			[msacm.msgsm610]
+(0000) 					fdwSupport = 0x00000001
+(0001) 					cFormatTags = 0x00000002
+(0002) 					aFormatTagCache = hex: 01,00,00,00,10,00,00,00,31,00,00,00,14,00,00,00
+(0003) 					cFilterTags = 0x00000000
+<0017> 	[Windows CE Services]
+<0000> 		[Synchronization]
+<0000> 			[Objects]
+<0000> 				[File]
+(0000) 						Store = "cefobj.dll"
+<0018> 	[HARDWARE]
+<0000> 		[DEVICEMAP]
+<0000> 			[Contrast]
+(0000) 					Contrast = 0x00000013
+(0001) 					ContrastSteps = 0x00000024
+(0002) 					ContrastMin = 0x00000000
+<0000> 				[Config0]
+(0000) 						ContrastMin = 0x00000000
+(0001) 						ContrastSteps = 0x00000024
+(0002) 						Contrast = 0x00000013
+<0001> 				[Config1]
+(0000) 						ContrastMin = 0x00000000
+(0001) 						ContrastSteps = 0x00000024
+(0002) 						Contrast = 0x0000000c
+<0001> 			[BACKLIGHT]
+(0000) 					BacklightLevels = 0x00000004
+(0001) 					BacklightMin = 0x00000006
+(0002) 					BacklightMax = 0x0000001d
+(0003) 					BacklightIntensity = 0x00000006
+<0002> 			[KEYLIGHT]
+(0000) 					KeylightIntensity = 0x00000000
+(0001) 					KeylightLevels = 0x00000002
+(0002) 					KeylightMin = 0x00000000
+(0003) 					KeylightMax = 0x00000001
+(0004) 					KeylightTimeout = 0x00005000
+<0003> 			[TOUCH]
+(0000) 					CalibrationData = "556,558 313,779 795,778 798,349 315,326 "
+(0001) 					PowerUpTouchDelay = 0x00000100
+(0002) 					MaxCalError = 0x00000005
+<0000> 				[TYPE0]
+(0000) 						CalibrationData = "522,514 767,253 270,268 265,742 761,747 "
+<0001> 				[TYPE1]
+(0000) 						CalibrationData = "514,527 270,760 772,751 764,287 263,287 "
+<0002> 				[NONE]
+(0000) 						CalibrationData = "514,527 270,760 772,751 764,287 263,287 "
+<0003> 				[ActivityEvents]
+(0000) 						PowerManager/ActivityTimer/Backlight/TouchActivity = ""
+(0001) 						PowerManager/ActivityTimer/Keylight/TouchActivity = ""
+(0002) 						UserActivityEvent = ""
+<0004> 			[MOUSE]
+(0000) 					DriverName = "kbdmouse.dll"
+<0005> 			[KEYBD]
+(0000) 					SpecialEnterTabKey = 0x00000001
+(0001) 					CellPhoneKeyEnable = 0x00000000
+(0002) 					MultiMapKeyTimeout = 0x00000000
+(0003) 					PowerUpTimeout = 0x00000100
+(0004) 					KeyMapMode = 0x00000001
+(0005) 					DefaultKeyState = 0x00000001
+(0006) 					DefaultMultiMappingTable = ""
+(0007) 					DefaultMappingTable = "\Windows\53Key.rmt"
+(0008) 					ScanCodeTable = "\Windows\53Key.sct"
+(0009) 					DriverName = "keybddr.dll"
+(0010) 					Status = 0x00000001
+(0011) 					Key = 0x00000000
+(0012) 					Keyboard Type = 0x00000004
+(0013) 					Keyboard SubType = 0x00000000
+(0014) 					Keyboard Function Keys = 0x0000000c
+(0015) 					Keyboard Layout = "00000409"
+<0000> 				[53KEY]
+(0000) 						ScanCodeTable = "\Windows\53Key.sct"
+(0001) 						DefaultMappingTable = "\Windows\53Key.rmt"
+(0002) 						DefaultMultiMappingTable = ""
+(0003) 						DefaultKeyState = 0x00000001
+(0004) 						KeyMapMode = 0x00000001
+(0005) 						PowerUpTimeout = 0x00000100
+(0006) 						MultiMapKeyTimeout = 0x00000000
+(0007) 						CellPhoneKeyEnable = 0x00000000
+(0008) 						SpecialEnterTabKey = 0x00000001
+<0001> 				[43KEY]
+(0000) 						ScanCodeTable = "\Windows\43Key.sct"
+(0001) 						DefaultMappingTable = "\Windows\43Key.rmt"
+(0002) 						DefaultMultiMappingTable = ""
+(0003) 						DefaultKeyState = 0x00000020
+(0004) 						KeyMapMode = 0x00000020
+(0005) 						PowerUpTimeout = 0x00000100
+(0006) 						MultiMapKeyTimeout = 0x00000000
+(0007) 						CellPhoneKeyEnable = 0x00000000
+(0008) 						SpecialEnterTabKey = 0x00000001
+<0002> 				[28KEY]
+(0000) 						ScanCodeTable = "\Windows\28Key.sct"
+(0001) 						DefaultMappingTable = "\Windows\28Key.rmt"
+(0002) 						DefaultMultiMappingTable = "\Windows\28key.rmm"
+(0003) 						DefaultKeyState = 0x00000020
+(0004) 						KeyMapMode = 0x00000020
+(0005) 						PowerUpTimeout = 0x00000100
+(0006) 						MultiMapKeyTimeout = 0x00000190
+(0007) 						CellPhoneKeyEnable = 0x00000001
+(0008) 						SpecialEnterTabKey = 0x00000001
+<0003> 				[20KEY]
+(0000) 						ScanCodeTable = "\Windows\20Key.sct"
+(0001) 						DefaultMappingTable = ""
+(0002) 						DefaultMultiMappingTable = ""
+(0003) 						DefaultKeyState = 0x00000001
+(0004) 						KeyMapMode = 0x00000001
+(0005) 						PowerUpTimeout = 0x00000100
+(0006) 						MultiMapKeyTimeout = 0x00000000
+(0007) 						CellPhoneKeyEnable = 0x00000000
+(0008) 						SpecialEnterTabKey = 0x00000001
+<0004> 				[ActivityEvents]
+(0000) 						PowerManager/ActivityTimer/Backlight/KeyboardActivity = ""
+(0001) 						PowerManager/ActivityTimer/Keylight/KeyboardActivity = ""
+(0002) 						UserActivityEvent = ""
+(0003) 						_KeyPress = "Key press event"
+<0001> 		[BATTERY]
+(0000) 				BackupBatteryInfo = hex: ff,00,00,00
+<0019> 	[ControlPanel]
+<0000> 		[Bluetooth]
+(0000) 				ShowIcon = 0x00000001
+<0001> 		[Connections]
+(0000) 				GoToTab = 0x00000001
+<0002> 		[Network]
+(0000) 				Hide = 0x00000000
+<0003> 		[Contrast]
+(0000) 				Redirect = ""
+<0020> 	[Windows CE Tools]
+(0000) 			Platform = "{94BC8101-AB9E-4324-9E82-05EC7B14191B}"
+<0021> 	[Platform]
+(0000) 			Name = "Microsoft Windows CE Hardware Reference Platform"
+(0001) 			Type = 0x00000002
+<0022> 	[Loader]
+(0000) 			SystemPath = MULTI_SZ: 
+					"\Release\"
+

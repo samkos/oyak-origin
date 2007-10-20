@@ -1,0 +1,2240 @@
+HKEY_CLASSES_ROOT
+<0000> 	[.py]
+(0000) 			Default = "Python.File"
+<0001> 	[.pyc]
+(0000) 			Default = "Python.File"
+<0002> 	[Python.File]
+<0000> 		[Shell]
+<0000> 			[Open]
+<0000> 				[Command]
+(0000) 						Default = ""\Program Files\Python25\python.exe" "%1""
+<0003> 	[.pyw]
+(0000) 			Default = "Python.File.NoShell"
+<0004> 	[Python.File.NoShell]
+<0000> 		[Shell]
+<0000> 			[Open]
+<0000> 				[Command]
+(0000) 						Default = ""\Program Files\Python25\python.exe" /nopcceshell "%1""
+<0005> 	[.bat]
+(0000) 			Default = "cmdfile"
+<0006> 	[.cmd]
+(0000) 			Default = "cmdfile"
+<0007> 	[cmdfile]
+(0000) 			Default = "Batch File"
+<0000> 		[DefaultIcon]
+(0000) 				Default = "\Windows\cmd.exe"
+<0001> 		[Shell]
+<0000> 			[Open]
+<0000> 				[Command]
+(0000) 						Default = "\Windows\cmd.exe /c %1"
+<0008> 	[CLSID]
+<0000> 		[{42429667-ae04-11d0-a4f8-00aa00a749b9}]
+(0000) 				Default = "Keyboard"
+(0001) 				KBMode = 0x00000005
+<0000> 			[InprocServer32]
+(0000) 					Default = "\windows\msim.dll"
+<0001> 			[IsSIPInputMethod]
+(0000) 					Default = "1"
+<0002> 			[DefaultIcon]
+(0000) 					Default = "\windows\msim.dll,0"
+<0001> 		[{D5CA76C5-0DEE-4453-96A1-E603C2401766}]
+<0000> 			[InprocServer32]
+(0000) 					Default = "btdrt.dll"
+(0001) 					ThreadingModel = "Both"
+<0001> 			[TypeLib]
+(0000) 					Default = "{00BC26C8-0A87-41d0-82BA-61FF9E0B1BB5}"
+<0002> 		[{ACD02BA7-9667-4085-A100-CC6ACA9621D6}]
+<0000> 			[InprocServer32]
+(0000) 					Default = "btdrt.dll"
+(0001) 					ThreadingModel = "Both"
+<0001> 			[TypeLib]
+(0000) 					Default = "{00BC26C8-0A87-41d0-82BA-61FF9E0B1BB5}"
+<0003> 		[{3B898402-857E-4e41-9145-BC35431B7B4D}]
+<0000> 			[InprocServer32]
+(0000) 					Default = "btdrt.dll"
+(0001) 					ThreadingModel = "Both"
+<0001> 			[ProgID]
+(0000) 					Default = "BthAPI.SdpSearch.1"
+<0002> 			[TypeLib]
+(0000) 					Default = "{00BC26C8-0A87-41d0-82BA-61FF9E0B1BB5}"
+<0003> 			[VersionIndependentProgID]
+(0000) 					Default = "BthAPI.SdpSearch"
+<0004> 		[{249797FA-19DB-4dda-94D4-E0BCD30EA65E}]
+<0000> 			[InprocServer32]
+(0000) 					Default = "btdrt.dll"
+(0001) 					ThreadingModel = "Both"
+<0001> 			[TypeLib]
+(0000) 					Default = "{00BC26C8-0A87-41d0-82BA-61FF9E0B1BB5}"
+<0005> 		[{44EC053A-400F-11D0-9DCD-00A0C90391D3}]
+(0000) 				Default = "Registrar Class"
+<0000> 			[InprocServer32]
+(0000) 					Default = "\Windows\ATLCE400.dll"
+(0001) 					ThreadingModel = "Both"
+<0001> 			[ProgID]
+(0000) 					Default = "ATL.Registrar"
+<0006> 		[{275c23e2-3747-11d0-9fea-00aa003f8646}]
+(0000) 				Default = "CMultiLanguage"
+<0000> 			[InprocServer32]
+(0000) 					Default = "mlang.dll"
+(0001) 					ThreadingModel = "both"
+<0007> 		[{8f6b0360-b80d-11d0-a9b3-006097942311}]
+(0000) 				Default = "AP lzdhtml encoding/decoding Filter"
+<0000> 			[InprocServer32]
+(0000) 					Default = "urlmon.dll"
+(0001) 					ThreadingModel = "Both"
+<0008> 		[{7b8a2d94-0ac9-11d1-896c-00c04Fb6bfc4}]
+(0000) 				Default = "Security Manager"
+<0000> 			[InprocServer32]
+(0000) 					Default = "urlmon.dll"
+(0001) 					ThreadingModel = "both"
+<0009> 		[{7b8a2d95-0ac9-11d1-896c-00c04Fb6bfc4}]
+(0000) 				Default = "URL Zone Manager"
+<0000> 			[InprocServer32]
+(0000) 					Default = "urlmon.dll"
+(0001) 					ThreadingModel = "both"
+<0010> 		[{30c3f6cd-98b5-11cf-bb82-00aa00bdce0b}]
+(0000) 				Default = "HeaderFooter"
+<0000> 			[InprocServer32]
+(0000) 					Default = "iepeers.dll"
+(0001) 					ThreadingModel = "both"
+<0001> 			[ProgID]
+(0000) 					Default = "HeaderFooter.HeaderFooter.1"
+<0011> 		[{3050f664-98b5-11cf-bb82-00aa00bdce0b}]
+(0000) 				Default = "Layout Rect"
+<0000> 			[InprocServer32]
+(0000) 					Default = "iepeers.dll"
+(0001) 					ThreadingModel = "both"
+<0001> 			[ProgID]
+(0000) 					Default = "LayoutRect.LayoutRect.1"
+<0012> 		[{3050f6d4-98b5-11cf-bb82-00aa00bdce0b}]
+(0000) 				Default = "Device Rect"
+<0000> 			[InprocServer32]
+(0000) 					Default = "iepeers.dll"
+(0001) 					ThreadingModel = "both"
+<0001> 			[ProgID]
+(0000) 					Default = "DeviceRect.DeviceRect.1"
+<0013> 		[{3050f6b3-98b5-11cf-bb82-00aa00bdce0b}]
+(0000) 				Default = "Template Printer class"
+<0000> 			[InprocServer32]
+(0000) 					Default = "iepeers.dll"
+(0001) 					ThreadingModel = "both"
+<0001> 			[ProgID]
+(0000) 					Default = "TemplatePrinter.TemplatePrinter.1"
+<0014> 		[{3050F4CF-98B5-11CF-BB82-00AA00BDCE0B}]
+(0000) 				Default = "PeerFactory Class"
+<0000> 			[InprocServer32]
+(0000) 					Default = "iepeers.dll"
+(0001) 					ThreadingModel = "both"
+<0001> 			[ProgID]
+(0000) 					Default = "PeerFactory.PeerFactory.1"
+<0002> 			[VersionIndependentProgID]
+(0000) 					Default = "PeerFactory.PeerFactory"
+<0015> 		[{3050F3D6-98B5-11CF-BB82-00AA00BDCE0B}]
+(0000) 				Default = "IImgCtx"
+<0000> 			[InProcServer32]
+(0000) 					Default = "mshtml.dll"
+(0001) 					ThreadingModel = "both"
+<0001> 			[ProgID]
+(0000) 					Default = "IImgCtx"
+<0016> 		[{3050F3C2-98B5-11CF-BB82-00AA00BDCE0B}]
+<0000> 			[InProcServer32]
+(0000) 					Default = "mshtml.dll"
+(0001) 					ThreadingModel = "both"
+<0017> 		[{3050F391-98B5-11CF-BB82-00AA00BDCE0B}]
+<0000> 			[InProcServer32]
+(0000) 					Default = "mshtml.dll"
+(0001) 					ThreadingModel = "both"
+<0018> 		[{3050F3B2-98B5-11CF-BB82-00AA00BDCE0B}]
+<0000> 			[InProcServer32]
+(0000) 					Default = "mshtml.dll"
+(0001) 					ThreadingModel = "both"
+<0019> 		[{3050F3BC-98B5-11CF-BB82-00AA00BDCE0B}]
+<0000> 			[InProcServer32]
+(0000) 					Default = "mshtml.dll"
+(0001) 					ThreadingModel = "both"
+<0020> 		[{3050F406-98B5-11CF-BB82-00AA00BDCE0B}]
+<0000> 			[InProcServer32]
+(0000) 					Default = "mshtml.dll"
+(0001) 					ThreadingModel = "both"
+<0021> 		[{25336920-03F9-11cf-8FD0-00AA00686F13}]
+<0000> 			[InProcServer32]
+(0000) 					Default = "mshtml.dll"
+(0001) 					ThreadingModel = "both"
+<0001> 			[ProgID]
+(0000) 					Default = "htmlfile"
+<0002> 			[EnablePlugin]
+<0000> 				[.css]
+(0000) 						Default = "PointPlus plugin"
+<0022> 		[{3050F3D9-98B5-11CF-BB82-00AA00BDCE0B}]
+<0000> 			[InProcServer32]
+(0000) 					Default = "mshtml.dll"
+(0001) 					ThreadingModel = "both"
+<0001> 			[ProgID]
+(0000) 					Default = "mhtmlfile"
+<0023> 		[{25336921-03F9-11CF-8FD0-00AA00686F13}]
+<0000> 			[InProcServer32]
+(0000) 					Default = "mshtml.dll"
+(0001) 					ThreadingModel = "both"
+<0001> 			[ProgID]
+(0000) 					Default = "htmlfile_FullWindowEmbed"
+<0024> 		[{18845040-0fa5-11d1-ba19-00c04fd912d0}]
+<0000> 			[InProcServer32]
+(0000) 					Default = "mshtml.dll"
+(0001) 					ThreadingModel = "both"
+<0025> 		[{05f6fe1a-ecef-11d0-aae7-00c04fc9b304}]
+<0000> 			[InProcServer32]
+(0000) 					Default = "mshtml.dll"
+(0001) 					ThreadingModel = "both"
+<0001> 			[ProgID]
+(0000) 					Default = "MSHTML.IntDitherer.1"
+<0026> 		[{607fd4e8-0a03-11d1-ab1d-00c04fc9b304}]
+<0000> 			[InProcServer32]
+(0000) 					Default = "mshtml.dll"
+(0001) 					ThreadingModel = "both"
+<0027> 		[{3050f499-98b5-11cf-bb82-00aa00bdce0b}]
+<0000> 			[InProcServer32]
+(0000) 					Default = "mshtml.dll"
+(0001) 					ThreadingModel = "Both"
+<0028> 		[{3050f667-98B5-11CF-BB82-00AA00BDCE0B}]
+<0000> 			[InProcServer32]
+(0000) 					Default = "mshtml.dll"
+(0001) 					ThreadingModel = "both"
+<0029> 		[{3050f67D-98b5-11cf-bb82-00aa00bdce0b}]
+<0000> 			[InProcServer32]
+(0000) 					Default = "mshtml.dll"
+(0001) 					ThreadingModel = "both"
+<0030> 		[{8856F961-340A-11D0-A96B-00C04FD705A2}]
+<0000> 			[InprocServer32]
+(0000) 					Default = "shdocvw.dll"
+(0001) 					ThreadingModel = "both"
+<0031> 		[{7057e952-bd1b-11d1-8919-00c04fc2c836}]
+<0000> 			[InprocServer32]
+(0000) 					Default = "shdocvw.dll"
+(0001) 					ThreadingModel = "both"
+<0032> 		[{3C374A40-BAE4-11CF-BF7D-00AA006946EE}]
+<0000> 			[InprocServer32]
+(0000) 					Default = "shdocvw.dll"
+(0001) 					ThreadingModel = "both"
+<0033> 		[{3050f4f8-98b5-11cf-bb82-00aa00bdce0b}]
+<0000> 			[InProcServer32]
+(0000) 					Default = "mshtml.dll"
+(0001) 					ThreadingModel = "both"
+<0034> 		[{ae24fdae-03c6-11d1-8b76-0080c744f389}]
+<0000> 			[InProcServer32]
+(0000) 					Default = "mshtml.dll"
+(0001) 					ThreadingModel = "both"
+<0035> 		[{2933BF90-7B36-11d2-B20E-00C04F983E60}]
+(0000) 				Default = "XML DOM Document"
+<0000> 			[InProcServer32]
+(0000) 					Default = "msxml3.dll"
+(0001) 					ThreadingModel = "Both"
+<0001> 			[ProgID]
+(0000) 					Default = "Microsoft.XMLDOM"
+<0002> 			[TypeLib]
+(0000) 					Default = "{f5078f18-c551-11d3-89b9-0000f81fe221}"
+<0003> 			[Version]
+(0000) 					Default = "1.0"
+<0036> 		[{F6D90F11-9C73-11D3-B32E-00C04F990BB4}]
+(0000) 				Default = "XML DOM Document"
+<0000> 			[InProcServer32]
+(0000) 					Default = "msxml3.dll"
+(0001) 					ThreadingModel = "Both"
+<0001> 			[ProgID]
+(0000) 					Default = "Msxml2.DOMDocument"
+<0002> 			[TypeLib]
+(0000) 					Default = "{f5078f18-c551-11d3-89b9-0000f81fe221}"
+<0003> 			[Version]
+(0000) 					Default = "3.0"
+<0037> 		[{d2423620-51a0-11d2-9caf-0060b0ec3d39}]
+(0000) 				Default = "XML Parser"
+<0000> 			[InProcServer32]
+(0000) 					Default = "msxml3.dll"
+(0001) 					ThreadingModel = "Both"
+<0001> 			[ProgID]
+(0000) 					Default = "Microsoft.XMLParser"
+<0038> 		[{f5078f19-c551-11d3-89b9-0000f81fe221}]
+(0000) 				Default = "XML Parser"
+<0000> 			[InProcServer32]
+(0000) 					Default = "msxml3.dll"
+<0001> 			[ProgID]
+(0000) 					Default = "Msxml2.XMLParser"
+<0039> 		[{373984C9-B845-449B-91E7-45AC83036ADE}]
+(0000) 				Default = "XML Schema Cache"
+<0000> 			[InProcServer32]
+(0000) 					Default = "msxml3.dll"
+(0001) 					ThreadingModel = "Both"
+<0001> 			[ProgID]
+(0000) 					Default = "Msxml2.XMLSchemaCache"
+<0002> 			[Version]
+(0000) 					Default = "3.0"
+<0040> 		[{F414C260-6AC0-11CF-B6D1-00AA00BBBB58}]
+<0000> 			[InprocServer32]
+(0000) 					Default = "jscript.dll"
+(0001) 					ThreadingModel = "both"
+<0001> 			[ProgID]
+(0000) 					Default = "JScript"
+<0002> 			[OLEScript]
+<0041> 		[{B54F3741-5B07-11cf-A4B0-00AA004A55E8}]
+<0000> 			[InprocServer32]
+(0000) 					Default = "vbscript.dll"
+(0001) 					ThreadingModel = "both"
+<0001> 			[ProgID]
+(0000) 					Default = "VBScript"
+<0002> 			[OLEScript]
+<0042> 		[{920C25D0-25D9-11D0-A55F-00A0C90C2091}]
+<0000> 			[InprocServer32]
+(0000) 					Default = "asp.dll"
+(0001) 					ThreadingModel = "Both"
+<0043> 		[{A506D160-25E0-11D0-A55F-00A0C90C2091}]
+<0000> 			[InprocServer32]
+(0000) 					Default = "asp.dll"
+(0001) 					ThreadingModel = "Both"
+<0044> 		[{46E19BA0-25DD-11D0-A55F-00A0C90C2091}]
+<0000> 			[InprocServer32]
+(0000) 					Default = "asp.dll"
+(0001) 					ThreadingModel = "Both"
+<0045> 		[{38999595-F9B2-11D2-9C53-00C04F681EE7}]
+<0000> 			[InprocServer32]
+(0000) 					Default = "asp.dll"
+(0001) 					ThreadingModel = "Both"
+<0046> 		[{1C724F9B-FE6B-11D2-9C54-00C04F681EE7}]
+<0000> 			[InprocServer32]
+(0000) 					Default = "asp.dll"
+(0001) 					ThreadingModel = "Both"
+<0047> 		[{9C5754F7-ADF5-4D82-B181-0F8FC5EA882B}]
+(0000) 				Default = "MSSOAP.DLL SoapTypeMapperFactory class"
+<0000> 			[TypeLib]
+(0000) 					Default = "{C65657D9-5C4B-421E-8DA6-AD4D590FE854}"
+<0001> 			[VersionIndependentProgID]
+(0000) 					Default = "MSSOAP.SoapTypeMapperFactory"
+<0002> 			[ProgID]
+(0000) 					Default = "MSSOAP.SoapTypeMapperFactory.1"
+<0003> 			[InProcServer32]
+(0000) 					ThreadingModel = "Both"
+(0001) 					Default = "\Windows\mssoap1.dll"
+<0048> 		[{BB023FC5-AA10-47CE-8A0A-6875C17B5914}]
+(0000) 				Default = "MSSOAP.DLL WSDLReader class"
+<0000> 			[TypeLib]
+(0000) 					Default = "{C65657D9-5C4B-421E-8DA6-AD4D590FE854}"
+<0001> 			[VersionIndependentProgID]
+(0000) 					Default = "MSSOAP.WSDLReader"
+<0002> 			[ProgID]
+(0000) 					Default = "MSSOAP.WSDLReader.1"
+<0003> 			[InProcServer32]
+(0000) 					ThreadingModel = "Both"
+(0001) 					Default = "\Windows\mssoap1.dll"
+<0049> 		[{FDE424F3-AA10-471D-8A0A-6875C17B5914}]
+(0000) 				Default = "MSSOAP.DLL SoapReader class"
+<0000> 			[TypeLib]
+(0000) 					Default = "{C65657D9-5C4B-421E-8DA6-AD4D590FE854}"
+<0001> 			[VersionIndependentProgID]
+(0000) 					Default = "MSSOAP.SoapReader"
+<0002> 			[ProgID]
+(0000) 					Default = "MSSOAP.SoapReader.1"
+<0003> 			[InProcServer32]
+(0000) 					ThreadingModel = "Both"
+(0001) 					Default = "\Windows\mssoap1.dll"
+<0050> 		[{ADE424F3-AA10-471D-8A0A-687534555900}]
+(0000) 				Default = "MSSOAP.DLL SoapSerializer class"
+<0000> 			[TypeLib]
+(0000) 					Default = "{C65657D9-5C4B-421E-8DA6-AD4D590FE854}"
+<0001> 			[VersionIndependentProgID]
+(0000) 					Default = "MSSOAP.SoapSerializer"
+<0002> 			[ProgID]
+(0000) 					Default = "MSSOAP.SoapSerializer.1"
+<0003> 			[InProcServer32]
+(0000) 					ThreadingModel = "Both"
+(0001) 					Default = "\Windows\mssoap1.dll"
+<0051> 		[{6205B8C9-75FF-4623-A50A-88E1F14EAFF2}]
+(0000) 				Default = "Microsoft Soap Http Connector"
+<0000> 			[TypeLib]
+(0000) 					Default = "{C65657D9-5C4B-421E-8DA6-AD4D590FE854}"
+<0001> 			[VersionIndependentProgID]
+(0000) 					Default = "MSSOAP.HttpConnector"
+<0002> 			[ProgID]
+(0000) 					Default = "MSSOAP.HttpConnector.1"
+<0003> 			[InprocServer32]
+(0000) 					ThreadingModel = "Both"
+(0001) 					Default = "\Windows\mssoap1.dll"
+<0052> 		[{4CE546FF-9128-465E-B5C5-5A36CFC2C285}]
+(0000) 				Default = "Soap Port Connector Factory"
+<0000> 			[TypeLib]
+(0000) 					Default = "{C65657D9-5C4B-421E-8DA6-AD4D590FE854}"
+<0001> 			[VersionIndependentProgID]
+(0000) 					Default = "MSSOAP.ConnectorFactory"
+<0002> 			[ProgID]
+(0000) 					Default = "MSSOAP.ConnectorFactory.1"
+<0003> 			[InprocServer32]
+(0000) 					ThreadingModel = "Both"
+(0001) 					Default = "\Windows\mssoap1.dll"
+<0053> 		[{86D54F3D-652D-4ab3-A1A6-14D403F6C813}]
+(0000) 				Default = "MSSOAP.DLL SoapClient class"
+<0000> 			[TypeLib]
+(0000) 					Default = "{C65657D9-5C4B-421E-8DA6-AD4D590FE854}"
+<0001> 			[VersionIndependentProgID]
+(0000) 					Default = "MSSOAP.SoapClient"
+<0002> 			[ProgID]
+(0000) 					Default = "MSSOAP.SoapClient.1"
+<0003> 			[InProcServer32]
+(0000) 					ThreadingModel = "Both"
+(0001) 					Default = "\Windows\mssoap1.dll"
+<0054> 		[{EBB2FF12-861A-42b6-B815-B1AF4D944916}]
+(0000) 				Default = "MSSOAP.DLL SoapServer class"
+<0000> 			[TypeLib]
+(0000) 					Default = "{C65657D9-5C4B-421E-8DA6-AD4D590FE854}"
+<0001> 			[VersionIndependentProgID]
+(0000) 					Default = "MSSOAP.SoapServer"
+<0002> 			[ProgID]
+(0000) 					Default = "MSSOAP.SoapServer.1"
+<0003> 			[InProcServer32]
+(0000) 					ThreadingModel = "Both"
+(0001) 					Default = "\Windows\mssoap1.dll"
+<0055> 		[{94873E03-77DF-455F-BC1C-E83B5AB8CF0F}]
+(0000) 				Default = "PSFactoryBuffer"
+<0000> 			[InProcServer32]
+(0000) 					ThreadingModel = "Both"
+(0001) 					Default = "\Windows\soapprxy.dll"
+<0056> 		[{30A7BC00-59B6-40BB-AA2B-89EB49EF274E}]
+(0000) 				Default = "ObexAPI"
+<0000> 			[InprocServer32]
+(0000) 					Default = "OBEXAPI.dll"
+(0001) 					ThreadingModel = "Free"
+(0002) 					ProgID = "OBEXAPI.1"
+(0003) 					VersionIndependentProgID = "OBEXAPI"
+<0057> 		[{30A7BC01-59B6-40BB-AA2B-89EB49EF274E}]
+(0000) 				Default = "HeaderCollection"
+<0000> 			[InprocServer32]
+(0000) 					Default = "OBEXAPI.dll"
+(0001) 					ThreadingModel = "Free"
+(0002) 					ProgID = "HeaderCollection.1"
+(0003) 					VersionIndependentProgID = "HeaderCollection"
+<0058> 		[{30a7bc05-59b6-40bb-aa2b-89eb49ef274e}]
+(0000) 				Default = "PropertyBag"
+<0000> 			[InprocServer32]
+(0000) 					Default = "OBEXAPI.dll"
+(0001) 					ThreadingModel = "Free"
+(0002) 					ProgID = "PropertyBag.1"
+(0003) 					VersionIndependentProgID = "PropertyBag"
+<0059> 		[{30a7bc04-59b6-40bb-aa2b-89eb49ef274e}]
+(0000) 				Default = "IpTransport"
+<0000> 			[InprocServer32]
+(0000) 					Default = "OBEXAPI.dll"
+(0001) 					ThreadingModel = "Free"
+(0002) 					ProgID = "IpTransport.1"
+(0003) 					VersionIndependentProgID = "IpTransport"
+<0060> 		[{30A7BC03-59B6-40BB-AA2B-89EB49EF274E}]
+(0000) 				Default = "BTHTransport"
+<0000> 			[InprocServer32]
+(0000) 					Default = "OBEXAPI.dll"
+(0001) 					ThreadingModel = "Free"
+(0002) 					ProgID = "BTHTransport.1"
+(0003) 					VersionIndependentProgID = "BTHTransport"
+<0061> 		[{D7D6E086-DCCD-11D0-AA4B-0060970DEBAE}]
+(0000) 				Default = "MSMQApplication Object"
+<0000> 			[Implemented categories]
+<0000> 				[{7DD95801-9882-11CF-9FA9-00AA006C42C4}]
+<0001> 			[TypeLib]
+(0000) 					Default = "{D7D6E071-DCCD-11D0-AA4B-0060970DEBAE}"
+<0002> 			[ProgID]
+(0000) 					Default = "MSMQ.MSMQApplication.1"
+<0003> 			[VersionIndependentProgID]
+(0000) 					Default = "MSMQ.MSMQApplication"
+<0004> 			[InprocServer32]
+(0000) 					ThreadingModel = "Free"
+(0001) 					Default = "\Windows\mqoa.dll"
+<0062> 		[{D7D6E07A-DCCD-11D0-AA4B-0060970DEBAE}]
+(0000) 				Default = "MSMQEvent Object"
+<0000> 			[Implemented categories]
+<0000> 				[{7DD95801-9882-11CF-9FA9-00AA006C42C4}]
+<0001> 			[TypeLib]
+(0000) 					Default = "{D7D6E071-DCCD-11D0-AA4B-0060970DEBAE}"
+<0002> 			[ProgID]
+(0000) 					Default = "MSMQ.MSMQEvent.1"
+<0003> 			[VersionIndependentProgID]
+(0000) 					Default = "MSMQ.MSMQEvent"
+<0004> 			[InprocServer32]
+(0000) 					ThreadingModel = "Free"
+(0001) 					Default = "\Windows\mqoa.dll"
+<0063> 		[{D7D6E07E-DCCD-11D0-AA4B-0060970DEBAE}]
+(0000) 				Default = "MSMQQueueInfos Object"
+<0000> 			[Implemented categories]
+<0000> 				[{7DD95801-9882-11CF-9FA9-00AA006C42C4}]
+<0001> 			[TypeLib]
+(0000) 					Default = "{D7D6E071-DCCD-11D0-AA4B-0060970DEBAE}"
+<0002> 			[ProgID]
+(0000) 					Default = "MSMQ.MSMQQueueInfos.1"
+<0003> 			[VersionIndependentProgID]
+(0000) 					Default = "MSMQ.MSMQQueueInfos"
+<0004> 			[InprocServer32]
+(0000) 					ThreadingModel = "Free"
+(0001) 					Default = "\Windows\mqoa.dll"
+<0064> 		[{D7D6E075-DCCD-11D0-AA4B-0060970DEBAE}]
+(0000) 				Default = "MSMQMessage Object"
+<0000> 			[Implemented categories]
+<0000> 				[{7DD95801-9882-11CF-9FA9-00AA006C42C4}]
+<0001> 			[TypeLib]
+(0000) 					Default = "{D7D6E071-DCCD-11D0-AA4B-0060970DEBAE}"
+<0002> 			[ProgID]
+(0000) 					Default = "MSMQ.MSMQMessage.1"
+<0003> 			[VersionIndependentProgID]
+(0000) 					Default = "MSMQ.MSMQMessage"
+<0004> 			[InprocServer32]
+(0000) 					ThreadingModel = "Free"
+(0001) 					Default = "\Windows\mqoa.dll"
+<0065> 		[{D7D6E079-DCCD-11D0-AA4B-0060970DEBAE}]
+(0000) 				Default = "MSMQQueue Object"
+<0000> 			[Implemented categories]
+<0000> 				[{7DD95801-9882-11CF-9FA9-00AA006C42C4}]
+<0001> 			[TypeLib]
+(0000) 					Default = "{D7D6E071-DCCD-11D0-AA4B-0060970DEBAE}"
+<0002> 			[ProgID]
+(0000) 					Default = "MSMQ.MSMQQueue.1"
+<0003> 			[VersionIndependentProgID]
+(0000) 					Default = "MSMQ.MSMQQueue"
+<0004> 			[InprocServer32]
+(0000) 					ThreadingModel = "Free"
+(0001) 					Default = "\Windows\mqoa.dll"
+<0066> 		[{D7D6E07C-DCCD-11D0-AA4B-0060970DEBAE}]
+(0000) 				Default = "MSMQQueueInfo Object"
+<0000> 			[Implemented categories]
+<0000> 				[{7DD95801-9882-11CF-9FA9-00AA006C42C4}]
+<0001> 			[TypeLib]
+(0000) 					Default = "{D7D6E071-DCCD-11D0-AA4B-0060970DEBAE}"
+<0002> 			[ProgID]
+(0000) 					Default = "MSMQ.MSMQQueueInfo.1"
+<0003> 			[VersionIndependentProgID]
+(0000) 					Default = "MSMQ.MSMQQueueInfo"
+<0004> 			[InprocServer32]
+(0000) 					ThreadingModel = "Free"
+(0001) 					Default = "\Windows\mqoa.dll"
+<0067> 		[{D7D6E073-DCCD-11D0-AA4B-0060970DEBAE}]
+(0000) 				Default = "MSMQQuery Object"
+<0000> 			[Implemented categories]
+<0000> 				[{7DD95801-9882-11CF-9FA9-00AA006C42C4}]
+<0001> 			[TypeLib]
+(0000) 					Default = "{D7D6E071-DCCD-11D0-AA4B-0060970DEBAE}"
+<0002> 			[ProgID]
+(0000) 					Default = "MSMQ.MSMQQuery.1"
+<0003> 			[VersionIndependentProgID]
+(0000) 					Default = "MSMQ.MSMQQuery"
+<0004> 			[InprocServer32]
+(0000) 					ThreadingModel = "Free"
+(0001) 					Default = "\Windows\mqoa.dll"
+<0068> 		[{3523c2fb-4031-44e4-9a3b-f1e94986ee7f}]
+(0000) 				Default = "Microsoft RDP Client Control"
+<0000> 			[InprocServer32]
+(0000) 					Default = "\WINDOWS\mstscax.dll"
+(0001) 					ThreadingModel = "Free"
+<0001> 			[MiscStatus]
+(0000) 					Default = "0"
+<0000> 				[1]
+(0000) 						Default = "131473"
+<0002> 			[ProgID]
+(0000) 					Default = "MsTscAx.MsTscAx.2"
+<0003> 			[Programmable]
+<0004> 			[ToolboxBitmap32]
+(0000) 					Default = "\WINDOWS\mstscax.dll, 1"
+<0005> 			[TypeLib]
+(0000) 					Default = "{8C11EFA1-92C3-11D1-BC1E-00C04FA31489}"
+<0006> 			[Version]
+(0000) 					Default = "2.0"
+<0007> 			[VersionIndependentProgID]
+(0000) 					Default = "MsTscAx.MsTscAx"
+<0069> 		[{00021400-0000-0000-C000-000000000046}]
+(0000) 				FriendlyTypeName = "@\Windows\ceshell.dll,-20480"
+(0001) 				DisplayName = "Desktop"
+<0070> 		[{000214A1-0000-0000-C000-000000000046}]
+(0000) 				FriendlyTypeName = "@\Windows\ceshell.dll,-20481"
+(0001) 				DisplayName = "Recycle Bin"
+(0002) 				DefaultIcon = "\Windows\ceshell.dll,-4352"
+(0003) 				AltIcon = "\Windows\ceshell.dll,-4355"
+(0004) 				InprocServer = "ceshell.dll"
+<0071> 		[{000214A0-0000-0000-C000-000000000046}]
+(0000) 				FriendlyTypeName = "@\Windows\ceshell.dll,-20482"
+(0001) 				DisplayName = "My Computer"
+(0002) 				DefaultIcon = "\Windows\ceshell.dll,-4354"
+(0003) 				InprocServer = "ceshell.dll"
+<0072> 		[{698E3FCA-70C3-11D0-81E8-00A0C90AD20A}]
+(0000) 				Default = "Browser"
+<0000> 			[ProgId]
+(0000) 					Default = "Browser"
+<0001> 			[InprocServer32]
+(0000) 					Default = "webview.dll"
+<0002> 			[Control]
+(0000) 					Default = "True"
+<0003> 			[Version]
+(0000) 					Default = "1.0"
+<0004> 			[TypeLib]
+(0000) 					Default = "{698E3FBD-70C3-11D0-81E8-00A0C90AD20A}"
+<0005> 			[DefaultIcon]
+(0000) 					Default = "webview.dll,0"
+<0006> 			[MiscStatus]
+(0000) 					Default = "131473"
+<0073> 		[{555C7786-BA95-11D0-81F1-00A0C90AD20A}]
+(0000) 				Default = "ControlWrap"
+<0000> 			[ProgId]
+(0000) 					Default = "ControlWrap"
+<0001> 			[InprocServer32]
+(0000) 					Default = "webview.dll"
+<0002> 			[Control]
+(0000) 					Default = "True"
+<0003> 			[Version]
+(0000) 					Default = "1.0"
+<0004> 			[TypeLib]
+(0000) 					Default = "{698E3FBD-70C3-11D0-81E8-00A0C90AD20A}"
+<0005> 			[DefaultIcon]
+(0000) 					Default = "webview.dll,0"
+<0006> 			[MiscStatus]
+(0000) 					Default = "131473"
+<0074> 		[{e436ebb2-524f-11ce-9f53-0020af0ba770}]
+(0000) 				Default = "Filter Mapper"
+<0000> 			[InprocServer32]
+(0000) 					Default = "quartz.dll"
+(0001) 					ThreadingModel = "Both"
+<0075> 		[{e436ebb3-524f-11ce-9f53-0020af0ba770}]
+(0000) 				Default = "Filter Graph"
+<0000> 			[InprocServer32]
+(0000) 					Default = "quartz.dll"
+(0001) 					ThreadingModel = "Both"
+<0076> 		[{e436ebb8-524f-11ce-9f53-0020af0ba770}]
+(0000) 				Default = "Filter Graph no thread"
+<0000> 			[InprocServer32]
+(0000) 					Default = "quartz.dll"
+(0001) 					ThreadingModel = "Both"
+<0077> 		[{e436ebb1-524f-11ce-9f53-0020af0ba770}]
+(0000) 				Default = "System Clock"
+<0000> 			[InprocServer32]
+(0000) 					Default = "quartz.dll"
+(0001) 					ThreadingModel = "Both"
+<0078> 		[{1e651cc0-b199-11d0-8212-00c04fc32c45}]
+(0000) 				Default = "Memory Allocator"
+<0000> 			[InprocServer32]
+(0000) 					Default = "quartz.dll"
+(0001) 					ThreadingModel = "Both"
+<0079> 		[{060AF76C-68DD-11d0-8FC1-00C04FD9189D}]
+(0000) 				Default = "Seeking"
+<0000> 			[InprocServer32]
+(0000) 					Default = "quartz.dll"
+(0001) 					ThreadingModel = "Both"
+<0080> 		[{e436ebb4-524f-11ce-9f53-0020af0ba770}]
+(0000) 				Default = "Filter Graph Control Plug In Distributor"
+<0000> 			[InprocServer32]
+(0000) 					Default = "quartz.dll"
+(0001) 					ThreadingModel = "Both"
+<0081> 		[{6a08cf80-0e18-11cf-a24d-0020afd79767}]
+(0000) 				Default = "ACM Wrapper"
+(0001) 				Merit = 0x00600000
+<0000> 			[InprocServer32]
+(0000) 					Default = "quartz.dll"
+(0001) 					ThreadingModel = "Both"
+<0001> 			[Pins]
+<0000> 				[Input]
+(0000) 						ConnectsToPin = "Output"
+<0000> 					[Types]
+<0000> 						[{73647561-0000-0010-8000-00AA00389B71}]
+<0000> 							[{00000000-0000-0000-0000-000000000000}]
+<0001> 				[Output]
+(0000) 						Direction = 0x00000001
+(0001) 						ConnectsToPin = "Input"
+<0000> 					[Types]
+<0000> 						[{73647561-0000-0010-8000-00AA00389B71}]
+<0000> 							[{00000000-0000-0000-0000-000000000000}]
+<0082> 		[{e30629d1-27e5-11ce-875d-00608cb78066}]
+(0000) 				Default = "Audio Renderer"
+(0001) 				Merit = 0x00800000
+<0000> 			[InprocServer32]
+(0000) 					Default = "quartz.dll"
+(0001) 					ThreadingModel = "Both"
+<0001> 			[Pins]
+<0000> 				[Input]
+(0000) 						IsRendered = 0x00000001
+<0000> 					[Types]
+<0000> 						[{73647561-0000-0010-8000-00AA00389B71}]
+<0000> 							[{00000000-0000-0000-0000-000000000000}]
+<0083> 		[{e436ebb5-524f-11ce-9f53-0020af0ba770}]
+(0000) 				Default = "File Source (Async.)"
+(0001) 				Merit = 0x00400000
+<0000> 			[InprocServer32]
+(0000) 					Default = "quartz.dll"
+(0001) 					ThreadingModel = "Both"
+<0001> 			[Pins]
+<0000> 				[Output]
+(0000) 						Direction = 0x00000001
+<0000> 					[Types]
+<0000> 						[{E436EB83-524F-11CE-9F53-0020AF0BA770}]
+<0000> 							[{00000000-0000-0000-0000-000000000000}]
+<0084> 		[{e436ebb6-524f-11ce-9f53-0020af0ba770}]
+(0000) 				Default = "File Source (URL)"
+(0001) 				Merit = 0x00400000
+<0000> 			[InprocServer32]
+(0000) 					Default = "quartz.dll"
+(0001) 					ThreadingModel = "Both"
+<0085> 		[{A4138508-7379-4698-88B7-49132C702184}]
+(0000) 				Default = "Active SSCE Engine Object"
+<0000> 			[InprocServer32]
+(0000) 					Default = "\Windows\ssceca20.dll"
+(0001) 					ThreadingModel = "Both"
+<0001> 			[ProgID]
+(0000) 					Default = "SSCE.Engine.2.0"
+<0086> 		[{08505AEA-F293-4750-98AF-3C1B0077FE3F}]
+(0000) 				Default = "SSCE Error Object"
+<0000> 			[InprocServer32]
+(0000) 					Default = "\Windows\ssceca20.dll"
+(0001) 					ThreadingModel = "Both"
+<0001> 			[ProgID]
+(0000) 					Default = "SSCE.Error.2.0"
+<0002> 			[SSCE Error Object]
+(0000) 					Default = ""
+<0087> 		[{444C03B3-490A-48C2-81B6-E77366CB62F9}]
+(0000) 				Default = "SSCE Errors Collection"
+<0000> 			[InprocServer32]
+(0000) 					Default = "\Windows\ssceca20.dll"
+(0001) 					ThreadingModel = "Both"
+<0001> 			[ProgID]
+(0000) 					Default = "SSCE.Errors.2.0"
+<0002> 			[SSCE Errors Collection]
+(0000) 					Default = ""
+<0088> 		[{3CF68253-1219-48DE-975A-FBF161E50EE4}]
+(0000) 				Default = "SSCE Param Object"
+<0000> 			[InprocServer32]
+(0000) 					Default = "\Windows\ssceca20.dll"
+(0001) 					ThreadingModel = "Both"
+<0001> 			[ProgID]
+(0000) 					Default = "SSCE.Param.2.0"
+<0002> 			[SSCE Param Object]
+(0000) 					Default = ""
+<0089> 		[{474E7D08-67F7-4433-877D-61AC4F2B5879}]
+(0000) 				Default = "SSCE Params Collection"
+<0000> 			[InprocServer32]
+(0000) 					Default = "\Windows\ssceca20.dll"
+(0001) 					ThreadingModel = "Both"
+<0001> 			[ProgID]
+(0000) 					Default = "SSCE.Params.2.0"
+<0002> 			[SSCE Params Collection]
+(0000) 					Default = ""
+<0090> 		[{114E00DD-C185-419E-9610-F4F9126559A7}]
+(0000) 				Default = "Active SSCE remote data access Object"
+<0000> 			[InprocServer32]
+(0000) 					Default = "\Windows\ssceca20.dll"
+(0001) 					ThreadingModel = "Both"
+<0001> 			[ProgID]
+(0000) 					Default = "SSCE.RemoteDataAccess.2.0"
+<0091> 		[{4BF456A0-3B51-4E62-AA9E-7127A84551D0}]
+(0000) 				Default = "Active SSCE Replication Object"
+<0000> 			[InprocServer32]
+(0000) 					Default = "\Windows\ssceca20.dll"
+(0001) 					ThreadingModel = "Both"
+<0001> 			[ProgID]
+(0000) 					Default = "SSCE.Replication.2.0"
+<0002> 			[SSCE Replication Control]
+(0000) 					Default = ""
+<0092> 		[{76A85B2E-9DE0-4DED-8E69-4DEFDB9C0917}]
+(0000) 				Default = "Microsoft.SQLSERVER.OLEDB.CE.2.0"
+(0001) 				OLEDB_SERVICES = 0xfffffffe
+<0000> 			[ExtendedErrors]
+(0000) 					Default = "Microsoft SQLServer 2.0 OLE DB Provider for WinCE Error Lookup"
+<0000> 				[{B07F90AF-54B6-41A5-8C93-253870A5B434}]
+(0000) 						Default = "Microsoft SQLServer 2.0 OLE DB Provider for WinCEError Lookup"
+<0001> 			[InprocServer32]
+(0000) 					Default = "\Windows\ssce20.dll"
+(0001) 					ThreadingModel = "Both"
+<0002> 			[OLE DB Provider]
+(0000) 					Default = "Microsoft OLED DB Provider for SQL Server CE"
+<0003> 			[ProgID]
+(0000) 					Default = "Microsoft.SQLSERVER.OLEDB.CE.2.0"
+<0004> 			[VersionIndependentProgID]
+(0000) 					Default = "Microsoft.SQLSERVER.OLEDB.CE"
+<0093> 		[{B07F90AF-54B6-41A5-8C93-253870A5B434}]
+(0000) 				Default = "Microsoft SQLServer 2.0 OLE DB Provider for WinCE Error Lookup"
+<0000> 			[InprocServer32]
+(0000) 					Default = "\Windows\ssce20.dll"
+(0001) 					ThreadingModel = "Both"
+<0001> 			[ProgID]
+(0000) 					Default = "Microsoft.SQLSERVER.OLEDB.CE.ErrorLookup.2.0"
+<0002> 			[VersionIndependentProgID]
+(0000) 					Default = "Microsoft.SQLSERVER.OLEDB.CE.ErrorLookup"
+<0009> 	[BthAPI.SdpNodeContainer]
+(0000) 			Default = "SdpNodeContainer Class"
+<0000> 		[CLSID]
+(0000) 				Default = "{D5CA76C5-0DEE-4453-96A1-E603C2401766}"
+<0001> 		[CurVer]
+(0000) 				Default = "BthAPI.SdpNodeContainer.1"
+<0010> 	[BthAPI.SdpNodeContainer.1]
+(0000) 			Default = "SdpNodeContainer Class"
+<0000> 		[CLSID]
+(0000) 				Default = "{D5CA76C5-0DEE-4453-96A1-E603C2401766}"
+<0011> 	[BthAPI.SdpRecord]
+(0000) 			Default = "SdpRecord Class"
+<0000> 		[CLSID]
+(0000) 				Default = "{ACD02BA7-9667-4085-A100-CC6ACA9621D6}"
+<0001> 		[CurVer]
+(0000) 				Default = "BthAPI.SdpRecord.1"
+<0012> 	[BthAPI.SdpRecord.1]
+(0000) 			Default = "SdpRecord Class"
+<0000> 		[CLSID]
+(0000) 				Default = "{ACD02BA7-9667-4085-A100-CC6ACA9621D6}"
+<0013> 	[BthAPI.SdpSearch]
+(0000) 			Default = "SdpSearch Class"
+<0000> 		[CLSID]
+(0000) 				Default = "{3B898402-857E-4e41-9145-BC35431B7B4D}"
+<0001> 		[CurVer]
+(0000) 				Default = "BthAPI.SdpSearch.1"
+<0014> 	[BthAPI.SdpSearch.1]
+(0000) 			Default = "SdpSearch Class"
+<0000> 		[CLSID]
+(0000) 				Default = "{3B898402-857E-4e41-9145-BC35431B7B4D}"
+<0015> 	[BthAPI.SdpStream]
+(0000) 			Default = "SdpStream Class"
+<0000> 		[CLSID]
+(0000) 				Default = "{249797FA-19DB-4dda-94D4-E0BCD30EA65E}"
+<0001> 		[CurVer]
+(0000) 				Default = "BthAPI.SdpStream.1"
+<0016> 	[BthAPI.SdpStream.1]
+(0000) 			Default = "SdpStream Class"
+<0000> 		[CLSID]
+(0000) 				Default = "{249797FA-19DB-4dda-94D4-E0BCD30EA65E}"
+<0017> 	[TypeLib]
+<0000> 		[{00BC26C8-0A87-41d0-82BA-61FF9E0B1BB5}]
+<0000> 			[1.0]
+<0000> 				[0]
+<0000> 					[win32]
+(0000) 							Default = "btdrt.dll"
+<0001> 		[{00020430-0000-0000-C000-000000000046}]
+<0000> 			[2.0]
+<0000> 				[0]
+(0000) 						Default = "oleaut32.dll"
+<0002> 		[{44EC0535-400F-11D0-9DCD-00A0C90391D3}]
+<0000> 			[1.0]
+<0000> 				[0]
+(0000) 						Default = "\Windows\ATLCE400.dll"
+<0000> 					[win32]
+(0000) 							Default = "\Windows\ATLCE400.dll"
+<0003> 		[{f5078f18-c551-11d3-89b9-0000f81fe221}]
+<0000> 			[3.0]
+(0000) 					Default = "Microsoft XML, v3.0"
+<0000> 				[0]
+<0000> 					[win32]
+(0000) 							Default = "msxml3.dll"
+<0004> 		[{D97A6DA0-A85C-11CF-83AE-00A0C90C2BD8}]
+<0000> 			[1.0]
+<0000> 				[0]
+(0000) 						Default = "asp.dll"
+<0005> 		[{C65657D9-5C4B-421E-8DA6-AD4D590FE854}]
+<0000> 			[1.0]
+(0000) 					Default = "Microsoft Soap Type Library (Ver 1.0)"
+<0000> 				[0]
+<0000> 					[win32]
+(0000) 							Default = "\Windows\mssoap1.dll"
+<0006> 		[{D7D6E071-DCCD-11D0-AA4B-0060970DEBAE}]
+<0000> 			[1.0]
+<0000> 				[0]
+(0000) 						Default = "\Windows\mqoa.dll"
+<0000> 					[Win32]
+(0000) 							Default = "\Windows\mqoa.dll"
+<0007> 		[{8C11EFA1-92C3-11D1-BC1E-00C04FA31489}]
+<0000> 			[1.0]
+(0000) 					Default = "Microsoft Terminal Services Active Client 1.0 Type Library"
+<0000> 				[0]
+<0000> 					[win32]
+(0000) 							Default = "\WINDOWS\mstscax.dll"
+<0001> 				[FLAGS]
+(0000) 						Default = "0"
+<0002> 				[HELPDIR]
+(0000) 						Default = "\WINDOWS"
+<0008> 		[{698E3FBD-70C3-11D0-81E8-00A0C90AD20A}]
+<0000> 			[1.0]
+(0000) 					Default = "Browser Module"
+<0000> 				[0]
+(0000) 						Default = "webview.dll"
+<0001> 				[FLAGS]
+(0000) 						Default = "2"
+<0002> 				[HELPDIR]
+(0000) 						Default = "\Windows"
+<0009> 		[{A32F7BE0-A13E-11D3-BDDF-00C04FA312F8}]
+<0000> 			[2.0]
+<0000> 				[0]
+(0000) 						Default = "\Windows\ssceca20.dll"
+<0000> 					[win32]
+(0000) 							Default = "\Windows\ssceca20.dll"
+<0018> 	[ATL.Registrar]
+(0000) 			Default = "Registrar Class"
+<0000> 		[CLSID]
+(0000) 				Default = "{44EC053A-400F-11D0-9DCD-00A0C90391D3}"
+<0019> 	[MIME]
+<0000> 		[Database]
+<0000> 			[Codepage]
+<0000> 				[852]
+(0000) 						BodyCharset = "ibm852"
+(0001) 						Description = "Central European (DOS)"
+(0002) 						Level = hex: 02,02,00,00
+(0003) 						Family = 0x000004e2
+<0001> 				[866]
+(0000) 						BodyCharset = "cp866"
+(0001) 						Description = "Cyrillic Alphabet (DOS)"
+(0002) 						Level = hex: 02,02,00,00
+(0003) 						Family = 0x000004e3
+<0002> 				[932]
+(0000) 						BodyCharset = "iso-2022-jp"
+(0001) 						Description = "Japanese (Shift-JIS)"
+(0002) 						FixedWidthFont = "Gothic"
+(0003) 						Level = hex: 07,07,00,00
+(0004) 						Encoding = hex: 01,01,00,00
+(0005) 						ProportionalFont = "Gothic"
+(0006) 						WebCharset = "shift_jis"
+<0003> 				[1200]
+(0000) 						BodyCharset = "unicode"
+(0001) 						FixedWidthFont = "Courier New"
+(0002) 						ProportionalFont = "Arial"
+(0003) 						Description = "Universal Alphabet"
+(0004) 						Level = hex: 06,02,00,00
+(0005) 						Encoding = hex: 01,01,00,00
+<0004> 				[1201]
+(0000) 						BodyCharset = "unicodeFEFF"
+(0001) 						FixedWidthFont = "Courier New"
+(0002) 						ProportionalFont = "Arial"
+(0003) 						Description = "Universal Alphabet (Big-Endian)"
+(0004) 						Level = hex: 00,00,00,00
+(0005) 						Encoding = hex: 03,01,00,00
+(0006) 						Family = 0x000004b0
+<0005> 				[1250]
+(0000) 						BodyCharset = "iso-8859-2"
+(0001) 						FixedWidthFont = "Courier New"
+(0002) 						ProportionalFont = "Arial"
+(0003) 						WebCharset = "windows-1250"
+(0004) 						Description = "Central European Alphabet (Windows)"
+(0005) 						Level = hex: 03,03,00,00
+(0006) 						Encoding = hex: 02,02,00,00
+<0006> 				[1251]
+(0000) 						BodyCharset = "koi8-r"
+(0001) 						FixedWidthFont = "Courier New"
+(0002) 						ProportionalFont = "Arial"
+(0003) 						WebCharset = "windows-1251"
+(0004) 						Description = "Cyrillic Alphabet (Windows)"
+(0005) 						Level = hex: 03,03,00,00
+(0006) 						Encoding = hex: 02,02,00,00
+<0007> 				[1252]
+(0000) 						BodyCharset = "iso-8859-1"
+(0001) 						FixedWidthFont = "Courier New"
+(0002) 						ProportionalFont = "Arial"
+(0003) 						WebCharset = "iso-8859-1"
+(0004) 						Description = "Western Alphabet"
+(0005) 						Level = hex: 07,07,00,00
+<0008> 				[1253]
+(0000) 						BodyCharset = "iso-8859-7"
+(0001) 						FixedWidthFont = "Courier New"
+(0002) 						ProportionalFont = "Arial"
+(0003) 						HeaderCharset = "iso-8859-7"
+(0004) 						WebCharset = "windows-1253"
+(0005) 						Description = "Greek Alphabet (Windows)"
+(0006) 						Level = hex: 03,03,00,00
+(0007) 						Encoding = hex: 01,01,00,00
+<0009> 				[1254]
+(0000) 						BodyCharset = "iso-8859-9"
+(0001) 						FixedWidthFont = "Courier New"
+(0002) 						ProportionalFont = "Arial"
+(0003) 						WebCharset = "iso-8859-9"
+(0004) 						Description = "Turkish Alphabet"
+(0005) 						Level = hex: 07,07,00,00
+(0006) 						Encoding = hex: 02,02,00,00
+<0010> 				[1257]
+(0000) 						BodyCharset = "iso-8859-4"
+(0001) 						FixedWidthFont = "Courier New"
+(0002) 						ProportionalFont = "Arial"
+(0003) 						WebCharset = "windows-1257"
+(0004) 						Description = "Baltic Alphabet (Windows)"
+(0005) 						Level = hex: 07,07,00,00
+(0006) 						Encoding = hex: 02,02,00,00
+<0011> 				[20866]
+(0000) 						BodyCharset = "koi8-r"
+(0001) 						Description = "Cyrillic Alphabet (KOI8-R)"
+(0002) 						Family = 0x000004e3
+(0003) 						Level = hex: 07,07,00,00
+(0004) 						Encoding = hex: 01,01,00,00
+<0012> 				[21866]
+(0000) 						BodyCharset = "koi8-ru"
+(0001) 						Description = "Ukrainian Alphabet (KOI8-RU)"
+(0002) 						Family = 0x000004e3
+(0003) 						Level = hex: 07,07,00,00
+(0004) 						Encoding = hex: 01,01,00,00
+<0013> 				[28592]
+(0000) 						BodyCharset = "iso-8859-2"
+(0001) 						Description = "Central European Alphabet (ISO)"
+(0002) 						Family = 0x000004e2
+(0003) 						Level = hex: 07,07,00,00
+<0014> 				[28593]
+(0000) 						BodyCharset = "iso-8859-3"
+(0001) 						Description = "Latin 3 Alphabet (ISO)"
+(0002) 						Family = 0x000004e6
+(0003) 						Level = hex: 03,07,00,00
+<0015> 				[28594]
+(0000) 						BodyCharset = "iso-8859-4"
+(0001) 						Description = "Baltic Alphabet (ISO)"
+(0002) 						Family = 0x000004e9
+(0003) 						Level = hex: 03,03,00,00
+<0016> 				[28595]
+(0000) 						BodyCharset = "iso-8859-5"
+(0001) 						Description = "Cyrillic Alphabet (ISO)"
+(0002) 						Family = 0x000004e3
+(0003) 						Level = hex: 07,07,00,00
+(0004) 						Encoding = hex: 01,01,00,00
+<0017> 				[28597]
+(0000) 						BodyCharset = "iso-8859-7"
+(0001) 						Description = "Greek Alphabet (ISO)"
+(0002) 						Family = 0x000004e5
+(0003) 						Level = hex: 07,07,00,00
+(0004) 						Encoding = hex: 01,01,00,00
+<0018> 				[50000]
+(0000) 						BodyCharset = "x-user-defined"
+(0001) 						FixedWidthFont = "Courier New"
+(0002) 						ProportionalFont = "Lucida Sans Unicode"
+(0003) 						Description = "User Defined"
+(0004) 						Level = hex: 03,03,00,00
+<0019> 				[50220]
+(0000) 						BodyCharset = "iso-2022-jp"
+(0001) 						Description = "Japanese (JIS)"
+(0002) 						Level = hex: 07,07,00,00
+(0003) 						Family = 0x000003a4
+<0020> 				[50221]
+(0000) 						BodyCharset = "_iso-2022-jp$ESC"
+(0001) 						Description = "Japanese (JIS-Allow 1 byte Kana, ESC)"
+(0002) 						Level = hex: 03,03,00,00
+(0003) 						Family = 0x000003a4
+(0004) 						WebCharset = "csISO2022JP"
+<0021> 				[50222]
+(0000) 						BodyCharset = "_iso-2022-jp$SIO"
+(0001) 						Description = "Japanese (JIS-Allow 1 byte Kana, SIO)"
+(0002) 						Level = hex: 03,01,00,00
+(0003) 						Family = 0x000003a4
+(0004) 						WebCharset = "iso-2022-jp"
+<0022> 				[50932]
+(0000) 						BodyCharset = "_autodetect"
+(0001) 						Description = "Japanese (Auto Select)"
+(0002) 						Level = hex: 07,00,00,00
+(0003) 						Family = 0x000003a4
+(0004) 						Encoding = hex: 03,01,00,00
+<0023> 				[51932]
+(0000) 						BodyCharset = "euc-jp"
+(0001) 						Description = "Japanese (EUC)"
+(0002) 						Level = hex: 07,07,00,00
+(0003) 						Family = 0x000003a4
+(0004) 						Encoding = hex: 03,01,00,00
+<0024> 				[65000]
+(0000) 						BodyCharset = "utf-7"
+(0001) 						Description = "Universal Alphabet (UTF-7)"
+(0002) 						Family = 0x000004b0
+(0003) 						Level = hex: 03,01,00,00
+<0025> 				[65001]
+(0000) 						BodyCharset = "utf-8"
+(0001) 						Description = "Universal Alphabet (UTF-8)"
+(0002) 						Family = 0x000004b0
+(0003) 						Level = hex: 03,03,00,00
+<0001> 			[Rfc1766]
+(0000) 					0436 = "af;Afrikaans"
+(0001) 					041C = "sq;Albanian"
+(0002) 					0001 = "ar;Arabic"
+(0003) 					0401 = "ar-sa;Arabic (Saudi Arabia)"
+(0004) 					0801 = "ar-iq;Arabic (Iraq)"
+(0005) 					0C01 = "ar-eg;Arabic (Egypt)"
+(0006) 					1001 = "ar-ly;Arabic (Libya)"
+(0007) 					1401 = "ar-dz;Arabic (Algeria)"
+(0008) 					1801 = "ar-ma;Arabic (Morocco)"
+(0009) 					1C01 = "ar-tn;Arabic (Tunisia)"
+(0010) 					2001 = "ar-om;Arabic (Oman)"
+(0011) 					2401 = "ar-ye;Arabic (Yemen)"
+(0012) 					2801 = "ar-sy;Arabic (Syria)"
+(0013) 					2C01 = "ar-jo;Arabic (Jordan)"
+(0014) 					3001 = "ar-lb;Arabic (Lebanon)"
+(0015) 					3401 = "ar-kw;Arabic (Kuwait)"
+(0016) 					3801 = "ar-ae;Arabic (U.A.E.)"
+(0017) 					3C01 = "ar-bh;Arabic (Bahrain)"
+(0018) 					4001 = "ar-qa;Arabic (Qatar)"
+(0019) 					042D = "eu;Basque"
+(0020) 					0402 = "bg;Bulgarian"
+(0021) 					0423 = "be;Belarusian"
+(0022) 					0403 = "ca;Catalan"
+(0023) 					0004 = "zh;Chinese"
+(0024) 					0404 = "zh-tw;Chinese (Taiwan)"
+(0025) 					0804 = "zh-cn;Chinese (PRC)"
+(0026) 					0C04 = "zh-hk;Chinese (Hong Kong SAR)"
+(0027) 					1004 = "zh-sg;Chinese (Singapore)"
+(0028) 					041A = "hr;Croatian"
+(0029) 					0405 = "cs;Czech"
+(0030) 					0406 = "da;Danish"
+(0031) 					0413 = "nl;Dutch (Netherlands)"
+(0032) 					0813 = "nl-be;Dutch (Belgian)"
+(0033) 					0009 = "en;English"
+(0034) 					0409 = "en-us;English (United States)"
+(0035) 					0809 = "en-gb;English (British)"
+(0036) 					0C09 = "en-au;English (Australian)"
+(0037) 					1009 = "en-ca;English (Canadian)"
+(0038) 					1409 = "en-nz;English (New Zealand)"
+(0039) 					1809 = "en-ie;English (Ireland)"
+(0040) 					1C09 = "en-za;English (South Africa)"
+(0041) 					2009 = "en-jm;English (Jamaica)"
+(0042) 					2809 = "en-bz;English (Belize)"
+(0043) 					2C09 = "en-tt;English (Trinidad)"
+(0044) 					0425 = "et;Estonian"
+(0045) 					0438 = "fo;Faeroese"
+(0046) 					0429 = "fa;Farsi"
+(0047) 					040B = "fi;Finnish"
+(0048) 					040C = "fr;French (France)"
+(0049) 					080C = "fr-be;French (Belgian)"
+(0050) 					0C0C = "fr-ca;French (Canadian)"
+(0051) 					100C = "fr-ch;French (Swiss)"
+(0052) 					140C = "fr-lu;French (Luxembourg)"
+(0053) 					043C = "gd;Gaelic"
+(0054) 					0407 = "de;German (Germany)"
+(0055) 					0807 = "de-ch;German (Swiss)"
+(0056) 					0C07 = "de-at;German (Austrian)"
+(0057) 					1007 = "de-lu;German (Luxembourg)"
+(0058) 					1407 = "de-li;German (Liechtenstein)"
+(0059) 					0408 = "el;Greek"
+(0060) 					040D = "he;Hebrew"
+(0061) 					0439 = "hi;Hindi"
+(0062) 					040E = "hu;Hungarian"
+(0063) 					040F = "is;Icelandic"
+(0064) 					0421 = "in;Indonesian"
+(0065) 					0410 = "it;Italian (Italy)"
+(0066) 					0810 = "it-ch;Italian (Swiss)"
+(0067) 					0411 = "ja;Japanese"
+(0068) 					0412 = "ko;Korean"
+(0069) 					0426 = "lv;Latvian"
+(0070) 					0427 = "lt;Lithuanian"
+(0071) 					042F = "mk;Macedonian (FYROM)"
+(0072) 					043E = "ms;Malaysian"
+(0073) 					043A = "mt;Maltese"
+(0074) 					0414 = "no;Norwegian (bokmal)"
+(0075) 					0814 = "no;Norwegian (Nynorsk)"
+(0076) 					0415 = "pl;Polish"
+(0077) 					0416 = "pt-br;Portuguese (Brazilian)"
+(0078) 					0816 = "pt;Portuguese (Portugal)"
+(0079) 					0417 = "rm;Rhaeto-Romanic"
+(0080) 					0418 = "ro;Romanian"
+(0081) 					0818 = "ro-mo;Romanian (Moldavia)"
+(0082) 					0419 = "ru;Russian"
+(0083) 					0819 = "ru-mo;Russian (Moldavia)"
+(0084) 					0C1A = "sr;Serbian (Cyrillic)"
+(0085) 					081A = "sr;Serbian (Latin)"
+(0086) 					041B = "sk;Slovak"
+(0087) 					0424 = "sl;Slovenian"
+(0088) 					042E = "sb;Sorbian"
+(0089) 					040A = "es;Spanish"
+(0090) 					080A = "es-mx;Spanish (Mexican)"
+(0091) 					0C0A = "es;Spanish"
+(0092) 					100A = "es-gt;Spanish (Guatemala)"
+(0093) 					140A = "es-cr;Spanish (Costa Rica)"
+(0094) 					180A = "es-pa;Spanish (Panama)"
+(0095) 					1C0A = "es-do;Spanish"
+(0096) 					200A = "es-ve;Spanish (Venezuela)"
+(0097) 					240A = "es-co;Spanish (Colombia)"
+(0098) 					280A = "es-pe;Spanish (Peru)"
+(0099) 					2C0A = "es-ar;Spanish (Argentina)"
+(0100) 					300A = "es-ec;Spanish (Ecuador)"
+(0101) 					340A = "es-cl;Spanish (Chile)"
+(0102) 					380A = "es-uy;Spanish (Uruguay)"
+(0103) 					3C0A = "es-py;Spanish (Paraguay)"
+(0104) 					400A = "es-bo;Spanish (Bolivia)"
+(0105) 					440A = "es-sv;Spanish (El Salvador)"
+(0106) 					480A = "es-hn;Spanish (Honduras)"
+(0107) 					4C0A = "es-ni;Spanish (Nicaragua)"
+(0108) 					500A = "es-pr;Spanish (Puerto Rico)"
+(0109) 					0430 = "sx;Sutu"
+(0110) 					041D = "sv;Swedish"
+(0111) 					081D = "sv-fi;Swedish (Finland)"
+(0112) 					041E = "th;Thai"
+(0113) 					0431 = "ts;Tsonga"
+(0114) 					0432 = "tn;Tswana"
+(0115) 					041F = "tr;Turkish"
+(0116) 					0422 = "uk;Ukrainian"
+(0117) 					0420 = "ur;Urdu"
+(0118) 					042A = "vi;Vietnamese"
+(0119) 					0434 = "xh;Xhosa"
+(0120) 					043D = "ji;Yiddish"
+(0121) 					0435 = "zu;Zulu"
+<0002> 			[Charset]
+<0000> 				[_autodetect]
+(0000) 						Codepage = 0x0000c6f4
+(0001) 						InternetEncoding = 0x0000c6f4
+<0001> 				[_autodetect_all]
+(0000) 						Codepage = 0x0000c351
+(0001) 						InternetEncoding = 0x0000c351
+<0002> 				[_autodetect_kr]
+(0000) 						Codepage = hex: 05,c7,00,00
+(0001) 						InternetEncoding = hex: 05,c7,00,00
+<0003> 				[_iso-2022-jp$ESC]
+(0000) 						Codepage = 0x000003a4
+(0001) 						InternetEncoding = 0x0000c42d
+<0004> 				[_iso-2022-jp$SIO]
+(0000) 						Codepage = 0x000003a4
+(0001) 						InternetEncoding = 0x0000c42e
+<0005> 				[ANSI_X3.4-1968]
+(0000) 						AliasForCharset = "iso-8859-1"
+<0006> 				[ANSI_X3.4-1986]
+(0000) 						AliasForCharset = "iso-8859-1"
+<0007> 				[arabic]
+(0000) 						AliasForCharset = "iso-8859-6"
+<0008> 				[ascii]
+(0000) 						AliasForCharset = "iso-8859-1"
+<0009> 				[ASMO-708]
+(0000) 						Codepage = 0x000004e8
+(0001) 						InternetEncoding = 0x000002c4
+<0010> 				[Big5]
+(0000) 						Codepage = hex: b6,03,00,00
+(0001) 						InternetEncoding = hex: b6,03,00,00
+<0011> 				[chinese]
+(0000) 						AliasForCharset = "gb2312"
+<0012> 				[CN-GB]
+(0000) 						AliasForCharset = "gb2312"
+<0013> 				[cp1256]
+(0000) 						AliasForCharset = "windows-1256"
+<0014> 				[cp367]
+(0000) 						AliasForCharset = "iso-8859-1"
+<0015> 				[cp819]
+(0000) 						AliasForCharset = "iso-8859-1"
+<0016> 				[cp852]
+(0000) 						AliasForCharset = "ibm852"
+<0017> 				[cp866]
+(0000) 						AliasForCharset = "ibm866"
+<0018> 				[csASCII]
+(0000) 						AliasForCharset = "iso-8859-1"
+<0019> 				[csbig5]
+(0000) 						AliasForCharset = "big5"
+<0020> 				[csEUCKR]
+(0000) 						AliasForCharset = "ks_c_5601-1987"
+<0021> 				[csEUCPkdFmtJapanese]
+(0000) 						AliasForCharset = "euc-jp"
+<0022> 				[csGB2312]
+(0000) 						AliasForCharset = "gb2312"
+<0023> 				[csISO2022JP]
+(0000) 						AliasForCharset = "_iso-2022-jp$ESC"
+<0024> 				[csISO2022KR]
+(0000) 						AliasForCharset = "iso-2022-kr"
+<0025> 				[csISO58GB231280]
+(0000) 						AliasForCharset = "gb2312"
+<0026> 				[csISOLatin1]
+(0000) 						AliasForCharset = "windows-1252"
+<0027> 				[csISOLatin2]
+(0000) 						AliasForCharset = "iso-8859-2"
+<0028> 				[csISOLatin4]
+(0000) 						AliasForCharset = "iso-8859-4"
+<0029> 				[csISOLatin5]
+(0000) 						AliasForCharset = "iso-8859-5"
+<0030> 				[csISOLatinArabic]
+(0000) 						AliasForCharset = "iso-8859-6"
+<0031> 				[csISOLatinCyrillic]
+(0000) 						AliasForCharset = "iso-8859-5"
+<0032> 				[csISOLatinGreek]
+(0000) 						AliasForCharset = "iso-8859-7"
+<0033> 				[csISOLatinHebrew]
+(0000) 						AliasForCharset = "iso-8859-8"
+<0034> 				[csKOI8R]
+(0000) 						AliasForCharset = "koi8-r"
+<0035> 				[koi]
+(0000) 						AliasForCharset = "koi8-r"
+<0036> 				[koi8-r]
+(0000) 						Codepage = 0x000004e3
+(0001) 						InternetEncoding = 0x00005182
+<0037> 				[koi8-ru]
+(0000) 						Codepage = 0x000004e3
+(0001) 						InternetEncoding = 0x0000556a
+<0038> 				[csKSC56011987]
+(0000) 						AliasForCharset = "ks_c_5601-1987"
+<0039> 				[csShiftJIS]
+(0000) 						AliasForCharset = "shift_jis"
+<0040> 				[csUnicode11UTF7]
+(0000) 						AliasForCharset = "utf-7"
+<0041> 				[cyrillic]
+(0000) 						AliasForCharset = "iso-8859-5"
+<0042> 				[csWindows31J]
+(0000) 						AliasForCharset = "shift_jis"
+<0043> 				[DIN_66003]
+(0000) 						Codepage = hex: 04,e4,00,00
+(0001) 						InternetEncoding = hex: 8a,4e,00,00
+<0044> 				[DOS-720]
+(0000) 						Codepage = 0x000004e8
+(0001) 						InternetEncoding = 0x000002d0
+<0045> 				[DOS-862]
+(0000) 						Codepage = 0x000004e7
+(0001) 						InternetEncoding = 0x0000035e
+<0046> 				[DOS-874]
+(0000) 						Codepage = 0x0000036a
+(0001) 						InternetEncoding = 0x0000036a
+<0047> 				[ECMA-114]
+(0000) 						AliasForCharset = "iso-8859-6"
+<0048> 				[ECMA-118]
+(0000) 						AliasForCharset = "iso-8859-7"
+<0049> 				[ELOT_928]
+(0000) 						AliasForCharset = "iso-8859-7"
+<0050> 				[euc-jp]
+(0000) 						Codepage = hex: a4,03,00,00
+(0001) 						InternetEncoding = hex: dc,ca,00,00
+<0051> 				[euc-kr]
+(0000) 						Codepage = 0x000003b5
+(0001) 						InternetEncoding = 0x000003b5
+(0002) 						AliasForCharset = "ks_c_5601"
+<0052> 				[Extended_UNIX_Code_Packed_Format_for_Japanese]
+(0000) 						AliasForCharset = "euc-jp"
+<0053> 				[GB2312]
+(0000) 						Codepage = hex: a8,03,00,00
+(0001) 						InternetEncoding = hex: a8,03,00,00
+<0054> 				[GBK]
+(0000) 						AliasForCharset = "gb2312"
+<0055> 				[GB_2312-80]
+(0000) 						AliasForCharset = "gb2312"
+<0056> 				[greek]
+(0000) 						AliasForCharset = "iso-8859-7"
+<0057> 				[greek8]
+(0000) 						AliasForCharset = "iso-8859-7"
+<0058> 				[hebrew]
+(0000) 						AliasForCharset = "iso-8859-8"
+<0059> 				[hz-gb-2312]
+(0000) 						Codepage = hex: a8,03,00,00
+(0001) 						InternetEncoding = hex: c8,ce,00,00
+<0060> 				[IBM367]
+(0000) 						AliasForCharset = "iso-8859-1"
+<0061> 				[ibm819]
+(0000) 						AliasForCharset = "iso-8859-1"
+<0062> 				[ibm852]
+(0000) 						Codepage = 0x00000354
+(0001) 						InternetEncoding = 0x00000354
+<0063> 				[ibm866]
+(0000) 						Codepage = 0x00000362
+(0001) 						InternetEncoding = 0x00000362
+<0064> 				[irv]
+(0000) 						Codepage = hex: e4,04,00,00
+(0001) 						InternetEncoding = hex: 89,4e,00,00
+<0065> 				[iso-2022-jp]
+(0000) 						Codepage = 0x000003a4
+(0001) 						InternetEncoding = 0x0000c42c
+<0066> 				[iso-2022-kr]
+(0000) 						Codepage = 0x000003b5
+(0001) 						InternetEncoding = 0x0000c431
+<0067> 				[iso_8859-1]
+(0000) 						AliasForCharset = "iso-8859-1"
+<0068> 				[iso_8859-1:1987]
+(0000) 						AliasForCharset = "iso-8859-1"
+<0069> 				[iso_8859-2]
+(0000) 						AliasForCharset = "iso-8859-2"
+<0070> 				[iso_8859-2:1987]
+(0000) 						AliasForCharset = "iso-8859-2"
+<0071> 				[ISO_8859-4]
+(0000) 						AliasForCharset = "iso-8859-4"
+<0072> 				[ISO_8859-4:1988]
+(0000) 						AliasForCharset = "iso-8859-4"
+<0073> 				[ISO_8859-5]
+(0000) 						AliasForCharset = "iso-8859-5"
+<0074> 				[ISO_8859-5:1988]
+(0000) 						AliasForCharset = "iso-8859-5"
+<0075> 				[ISO_8859-6]
+(0000) 						AliasForCharset = "iso-8859-6"
+<0076> 				[ISO_8859-6:1987]
+(0000) 						AliasForCharset = "iso-8859-6"
+<0077> 				[ISO_8859-7]
+(0000) 						AliasForCharset = "iso-8859-7"
+<0078> 				[ISO_8859-7:1987]
+(0000) 						AliasForCharset = "iso-8859-7"
+<0079> 				[ISO_8859-8]
+(0000) 						AliasForCharset = "iso-8859-8"
+<0080> 				[ISO_8859-8:1988]
+(0000) 						AliasForCharset = "iso-8859-8"
+<0081> 				[ISO_8859-9]
+(0000) 						AliasForCharset = "iso-8859-9"
+<0082> 				[ISO_8859-9:1989]
+(0000) 						AliasForCharset = "iso-8859-9"
+<0083> 				[ISO646-US]
+(0000) 						AliasForCharset = "iso-8859-1"
+<0084> 				[ISO_646.irv:1991]
+(0000) 						AliasForCharset = "iso-8859-1"
+<0085> 				[iso8859-1]
+(0000) 						AliasForCharset = "iso-8859-1"
+<0086> 				[iso8859-2]
+(0000) 						AliasForCharset = "iso-8859-2"
+<0087> 				[iso-8859-1]
+(0000) 						Codepage = 0x000004e4
+(0001) 						InternetEncoding = 0x000004e4
+<0088> 				[iso-8859-2]
+(0000) 						Codepage = 0x000004e2
+(0001) 						InternetEncoding = 0x00006fb0
+<0089> 				[iso-8859-3]
+(0000) 						Codepage = 0x000004e6
+(0001) 						InternetEncoding = 0x00006fb1
+<0090> 				[iso-8859-4]
+(0000) 						Codepage = 0x000004e9
+(0001) 						InternetEncoding = 0x00006fb2
+<0091> 				[iso-8859-5]
+(0000) 						Codepage = 0x000004e3
+(0001) 						InternetEncoding = 0x00006fb3
+<0092> 				[iso-8859-7]
+(0000) 						Codepage = 0x000004e5
+(0001) 						InternetEncoding = 0x00006fb5
+<0093> 				[iso-8859-9]
+(0000) 						Codepage = 0x000004e6
+(0001) 						InternetEncoding = 0x000004e6
+<0094> 				[iso-8859-11]
+(0000) 						AliasForCharset = "windows-874"
+<0095> 				[iso-8859-6]
+(0000) 						Codepage = hex: e8,04,00,00
+(0001) 						InternetEncoding = hex: b4,6f,00,00
+<0096> 				[iso-8859-8]
+(0000) 						Codepage = hex: e7,04,00,00
+(0001) 						InternetEncoding = 0x00006fb6
+<0097> 				[ISO-8859-8 Visual]
+(0000) 						AliasForCharset = "iso-8859-8"
+<0098> 				[iso-8859-8-i]
+(0000) 						Codepage = 0x000004e7
+(0001) 						InternetEncoding = 0x000096c6
+<0099> 				[iso-ir-100]
+(0000) 						AliasForCharset = "iso-8859-1"
+<0100> 				[iso-ir-101]
+(0000) 						AliasForCharset = "iso-8859-2"
+<0101> 				[iso-ir-110]
+(0000) 						AliasForCharset = "iso-8859-4"
+<0102> 				[iso-ir-111]
+(0000) 						AliasForCharset = "iso-8859-4"
+<0103> 				[iso-ir-126]
+(0000) 						AliasForCharset = "iso-8859-7"
+<0104> 				[iso-ir-127]
+(0000) 						AliasForCharset = "iso-8859-6"
+<0105> 				[iso-ir-138]
+(0000) 						AliasForCharset = "iso-8859-8"
+<0106> 				[iso-ir-144]
+(0000) 						AliasForCharset = "iso-8859-5"
+<0107> 				[iso-ir-148]
+(0000) 						AliasForCharset = "iso-8859-9"
+<0108> 				[iso-ir-149]
+(0000) 						AliasForCharset = "ks_c_5601-1987"
+<0109> 				[iso-ir-58]
+(0000) 						AliasForCharset = "gb2312"
+<0110> 				[iso-ir-6]
+(0000) 						AliasForCharset = "iso-8859-1"
+<0111> 				[l1]
+(0000) 						AliasForCharset = "windows-1252"
+<0112> 				[l2]
+(0000) 						AliasForCharset = "iso-8859-2"
+<0113> 				[l4]
+(0000) 						AliasForCharset = "iso-8859-4"
+<0114> 				[l5]
+(0000) 						AliasForCharset = "iso-8859-5"
+<0115> 				[latin1]
+(0000) 						AliasForCharset = "iso-8859-1"
+<0116> 				[latin2]
+(0000) 						AliasForCharset = "iso-8859-2"
+<0117> 				[latin4]
+(0000) 						AliasForCharset = "iso-8859-4"
+<0118> 				[latin5]
+(0000) 						AliasForCharset = "iso-8859-5"
+<0119> 				[unicode]
+(0000) 						Codepage = 0x000004b0
+(0001) 						InternetEncoding = 0x000004b0
+<0120> 				[unicode-1-1-utf-7]
+(0000) 						AliasForCharSet = "utf-7"
+<0121> 				[unicode-1-1-utf-8]
+(0000) 						AliasForCharSet = "utf-8"
+<0122> 				[unicode-2-0-utf-8]
+(0000) 						AliasForCharset = "utf-8"
+<0123> 				[unicodeFEFF]
+(0000) 						Codepage = 0x000004b0
+(0001) 						InternetEncoding = 0x000004b1
+<0124> 				[ms_Kanji]
+(0000) 						AliasForCharset = "shift_jis"
+<0125> 				[shift_jis]
+(0000) 						Codepage = 0x000003a4
+(0001) 						InternetEncoding = 0x000003a4
+<0126> 				[shift-jis]
+(0000) 						AliasForCharset = "shift_jis"
+<0127> 				[us]
+(0000) 						AliasForCharset = "iso-8859-1"
+<0128> 				[us-ascii]
+(0000) 						AliasForCharset = "iso-8859-1"
+<0129> 				[utf-7]
+(0000) 						Codepage = 0x000004b0
+(0001) 						InternetEncoding = 0x0000fde8
+<0130> 				[utf-8]
+(0000) 						Codepage = 0x000004b0
+(0001) 						InternetEncoding = 0x0000fde9
+<0131> 				[windows-1250]
+(0000) 						Codepage = 0x000004e2
+(0001) 						InternetEncoding = 0x000004e2
+<0132> 				[windows-1251]
+(0000) 						Codepage = 0x000004e3
+(0001) 						InternetEncoding = 0x000004e3
+<0133> 				[windows-1252]
+(0000) 						Codepage = 0x000004e4
+(0001) 						InternetEncoding = 0x000004e4
+<0134> 				[windows-1253]
+(0000) 						Codepage = 0x000004e5
+(0001) 						InternetEncoding = 0x000004e5
+<0135> 				[Windows-1254]
+(0000) 						AliasForCharset = "iso-8859-9"
+<0136> 				[windows-1255]
+(0000) 						Codepage = 0x000004e7
+(0001) 						InternetEncoding = 0x000004e7
+<0137> 				[windows-1256]
+(0000) 						Codepage = 0x000004e8
+(0001) 						InternetEncoding = 0x000004e8
+<0138> 				[windows-1257]
+(0000) 						Codepage = 0x000004e9
+(0001) 						InternetEncoding = 0x000004e9
+<0139> 				[x-ansi]
+(0000) 						AliasForCharset = "iso-8859-1"
+<0140> 				[x-euc]
+(0000) 						AliasForCharset = "euc-jp"
+<0141> 				[x-cp1250]
+(0000) 						AliasForCharset = "Windows-1250"
+<0142> 				[x-cp1251]
+(0000) 						AliasForCharset = "Windows-1251"
+<0143> 				[x-unicode-2-0-utf-7]
+(0000) 						AliasForCharset = "utf-7"
+<0144> 				[x-unicode-2-0-utf-8]
+(0000) 						AliasForCharset = "utf-8"
+<0145> 				[x-user-defined]
+(0000) 						Codepage = 0x0000c350
+(0001) 						InternetEncoding = 0x0000c350
+<0146> 				[x-euc-jp]
+(0000) 						AliasForCharset = "euc-jp"
+<0147> 				[x-ms-cp932]
+(0000) 						AliasForCharset = "shift_jis"
+<0148> 				[x-sjis]
+(0000) 						AliasForCharset = "shift_jis"
+<0149> 				[korean]
+(0000) 						AliasForCharset = "euc-kr"
+<0150> 				[KSC5601]
+(0000) 						AliasForCharset = "ks_c_5601-1987"
+<0151> 				[KSC_5601]
+(0000) 						AliasForCharset = "ks_c_5601-1987"
+<0152> 				[ks_c_5601]
+(0000) 						AliasForCharset = "euc-kr"
+(0001) 						Codepage = hex: b5,03,00,00
+(0002) 						InternetEncoding = hex: b5,03,00,00
+<0153> 				[ks_c_5601-1987]
+(0000) 						AliasForCharset = "euc-kr"
+(0001) 						Codepage = 0x000003b5
+(0002) 						InternetEncoding = 0x000003b5
+<0154> 				[ks_c_5601-1989]
+(0000) 						AliasForCharset = "ks_c_5601-1987"
+<0155> 				[logical]
+(0000) 						AliasForCharset = "windows-1255"
+<0156> 				[NS_4551-1]
+(0000) 						Codepage = hex: e4,04,00,00
+(0001) 						InternetEncoding = hex: 8c,4e,00,00
+<0157> 				[SEN_850200_B]
+(0000) 						Codepage = hex: e4,04,00,00
+(0001) 						InternetEncoding = hex: 8b,4e,00,00
+<0158> 				[visual]
+(0000) 						AliasForCharset = "iso-8859-8"
+<0159> 				[windows-1258]
+(0000) 						Codepage = hex: ea,04,00,00
+(0001) 						InternetEncoding = hex: ea,04,00,00
+<0160> 				[windows-874]
+(0000) 						Codepage = hex: 6a,03,00,00
+(0001) 						InternetEncoding = hex: 6a,03,00,00
+<0161> 				[x-x-big5]
+(0000) 						AliasForCharset = "big5"
+<0003> 			[Content Type]
+<0000> 				[image/bmp]
+(0000) 						Extension = ".bmp"
+(0001) 						CLSID = "{25336920-03F9-11cf-8FD0-00AA00686F13}"
+(0002) 						Image Filter CLSID = "{607fd4e8-0a03-11d1-ab1d-00c04fc9b304}"
+<0000> 					[Bits]
+(0000) 							0 = hex: 02,00,00,00,ff,ff,42,4d
+<0001> 				[image/gif]
+(0000) 						Extension = ".gif"
+(0001) 						CLSID = "{25336920-03F9-11cf-8FD0-00AA00686F13}"
+(0002) 						Image Filter CLSID = "{607fd4e8-0a03-11d1-ab1d-00c04fc9b304}"
+<0000> 					[Bits]
+(0000) 							0 = hex: 04,00,00,00,ff,ff,ff,ff,47,49,46,38
+<0002> 				[image/jpeg]
+(0000) 						Extension = ".jpg"
+(0001) 						CLSID = "{25336920-03F9-11cf-8FD0-00AA00686F13}"
+(0002) 						Image Filter CLSID = "{607fd4e8-0a03-11d1-ab1d-00c04fc9b304}"
+<0000> 					[Bits]
+(0000) 							0 = hex: 02,00,00,00,ff,ff,ff,d8
+<0003> 				[image/pjpeg]
+(0000) 						CLSID = "{25336920-03F9-11cf-8FD0-00AA00686F13}"
+(0001) 						Extension = ".jpg"
+(0002) 						Image Filter CLSID = "{607fd4e8-0a03-11d1-ab1d-00c04fc9b304}"
+<0000> 					[Bits]
+(0000) 							0 = hex: 02,00,00,00,ff,ff,ff,d8
+<0004> 				[image/xbm]
+(0000) 						Extension = ".xbm"
+<0005> 				[image/x-xbitmap]
+(0000) 						Extension = ".xbm"
+(0001) 						CLSID = "{25336920-03F9-11cf-8FD0-00AA00686F13}"
+<0006> 				[message/rfc822]
+(0000) 						CLSID = "{3050F3D9-98B5-11CF-BB82-00AA00BDCE0B}"
+<0007> 				[text/css]
+(0000) 						Extension = ".css"
+<0008> 				[text/html]
+(0000) 						Extension = ".htm"
+(0001) 						Encoding = hex: 08,00,00,00
+(0002) 						CLSID = "{25336920-03F9-11cf-8FD0-00AA00686F13}"
+<0009> 				[text/plain]
+(0000) 						Extension = ".txt"
+(0001) 						Encoding = hex: 07,00,00,00
+(0002) 						CLSID = "{25336920-03F9-11cf-8FD0-00AA00686F13}"
+<0010> 				[application/x-msdownload]
+(0000) 						Extension = ".exe"
+<0011> 				[text/x-component]
+(0000) 						CLSID = "{3050f4f8-98b5-11cf-bb82-00aa00bdce0b}"
+(0001) 						Extension = ".htc"
+<0012> 				[text/x-scriptlet]
+(0000) 						CLSID = "{ae24fdae-03c6-11d1-8b76-0080c744f389}"
+<0020> 	[PROTOCOLS]
+<0000> 		[Handler]
+<0000> 			[javascript]
+(0000) 					CLSID = "{3050F3B2-98B5-11CF-BB82-00AA00BDCE0B}"
+<0001> 			[about]
+(0000) 					CLSID = "{3050F406-98B5-11CF-BB82-00AA00BDCE0B}"
+<0002> 			[res]
+(0000) 					CLSID = "{3050F3BC-98B5-11CF-BB82-00AA00BDCE0B}"
+<0021> 	[.exe]
+(0000) 			Default = "exefile"
+(0001) 			Content Type = "application/x-msdownload"
+<0022> 	[exefile]
+(0000) 			Default = "Application"
+<0000> 		[shell]
+<0000> 			[open]
+<0000> 				[command]
+(0000) 						Default = ""%1" %*"
+<0001> 		[DefaultIcon]
+(0000) 				Default = "%1"
+<0023> 	[HeaderFooter.HeaderFooter]
+(0000) 			Default = "HeaderFooter"
+<0000> 		[CurVer]
+(0000) 				Default = "HeaderFooter.HeaderFooter.1"
+<0024> 	[HeaderFooter.HeaderFooter.1]
+(0000) 			CLSID = "{30c3f6cd-98b5-11cf-bb82-00aa00bdce0b}"
+<0025> 	[LayoutRect.LayoutRect]
+(0000) 			Default = "Layout Rect"
+<0000> 		[CurVer]
+(0000) 				Default = "LayoutRect.LayoutRect.1"
+<0026> 	[LayoutRect.LayoutRect.1]
+(0000) 			CLSID = "{3050f664-98b5-11cf-bb82-00aa00bdce0b}"
+<0027> 	[DeviceRect.DeviceRect]
+(0000) 			Default = "Device Rect"
+<0000> 		[CurVer]
+(0000) 				Default = "DeviceRect.DeviceRect.1"
+<0028> 	[DeviceRect.DeviceRect.1]
+(0000) 			CLSID = "{3050f6d4-98b5-11cf-bb82-00aa00bdce0b}"
+<0029> 	[TemplatePrinter.TemplatePRinter]
+(0000) 			Default = "Template Printer"
+<0000> 		[CurVer]
+(0000) 				Default = "TemplatePrinter.TemplatePrinter.1"
+<0030> 	[TemplatePrinter.TemplatePrinter.1]
+(0000) 			CLSID = "{3050f6b3-98b5-11cf-bb82-00aa00bdce0b}"
+<0031> 	[IImgCtx]
+(0000) 			Default = "IImgCtx"
+<0000> 		[CLSID]
+(0000) 				Default = "{3050F3D6-98B5-11CF-BB82-00AA00BDCE0B}"
+<0032> 	[GIFFilter.CoGIFFilter]
+<0000> 		[CLSID]
+(0000) 				Default = "{607fd4e8-0a03-11d1-ab1d-00c04fc9b304}"
+<0033> 	[GIFFilter.CoGIFFilter.1]
+<0000> 		[CLSID]
+(0000) 				Default = "{607fd4e8-0a03-11d1-ab1d-00c04fc9b304}"
+<0034> 	[JPEGFilter.CoJPEGFilter]
+<0000> 		[CLSID]
+(0000) 				Default = "{607fd4e8-0a03-11d1-ab1d-00c04fc9b304}"
+<0035> 	[JPEGFilter.CoJPEGFilter.1]
+<0000> 		[CLSID]
+(0000) 				Default = "{607fd4e8-0a03-11d1-ab1d-00c04fc9b304}"
+<0036> 	[BMPFilter.CoBMPFilter]
+<0000> 		[CLSID]
+(0000) 				Default = "{607fd4e8-0a03-11d1-ab1d-00c04fc9b304}"
+<0037> 	[BMPFilter.CoBMPFilter.1]
+<0000> 		[CLSID]
+(0000) 				Default = "{607fd4e8-0a03-11d1-ab1d-00c04fc9b304}"
+<0038> 	[file]
+(0000) 			Default = "URL:File Protocol"
+(0001) 			URL Protocol = ""
+(0002) 			Source Filter = "{e436ebb5-524f-11ce-9f53-0020af0ba770}"
+<0039> 	[http]
+(0000) 			Default = "URL:HyperText Transfer Protocol"
+(0001) 			URL Protocol = ""
+(0002) 			Source Filter = "{e436ebb6-524f-11ce-9f53-0020af0ba770}"
+<0000> 		[DefaultIcon]
+(0000) 				Default = "iebrowser.exe,0"
+<0001> 		[Shell]
+<0000> 			[Open]
+<0000> 				[Command]
+(0000) 						Default = "iebrowser.exe %1"
+<0040> 	[https]
+(0000) 			Default = "URL:HyperText Transfer Protocol with Privacy"
+(0001) 			URL Protocol = ""
+(0002) 			Source Filter = "{e436ebb6-524f-11ce-9f53-0020af0ba770}"
+<0000> 		[DefaultIcon]
+(0000) 				Default = "iebrowser.exe,0"
+<0001> 		[Shell]
+<0000> 			[Open]
+<0000> 				[Command]
+(0000) 						Default = "iebrowser.exe %1"
+<0041> 	[ftp]
+(0000) 			Default = "URL:File Transfer Protocol"
+(0001) 			URL Protocol = ""
+<0000> 		[DefaultIcon]
+(0000) 				Default = "iebrowser.exe,0"
+<0001> 		[Shell]
+<0000> 			[Open]
+<0000> 				[Command]
+(0000) 						Default = "iebrowser.exe %1"
+<0042> 	[.htm]
+(0000) 			Default = "htmlfile"
+(0001) 			Content Type = "text/html"
+<0043> 	[.html]
+(0000) 			Default = "htmlfile"
+(0001) 			Content Type = "text/html"
+<0044> 	[htmlfile]
+(0000) 			Default = "HTML Document"
+<0000> 		[CLSID]
+(0000) 				Default = "{25336920-03F9-11cf-8FD0-00AA00686F13}"
+<0001> 		[shell]
+<0000> 			[open]
+<0000> 				[command]
+(0000) 						Default = "ieBrowser.exe %1"
+<0002> 		[DefaultIcon]
+(0000) 				Default = "iebrowser.exe,0"
+<0045> 	[htmlfile_FullWindowEmbed]
+<0000> 		[CLSID]
+(0000) 				Default = "{25336921-03F9-11CF-8FD0-00AA00686F13}"
+<0046> 	[.mhtml]
+(0000) 			Default = "mhtmlfile"
+(0001) 			Content Type = "message/rfc822"
+<0047> 	[.mht]
+(0000) 			Default = "mhtmlfile"
+(0001) 			Content Type = "message/rfc822"
+<0048> 	[mhtmlfile]
+<0000> 		[CLSID]
+(0000) 				Default = "{3050F3D9-98B5-11CF-BB82-00AA00BDCE0B}"
+<0049> 	[.css]
+(0000) 			Content Type = "text/css"
+<0050> 	[.bmp]
+(0000) 			Default = "bmpfile"
+(0001) 			Content Type = "image/bmp"
+<0051> 	[bmpfile]
+(0000) 			Default = "Bitmap Image"
+<0000> 		[CLSID]
+(0000) 				Default = "{25336920-03F9-11cf-8FD0-00AA00686F13}"
+<0052> 	[.gif]
+(0000) 			Default = "giffile"
+(0001) 			Content Type = "image/gif"
+<0053> 	[giffile]
+(0000) 			Default = "GIF Image"
+<0000> 		[CLSID]
+(0000) 				Default = "{25336920-03F9-11cf-8FD0-00AA00686F13}"
+<0054> 	[.jpe]
+(0000) 			Default = "jpegfile"
+(0001) 			Content Type = "image/jpeg"
+<0055> 	[.jpg]
+(0000) 			Default = "jpegfile"
+(0001) 			Content Type = "image/jpeg"
+<0056> 	[.jfif]
+(0000) 			Default = "pjpegfile"
+(0001) 			Content Type = "image/pjpeg"
+<0057> 	[.jpeg]
+(0000) 			Default = "jpegfile"
+(0001) 			Content Type = "image/jpeg"
+<0058> 	[jpegfile]
+(0000) 			Default = "JPEG Image"
+<0000> 		[CLSID]
+(0000) 				Default = "{25336920-03F9-11cf-8FD0-00AA00686F13}"
+<0059> 	[pjpegfile]
+(0000) 			Default = "JPEG Image"
+<0000> 		[CLSID]
+(0000) 				Default = "{25336920-03F9-11cf-8FD0-00AA00686F13}"
+<0060> 	[.xbm]
+(0000) 			Content Type = "image/x-xbitmap"
+<0061> 	[xbmfile]
+(0000) 			Default = "XBM Image"
+<0000> 		[CLSID]
+(0000) 				Default = "{25336920-03F9-11cf-8FD0-00AA00686F13}"
+<0062> 	[.txt]
+(0000) 			Content Type = "text/plain"
+<0063> 	[.hta]
+(0000) 			Content Type = "application/hta"
+<0064> 	[.htc]
+(0000) 			Content Type = "text/x-component"
+<0065> 	[MSXML.DOMDocument]
+(0000) 			Default = "XML DOM Document"
+<0000> 		[CLSID]
+(0000) 				Default = "{2933BF90-7B36-11d2-B20E-00C04F983E60}"
+<0066> 	[Microsoft.XMLDOM]
+(0000) 			Default = "XML DOM Document"
+<0000> 		[CLSID]
+(0000) 				Default = "{2933BF90-7B36-11d2-B20E-00C04F983E60}"
+<0067> 	[MSXML2.DOMDocument]
+(0000) 			Default = "XML DOM Document"
+<0000> 		[CLSID]
+(0000) 				Default = "{F6D90F11-9C73-11D3-B32E-00C04F990BB4}"
+<0068> 	[Microsoft.XMLParser]
+(0000) 			Default = "XML Parser"
+<0000> 		[CLSID]
+(0000) 				Default = "{d2423620-51a0-11d2-9caf-0060b0ec3d39}"
+<0069> 	[Msxml2.XMLParser]
+(0000) 			Default = "XML Parser"
+<0000> 		[CLSID]
+(0000) 				Default = "{f5078f19-c551-11d3-89b9-0000f81fe221}"
+<0070> 	[Msxml2.XMLSchemaCache]
+(0000) 			Default = "XML Schema Cache"
+<0000> 		[CLSID]
+(0000) 				Default = "{373984C9-B845-449B-91E7-45AC83036ADE}"
+<0071> 	[JScript]
+<0000> 		[CLSID]
+(0000) 				Default = "{F414C260-6AC0-11CF-B6D1-00AA00BBBB58}"
+<0001> 		[OLEScript]
+<0072> 	[LiveScript]
+<0000> 		[CLSID]
+(0000) 				Default = "{F414C260-6AC0-11CF-B6D1-00AA00BBBB58}"
+<0001> 		[OLEScript]
+<0073> 	[JavaScript]
+<0000> 		[CLSID]
+(0000) 				Default = "{F414C260-6AC0-11CF-B6D1-00AA00BBBB58}"
+<0001> 		[OLEScript]
+<0074> 	[JavaScript1.1]
+<0000> 		[CLSID]
+(0000) 				Default = "{F414C260-6AC0-11CF-B6D1-00AA00BBBB58}"
+<0001> 		[OLEScript]
+<0075> 	[JavaScript1.2]
+<0000> 		[CLSID]
+(0000) 				Default = "{F414C260-6AC0-11CF-B6D1-00AA00BBBB58}"
+<0001> 		[OLEScript]
+<0076> 	[JavaScript1.3]
+<0000> 		[CLSID]
+(0000) 				Default = "{F414C260-6AC0-11CF-B6D1-00AA00BBBB58}"
+<0001> 		[OLEScript]
+<0077> 	[ECMAScript]
+<0000> 		[CLSID]
+(0000) 				Default = "{F414C260-6AC0-11CF-B6D1-00AA00BBBB58}"
+<0001> 		[OLEScript]
+<0078> 	[VBScript]
+<0000> 		[CLSID]
+(0000) 				Default = "{B54F3741-5B07-11cf-A4B0-00AA004A55E8}"
+<0001> 		[OLEScript]
+<0079> 	[VBS]
+<0000> 		[CLSID]
+(0000) 				Default = "{B54F3741-5B07-11cf-A4B0-00AA004A55E8}"
+<0001> 		[OLEScript]
+<0080> 	[.asp]
+(0000) 			Content Type = "text/asp"
+<0081> 	[.xml]
+(0000) 			Content Type = "text/xml"
+<0082> 	[.wav]
+(0000) 			Content Type = "audio/wav"
+(0001) 			Default = "wavfile"
+<0083> 	[.mid]
+(0000) 			Content Type = "audio/mid"
+<0084> 	[.rmi]
+(0000) 			Content Type = "audio/mid"
+<0085> 	[.avi]
+(0000) 			Content Type = "video/avi"
+<0086> 	[.mpeg]
+(0000) 			Content Type = "video/mpeg"
+<0087> 	[.mpg]
+(0000) 			Content Type = "video/mpeg"
+<0088> 	[.mp2]
+(0000) 			Content Type = "video/mpeg"
+<0089> 	[.mp3]
+(0000) 			Content Type = "audio/mpeg"
+<0090> 	[.mpa]
+(0000) 			Content Type = "audio/mpeg"
+<0091> 	[.qt]
+(0000) 			Content Type = "video/quicktime"
+<0092> 	[.mov]
+(0000) 			Content Type = "video/quicktime"
+<0093> 	[.wma]
+(0000) 			Content Type = "audio/x-ms-wma"
+<0094> 	[.wax]
+(0000) 			Content Type = "audio/x-ms-wax"
+<0095> 	[.wvx]
+(0000) 			Content Type = "video/x-ms-wvx"
+<0096> 	[.asf]
+(0000) 			Content Type = "video/x-ms-asf"
+<0097> 	[.asx]
+(0000) 			Content Type = "video/x-ms-asf"
+<0098> 	[.wmv]
+(0000) 			Content Type = "video/x-ms-wmv"
+<0099> 	[.wmx]
+(0000) 			Content Type = "video/x-ms-wmx"
+<0100> 	[.wm]
+(0000) 			Content Type = "video/x-ms-wm"
+<0101> 	[asp.Request]
+<0000> 		[CLSID]
+(0000) 				Default = "{920C25D0-25D9-11D0-A55F-00A0C90C2091}"
+<0102> 	[asp.Server]
+<0000> 		[CLSID]
+(0000) 				Default = "{A506D160-25E0-11D0-A55F-00A0C90C2091}"
+<0103> 	[asp.Response]
+<0000> 		[CLSID]
+(0000) 				Default = "{46E19BA0-25DD-11D0-A55F-00A0C90C2091}"
+<0104> 	[MSSOAP.SoapTypefactory.1]
+(0000) 			Default = "Microsoft SoapTypeMapperFactory Version 1"
+<0000> 		[Clsid]
+(0000) 				Default = "{9C5754F7-ADF5-4D82-B181-0F8FC5EA882B}"
+<0105> 	[MSSOAP.SoapTypeMapperFactory]
+(0000) 			Default = "Microsoft SoapTypeMapperFactoryclass"
+<0000> 		[CurVer]
+(0000) 				Default = "MSSOAP.SoapTypeMapperFactory.1"
+<0001> 		[Clsid]
+(0000) 				Default = "{9C5754F7-ADF5-4D82-B181-0F8FC5EA882B}"
+<0106> 	[MSSOAP.WSDLReader.1]
+(0000) 			Default = "Microsoft Soap WSDLReader class Version 1"
+<0000> 		[Clsid]
+(0000) 				Default = "{BB023FC5-AA10-47CE-8A0A-6875C17B5914}"
+<0107> 	[MSSOAP.WSDLReader]
+(0000) 			Default = "Microsoft Soap WSDLReader class"
+<0000> 		[CurVer]
+(0000) 				Default = "MSSOAP.WSDLReader.1"
+<0001> 		[Clsid]
+(0000) 				Default = "{BB023FC5-AA10-47CE-8A0A-6875C17B5914}"
+<0108> 	[MSSOAP.SoapReader.1]
+(0000) 			Default = "Microsoft Soap SoapReader class Version 1"
+<0000> 		[Clsid]
+(0000) 				Default = "{FDE424F3-AA10-471D-8A0A-6875C17B5914}"
+<0109> 	[MSSOAP.SoapReader]
+(0000) 			Default = "Microsoft Soap SoapReader class"
+<0000> 		[CurVer]
+(0000) 				Default = "MSSOAP.SoapReader.1"
+<0001> 		[Clsid]
+(0000) 				Default = "{FDE424F3-AA10-471D-8A0A-6875C17B5914}"
+<0110> 	[MSSOAP.SoapSerializer.1]
+(0000) 			Default = "Microsoft Soap SoapSerializer class Version 1"
+<0000> 		[Clsid]
+(0000) 				Default = "{ADE424F3-AA10-471D-8A0A-687534555900}"
+<0111> 	[MSSOAP.SoapSerializer]
+(0000) 			Default = "Microsoft Soap SoapSerializer class"
+<0000> 		[CurVer]
+(0000) 				Default = "MSSOAP.SoapSerializer.1"
+<0001> 		[Clsid]
+(0000) 				Default = "{ADE424F3-AA10-471D-8A0A-687534555900}"
+<0112> 	[MSSOAP.HttpConnector.1]
+(0000) 			Default = "Microsoft Soap Http Connector"
+<0000> 		[Clsid]
+(0000) 				Default = "{6205B8C9-75FF-4623-A50A-88E1F14EAFF2}"
+<0113> 	[MSSOAP.HttpConnector]
+(0000) 			Default = "Microsoft Soap Http Connector"
+<0000> 		[CurVer]
+(0000) 				Default = "MSSOAP.HttpConnector.1"
+<0001> 		[Clsid]
+(0000) 				Default = "{6205B8C9-75FF-4623-A50A-88E1F14EAFF2}"
+<0114> 	[MSSOAP.ConnectorFactory.1]
+(0000) 			Default = "Soap Port Connector Factory"
+<0000> 		[Clsid]
+(0000) 				Default = "{4CE546FF-9128-465E-B5C5-5A36CFC2C285}"
+<0115> 	[MSSOAP.ConnectorFactory]
+(0000) 			Default = "Soap Port Connector Factory"
+<0000> 		[CurVer]
+(0000) 				Default = "MSSOAP.ConnectorFactory.1"
+<0001> 		[Clsid]
+(0000) 				Default = "{4CE546FF-9128-465E-B5C5-5A36CFC2C285}"
+<0116> 	[MSSOAP.SoapClient.1]
+(0000) 			Default = "Microsoft Soap SoapClient class Version 1"
+<0000> 		[Clsid]
+(0000) 				Default = "{86D54F3D-652D-4ab3-A1A6-14D403F6C813}"
+<0117> 	[MSSOAP.SoapClient]
+(0000) 			Default = "Microsoft Soap SoapClient class"
+<0000> 		[CurVer]
+(0000) 				Default = "MSSOAP.SoapClient.1"
+<0001> 		[Clsid]
+(0000) 				Default = "{86D54F3D-652D-4ab3-A1A6-14D403F6C813}"
+<0118> 	[MSSOAP.SoapServer.1]
+(0000) 			Default = "Microsoft Soap SoapServer class Version 1"
+<0000> 		[Clsid]
+(0000) 				Default = "{EBB2FF12-861A-42b6-B815-B1AF4D944916}"
+<0119> 	[MSSOAP.SoapServer]
+(0000) 			Default = "Microsoft Soap SoapServer class"
+<0000> 		[Clsid]
+(0000) 				Default = "{EBB2FF12-861A-42b6-B815-B1AF4D944916}"
+<0001> 		[CurVer]
+(0000) 				Default = "MSSOAP.SoapServer.1"
+<0120> 	[INTERFACE]
+<0000> 		[{09BC1FF4-5711-4B93-B01D-DDD826EBD353}]
+(0000) 				Default = "ISoapConnector"
+<0000> 			[NumMethods]
+(0000) 					Default = "17"
+<0001> 			[ProxyStubClsid32]
+(0000) 					Default = "{94873E03-77DF-455F-BC1C-E83B5AB8CF0F}"
+<0001> 		[{ADE424F3-0474-4231-AB31-4A254897700B}]
+(0000) 				Default = "ISoapSerializer"
+<0000> 			[NumMethods]
+(0000) 					Default = "31"
+<0001> 			[ProxyStubClsid32]
+(0000) 					Default = "{94873E03-77DF-455F-BC1C-E83B5AB8CF0F}"
+<0002> 		[{AC2424F3-0A74-4231-AB31-4A037C9B22A3}]
+(0000) 				Default = "ISoapMapper"
+<0000> 			[NumMethods]
+(0000) 					Default = "17"
+<0001> 			[ProxyStubClsid32]
+(0000) 					Default = "{94873E03-77DF-455F-BC1C-E83B5AB8CF0F}"
+<0003> 		[{6DEAE1C2-789F-430C-94CB-703F24E25D52}]
+(0000) 				Default = "IEnumWSDLPorts"
+<0000> 			[NumMethods]
+(0000) 					Default = "8"
+<0001> 			[ProxyStubClsid32]
+(0000) 					Default = "{94873E03-77DF-455F-BC1C-E83B5AB8CF0F}"
+<0004> 		[{A8BF14B8-DBBA-45B5-A1ED-571697FACD4C}]
+(0000) 				Default = "IEnumSoapMappers"
+<0000> 			[NumMethods]
+(0000) 					Default = "7"
+<0001> 			[ProxyStubClsid32]
+(0000) 					Default = "{94873E03-77DF-455F-BC1C-E83B5AB8CF0F}"
+<0005> 		[{BD5965B7-F5BF-49F3-AE7B-F817D4B7CC99}]
+(0000) 				Default = "IEnumWSDLService"
+<0000> 			[NumMethods]
+(0000) 					Default = "8"
+<0001> 			[ProxyStubClsid32]
+(0000) 					Default = "{94873E03-77DF-455F-BC1C-E83B5AB8CF0F}"
+<0006> 		[{C21A73B1-5655-4B36-BA3F-8E2DBABE82DF}]
+(0000) 				Default = "IWSDLService"
+<0000> 			[NumMethods]
+(0000) 					Default = "6"
+<0001> 			[ProxyStubClsid32]
+(0000) 					Default = "{94873E03-77DF-455F-BC1C-E83B5AB8CF0F}"
+<0007> 		[{EDABBFA8-E126-402D-B65D-4EFAC1405F6E}]
+(0000) 				Default = "ISOAPError"
+<0000> 			[NumMethods]
+(0000) 					Default = "7"
+<0001> 			[ProxyStubClsid32]
+(0000) 					Default = "{94873E03-77DF-455F-BC1C-E83B5AB8CF0F}"
+<0008> 		[{E8685095-8543-4771-B2EE-E17C58379E47}]
+(0000) 				Default = "ISOAPServer"
+<0000> 			[NumMethods]
+(0000) 					Default = "9"
+<0001> 			[ProxyStubClsid32]
+(0000) 					Default = "{94873E03-77DF-455F-BC1C-E83B5AB8CF0F}"
+<0009> 		[{504D4B91-76B8-4D88-95EA-CEB5E0FE41F3}]
+(0000) 				Default = "IHeaderHandler"
+<0000> 			[NumMethods]
+(0000) 					Default = "10"
+<0001> 			[ProxyStubClsid32]
+(0000) 					Default = "{94873E03-77DF-455F-BC1C-E83B5AB8CF0F}"
+<0010> 		[{B818238A-B709-4EB2-A4CE-6BA02C671F74}]
+(0000) 				Default = "ISoapTypeMapperFactory"
+<0000> 			[NumMethods]
+(0000) 					Default = "15"
+<0001> 			[ProxyStubClsid32]
+(0000) 					Default = "{94873E03-77DF-455F-BC1C-E83B5AB8CF0F}"
+<0011> 		[{CEA11D8A-258D-4863-A91F-3B4D046039E2}]
+(0000) 				Default = "ISoapTypeMapper"
+<0000> 			[NumMethods]
+(0000) 					Default = "11"
+<0001> 			[ProxyStubClsid32]
+(0000) 					Default = "{94873E03-77DF-455F-BC1C-E83B5AB8CF0F}"
+<0012> 		[{4BDFD94B-415C-46F2-95E1-D145AB080F9E}]
+(0000) 				Default = "ISOAPClient"
+<0000> 			[NumMethods]
+(0000) 					Default = "17"
+<0001> 			[ProxyStubClsid32]
+(0000) 					Default = "{94873E03-77DF-455F-BC1C-E83B5AB8CF0F}"
+<0013> 		[{8905303D-7ED3-40C2-A37F-27A46F98346A}]
+(0000) 				Default = "ISoapConnectorFactory"
+<0000> 			[NumMethods]
+(0000) 					Default = "8"
+<0001> 			[ProxyStubClsid32]
+(0000) 					Default = "{94873E03-77DF-455F-BC1C-E83B5AB8CF0F}"
+<0014> 		[{2C713C3C-77FE-4997-AA30-38519C57FC15}]
+(0000) 				Default = "IWSDLOperation"
+<0000> 			[NumMethods]
+(0000) 					Default = "17"
+<0001> 			[ProxyStubClsid32]
+(0000) 					Default = "{94873E03-77DF-455F-BC1C-E83B5AB8CF0F}"
+<0015> 		[{77127B0C-C47E-4861-8429-4B6DA7401663}]
+(0000) 				Default = "IWSDLReader"
+<0000> 			[NumMethods]
+(0000) 					Default = "7"
+<0001> 			[ProxyStubClsid32]
+(0000) 					Default = "{94873E03-77DF-455F-BC1C-E83B5AB8CF0F}"
+<0016> 		[{C4618005-691F-41FE-A318-C37CEC14B867}]
+(0000) 				Default = "IEnumWSDLOperations"
+<0000> 			[NumMethods]
+(0000) 					Default = "9"
+<0001> 			[ProxyStubClsid32]
+(0000) 					Default = "{94873E03-77DF-455F-BC1C-E83B5AB8CF0F}"
+<0017> 		[{94873E03-77DF-455F-BC1C-E83B5AB8CF0F}]
+(0000) 				Default = "IWSDLPort"
+<0000> 			[NumMethods]
+(0000) 					Default = "9"
+<0001> 			[ProxyStubClsid32]
+(0000) 					Default = "{94873E03-77DF-455F-BC1C-E83B5AB8CF0F}"
+<0121> 	[MSMQ.MSMQApplication.1]
+(0000) 			Default = "MSMQApplication Object"
+<0000> 		[CLSID]
+(0000) 				Default = "{D7D6E086-DCCD-11D0-AA4B-0060970DEBAE}"
+<0122> 	[MSMQ.MSMQApplication]
+(0000) 			Default = "MSMQApplication Object"
+<0000> 		[CurVer]
+(0000) 				Default = "MSMQ.MSMQApplication.1"
+<0001> 		[CLSID]
+(0000) 				Default = "{D7D6E086-DCCD-11D0-AA4B-0060970DEBAE}"
+<0123> 	[MSMQ.MSMQEvent.1]
+(0000) 			Default = "MSMQEvent Object"
+<0000> 		[CLSID]
+(0000) 				Default = "{D7D6E07A-DCCD-11D0-AA4B-0060970DEBAE}"
+<0124> 	[MSMQ.MSMQEvent]
+(0000) 			Default = "MSMQEvent Object"
+<0000> 		[CurVer]
+(0000) 				Default = "MSMQ.MSMQEvent.1"
+<0001> 		[CLSID]
+(0000) 				Default = "{D7D6E07A-DCCD-11D0-AA4B-0060970DEBAE}"
+<0125> 	[MSMQ.MSMQQueueInfos.1]
+(0000) 			Default = "MSMQQueueInfos Object"
+<0000> 		[CLSID]
+(0000) 				Default = "{D7D6E07E-DCCD-11D0-AA4B-0060970DEBAE}"
+<0126> 	[MSMQ.MSMQQueueInfos]
+(0000) 			Default = "MSMQQueueInfos Object"
+<0000> 		[CurVer]
+(0000) 				Default = "MSMQ.MSMQQueueInfos.1"
+<0001> 		[CLSID]
+(0000) 				Default = "{D7D6E07E-DCCD-11D0-AA4B-0060970DEBAE}"
+<0127> 	[MSMQ.MSMQMessage.1]
+(0000) 			Default = "MSMQMessage Object"
+<0000> 		[CLSID]
+(0000) 				Default = "{D7D6E075-DCCD-11D0-AA4B-0060970DEBAE}"
+<0128> 	[MSMQ.MSMQMessage]
+(0000) 			Default = "MSMQMessage Object"
+<0000> 		[CurVer]
+(0000) 				Default = "MSMQ.MSMQMessage.1"
+<0001> 		[CLSID]
+(0000) 				Default = "{D7D6E075-DCCD-11D0-AA4B-0060970DEBAE}"
+<0129> 	[MSMQ.MSMQQueue.1]
+(0000) 			Default = "MSMQQueue Object"
+<0000> 		[CLSID]
+(0000) 				Default = "{D7D6E079-DCCD-11D0-AA4B-0060970DEBAE}"
+<0130> 	[MSMQ.MSMQQueue]
+(0000) 			Default = "MSMQQueue Object"
+<0000> 		[CurVer]
+(0000) 				Default = "MSMQ.MSMQQueue.1"
+<0001> 		[CLSID]
+(0000) 				Default = "{D7D6E079-DCCD-11D0-AA4B-0060970DEBAE}"
+<0131> 	[MSMQ.MSMQQueueInfo.1]
+(0000) 			Default = "MSMQQueueInfo Object"
+<0000> 		[CLSID]
+(0000) 				Default = "{D7D6E07C-DCCD-11D0-AA4B-0060970DEBAE}"
+<0132> 	[MSMQ.MSMQQueueInfo]
+(0000) 			Default = "MSMQQueueInfo Object"
+<0000> 		[CurVer]
+(0000) 				Default = "MSMQ.MSMQQueueInfo.1"
+<0001> 		[CLSID]
+(0000) 				Default = "{D7D6E07C-DCCD-11D0-AA4B-0060970DEBAE}"
+<0133> 	[MSMQ.MSMQQuery.1]
+(0000) 			Default = "MSMQQuery Object"
+<0000> 		[CLSID]
+(0000) 				Default = "{D7D6E073-DCCD-11D0-AA4B-0060970DEBAE}"
+<0134> 	[MSMQ.MSMQQuery]
+(0000) 			Default = "MSMQQuery Object"
+<0000> 		[CurVer]
+(0000) 				Default = "MSMQ.MSMQQuery.1"
+<0001> 		[CLSID]
+(0000) 				Default = "{D7D6E073-DCCD-11D0-AA4B-0060970DEBAE}"
+<0135> 	[.rdp]
+(0000) 			Default = "rdpfile"
+<0136> 	[rdpfile]
+(0000) 			Default = "Remote Desktop Connection"
+<0000> 		[DefaultIcon]
+(0000) 				Default = "\Windows\cetsc.exe,-10101"
+<0001> 		[Shell]
+<0000> 			[Open]
+<0000> 				[Command]
+(0000) 						Default = "\Windows\cetsc.exe %1"
+<0137> 	[MsTscAx.MsTscAx]
+(0000) 			Default = "MsTscAx Class v3"
+<0000> 		[CurVer]
+(0000) 				Default = "MsTscAx.MsTscAx.3"
+<0138> 	[MsTscAx.MsTscAx.3]
+(0000) 			Default = "MsTscAx Class v3"
+<0000> 		[CLSID]
+(0000) 				Default = "{3523c2fb-4031-44e4-9a3b-f1e94986ee7f}"
+<0139> 	[.url]
+(0000) 			Default = "urlfile"
+<0140> 	[urlfile]
+(0000) 			ERROR: ERROR - Données non valides.
+
+<0000> 		[Shell]
+<0000> 			[Open]
+<0000> 				[Command]
+(0000) 						Default = "explorer.exe -u%1"
+<0141> 	[.cpl]
+(0000) 			Default = "cplfile"
+<0142> 	[cplfile]
+(0000) 			Default = "Control Panel extension"
+<0000> 		[DefaultIcon]
+(0000) 				Default = "\Windows\ceshell.dll,-4608"
+<0001> 		[Shell]
+<0000> 			[Open]
+<0000> 				[Command]
+(0000) 						Default = "\Windows\ctlpnl.exe %1"
+<0143> 	[.dll]
+(0000) 			Default = "dllfile"
+<0144> 	[dllfile]
+(0000) 			Default = "Application Extension"
+<0000> 		[DefaultIcon]
+(0000) 				Default = "\Windows\ceshell.dll,-4608"
+<0145> 	[.ttf]
+(0000) 			Default = "ttffile"
+<0146> 	[ttffile]
+(0000) 			Default = "TrueType Font file"
+<0000> 		[DefaultIcon]
+(0000) 				Default = "\Windows\ceshell.dll,-4609"
+<0147> 	[wavfile]
+(0000) 			Default = "Wave Sound"
+<0000> 		[DefaultIcon]
+(0000) 				Default = "\Windows\ceshell.dll,-4610"
+<0001> 		[Shell]
+<0000> 			[Open]
+<0000> 				[Command]
+(0000) 						Default = ""AudioSamp.exe" %1"
+<0148> 	[.cab]
+(0000) 			Default = "cabfile"
+<0149> 	[cabfile]
+(0000) 			Default = "CAB File"
+<0000> 		[DefaultIcon]
+(0000) 				Default = "\Windows\wceload.exe,-101"
+<0001> 		[Shell]
+<0000> 			[Open]
+<0000> 				[Command]
+(0000) 						Default = "\Windows\wceload.exe "%1""
+<0150> 	[Filter]
+<0000> 		[{6a08cf80-0e18-11cf-a24d-0020afd79767}]
+<0001> 		[{e30629d1-27e5-11ce-875d-00608cb78066}]
+<0002> 		[{e436ebb5-524f-11ce-9f53-0020af0ba770}]
+<0003> 		[{e436ebb6-524f-11ce-9f53-0020af0ba770}]
+<0151> 	[.dms]
+(0000) 			Default = "dmsfile"
+<0152> 	[dmsfile]
+(0000) 			Default = "Device Management Script File"
+<0000> 		[DefaultIcon]
+(0000) 				Default = "\Windows\dmscript.exe,-1000"
+<0001> 		[Shell]
+<0000> 			[Open]
+<0000> 				[Command]
+(0000) 						Default = "\Windows\dmscript.exe %1"
+<0153> 	[SSCE.Engine.2.0]
+(0000) 			Default = "Active SSCE Engine Object"
+<0000> 		[CLSID]
+(0000) 				Default = "{A4138508-7379-4698-88B7-49132C702184}"
+<0154> 	[SSCE.Errors.2.0]
+(0000) 			Default = "SSCE Error Collection"
+<0000> 		[CLSID]
+(0000) 				Default = "{444C03B3-490A-48C2-81B6-E77366CB62F9}"
+<0155> 	[SSCE.Param.2.0]
+(0000) 			Default = "SSCE Param Object"
+<0000> 		[CLSID]
+(0000) 				Default = "{3CF68253-1219-48DE-975A-FBF161E50EE4}"
+<0156> 	[SSCE.Params.2.0]
+(0000) 			Default = "SSCE Params Collection"
+<0000> 		[CLSID]
+(0000) 				Default = "{474E7D08-67F7-4433-877D-61AC4F2B5879}"
+<0157> 	[SSCE.RemoteDataAccess.2.0]
+(0000) 			Default = "Active SSCE remote data access Object"
+<0000> 		[CLSID]
+(0000) 				Default = "{114E00DD-C185-419E-9610-F4F9126559A7}"
+<0158> 	[SSCE.Replication.2.0]
+(0000) 			Default = "Active SSCE Replication Object"
+<0000> 		[CLSID]
+(0000) 				Default = "{4BF456A0-3B51-4E62-AA9E-7127A84551D0}"
+<0159> 	[Microsoft.SQLSERVER.OLEDB.CE.2.0]
+(0000) 			Default = "Microsoft.SQLSERVER.OLEDB.CE.2.0"
+<0000> 		[CLSID]
+(0000) 				Default = "{76A85B2E-9DE0-4DED-8E69-4DEFDB9C0917}"
+<0160> 	[Microsoft.SQLSERVER.OLEDB.CE.2.0Errors]
+(0000) 			Default = "Microsoft SQLServer 2.0 OLE DB Provider for WinCE Error Lookup"
+<0000> 		[Clsid]
+(0000) 				Default = "{B07F90AF-54B6-41A5-8C93-253870A5B434}"
