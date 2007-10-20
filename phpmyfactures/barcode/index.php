@@ -38,7 +38,7 @@
 <?php
 
 
-$nb_produit = 20;
+$nb_produit = 1000;
 if(!$start) {$start=0;}
 
 

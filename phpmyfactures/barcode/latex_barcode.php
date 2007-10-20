@@ -10,6 +10,10 @@
  */
 @set_time_limit(300);
 
+$nb_per_line=3;
+$nb_per_page=8;
+$format="|c|c|c|";
+
 print "$action ...<br />";
 
 if ($action=="print") {
@@ -28,56 +32,90 @@ if ($action=="print") {
  	 $fpython=fopen($python_file,"w");							
 
    fwrite($ftex,
-'\documentclass{article}
+  '\documentclass[a4paper]{article}
+   %
+   \usepackage{graphicx}
+   %
+   \setlength{\voffset}{-6.2cm}
+   \setlength{\hoffset}{-3.3cm}
 
-\usepackage[greek,francais]{babel}
-\usepackage[latin1]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage{graphicx}
+   \setlength{\oddsidemargin}{0pt}
+   \setlength{\evensidemargin}{0.5cm}
 
-\begin{document}
-\begin{tabular}{ccccccccc}
-');
+   \setlength{\textwidth}{550pt}
 
-	 fwrite($fpython,"codebarlist = [\\");
+   \setlength{\topmargin}{1cm}
+   \setlength{\textheight}{27cm}
+
+   \setlength{\headheight}{90pt}
+
+   \setlength{\headsep}{0pt}
+   \setlength{\parindent}{1cm}
+   \setlength{\parskip}{0.2cm}
+
+   \setlength{\marginparwidth}{0pt}
+   \setlength{\marginparsep}{0pt}
+   %
+   \begin{document}
+
+   \begin{small}
+   \begin{tabular}{'.$format.'}
+   \hline');
+
+   fwrite($fpython,"codebarlist = [\\");
 	 
-	 $nb_lignes=0;
-   foreach (array_keys($barcodes) as $key) {
-	   for ($i=1;$i<=$quantites[$key];$i++) {
-		    fwrite($ftex, sprintf("\includegraphics{%s.eps} & \\hspace{1cm} & ",$barcodes[$key]) );
-		 }
-		 fwrite ($ftex," \\\\ \n ");
-	   for ($i=1;$i<=$quantites[$key];$i++) {
-		 		fwrite($ftex,sprintf(" %s  & \\hspace{1cm} & ",$produits[$key]) );
-		 }
-	   fwrite ($ftex," \\\\\n \\vspace{2cm} \\\\ \n" );
-			
-			$python_line=sprintf('
-			    ("%s", "%s", "%s"),',$barcodes[$key],$price,$produits[$key], $barcodes[$key]);			
-		  fwrite ($fpython, $python_line);
-			
-			$nb_lignes=$nb_lignes+1;
-			
-			if ($nb_lignes==3) {
-			  	   fwrite ($ftex," \\\\\n  \\end{tabular} \\ \\eject \n" );
-						 fwrite ($ftex," \\begin{tabular}{ccccccccc} \n");
-						 $nb_lignes=0;
-			}
-		}
-		
-		fwrite ($ftex,"\\end{tabular} \\end{document}\n");
-    fwrite($fpython,"];
+   $nb_lignes=0;
+
+
+
+// capture info code barre
+
+$sql_query = "select id,titre,stock,barcode from ".$prefixe_table."produits  ";
+
+print "<BR> $sql_query <BR>";
+$req = mysql_query("$sql_query ");
+
+$nb=0;
+
+ foreach (array_keys($barcodes) as $key) {
+   for ($i=1;$i<=$quantites[$key];$i++) {
+     $python_line=sprintf('
+			    ("%s", "%s", "%s"),',$barcodes[$key],$produits[$key],"99.99", $barcodes[$key]); 
+     fwrite ($fpython, $python_line);
+     fwrite ($fpython, $python_line);
+
+     fwrite($ftex, sprintf("
+                            \includegraphics[height=3.2 cm,width=6.5 cm]{%s.eps}  ",$barcodes[$key]) );
+     $nb=$nb+1;
+     if ($nb<$nb_per_line) {
+       fwrite($ftex,"&");
+     }
+     else {
+       $nb=0;
+       $nb_lignes=$nb_lignes+1;
+       fwrite($ftex," \\\\ \\hline  ");
+     }
+  
+     if ($nb_lignes==$nb_per_page) {
+       fwrite ($ftex,' \\ \hline \end{tabular} \eject \n' );
+       fwrite ($ftex,'\begin{tabular}{'.$format.'} \hline');
+       $nb_lignes=0;
+     }
+   }
+ }
+}	
+fwrite ($ftex,"\\hline \\end{tabular}    \\end{small} \\end{document}\n");
+fwrite($fpython,"];
 		");
-	 
-	 fclose($ftex);
-	 fclose($fpython);
-	 
-	 system("compile.bat ",$status);
-	 print "resultat-> $status";
 
-	 system("print.bat  ",$status);
-	 print "resultat-> $status";
-}
+fclose($ftex);
+fclose($fpython);
+
+//system("compile.bat > work/compile.out ",$status);
+system("compile.bat  ",$status);
+print "resultat-> $status";
+
+
 
 
 
