@@ -17,13 +17,34 @@ $req = mysql_query("delete from ".$prefixe_table."fournisseurs where id=\"$id_fo
 	  <td bgcolor="#99CCCC" align="center" width="23%"><b>Ville</b></td>
 	  <td bgcolor="#99CCCC" align="center" width="40%" colspan="3"><b>Actions</b></td>
    </tr>
+    <tr>
+      <form action="">
+     
+    <td bgcolor="#99CCCC" colspan=1> 
+    	<input type=text name=filtre_clef size=15 value="<? echo $filtre_clef ?>"> 
+    </td>
+    <td bgcolor="#99CCCC" colspan=1>       
+    	<input type=text name=filtre_nom size=15 value="<? echo $filtre_nom ?>"> 
+   	</td>
+    <td bgcolor="#99CCCC" colspan=1>
+    	<input type=text name=filtre_ville size=15 value="<? echo $filtre_ville ?>">
+		</td>  
+    <td bgcolor="#99CCCC" colspan=2>  <input type="submit" value="Filtrer"> </td>
+    </td>
+</tr>
 <?php
 
 $nb_fournisseur = 30;
 if(!$start) 
 {$start=0;}
 
-$req = mysql_query("select id,clef,societe,ville from ".$prefixe_table."fournisseurs order by clef limit $start,$nb_fournisseur");
+
+if (!$filtre_clef) {$filtre_clef='*';}
+if (!$filtre_nom) {$filtre_nom='*';}
+if (!$filtre_ville) {$filtre_ville='*';}
+
+$sql_filtre=str_replace("*","%","where clef like '$filtre_clef' and ville like '$filtre_ville' and nom like '$filtre_nom' ");
+$req = mysql_query("select id,clef,societe,ville from ".$prefixe_table."fournisseurs $sql_filtre order by clef limit $start,$nb_fournisseur");
 while($ligne = mysql_fetch_array($req))
 {
 $id = $ligne["id"];

@@ -38,6 +38,9 @@ text-decoration: underline;
 
 <table border="0" align="center" width="770">
    <tr>
+      <td colspan="16" align="center"><hr size="1" color="#000000">Oyak v<? print $version ?></td>
+   </tr>
+   <tr>
       <td colspan="16" align="center"><hr size="1" color="#000000"></td>
    </tr>
    <tr>
