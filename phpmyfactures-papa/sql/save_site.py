@@ -1,6 +1,6 @@
 import os, sys, string, shutil
 from stat import *
-import time
+import time,datetime
 
 
 from_dir="C:\Program Files\EasyPHP1-8\www\phpmyfactures"
@@ -87,10 +87,7 @@ if __name__ == '__main__':
     print """
 -------------------------------------------------
 -------------------------------------------------
--------------------------------------------------
-!  sauvegarde du site
--------------------------------------------------
--------------------------------------------------
+! sauvegarde du site
 -------------------------------------------------
 -------------------------------------------------
 """
@@ -126,11 +123,26 @@ if __name__ == '__main__':
     copytree(from_dir,from_dir, to_dir)
 
     # sauvegarde de la base
-    save_database()
-
     # construction du fichier 7z
 
-    print "-- FIN --"
-    input("Le site est sauvegarde")
+    save_database()
+
+    # renommage fichier sauvegarde
+    now=datetime.datetime.now()
+    name_arch="c:\Oyak\Oyak-%s-%s.7z"%(now.strftime("%Y%m%d"),now.strftime("%H%M%S"))
+    print name_arch
+    os.rename("c:\Oyak\save_site.7z",name_arch)
+
+
+
+    print """
+-------------------------------------------------
+-------------------------------------------------
+! sauvegarde du site termine
+-------------------------------------------------
+-------------------------------------------------
+"""
+
+    input("Le site est sauvegarde dans le fichier "+name_arch)
 
 
