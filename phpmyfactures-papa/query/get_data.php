@@ -1,7 +1,6 @@
 <?php
 
 include("../inc/conf.php");
-$where="";
 
 if ($header) {
  include("../inc/header.php");
@@ -62,19 +61,19 @@ else {
   
   
   if ($vendeurs) {
-    $query="select id,nom,prenom from ".$prefixe_table."vendeurs $where order by nom ";
-    //print $query;
+    $query="select id,nom,prenom,timestamp from ".$prefixe_table."vendeurs order by nom";
+  	//print $query;
     $req = mysql_query($query);
-    while($ligne = mysql_fetch_array($req))
-      { print $ligne["id"].'!'.$ligne[nom].'!'.$ligne[prenom].'!'.date2string($ligne[timestamp]).'=';
-      if ($header) {print "<BR>";}
-      }
+  	while($ligne = mysql_fetch_array($req))
+  	{ print $ligne["id"].'!'.$ligne[nom].'!'.$ligne[prenom].'!'.date2string($ligne[timestamp]).'=';
+  	  if ($header) {print "<BR>";}
+  	}
   }
   
   
   if ($clients) {
-    $query="select societe,ville,clef,balance from ".$prefixe_table."clients $where";
-    //print $query;
+    $query="select societe,ville,clef,timestamp from ".$prefixe_table."clients";
+  	//print $query;
     $req = mysql_query($query);
   	while($ligne = mysql_fetch_array($req))
   	{ print $ligne["societe"].'!'.$ligne[ville].'!'.$ligne[clef].'!'.date2string($ligne[timestamp]).'=';
@@ -83,7 +82,7 @@ else {
   }
   
   if ($fournisseurs) {
-    $query="select societe,ville,clef from ".$prefixe_table."fournisseurs $where";
+    $query="select societe,ville,clef,timestamp from ".$prefixe_table."fournisseurs";
   	//print $query;
     $req = mysql_query($query);
   	while($ligne = mysql_fetch_array($req))
@@ -94,7 +93,7 @@ else {
   }
   	 
   if ($produits) {
-    $query="select barcode,clef,fournisseur,prix_vente_ht,prix_plancher_ht,prix_stock_ht,stock,poids,titre from ".$prefixe_table."produits $where" ;
+    $query="select barcode,clef,fournisseur,prix_vente_ht,prix_plancher_ht,poids,titre,timestamp from ".$prefixe_table."produits";
   	//print $query;
     $req = mysql_query($query);
   	while($ligne = mysql_fetch_array($req))
