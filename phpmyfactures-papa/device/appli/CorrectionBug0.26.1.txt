@@ -36,6 +36,7 @@ non reporte dans 0.28
 bug : relire donnee ne marche pas
 
 correc : importation de la solution 0.28
+         encore une erreur
 
 non reporte dans 0.28
 

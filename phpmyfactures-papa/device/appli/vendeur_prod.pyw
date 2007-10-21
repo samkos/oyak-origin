@@ -306,6 +306,9 @@ class ihmRoot:
         label = Button(self.ihm, text="Nouvelle Facture", command=processFacture,height=4,width=self.Xmax)
         self.add(panelName,"autre",label,3,0)
 
+        label = Button(self.ihm, text="Choisir Vendeur", command=self.changeVendeur,height=4,width=self.Xmax)
+        self.add(panelName,"vendeur",label,5,0)
+
         label = Button(self.ihm, text="Relire Donnée", command=self.rechargeBase,height=4,width=self.Xmax)
         self.add(panelName,"reloader",label,6,0)
         
@@ -513,6 +516,10 @@ class ihmRoot:
 ##0.26##        lisData(readFromServer=1)
         lisData_new(clearAll=1)
         ihm.showMessage("OK...",self.showMenu)
+
+    def changeVendeur(self):
+        global myVendeur
+        myVendeur.ihmShow()
 
 
 
@@ -1052,7 +1059,7 @@ class chooseVendeur(chooseXXX):
           if len(self.filtre)==0 and len(self.clefs0)>0:
               clef=self.listbox0.curselection()[0]
               choix=self.clefs0[int(clef)]
-              print clef,choix
+              #print clef,choix
           else:
               clef=self.listbox.curselection()[0]
               choix=self.clefs[int(clef)]
@@ -1257,8 +1264,8 @@ class chooseFournisseur(chooseXXX):
 
     def collect(self,article):
         (societe,ville,clef,timestamp)=article
-        print "in fournisseur : timestamp=%s, inf=%s, cond=%s"%(timestamp,self.inf,timestamp>=self.inf)
-        print article
+        #print "in fournisseur : timestamp=%s, inf=%s, cond=%s"%(timestamp,self.inf,timestamp>=self.inf)
+        #print article
         if (timestamp>=self.inf):
             self.updateTimestamp(timestamp)
             Fournisseurs[clef]=(societe,ville,clef)
