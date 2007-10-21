@@ -917,12 +917,13 @@ class ean13print(barCodeSymbol):
         # Note we use fit=1
         # later when we go to printing isbn13() instead of isbn.s, we'll remove the fit
         # to keep the line from getting too tiny.
-        self.isbn.name = "xxx"
+        self.isbn.name = price
         self.ps.lines = self.ps.header(self.isbn.s,comments,ean13font,isbnfont,upc5font) + \
                         [ "ean13font" ] + \
                         self.ean13Symbol.pslines() +\
                         [ "isbnfont" ] + \
-                        self.ean13Symbol.psTopCenterText("%s %s" % (self.isbn.name,self.isbn.s),isbnfont,fit=1)
+                        self.ean13Symbol.psTopCenterText("%s" % (self.isbn.name),isbnfont,fit=0)
+#                        self.ean13Symbol.psTopCenterText("%s %s" % (self.isbn.name,self.isbn.s),isbnfont,fit=1)
 
         # 5-digit add-on:  (optional for ISBN only)
         BLANK=re.compile("^ *$")
