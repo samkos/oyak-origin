@@ -1,4 +1,4 @@
-import os, sys, string
+import os, sys, string, shutil
 from stat import *
 import time
 
@@ -8,10 +8,43 @@ work_dir="C:\Program Files\EasyPHP1-8\www\SAVE"
 dirname=string.split(from_dir,'\\')[-1]
 to_dir=work_dir+"\\"+dirname
 
+debug=10
 
-def walktree(dir,par,type):
-    global from_dir,to_dir
-        
+def deltree(dir):
+    global debug
+    
+    mode = os.stat(dir)[ST_MODE]
+    if S_ISDIR(mode):
+      for f in os.listdir(dir):
+          pathname = '%s\%s' % (dir, f)
+          mode = os.stat(pathname)[ST_MODE]
+          if S_ISDIR(mode):
+              # It's a directory, recurse into it
+              deltree(pathname)
+          elif S_ISREG(mode):
+              # It's a file removeit
+              try:
+                  os.remove(pathname)
+                  if debug>0:
+                      print "F- "+pathname  
+              except:
+                  print "erreur Affacement fichier  "+pathname
+                  raise
+      # It's a directory, remove it
+      try:
+          print "D- "+dir
+          os.rmdir(dir)
+      except:
+          print "erreur Effacement Dir "+dir
+          raise
+      
+    
+
+
+
+def copytree(dir,from_dir,to_dir):
+    global debug
+    
     mode = os.stat(dir)[ST_MODE]
     if S_ISDIR(mode):
       for f in os.listdir(dir):
@@ -25,37 +58,52 @@ def walktree(dir,par,type):
                     os.mkdir(to_pathname)
                 except:
                     print "erreur Creation Dir "+to_pathname
-                print "D+ "+to_pathname
+                    raise
+                if debug>0:
+                      print "D+ "+to_pathname
                 # It's a directory, recurse into it
-                walktree(pathname, 0, TYPE_DIR)
+                if not (f=="work"):
+                    copytree(pathname, from_dir, to_dir)
 
             elif S_ISREG(mode):
                 # It's a file copy it!
                 try:
-                    os.copy(path_name,to_pathname)
+                    shutil.copy(pathname,to_pathname)
                 except:
-                    print "erreur copie fichier  "+to_pathname                    
-                print "F+ "+to_pathname
+                    print "erreur copie fichier  "+pathname+"  "+to_pathname
+                    raise
+                if debug>0:
+                    print "F+ "+to_pathname
     
 
 if __name__ == '__main__':
 
-    # read number of cd in base
-
-    TYPE_DISK, TYPE_FILE, TYPE_DIR = 'Disk', 'File', 'Dir'
-
     # effacement de la sauvegarde eventuelle
-    os.removedirs(work_dir)
+    deltree(work_dir)
+    try:
+        deltree(work_dir)
+        print "Effacement "+work_dir
+    except:
+        print "Erreur effacement " + work_dir
+        pass
 
     # creation du diretory cible
     os.mkdir(work_dir)
-    os.mkdir(to_dir)
-
+    try:
+        os.mkdir(work_dir)
+    except:
+        print "Erreur creation " + work_dir
+        pass
+    try:
+        os.mkdir(to_dir)
+    except:
+        print "Erreur creation " + to_dir
+        pass
 
     
 
     # recopie du site web
-    walktree(from_dir, 0, TYPE_DISK)
+    copytree(from_dir,from_dir, to_dir)
 
     # sauvegarde de la base
 
