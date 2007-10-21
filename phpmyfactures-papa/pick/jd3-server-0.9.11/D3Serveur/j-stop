@@ -1,0 +1,205 @@
+*
+* J-STOP : stop all thread of the server
+* Copyright (c) 2001 Christophe Marchal
+*
+* This program is free software; you can redistribute it and/or
+* modify it under the terms of the GNU General Public License
+* as published by the Free Software Foundation; either version 2
+* of the License, or any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software
+* Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*
+
+*----------------------------------------------------------------------*
+* Command to stop all thread started by J-START
+*
+*
+*   Command line is : j-stop [-a]
+*
+*   parameters : -a : force stopping all server started, without asking
+*
+*
+* Christophe Marchal
+*   Mai, 2001
+* Cedric Fontaine
+*   Novembre, 2002
+* Marc Dubois
+*    June, 2003
+*    Signal D3Server and D3Client to 'kindly' shutdown, or progress to
+*    harsher means.
+*
+* Version 0.9.11
+*----------------------------------------------------------------------*
+*
+   cfunction socket.builtin
+   include bp,includes sysid.inc
+   include bp,unix.h socket.h
+*
+
+   equ am to char(254), vm to char(253), esc to char(27)
+
+   include equates
+
+   open _JD3.FJ.PORTS to F.PORTS else
+      stop "Error opening file ":_JD3.FJ.PORTS
+   end
+
+*----------------------------------------------------------------------*
+* Check options
+*----------------------------------------------------------------------*
+tclread tcl.com
+convert " " to am in tcl.com
+
+force.all = 0
+locate("-a",tcl.com;pos) then
+  force.all = 1
+end
+
+* Unix or NT
+UnixHost = 0
+ThisHost = SYSTEM(38)<1,1>
+if ThisHost # 2 and ThisHost # 4 then
+   STOP
+end
+IF ThisHost = 2 then UnixHost = 1
+
+*----------------------------------------------------------------------*
+* Get the server list
+*------------------------------------------------------------------------
+   execute 'select ':_JD3.FJ.PORTS:' with a1 = "server" ' capturing cap
+
+   server.lst = ""
+   loop
+     readnext key else key = ""
+   while key # "" do
+     server.lst<-1> = key
+   repeat
+
+*------------------------------------------------------------------------
+* Get the number of the server we want to stop
+*------------------------------------------------------------------------
+nbserver = dcount(server.lst,am)
+
+if nbserver <= 0 then
+   print "No server started"
+   stop
+end
+
+if nbserver > 1 and force.all = 0 then
+   execute "j-status -s"
+   print "There are ":nbserver:" servers started."
+
+   serv = -1
+   loop
+   while serv < 0 do
+     print "Wich one do you want to stop (0=none[default],a=all,pid=server to stop) ":
+     input serv
+
+     if serv = "" or serv = 0 then
+        serv = 0
+     end else
+        if not(num(serv)) then
+           if oconv(serv,"MCL") # "a" then
+              serv = -1
+           end
+        end else
+           locate(serv,server.lst;pos) else
+              serv = -1
+           end
+        end
+     end
+   repeat
+
+   if serv = 0 then
+      stop
+   end
+
+   if serv"MCL" # "a" then
+      nbservser = 1
+      locate(serv,server.lst;pos) then
+         server.lst = server.lst<pos>
+      end else
+         stop
+      end
+   end
+end
+
+*------------------------------------------------------------------------
+* Stop all server we ask
+*------------------------------------------------------------------------
+for j = 1 to nbserver
+   read server.status from F.PORTS,server.lst<j> then
+
+      * Stop all child
+      nbchild = dcount(server.status<6>,vm)
+      server = 0
+      for i = 1 to nbchild
+         port = server.status<8,i> + 0
+         gosub 100
+         sleep .3
+
+         execute "end ":server.status<6,i>:" ":server.status<7> capturing cap
+
+         crt " Logging off (child) on ":server.status<6,i>:" .... ":
+         execute "logoff ":server.status<6,i> capturing cap
+         crt "done."
+
+         delete F.PORTS,server.status<6,i>
+      next i
+
+      * Stop main server
+      server = 1
+      port = server.status<2> + 0
+      delete F.PORTS,server.lst<j>
+      gosub 100
+      sleep .3
+      execute "end ":server.lst<j>:" ":server.status<7> capturing cap
+      crt " Logging off (server) on ":server.lst<j>:" .... ":
+      execute "logoff ":server.lst<j> capturing cap
+      crt "done."
+
+   end
+next j
+
+stop
+
+*------------------------------------------------------------------------------------
+* Sending SHUTDOWN to D3client
+*
+* port : port which you want to say SHUTDOWN
+*
+*------------------------------------------------------------------------------------
+100
+* Create socket
+   sock = %socket(AF$INET, SOCK$STREAM, 0)
+
+* Connect to port
+*   if %connect(sock,AF$INET, INADDR$ANY,port) < 0 then
+   if %connect(sock,AF$INET,'localhost',port) < 0 then
+      goto 199
+   end
+
+
+   *
+   * Don't send commande, but wakeup server to force it to reload record from FJ.PORT
+   * and see there is no more to stop it
+   *
+   if not(server) then
+      buffer = CP.SHUTDOWN.AMC"R(%8)"
+      n = %send(sock, buffer, 8, 0)
+   end
+
+199
+   if UnixHost then
+        %close(sock)
+   end else
+        %closesocket(sock)
+   end
+return

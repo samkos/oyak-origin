@@ -1,0 +1,63 @@
+version 0.9.11 :
+  - improvement made by Marc Dubois (see readme_NT.txt) to fix NT socket shutdown problem
+
+version 0.9.10 :
+  - Some changes made by Cedric Fontaine to manage free port available on jd3 server
+
+version 0.9.9:
+  - Use option SO$REUSEADDR on socket to prevent blocking after crash or bad shutdown.(don't know if it's
+    really working)
+
+version 0.9.8:
+  - Some minor bug corrections
+
+version 0.9.7:
+  - Improve management of free ports :
+        . different for each server, so now you could start a server for normal activity
+          and another for development, and don't crash all child for normal user (only
+          child from development server)
+
+        . never loop for ever when there is no more child free, just wait 5 second
+          (see MAXTRY in the code) before refuse connection
+
+        . check if a free port is really free or killed (logged off) by another process (or user)
+
+  - J-STOP :  now really stop the main server with all child
+
+version 0.9.6 :
+  - D3CLIENT : new option
+                   -s xxx to know the pid of the main server, used by new commands (see bellow)
+
+  - D3SERVER : new option
+                -h  to see all options available
+                -c xxx  to specify number of child to start
+                -cp xxx  to specify the starting port for the child
+
+  - new command  :
+        j-startup   to start a new server as a phantom
+        j-stop      to stop a server
+        j-status    to show status of the server(s)
+
+  - All the system use FJ.PORTS file to store information about connection
+
+version 0.9.5 :
+  - little change in the protocol for the Execute query:
+    possibility to make data for execute command, and why not execute many command at one time
+    see protocol.txt to know how it change (or read the code;)
+
+    Still compatible with old protocol
+
+version 0.9.4 :
+  - bugs in the READV
+
+version 0.9.3 :
+  - few bug about log file
+  - I think I change the name of the main server : I promiss I never do this again
+
+version 0.9.2 :
+  - Correct a problem with TCL parameter
+  - comments and error messages in English
+
+version 0.9.1 :
+  - New stuff in the SELECT on open file
+  - Improve the network speed (about 5-10 times faster)

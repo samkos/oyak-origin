@@ -1,0 +1,381 @@
+The protocol of the d3 server (0.9.1) :
+
+    The protocol is very simple.
+    Two strings are exchanged between server and client
+    The first one is the lenght of the second, always 8 bytes long.
+    The second one contains the command line sent to the server and the result of this command sent to the client.
+    
+    Each line contains various information, separated by char(1) (\0x001, I'll call it _sep ), depending on what the client ask to the server.
+    All lines must end with the _sep separator.
+    Each command line begins with the command code as the first information, and each result line begins with the error code.
+        
+    Available command :
+      For the exemple I use _sep to mean the separator character (char(1)) 
+      and the : as the concat instruction (but it is not into the protocol ;)
+        
+        Login a user
+           No basic instruction for that
+           
+           Command code = 1
+           parameters
+            1 : user code
+            2 : password
+            
+           returns 
+            1 : error code = 0  if all is ok
+                             -1 if password is incorrect
+                             -2 if the user does not exist
+                             
+           Ex : 
+           Client send      1:_sep:usr:_sep:passwd:_sep
+           Server send      0:_sep:_sep
+
+           Notes : maybe the server must close the connection if the error code is not 0           
+            
+            
+        Logoff a user
+           No basic instruction for this
+           
+           Notes : this closes the connection
+           
+           Command code = 2
+           no parameter
+            
+           returns
+            1 : error code = always 0 
+            
+           Ex: 
+           Client send      2:_sep
+           Server send      0:_sep 
+           
+
+        Execute TCL command :
+           Basic instruction : execute "list myfile" returning error capturing cap
+
+           Commande code = 3
+           parameters
+            1 : the TCL command to execute
+                
+                Change since version 0.9.5 :
+                  all the command in the first attribute separate by VM
+                  in the second attribute all the data to be done separate by SVM for each command (in first attribute)
+                
+           returns 
+            1 : error code = always 0
+            2 : the capturing result , attirbute mark separated
+            
+                Change since version 0.9.5 :
+                    all the capturing are glue in the order of the command separated by a AM
+            
+            Ex :
+            Client send         3:_sep:list myfile:_sep
+            Server send      0:_sep:capturing:_sep
+                
+                Since version 0.9.5 you can do :
+                    Client send      3:_sep:copy myfile myrecord:VM:search myfile:AM:newrecord:VM:first to search:SVM:other element to search:_sep
+                    Server send      0:_sep:capturing from copy:AM:capturing from search:_sep
+
+
+        Call subroutine :
+           Basic instruction : call mysub(par1,par2)
+
+           Notes : Maximum 16 parameters are allow, I hope it will be enough ;)
+    
+           Command code = 4
+           parameters
+            1 : the name of the subroutine
+            2 : number of parameter for the subroutine
+            3.... : parameters of the subroutine separated by the _sep
+            
+           returns
+            1 : error code = always 0
+            2.... : parameters of the subroutine with their new value
+            
+            Ex : calling mysub that modify the second parameter
+            Client send         4:_sep:mysub:_sep:_2:_sep:par1:_sep:par2:_sep
+            Server send      0:_sep:par1:_sep:par2modified:_sep
+
+
+        Select items from the TCL
+           Basic instruction : execute "select myfile with..."
+           
+           Notes : sselect can be used, the keys will stay in order.
+           
+           Command code = 17
+           parameters
+            1 : the select statement
+            
+           returns
+            1 : error code = always 0
+            2 : number of items selected
+            3 : each key selected, attribute mark(@AM) separated
+            
+           Ex 
+            Client send         17:_sep:select myfile with a1 = "k]":_sep
+            Server send         0:_sep:2:_sep:key1:@AM:key2:_sep
+           
+            
+        Open a file
+           Basic instruction : open "myfile" to fd
+           
+           Notes : The server use a dim variable to store the file descriptor 
+                   and return the position in the dim to the client
+                   
+           Command code = 6
+           parameters 
+            1 : account name of the file, if it is "", the server try to open the file
+                into the account he runs. Take care of this, and make pointer file if needed.
+                
+            2 : name of the file
+           
+           returns 
+            1 : error code = 0 if the file is opened
+                             -1 if the file can not be open
+            2 : the file descriptor if the file is opened
+            
+           Ex :  
+           Client send       6:_sep::_sep:myfile:_sep
+           Server send       0:_sep:3:_sep
+                 
+        Select a file
+           Basic instruction : select file.desciptor
+           
+           Notes : the server uses a dim variable to store each active list of a file
+           
+           Command code = 5
+           parameters 
+            1 : the file descriptor
+           
+           returns : 
+            1 : error code = -1 if the file is not open
+                              0 if everything is OK
+            2 : the position in the dim of the select list
+            3 : number of item selected (use estimate-count to count them)
+            
+           Ex : Assume that myfile is open and his fd = 3, there is 3 records in the file
+           Client send       5:_sep:3:_sep
+           Server send       0:_sep:4:_sep:3:_sep
+           
+        Readnext from a select file
+           Basic instruction : readnext key from selectlist
+           
+           Notes : the select lists are stored on the server, but it will be better if the server sent the list 
+                   of keys to the client (less network communications)
+            
+           Command code = 7
+           parameters
+            1 : the select list descriptor send by a select
+            
+           returns 
+            1 : error code : 0 if all is ok
+                             -1 if there is no more key, or no active list
+            2 : the next key, if there is one
+            
+           Ex : 
+           Client send      7:_sep:3:_sep
+           Server send      0:_sep:nextkey:_sep
+           
+        Read an item from a file
+           Basic instruction : read item from fd,key
+            
+           command code = 8
+           parameters
+            1 : file descriptor
+            2 : key
+            
+           returns
+            1 : error code = -1 if the file is not open
+                             -2 if the record does not exist
+                             0  if everything is ok
+            2 : depending on the error code 
+                if error code = 0 
+                    the record with all the separator (@AM,@VM,@SVM)
+                              = -1
+                    ""
+                              = -2
+                    ""
+            
+           Ex :
+           Client send      8:_sep:3:_sep:key:_sep
+           Server send      0:_sep:att1:@AM:attr2vm1:@VM:attr2vm2:_sep
+           
+        Read an item and lock it
+           Basic instruction : readu item from fd,key
+            
+           command code = 9
+           parameters
+            1 : file descriptor
+            2 : key
+            
+           returns
+            1 : error code = -1 if the file is not open
+                             -2 if the record does not exist
+                             -3 if the record is locked
+                             0  if everything is ok
+            2 : depending of the error code 
+                if error code = 0 
+                    the record with all the separator (@AM,@VM,@SVM)
+                              = -1
+                    ""
+                              = -2
+                    ""
+                              = -3
+                    the port who locks the item:@VM:the name of the user on this port
+            
+           Ex :
+           Client send      9:_sep:3:_sep:key:_sep
+           Server send      0:_sep:att1:@AM:attr2vm1:@VM:attr2vm2:_sep
+           
+           Notes : even if the record does not exist, it is locked
+            
+        Write an item 
+           Basic instruction : write item on fd,key
+           
+           Command code = 10
+           parameters 
+            1 : file descriptor
+            2 : key
+            3 : record to write
+            
+           returns 
+            1 : error code = -1 if the file is not open
+                             0  if all is OK
+
+           Ex :
+           Client send      10:_sep:3:_sep:key:_sep:att1:@AM:attr2vm1:@VM:attr2vm2:_sep
+           Server send      0:_sep
+           
+        Release a lock
+           Basic instruction : release fd,key
+           
+           Command code = 11
+           parameters
+            1 : file descriptor
+            2 : key
+            
+           returns 
+            1 : error code = -1 if the file is not open
+                             0  if all is OK
+
+           Ex : 
+           Client send      11:_sep:3:_sep:key:_sep
+           Server send      0:_sep
+           
+        Delete an item 
+           Basic instruction : delete fd,key
+           
+           Command code = 12
+           parameters
+            1 : file descriptor
+            2 : key
+            
+           returns 
+            1 : error code = -1 if the file is not open
+                             0  if all is OK
+
+           Ex : 
+           Client send      12:_sep:3:_sep:key:_sep
+           Server send      0:_sep
+           
+        Close an opened file 
+           Basic instruction : close fd
+           
+           Command code = 13
+           parameters
+            1 : file descriptor
+            
+           returns 
+            1 : error code = -1 if the file is not open
+                             0  if all is OK
+
+           Ex : 
+           Client send      13:_sep:3:_sep
+           Server send      0:_sep
+
+           
+        Test if a record exists or not
+           No basic instruction to do this
+           
+           Command code = 14
+           parameters
+            1 : file descriptor
+            2 : key
+            
+           returns 
+            1 : error code = -1 if the file is not open
+                             0  if all is OK
+            2 : the flag to say if it exist or not
+                0 = record exist
+                1 = record does not exist
+                
+
+           Ex : 
+           Client send      13:_sep:3:_sep:key:_sep
+           Server send      0:_sep:1:_sep
+           
+        Lock an item without reading it
+           No basic instruction to do this
+           
+           Command code = 15
+           parameters
+            1 : file descriptor
+            2 : key
+            
+           returns
+            1 : error code = -1 if the file is not open
+                             -2 if the record does not exist
+                             -3 if the record is locked
+                             0  if all is ok
+            2 : depending on the error code 
+                if error code = 0 ,-1,-2
+                    ""
+                              = -3
+                    the port who locks the item:@VM:the name of the user on this port
+            
+           Ex :
+           Client send      15:_sep:3:_sep:key
+           Server send      0:_sep:_sep
+           
+           Notes : even if the record does not exist, it is locked
+                   
+        Read an attribute from a file
+           Basic instruction : readv attr from fd,key,1
+           
+           Command code = 16
+           parameters
+            1 : file descriptor
+            2 : key
+            3 : position of the attribute
+            
+           returns
+            1 : error code = -1 if the file is not open
+                             -2 if the record does not exist
+                             0  if all is ok
+            2 : depending of the error code 
+                if error code = 0 
+                    the record with all the separator (@AM,@VM,@SVM)
+                              = -1
+                    ""
+                              = -2
+                    ""
+            
+           Ex :
+           Client send      16:_sep:3:_sep:key:_sep:2:_sep
+           Server send      0:_sep:attr2vm1:@VM:attr2vm2:_sep
+           
+        Do nothing but send an IP packet
+           No basic utility
+           
+           Command code = 18   
+           parameters
+             no parameters
+             
+           returns
+            1 : error code = always 0
+            2 : "ok"
+            
+            Ex :
+            Client send     18:_sep
+            Server send     0:_sep:ok:_sep
+           
+

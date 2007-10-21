@@ -1,0 +1,876 @@
+*
+* D3Client : one thread server that can answer request of clients
+* Copyright (c) 2000 Christophe Marchal
+*
+* This program is free software; you can redistribute it and/or
+* modify it under the terms of the GNU General Public License
+* as published by the Free Software Foundation; either version 2
+* of the License, or any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software
+* Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*
+
+*----------------------------------------------------------------------*
+* one thread server that can answer request of clients
+*
+* These files must exist in the account :
+*   FJ.PORTS : file used by the d3server to know which thread are free
+*   FJ.USR   : file for the user information
+*   FJ.LOG   : file used when the user are logged for the lock information on readu
+*
+*
+* Command line : d3client -port xxxx [-d] [-s xxxx]
+*   parameters : -port xxxx : starting to listen on the port xxxx
+*                -d         : setting the debug flag
+*                -s xxxx    : for PID of the main server
+*
+*
+* Bryan Buchanan, wEbbTide Systems Pty Ltd
+*    March, 1997
+* Christophe Marchal
+*    Mars, 2000
+* Cedric Fontaine
+*    Novembre, 2002
+* Marc Dubois
+*    June, 2003
+*    Skip over 'unreleased' ports when binding.
+*    If this client receives command 'CP.SHUTDOWN.AMC' (initialised in
+*    EQUATES include) - Shutdown this process.
+*
+* Version 0.9.11
+*----------------------------------------------------------------------*
+   cfunction socket.builtin
+   INCLUDE DM,BP,INCLUDES SYSID.INC
+   INCLUDE DM,BP,UNIX.H SOCKET.H
+
+   equ am to char(254), vm to char(253), svm to char(252), esc to char(27)
+   equ bufmark to char(1)
+
+   EQU _USR.PASS     TO 1
+   EQU _USR.NOM      TO 2
+   EQU _USR.LOG.DATE TO 3
+   EQU _USR.LOG.TIME TO 4
+
+   ClientStop = 0
+
+   include equates
+
+   equ MAXBLOCK to 2048
+
+*-------------------------------------------------------------
+* Init variables and files
+*-------------------------------------------------------------
+   * Array for the subroutine parameters
+   dim param(16)
+
+   * Am I a phantom or not ?
+   isphantom = system(24)
+
+   buffer = space(MAXBLOCK)
+   eof = 0
+   error = 0
+   debug = 0
+   d3port = SYSTEM(22)
+
+   * for open files and active list
+   equ MAXFILES TO 1000
+   dim files(MAXFILES)
+   dim active.liste(MAXFILES)
+   mat files = ""
+   mat active.liste = ""
+   file.name = ""
+
+   * the file for free port
+   open _JD3.FJ.PORTS to F.PORTS else
+     stop "D3Client : error opening file ":_JD3.FJ.PORTS
+   end
+
+   * the file for logging info on users
+   open _JD3.FJ.LOG to F.LOG else
+     stop "D3CLIENT : error opening file ":_JD3.FJ.LOG
+   end
+
+   * the file for users info (code,password,....)
+   open _JD3.FJ.USR to F.USR else
+     stop "D3CLIENT : error opening file ":_JD3.FJ.USR
+   end
+
+   * the master dict file for macro to run subroutines
+   open _MASTER.DICT to M.DICT else
+      stop "D3CLIENT : error opening file ":_MASTER.DICT
+   end
+
+*-------------------------------------------------------------
+* Get TCL parameters
+*-------------------------------------------------------------
+   tclread tcl.command
+   convert ' ' to am in tcl.command
+
+   locate('-port', tcl.command; pos) then
+      listen.port = tcl.command<pos+1> + 0
+   end else
+      stop "D3client : No port specified"
+   end
+
+   locate('-d',tcl.command;pos) then
+      debug = 1
+   end
+
+   server.pid = ""
+   locate('-s',tcl.command;pos) then
+      server.pid = tcl.command<pos + 1>
+   end
+
+   * Unix or NT
+   UnixHost = 0
+   ThisHost = SYSTEM(38)<1,1>
+   if ThisHost # 2 and ThisHost # 4 then
+      if Debug then
+         print "Host is not UNIX or NT."
+      end
+      STOP
+   end
+   IF ThisHost = 2 then UnixHost = 1
+
+*------------------------------------------------------------------
+* Fix status of this thread
+*------------------------------------------------------------------
+* Add information for status on this thread, needed by J-STATUS
+status = "client"                  ;* Type of thread
+status<2> = listen.port            ;* IP Port
+status<3> = time():"#":date()      ;* startup time-date
+status<4> = _STATUS.STARTING       ;* Status
+status<5> = ""                     ;* IP connected
+status<10> = time():"#":date()     ;* Last transaction time-date
+write status on F.PORTS,d3port
+
+*-------------------------------------------------------------
+* Create the server socket
+*-------------------------------------------------------------
+   sock = %socket(AF$INET, SOCK$STREAM, 0)
+   if sock < 0 then
+      stop "D3Client : Error creating socket"
+   end
+
+   one = 1
+   err = %setsockopt(sock, SOL$SOCKET, SO$REUSEADDR, &one, 1)
+
+   bCnt = 0
+   binded = 0
+   * This variable 'maxLoop' is set depending on the number of orphaned ports you anticipate
+   * skipping over. (MD June, 2003)
+   maxLoop = 200
+   start.port = listen.port
+   loop until binded do
+      err = %bind(sock, AF$INET, INADDR$ANY, listen.port)
+      if err < 0 then
+        bCnt += 1
+        listen.port += 1
+        if bCnt > maxLoop then
+           if UnixHost then
+              %close(sock)
+           end else
+              %closesocket(sock)
+           end
+           stop "D3Client : Error binding from port ":start.port:" to ":listen.port
+        end
+      end else
+         binded = 1
+      end
+   repeat
+
+*-------------------------------------------------------------
+* Add information needed by the J-STOP, to stop all child
+*    and information for management of free port
+*-------------------------------------------------------------
+if server.pid # "" then
+   readu server.status from F.PORTS,server.pid
+   locate(d3port,server.status,6;pos.child) else
+      server.status<6,pos.child> = d3port
+      server.status<8,pos.child> = listen.port
+   end
+   write server.status on F.PORTS,server.pid
+end
+
+
+5
+   if debug then print "Waiting..."
+   writev _STATUS.WAITING on F.PORTS,d3port,4
+   writev "" on F.PORTS,d3port,5
+   writev time():"#":date() on F.PORTS,d3port,10
+
+   * Waiting client
+   %listen(sock, 0)
+   addr = 0
+   port = 0
+   if debug then crt "Listening..."
+   fd = %accept(sock, &addr, &port)
+
+   * if error retry waiting
+   if fd < 0 then
+      if UnixHost then
+         %close(fd)
+      end else
+         %closesocket(fd)
+      end
+      goto 5
+   end
+
+   gosub 500
+   if debug then print "Connection from ":addr
+   writev addr on F.PORTS,d3port,5
+   writev time():"#":date() on F.PORTS,d3port,10
+
+10
+   * remove me from the free ports
+   if server.pid # "" then
+      readu free.ports from F.PORTS,server.pid locked
+         sleep(1)
+         goto 10
+      end
+
+      locate(d3port,free.ports,6;pos.port) then
+         free.ports<8,pos.port> = ""
+      end else
+         if debug then print "My server is ":server.pid:" but I'm not in his list"
+      end
+
+      write free.ports on F.PORTS,server.pid
+   end
+
+   *-----------------------------------------------------------
+   * Main
+   *-----------------------------------------------------------
+   loop
+   while 1 do
+
+      writev _STATUS.CONNECTED on F.PORTS,d3port,4
+      writev time():"#":date() on F.PORTS,d3port,10
+
+      * Read request from client
+      gosub 20
+      * if error, the client close the connection
+      if error then goto 15
+
+      if debug then print "Command : ":command
+      writev _STATUS.PROCESSING on F.PORTS,d3port,4
+      writev time():"#":date() on F.PORTS,d3port,10
+
+      * answer request
+      begin case
+          case command = CP.SHUTDOWN.AMC
+            * Stop this Child
+            if debug then print "SHUTDOWN"
+            ClientStop = 1
+            goto 15
+
+         case command = CP.NOOP.AMC
+           if debug then print "NOOP"
+           result = "ok":bufmark
+           errorno = 0
+           gosub 30
+           if error then goto 15
+
+         * login a user
+         case command = CP.LOGON.AMC
+            if debug then print "LOGON"
+            user = field(result,bufmark,1)
+            pass = field(result,bufmark,2)
+            if debug then print "Logon ":user:"/":pass
+            buf = ""
+            read buf from F.USR,user then
+               if buf<_USR.PASS> # pass then
+                  errorno = -1
+               end else
+                  errorno = 0
+                  buf<_USR.LOG.DATE> = date()
+                  buf<_USR.LOG.TIME> = time()
+                  write buf on F.USR,user
+               end
+            end else
+               errorno = -2
+            end
+            result = "":bufmark
+
+            write buf<_USR.NOM>:"-1 ":buf<_USR.NOM>:"-2" on F.LOG,"$PORT":d3port
+
+            gosub 30
+            if error then goto 15
+
+         * logoff
+         case command = CP.LOGOFF.AMC
+             if debug then print "LOGOFF"
+             delete F.LOG,"$PORT":d3port
+
+             result = ""
+             errorno = 0
+             gosub 30
+             if error then goto 15
+
+         * execute tcl command
+         case command = CP.EXECUTE.AMC
+             if debug then print "EXECUTE"
+             result = field(result,bufmark,1)
+             nbcmd = dcount(result<1>,@VM)
+             if debug then print "execute ":nbcmd:" command"
+             buf = ""
+             for cptcmd = 1 to nbcmd
+                 nbdata = dcount(result<2,cptcmd>,@SVM)
+                 if debug then print "nb data ":nbdata
+                 for cptdata = 1 to nbdata
+                     data result<2,cptcmd,cptdata>
+                 next cptdata
+                 execute result<1,cptcmd> returning errorno capturing stuff
+                 buf := stuff:@AM
+             next cptcmd
+             result = buf:bufmark
+             errorno = 0
+             gosub 30
+             if error then goto 15
+
+         * call subroutine
+         case command = CP.CALL.AMC
+             if debug then print "CALL"
+             name = field(result, bufmark, 1)
+             nparam = field(result, bufmark, 2) + 0
+             if nparam < 0 then nparam = 0
+             if nparam > 16 then nparam = 16
+             mat param = ''
+             for i = 1 to nparam
+                 param(i) = field(result, bufmark, i+2)
+             next i
+
+             if debug then crt " subroutine ":name
+          if name"mcu" = "jd3getpage" then
+              call jd3getpage(addr,param(1),param(2),param(3))
+          end else
+
+             if nparam = 0 then
+                gosub 400
+             end else
+                on nparam gosub 401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412, 413, 414, 415, 416
+             end
+           end
+             if debug then print "CALL finished"
+             result = ''
+             for i = 1 to nparam
+                 result = result:param(i):bufmark
+             next i
+             errorno = 0
+             gosub 30
+             if error then goto 15
+
+         * select an opened file
+         case command = CP.SELECT.AMC
+            if debug then print "SELECT FILE"
+            filenum = field(result,bufmark,1)
+            nbelements = 0
+            execute "estimate-count ":file.name<filenum> capturing nbelements
+            if file.name<1,filenum> # "" then
+                select files(filenum) to active.liste(filenum)
+                result = filenum
+                errorno = 0
+             end else
+                * File not opened
+                result = ""
+                errorno = -1
+            end
+            result := bufmark:nbelements:bufmark
+            gosub 30
+            if error then goto 15
+
+         * execute a TCL select
+         case command = CP.SELECT.TCL.AMC
+            if debug then print "SELECT TCL"
+            stmt = field(result,bufmark,1)
+            execute stmt returning errorno capturing stuff
+            ok = 1
+            list = ''
+            cpt = 0
+            loop
+              readnext cle else ok = 0
+            while ok = 1 do
+              list<-1> = cle
+              cpt += 1
+            repeat
+
+            result = cpt:bufmark:list:bufmark
+            errorno = 0
+            gosub 30
+            if error then goto 15
+
+         * open file
+         case command = CP.OPEN.AMC
+             if debug then print "OPEN FILE"
+             account  = field(result,bufmark,1)
+             dataname = field(result,bufmark,2)
+             errorno = 0
+             if account # "" then
+               if index(dataname,",",1) > 0 then
+                  buf = account:",":dataname
+               end else
+                  buf = account:",":dataname:","
+               end
+             end else
+                buf = dataname
+             end
+
+             locate(buf,file.name,1;pos.file) then
+                 file.name<2,pos.file> += 1
+                 errorno = 0
+                 result = pos.file
+             end else
+                for i = 1 to MAXFILES
+                 if file.name<1,i> = "" then
+                     open buf to files(i) then
+                         errorno = 0
+                         result = i
+                         file.name<1,i> = buf
+                         file.name<2,i> = 1
+                     end else
+                        errorno = -1
+                        result = ""
+                     end
+                     i = MAXFILES
+                   end
+                next i
+             end
+             result := bufmark
+             gosub 30
+             if error then goto 15
+
+         * close an opened file
+         case command = CP.CLOSE.AMC
+            if debug then print "CLOSE FILE"
+            filenum = field(result,bufmark,1)
+            if file.name<1,filenum> = "" then
+                errorno = -1
+                result = ""
+             end else
+                file.name<2,filenum> -= 1
+                if file.name<2,filenum> <= 0 then
+                   file.name<1,filenum> = ""
+                   file.name<2,filenum> = 0
+                   close files(filenum)
+                   files(filenum) = ""
+                   errorno = 0
+                   result = ""
+                end
+            end
+             result := bufmark
+            gosub 30
+            if error then goto 15
+
+         * readnext from an active list
+         case command = CP.READNEXT.AMC
+             if debug then print "READNEXT"
+             filenum = field(result,bufmark,1)
+             errorno = 0
+             readnext result from active.liste(filenum) else
+                result = ""
+                active.liste(filenum) = ""
+                errorno = -1
+             end
+             result := bufmark
+             gosub 30
+             if error then goto 15
+
+         * read record
+         case command = CP.READ.AMC
+             if debug then print "READ"
+             filenum = field(result,bufmark,1)
+             item.id = field(result,bufmark,2)
+             errorno = 0
+             if file.name<1,filenum> = "" then
+                errorno = -1
+                result = ""
+             end else
+                 read result from files(filenum),item.id locked
+                    * if lock we try to find by who
+                    errorno = -3
+                    portlock = system(30)
+                    readv buf from F.LOG,"$PORT":portlock,1
+                    buf = field(field(buf,"-",2)," ",2)
+                    if buf = "" then buf = "Unknow"
+                    result = portlock:VM:buf
+                end else
+                    errorno = -2
+                    result = ""
+                end
+             end
+             result := bufmark
+             gosub 30
+             if error then goto 15
+
+         * read and lock a record
+         case command = CP.READU.AMC
+             if debug then print "READU"
+             filenum = field(result,bufmark,1)
+             item.id = field(result,bufmark,2)
+             errorno = 0
+             if file.name<1,filenum> = "" then
+                errorno = -1
+                result = ""
+             end else
+              readu result from files(filenum),item.id locked
+                    * if lock we try to find by who
+                    errorno = -3
+                    portlock = system(30)
+                    readv buf from F.LOG,"$PORT":portlock,1
+                    buf = field(field(buf,"-",2)," ",2)
+                    if buf = "" then buf = "Unknow"
+                    result = portlock:VM:buf
+                end else
+                    errorno = -2
+                    result = ''
+              end
+             end
+             result := bufmark
+             gosub 30
+             if error then goto 15
+
+         * write a record
+         case command = CP.WRITE.AMC
+             if debug then print "WRITE"
+             filenum = field(result,bufmark,1)
+             item.id = field(result,bufmark,2)
+             record = field(result,bufmark,3)
+             errorno = 0
+             result = ''
+             if file.name<1,filenum> = "" then
+                errorno = -1
+             end else
+                write record on files(filenum),item.id
+             end
+             result := bufmark
+             gosub 30
+             if error then goto 15
+
+         * delete a record
+         case command = CP.DELETE.ITEM.AMC
+             if debug then print "DELETE"
+             filenum = field(result,bufmark,1)
+             item.id = field(result,bufmark,2)
+             errorno = 0
+             result = ""
+             if file.name<1,filenum> = "" then
+                errorno = -1
+             end else
+                delete files(filenum),item.id
+             end
+             result := bufmark
+             gosub 30
+             if error then goto 15
+
+         * free a lock
+         case command= CP.RELEASE.AMC
+              if debug then print "RELEASE"
+              filenum = field(result,bufmark,1)
+              item.id = field(result,bufmark,2)
+              errorno = 0
+              result = ""
+              if file.name<1,filenum> = "" then
+                 errorno = -1
+              end else
+                 release files(filenum),item.id
+              end
+              result := bufmark
+              gosub 30
+              if error then goto 15
+
+         * test the existance of a record
+         case command = CP.TEST.EXIST.AMC
+             if debug then print "TEST EXIST"
+             filenum = field(result,bufmark,1)
+             item.id = field(result,bufmark,2)
+             errorno = 0
+             if file.name<1,filenum> = "" then
+                errorno = -1
+                result = ""
+             end else
+                read result from files(filenum),item.id then
+                    errorno = 0
+                    result = "0"
+                end else
+                    errorno = 0
+                    result = "1"
+                end
+             end
+             result := bufmark
+             gosub 30
+             if error then goto 15
+
+         * lock a record without reading
+         case command = CP.LOCK.AMC
+             if debug then print "LOCK"
+             filenum = field(result,bufmark,1)
+             item.id = field(result,bufmark,2)
+             result = ""
+             errorno = 0
+             if file.name<1,filenum> = "" then
+                errorno = -1
+                result = ""
+             end else
+              readu buf from files(filenum),item.id locked
+                    * if lock we try to find by who
+                    portlock = system(30)
+                    readv buf from F.LOG,"$PORT":portlock,1
+                    buf = field(field(buf,"-",2)," ",2)
+                    if buf = "" then buf = "Unknow"
+                    result = portlock:VM:buf
+                    errorno = -3
+                end else
+                    errorno = -2
+                    result = ""
+                end
+             end
+             result := bufmark
+             gosub 30
+             if error then goto 15
+
+         * read an attribute
+         case command = CP.READV.AMC
+             if debug then print "READV"
+             filenum = field(result,bufmark,1)
+             itemid = field(result,bufmark,2)
+             amc = field(result,bufmark,3)
+             errorno = 0
+
+             if file.name<1,filenum> = "" then
+                errorno = -1
+                result = ""
+             end else
+
+                readv result from files(filenum),itemid,amc else
+                    errorno = -2
+                    result = ""
+                end
+             end
+             result := bufmark
+             gosub 30
+             if error then goto 15
+
+         * return jd3 status
+         case command = CP.STATUS
+             errorno = 0
+             if debug then print "STATUS"
+             execute "j-status -f" returning errorno capturing stuff
+             result=stuff:bufmark
+             gosub 30
+             if error then goto 15
+
+
+      end case
+   repeat
+
+15
+   * close the connection
+   if UnixHost then
+      %close(fd)
+   end else
+      %closesocket(fd)
+   end
+   release
+
+16
+   * I am free so I tell it to the server
+   if server.pid # "" then
+      readu free.ports from F.PORTS,server.pid locked
+          sleep(1)
+          goto 16
+      end
+
+      locate(d3port,free.ports,6;pos.port) then
+         free.ports<8,pos.port> = listen.port
+      end else
+         if debug then print "My server is ":server.pid:" but I'm not in his list"
+      end
+
+      write free.ports on F.PORTS,server.pid
+   end
+
+   if ClientStop then
+      if UnixHost then
+         %close(sock)
+      end else
+         %closesocket(sock)
+      end
+      crt 'Stopping this Client.'
+      stop
+   end
+
+   * go waiting new connection
+   goto 5
+
+20
+  *--------------------------------------------------------------------
+  * Read request from the client
+  *
+  * Output : command = the request
+  *          error   = error code
+  *          result  = the parameters of the request
+  *--------------------------------------------------------------------
+   length = 8
+   gosub 25;
+   if error then return
+   length = trim(block) + 0
+   gosub 25;
+   if error then return
+   command = field(block, bufmark, 1) + 0
+   result = block[col2()+1, len(block)]
+   return
+
+25
+  *--------------------------------------------------------------------
+  * Read data from the socket
+  *
+  * Input : length = the length of the data to read
+  *         fd     = the socket
+  *
+  * Output : block = the data
+  *          error = error code
+  *--------------------------------------------------------------------
+   block = ''
+   nleft = length
+   error = 0
+   loop
+   while nleft > 0 do
+      if nleft > MAXBLOCK then nn = MAXBLOCK else nn = nleft
+      buffer = space(MAXBLOCK)
+      n = %recv(fd, buffer, nn , 0)
+      if n <= 0 then
+         error = 1
+         return
+      end
+      nleft = nleft - n
+      block = block:buffer[1,n]
+   repeat
+   return
+
+30
+  *-----------------------------------------------------------------------
+  * Send answer to the client
+  *
+  * Input : errorno = error code
+  *         result  = the answer
+  *-----------------------------------------------------------------------
+   result = errorno:bufmark:result
+   block = oconv(len(result),"mr%8"):result
+   gosub 35;
+   return
+
+35
+  *--------------------------------------------------------------------
+  * send data to client
+  *
+  * Input : block = data to send
+  *         fd    = the socket
+  *
+  * Output : error = error code
+  *--------------------------------------------------------------------
+  error = 0
+  loop
+      if len(block) > MAXBLOCK then
+         nleft = MAXBLOCK
+         buffer = block[1, MAXBLOCK]
+         block = block[MAXBLOCK+1, len(block)]
+      end else
+         nleft = len(block)
+         buffer = block
+         block = ''
+      end
+      loop
+      while nleft > 0 do
+         n = %send(fd, buffer, nleft, 0)
+         if n < 0 then
+            error = 1
+            return
+         end
+         nleft = nleft - n
+         buffer = buffer[n+1, MAXBLOCK]
+      repeat
+   while block # '' do
+   repeat
+   return
+
+*--------------------------------------------------------------------
+* Call subroutine with good parameters
+*
+* Input : name    = the name of the subroutine
+*                   (may be "account,file, subname")
+*         param() = the parameter of the subroutine
+*--------------------------------------------------------------------
+400*
+   call @name
+   return
+401*
+   call @name(param(1))
+   return
+402*
+   call @name(param(1),param(2))
+   return
+403*
+   call @name(param(1),param(2),param(3))
+   return
+404*
+   call @name(param(1),param(2),param(3),param(4))
+   return
+405*
+   call @name(param(1),param(2),param(3),param(4),param(5))
+   return
+406*
+   call @name(param(1),param(2),param(3),param(4),param(5),param(6))
+   return
+407*
+   call @name(param(1),param(2),param(3),param(4),param(5),param(6),param(7))
+   return
+408*
+   call @name(param(1),param(2),param(3),param(4),param(5),param(6),param(7),param(8))
+   return
+409*
+   call @name(param(1),param(2),param(3),param(4),param(5),param(6),param(7),param(8),param(9))
+   return
+410*
+   call @name(param(1),param(2),param(3),param(4),param(5),param(6),param(7),param(8),param(9),param(10))
+   return
+411*
+   call @name(param(1),param(2),param(3),param(4),param(5),param(6),param(7),param(8),param(9),param(10),param(11))
+   return
+412*
+   call @name(param(1),param(2),param(3),param(4),param(5),param(6),param(7),param(8),param(9),param(10),param(11),param(12))
+   return
+413*
+   call @name(param(1),param(2),param(3),param(4),param(5),param(6),param(7),param(8),param(9),param(10),param(11),param(12),param(13))
+   return
+414*
+   call @name(param(1),param(2),param(3),param(4),param(5),param(6),param(7),param(8),param(9),param(10),param(11),param(12),param(13),param(14))
+   return
+415*
+   call @name(param(1),param(2),param(3),param(4),param(5),param(6),param(7),param(8),param(9),param(10),param(11),param(12),param(13),param(14),param(15))
+   return
+416*
+   call @name(param(1),param(2),param(3),param(4),param(5),param(6),param(7),param(8),param(9),param(10),param(11),param(12),param(13),param(14),param(15),param(16))
+   return
+
+
+*--------------------------------------------------------------------
+* Convert 32bit adresse to xxx.xxx.xxx.xxx
+*--------------------------------------------------------------------
+500
+  xaddr = oconv(dtx(addr),"mr%8")
+  ip.addr = ""
+
+  for i = 7 to 1 step -2
+    ip.addr := ".":xtd(xaddr[i,2])
+  next i
+
+  addr = ip.addr[2,15]
+
+return

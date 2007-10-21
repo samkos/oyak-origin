@@ -67,22 +67,18 @@ if (!$message) { $message="&nbsp;";}
   </td> </tr>
 <tr >
     <td /> <a href="../query/get_data.php?clients=1&header=1">Liste Brute Client</a></td> <br>
-    <td /> <a href="../query/get_data2.php?clients=1&header=1">Liste Brute Client/Time</a></td> <br>
     <td /> <a href="../query/get_data.php?clients=1&header=1&date=1">Date Brute Client</a></td>
 </tr>
 <tr >
     <td /> <a href="../query/get_data.php?fournisseurs=1&header=1">Liste Brute Fournisseur</a></td><br>
-    <td /> <a href="../query/get_data2.php?fournisseurs=1&header=1">Liste Brute Fournisseur/Time</a></td><br>
     <td /> <a href="../query/get_data.php?fournisseurs=1&header=1&date=1">Date Brute Fournisseur</a></td>
 </tr>
 <tr >
     <td /> <a href="../query/get_data.php?produits=1&header=1">Liste Brute Produit</a></td><br>
-    <td /> <a href="../query/get_data2.php?produits=1&header=1">Liste Brute Produit/Time</a></td><br>
     <td /> <a href="../query/get_data.php?produits=1&header=1&date=1">Date Brute Produit</a></td>
 </tr>
 <tr >
     <td /> <a href="../query/get_data.php?vendeurs=1&header=1">Liste Brute Vendeur</a></td><br>
-    <td /> <a href="../query/get_data2.php?vendeurs=1&header=1">Liste Brute Vendeur/Time</a></td><br>
     <td /> <a href="../query/get_data.php?vendeurs=1&header=1&date=1">Date Brute Vendeur</a></td>
 </tr>
 <tr >

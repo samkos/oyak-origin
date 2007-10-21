@@ -1,0 +1,160 @@
+*
+* J-STATUS : show status of threads
+* Copyright (c) 2000 Christophe Marchal
+*
+* This program is free software; you can redistribute it and/or
+* modify it under the terms of the GNU General Public License
+* as published by the Free Software Foundation; either version 2
+* of the License, or any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software
+* Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*
+
+*----------------------------------------------------------------------*
+* Command to show the status of the server and all threads
+*
+*   Command line is : j-status [-s] [-f] [-h]
+*
+*   parameters : -s : show status of only the server (and not client thread)
+*                -f : show only number of free ports
+*                -h : display help
+*
+* Christophe Marchal
+* May, 2001
+* Cedric Fontaine
+* November, 2002
+*
+* Version 0.9.11
+*----------------------------------------------------------------------*
+   include equates
+
+   equ am to char(254), vm to char(253), esc to char(27)
+
+   CRLF = char(13):char(10)
+
+*------------------------------------------------------------------------
+   open _JD3.FJ.PORTS to F.PORTS else
+      stop "Error opening file ":_JD3.FJ.PORTS
+   end
+
+   tclread tcl.com
+   convert " " to am in tcl.com
+
+   locate("-h",tcl.com;pos) then
+       gosub help
+       stop
+   end
+
+   only.server = 0
+   locate("-s",tcl.com;pos) then
+      only.server = 1
+   end
+
+   only.freeports = 0
+   locate("-f",tcl.com;pos) then
+       only.freeports=1
+   end
+
+*------------------------------------------------------------------------
+   lst.server = ""
+   execute 'select ':_JD3.FJ.PORTS:' with a1 = "server" ' capturing cap
+
+   loop
+     readnext key else key = ""
+   while key # "" do
+     lst.server<-1> = key
+   repeat
+
+   if lst.server = "" then
+      print "No server started"
+      stop
+   end
+
+   head =             "PID   Port    Status      Startup Date/Time  From IP         Last transaction  "
+   head = head : CRLF:"----  ------  ----------  ------------------ --------------- ----------------- "
+*------------------------------------------------------------------------
+   if only.freeports = 0 then
+      execute "cls"
+      print head
+*      print
+   end
+
+   nb.server = dcount(lst.server,am)
+   for j = 1 to nb.server
+      read server.status from F.PORTS,lst.server<j> then
+        if only.server = 0 and only.freeports = 0 then
+           print "Server Status :"
+        end
+
+        if only.freeports = 0 then
+           DDEB=OCONV(FIELD(server.status<3>,"#",1),"mts"):" ":OCONV(FIELD(server.status<3>,"#",2),"d2/")
+           DLAST=OCONV(FIELD(server.status<10>,"#",1),"mts"):" ":OCONV(FIELD(server.status<10>,"#",2),"d2/")
+           print lst.server<j>"ml#4":"  ":server.status<2>"ml#6":"  ":server.status<4>"ml#10":"  ":DDEB"ml#17":"  ":server.status<5>"ml#15":" ":DLAST"ml#17"
+*           print lst.server<j>"ml#4":"  ":server.status<2>"ml#6":"  ":server.status<4>"ml#10":"  ":server.status<3>"ml#20":" ":server.status<5>"ml#15"
+        end
+        if oconv(lst.server<j>,"TPIBS;X;;7") = "" and only.freeports = 0 then
+           print "WARNING !!!!   Line ":lst.server<j>:" is Logged off"
+        end
+
+        if only.server = 0 then
+           if only.freeports = 0 then
+              print
+              print "Child Status :"
+           end
+
+           nbchild = dcount(server.status<6>,vm)
+           wait.nbchild = 0
+           for i = 1 to nbchild
+             read child from F.PORTS,server.status<6,i> then
+               if child<4> = _STATUS.WAITING then
+                  wait.nbchild += 1
+               end
+               if only.freeports = 0 then
+                  DDEB=OCONV(FIELD(child<3>,"#",1),"mts"):" ":OCONV(FIELD(child<3>,"#",2),"d2/")
+                  DLAST=OCONV(FIELD(child<10>,"#",1),"mts"):" ":OCONV(FIELD(child<10>,"#",2),"d2/")
+*                  print server.status<6,i>"ml#4":"  ":child<2>"ml#6":"  ":child<4>"ml#10":"  ":child<3>"ml#20":" ":child<5>"ml#15"
+                   print server.status<6,i>"ml#4":"  ":child<2>"ml#6":"  ":child<4>"ml#10":"  ":DDEB"ml#17":"  ":child<5>"ml#15":" ":DLAST"ml#17"
+               end
+               if oconv(server.status<6,i>,"TPIBS;X;;7") = "" and only.freeports = 0 then
+                  print "WARNING !!!!   Line ":server.status<6,i>:" is logged off !!!!!!!!"
+                  wait.nbchild -= 1
+               end
+             end else
+               if only.freeports = 0 then
+                  print "No status available for PID ":server.status<6,i>
+               end
+             end
+           next i
+           if only.freeports = 0 then
+              print
+              print "------------------------------------------------------------------------"
+           end else
+              print "Child waiting : ":wait.nbchild
+           end
+        end
+     end
+   next j
+   print
+
+stop
+
+*-----------------------------------------------------------------------
+* Print help about j-status
+*-----------------------------------------------------------------------
+help:
+  crt
+  crt "   Command line is : j-status [-s] [-f] [-h]"
+  crt
+  crt "   parameters : -s : show status of only the server (and not client thread)"
+  crt "                -f : show only number of free ports"
+  crt "                -h : display this message"
+  crt
+
+return

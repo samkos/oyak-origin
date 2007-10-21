@@ -1,0 +1,388 @@
+*
+* D3Server : The main program that know which port are free or not
+* Copyright (c) 2000 Christophe Marchal
+*
+* This program is free software; you can redistribute it and/or
+* modify it under the terms of the GNU General Public License
+* as published by the Free Software Foundation; either version 2
+* of the License, or any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software
+* Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*
+
+*----------------------------------------------------------------------*
+* The main program that know which port are free or not
+*  These file must exist in the account
+*   FJ.PORTS : file used by the d3server to know which thread are free
+*
+*   Command line is : d3server [-h] [-port xxxx] [-d] [-c xxx] [-cp xxxx]
+*
+*   parameters : -port xxxx : starting to listen on the port xxxx
+*                -d         : for debugging
+*                -c xxx     : number of child to start
+*                -cp xxxx   : starting port for the child,
+*                             increase by 1 for each child
+*                -h         : see help
+*
+* Bryan Buchanan, wEbbTide Systems Pty Ltd
+*    March, 1997
+* Christophe Marchal
+*    Novembre, 2002
+* Cedric Fontaine
+* Marc Dubois
+*    June, 2003
+*    If the Server record in F-Ports is missing (J-Stop deletes this record
+*    as a way of signalling this process to shutdown)- close sockets and stop.
+*
+* Version 0.9.11
+*----------------------------------------------------------------------*
+   cfunction socket.builtin
+   include dm,bp,includes sysid.inc
+   include dm,bp,unix.h socket.h
+
+   include equates
+
+*---------------------------------------------------------------------
+* Init equates and variables
+*---------------------------------------------------------------------
+   * Default value for the server port
+   equ WELL.KNOWN.PORT to 20002
+
+   * Default value for the starting child port
+   equ CHILD.PORTS TO 30000
+
+   * Default value for the number of child
+   equ PHANTOMS to 2
+
+   * Number of try to get a free port
+   equ MAXTRY   to 5
+
+   equ am to char(254), vm to char(253), esc to char(27)
+
+   my.port = system(22)
+   buffer = space(10)
+
+*---------------------------------------------------------------------
+* Get TCL parameters
+*---------------------------------------------------------------------
+   tclread tcl.com
+   convert ' ' to am in tcl.com
+
+   * Show help if asked
+   locate('-h',tcl.com;pos.help) then
+      gosub help
+      stop
+   end
+
+   * Find the port for the server
+   locate('-port',tcl.com;pos.port) then
+      ser.port = tcl.com<pos.port + 1> + 0
+   end else
+      ser.port = WELL.KNOWN.PORT
+   end
+
+
+   * Fix the debug flag
+   debug = 0
+   locate('-d',tcl.com;pos.debug) then
+      debug = 1
+   end
+
+   * Unix or NT
+   UnixHost = 0
+   ThisHost = SYSTEM(38)<1,1>
+   if ThisHost # 2 and ThisHost # 4 then
+      if Debug then
+         print "Host is not UNIX or NT."
+      end
+      STOP
+   end
+   IF ThisHost = 2 then UnixHost = 1
+
+   * Find the number of child to start
+   nbchild = PHANTOMS
+   locate('-c',tcl.com;pos.child) then
+      nbchild = tcl.com<pos.child + 1> + 0
+   end
+
+   if nbchild <= 0 then
+      stop "No child to start"
+   end
+
+
+   * Find the starting port for child
+   childport = CHILD.PORTS
+   locate('-cp',tcl.com;pos.child.port) then
+      childport = tcl.com<pos.child.port +1> + 0
+   end
+
+   if childport <= 0 then
+      stop 'Child port incorrect ':childport
+   end
+
+   * Make life easy
+   childport = childport - 1
+
+*---------------------------------------------------------------------
+* Open files
+*---------------------------------------------------------------------
+   open _JD3.FJ.PORTS to F.PORTS else
+      stop "Error opening file ":_JD3.FJ.PORTS
+   end
+
+*---------------------------------------------------------------------
+* Create the main server socket
+*---------------------------------------------------------------------
+   sock = %socket(AF$INET, SOCK$STREAM, 0)
+   if sock < 0 then
+      stop "D3Serveur : Error opening socket"
+   end
+
+   one = 1
+   err = %setsockopt(sock, SOL$SOCKET, SO$REUSEADDR, &one, 1)
+
+   err = %bind(sock, AF$INET, INADDR$ANY, ser.port)
+   if err < 0 then
+      if UnixHost then
+         %close(sock)
+      end else
+         %closesocket(sock)
+      end
+      stop "D3Serveur : Error binding to port ":ser.port
+   end
+
+*---------------------------------------------------------------------
+* Fix status for the server
+*---------------------------------------------------------------------
+   status = "server"               ;* Type of thread
+   status<2> = ser.port            ;* IP Port
+   status<3> = time():"#":date()   ;* startup time-date
+   status<4> = _STATUS.STARTING    ;* Status
+   status<5> = ""                  ;* IP connected
+   status<6> = ""                  ;* List of PID of all child
+   status<7> = oconv('u','U50BB')  ;* User that launch child, used by j-stop
+   status<8> = ""                  ;* List of available port for each child
+   status<10> = time():"#":date()  ;* Last transaction time
+   write status on F.PORTS,my.port
+
+   if debug then print "Serveur started on pid ":my.port
+
+*---------------------------------------------------------------------
+* Init phantom parameters
+*---------------------------------------------------------------------
+   gosub 200
+
+*---------------------------------------------------------------------
+* Start the threads
+*---------------------------------------------------------------------
+   if debug then print "Starting ":nbchild:" threads..."
+
+   for i = 1 to nbchild
+      next.port = childport + i
+      if debug then print "One thread started on port ":next.port
+      gosub 100
+   next i
+
+*---------------------------------------------------------------------
+* Waiting incoming connection
+*---------------------------------------------------------------------
+   if debug then print "Server ready on port ":ser.port
+
+   %listen(sock, 3)
+
+   loop
+   while 1 do
+      addr = 0
+      port = 0
+
+      writev _STATUS.WAITING on F.PORTS,my.port,4
+      writev "" on F.PORTS,my.port,5
+      writev time():"#":date() on F.PORTS,my.port,10
+
+      fd = %accept(sock, &addr, &port)
+      if fd > 0 then
+
+         * Translate the address
+         gosub 500
+
+         if debug then print "New connection from ":addr
+
+         read serverRec from F.PORTS,my.port else
+           if UnixHost then
+                %close(fd)
+                %close(sock)
+           end else
+                %closesocket(fd)
+                %closesocket(sock)
+           end
+           crt 'The server is shutting down......'
+           stop
+         end
+
+         * Change status of this thread
+         serverRec<4> = _STATUS.CONNECTED
+         serverRec<5> = addr
+         serverRec<10> = TIME():"#":DATE()
+         write serverRec on F.PORTS,my.port
+
+         try = 0
+         next.port = ""
+
+10
+         if try < MAXTRY then
+            try += 1
+
+            *-----------------------------------------------------
+            * find a free port in the list
+            *-----------------------------------------------------
+            readu free.ports from F.PORTS, my.port locked
+               sleep(1)
+               goto 10
+            end
+
+            for cpt.free = 1 to nbchild while next.port = ""
+              if free.ports<8,cpt.free> # "" then
+                 * Check if child not killed by hand
+                 if oconv(free.ports<6,cpt.free>,"TPIBS;X;;7") # "" then
+                    next.port = free.ports<8,cpt.free>
+                 end
+              end
+            next cpt.free
+
+            release F.PORTS,my.port
+
+            if next.port = '' then
+               if debug then print "No more free port"
+               sleep(1)
+               goto 10
+            end
+
+         end else
+            if debug then print "No ports available - Maximum try reached"
+            next.port = -1
+         end
+
+         *------------------------------------------------------------
+         * Send the number of port to the client, if we got one
+         *------------------------------------------------------------
+         if next.port # "" then
+            if next.port < 0 then
+               buffer = "-":oconv(abs(next.port),"mr%7")
+            end else
+               buffer = oconv(next.port,'mr%8')
+            end
+            if debug then print "Connection client on ":next.port
+
+            %send(fd, buffer, 8 ,0)
+         end
+
+        if UnixHost then
+           %close(fd)
+        end else
+           %closesocket(fd)
+        end
+
+      end else
+          if debug then crt "accept but fd = ":fd
+      end
+   repeat
+
+stop
+
+*----------------------------------------------------------------------
+* Start a thread as a phantom
+*---------------------------------------------------------------------
+100
+   orig.line = 'D3Client -port ':next.port:' -s ':my.port
+   if debug then orig.line := ' -d'
+
+   if debug then print "Starting child with ":orig.line
+
+   in.line = leg:thdr:term:vm:assignment:vm:cs:vm:orig.line
+
+   item = user.id
+   item<1,2> = esc
+   item<2> = md.id
+   item<2,2> = esc
+   item<3> = in.line
+   item<4> = opts
+   item<5> = user.line
+   item<6> = zline
+   item<9> = orig.line
+
+   * this oconv start the phantom
+   job.num = oconv(item,'u10')
+
+return
+
+*-----------------------------------------------------------------------
+* Init for the phantom parameters
+*-----------------------------------------------------------------------
+200
+   opts = 'sm'
+   zline = ''
+   leg = ''
+   thdr = ''
+   cs = 'case (fs'
+
+   term = oconv('','u4')
+   pterm = term<3>:',':term<5>
+   term = delete(term,3)
+   term = delete(term,4)
+   convert am to ',' in term
+   term = 'term ':term:pterm
+
+   queue = system(31)
+   assignment = 'sp-assign f':queue:'hs'
+
+   user.line = oconv('p','U50BB')
+   cur.user = oconv('u','U50BB')
+   cur.md = oconv('a','U50BB')
+
+   if count(cur.user,'*') then cur.user = field(cur.user,'*',1)
+   user.id = cur.user
+   passwd = esc
+   md.id = cur.md
+   mdpasswd = esc
+
+return
+
+*------------------------------------------------------------------------
+* Show help with all options available
+*------------------------------------------------------------------------
+help:
+
+print
+print "   Command line is : d3server [-h] [-port xxxx] [-d] [-c xxx] [-cp xxxx]"
+print
+print "   parameters : -port xxxx : starting to listen on the port xxxx"
+print "                -d         : for debugging"
+print "                -c xxx     : number of child to start"
+print "                -cp xxxx   : starting port for the child,"
+print "                             increase by 1 for each child"
+print "                -h         : see this help message"
+print
+
+return
+
+*--------------------------------------------------------------------
+* Convert 32bit adresse to xxx.xxx.xxx.xxx
+*--------------------------------------------------------------------
+500
+  xaddr = oconv(dtx(addr),"mr%8")
+  ip.addr = ""
+
+  for i = 7 to 1 step -2
+    ip.addr := ".":xtd(xaddr[i,2])
+  next i
+
+  addr = ip.addr[2,15]
+
+return

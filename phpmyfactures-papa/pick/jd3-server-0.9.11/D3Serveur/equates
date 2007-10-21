@@ -1,0 +1,61 @@
+*
+* Equates : equates for the protocol
+* Copyright (c) 2000 Christophe Marchal
+*
+* This program is free software; you can redistribute it and/or
+* modify it under the terms of the GNU General Public License
+* as published by the Free Software Foundation; either version 2
+* of the License, or any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software
+* Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*----------------------------------------------------------------------*
+*
+* Version 0.9.11
+*
+*----------------------------------------------------------------------*
+   equ CP.SHUTDOWN.AMC    to 0
+   equ CP.LOGON.AMC       to 1
+   equ CP.LOGOFF.AMC      to 2
+   equ CP.EXECUTE.AMC     to 3
+   equ CP.CALL.AMC        to 4
+   equ CP.SELECT.AMC      to 5
+   equ CP.OPEN.AMC        to 6
+   equ CP.READNEXT.AMC    to 7
+   equ CP.READ.AMC        to 8
+   equ CP.READU.AMC       to 9
+   equ CP.WRITE.AMC       to 10
+   equ CP.RELEASE.AMC     to 11
+   equ CP.DELETE.ITEM.AMC to 12
+   equ CP.CLOSE.AMC       to 13
+   equ CP.TEST.EXIST.AMC  to 14
+   equ CP.LOCK.AMC        to 15
+   equ CP.READV.AMC       to 16
+   equ CP.SELECT.TCL.AMC  to 17
+   equ CP.NOOP.AMC        to 18
+   equ CP.STATUS          to 19
+
+*
+   equ _STATUS.STARTING   to "Starting"
+   equ _STATUS.WAITING    to "Waiting"
+   equ _STATUS.PROCESSING to "Processing"
+   equ _STATUS.CONNECTED  to "Connected"
+   equ _STATUS.LOGOFF     to "Logged OFF"
+
+*
+   * File used for port handling
+   equ _JD3.FJ.PORTS      to "FJ.PORTS"
+
+   * file used for logging user activity
+   equ _JD3.FJ.LOG        to "FJ.LOG"
+
+   * file used for user identification (not yet done)
+   equ _JD3.FJ.USR        to "FJ.USR"
+
+   equ _MASTER.DICT       to "MD"

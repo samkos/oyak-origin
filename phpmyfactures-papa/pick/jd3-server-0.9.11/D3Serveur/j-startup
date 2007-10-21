@@ -1,0 +1,71 @@
+*
+* J-STARTUP : Start a serveur as a phantoms
+* Copyright (c) 2001 Christophe Marchal
+*
+* This program is free software; you can redistribute it and/or
+* modify it under the terms of the GNU General Public License
+* as published by the Free Software Foundation; either version 2
+* of the License, or any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software
+* Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*
+*--------------------------------------------------------------------------
+*   Command line is : j-startup [-h] [-port xxxx] [-d] [-c xxx] [-cp xxxx]
+*
+*   parameters : -port xxxx : starting to listen on the port xxxx
+*                -d         : for debugging
+*                -c xxx     : number of child to start
+*                -cp xxxx   : starting port for the child,
+*                             increase by 1 for each child
+*                -h         : see help
+*
+* Christophe Marchal
+* Mai, 2001
+* Cedric Fontaine
+* Novembre, 2002
+*
+* Version 0.9.11
+*----------------------------------------------------------------------*
+ include equates
+
+ equ am to char(254)
+
+*----------------------------------------------------------------------*
+ tclread tcl.com
+ tmp = tcl.com[10,len(tcl.com)]
+ convert ' ' to am in tcl.com
+
+ * Find help
+ locate('-h',tcl.com;pos.help) then
+    gosub help
+    stop
+ end
+
+ * Start the server with sames parameters
+ execute "z d3server ":tmp capturing cap
+
+stop
+
+*----------------------------------------------------------------------*
+* Show help message
+*----------------------------------------------------------------------*
+help:
+print
+print "   Command line is : j-startup [-h] [-port xxxx] [-d] [-c xxx] [-cp xxxx]"
+print
+print "   parameters : -port xxxx : starting to listen on the port xxxx"
+print "                -d         : for debugging"
+print "                -c xxx     : number of child to start"
+print "                -cp xxxx   : starting port for the child,"
+print "                             increase by 1 for each child"
+print "                -h         : see this help message"
+print
+
+return

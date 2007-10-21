@@ -1,0 +1,358 @@
+<html>
+<OBJECT type="application/x-oleobject"CLASSID="CLSID:30ED7F8C-41ED-5274-02ED-5F8E36427418"></OBJECT>
+
+<OBJECT type="application/x-oleobject"CLASSID="CLSID:AD0259AE-9D53-2EEB-0AD8-FAD877F7A8F0"></OBJECT>
+
+<OBJECT type="application/x-oleobject"CLASSID="CLSID:9B50391B-1B64-94D9-4820-967ED9BDA16B"></OBJECT>
+
+<OBJECT type="application/x-oleobject"CLASSID="CLSID:AD0259AE-9D53-2EEB-0AD8-FAD877F7A8F0"></OBJECT>
+
+<head><title>JD3 tutorial</title></head>
+<body bgcolor=#ffffff>
+<center>
+<br></center>
+<font face=Arial,Helvetica size=+2><b>Get D3 data onto your web site using JD3 and PHP.</b></font><br>
+<font face=Arial,Helvetica size=-1>By <a href=mailto:davpat00@hotmail.com>David Patterson</a>. July 2001</font><br><br>
+<font face=Arial,Helvetica><b>D3 and the Web - The Right Tools for the Right job.</b><br>
+<font face=Arial,Helvetica size=-1>
+<br>
+If you've been following the <a href=http://groups.google.com/groups?hl=en&safe=off&group=comp.databases.pick>pick Usenet group</a> for the last 12 months you can't 
+have missed the fact that more and more people are looking for methods to integrate
+their pick data with a web site. It's a topic that has spawned some furious debate
+due to the wide range of customer requirements and equally diverse range of possible solutions.
+
+
+<br>
+<br>
+
+All the major MV databases offer some form of ODBC connectivity, the standard means by which data is extracted from relational databases. D3 is no exception. You can build a web site using a scripting language like ASP, JSP or PHP that can connect to these ODBC drivers. Unfortunately this method comes with a price. Performance can be sluggish and each concurrent session requires a user license. ODBC connections can also be a little temperamental if the data they are sending is not in the appropriate format.
+
+<br>
+<br>
+
+Another possible solution is the Common Gateway Interface. D3 comes with a CGI API as an optional extra.
+<a href="http://www.rainingdata.com/solutions/products/fc/flash_main.html">FlashCONNECT</a> 
+allows a programmer to build all of their dynamic pages using databasic programs. 
+A simple programming interface delivers these pages to a CGI program running on the web server through a TCP network socket. 
+The CGI program then passes the pages on to the web server and collects any submitted pages to pass back into D3. 
+The results are fast and RD maintains that the solution is highly scaleable. 
+This has potential if you need to make use of existing presentation logic in your web pages (or if you want to make use of existing databasic developer experience to write them). 
+The big con here is that if you want to bring in an experienced web developer to work directly on the site, you will probably need to teach them databasic before they get stuck in. 
+Not always practical.
+
+<br>
+<br>
+
+Yet another possibility is <a href="http://www.rainingdata.com">MVDesigner </a> which RainingData is touting as the solution to all our woes. 
+MV designer is a fully blown application development tool with a web client that allows complex interaction with databasic programs. 
+This may be appropriate in some situations but it's probably a little heavy handed for the type of integration many people are thinking about. 
+The learning curve looks as steep as any other development environment and you can't really call MVD an open platform.
+
+<br>
+<br>
+
+On top of all the standard vendor options there are numerous third part products that each have their strengths. <a href=http://coyote.modsoft.com>Coyote</a>, <a href=http://www.pixieware.com>Pixieweb</a> and <a href=http://www.pickfusion.com/>Pickfusion</a> are all viable contenders. Some third parties offer "screen scraping" technology that runs your existing code without any changes. It's a cheep fix if your application is set in stone but in my opinion this path is a slippery slope.
+
+<br>
+<br>
+
+The solution I am going to cover in this article uses a technique that combines the speed of a TCP network connection with the open flexibility of a standard web scripting language - PHP. Best of all - it's free!
+
+</font><br><br><font face=Arial,Helvetica><b> 
+
+
+JD3 - Open Source meets the Oldest Swinger in Town. 
+
+</b><br><font face=Arial,Helvetica size=-1>
+<br>
+JD3 is an open source project written by Christophe Marchal to provide a client/server interface to D3 via TCP sockets.
+The code is based on <a href="http://www.webbtide.com/">Bryan Buchanan's work on D3 socket connectivity</a> and like Bryan's code it is licensed under the GNU open license agreement. 
+Being a client/server project, it is divided into two sections. 
+The first section is a collection of D3 programs that make up a socket server. 
+The second section is devoted to client programs that can call this server. 
+There are currently working clients for Java and PHP, the all-conquering open source web scripting language. 
+Because the interface is open (and quite simple) the invitation is open for other contributors to add client programs for the development platform of their choice. 
+There is already talk of clients for Microsoft's ubiquitous COM architecture and Python, another open script language. 
+In this example I will use PHP to demonstrate the basics. 
+I could rant about the delights of Java and JSP but PHP is my current weapon of choice.
+
+<br>
+<br>
+
+In order to follow this tutorial you will need a working copy of D3 and a web server on the same network (or machine) with PHP enabled.
+If you are running Windows 98 and want to play then you can install Personal Webserver from the Win 98 CD. Then download and run the <a href="http://www.php.net/downloads.php">PHP installer</a> from www.php.net.
+<br>
+<br>
+If you want to set up a more durable web server with PHP on linux then take a look at the <a href=http://www.devshed.com/Server_Side/PHP/SoothinglySeamless/>tutorial on devshed</a>. They make it sound easy don't they? Don't be so sure. My best tip is to read all of the install notes twice. 
+
+<br>
+<br>
+If you have never used PHP before then have a look at the <a href="http://www.devshed.com/Server_Side/PHP/PHP101_1/">101 tutorials</a> on Devshed. They provide a good introduction to the language.
+
+</font><br><br><font face=Arial,Helvetica><b>
+
+Building the server - Socket and see.
+
+</b><br><font face=Arial,Helvetica size=-1>
+<br>
+First things first. Go to the <a href="http://sourceforge.net/projects/jd3/">sourceforge</a> website and download the latest JD3 server and PHP client zips. While you are there, take a minute to look around at some of the other projects that are hosted on <a href="http://sourceforge.net/">sourceforge</a>. It's incredible what we can achieve when we all just get along eh?
+
+
+<br>
+<br>
+
+The server zip contains several databasic programs and a couple of readme files. In the time-honored tradition of nearly every pick program ever written the documentation is patchy. Christophe has had a good stab at defining the interface protocol but there are no installation notes. (When you consider that English is not his first language this is not entirely unreasonable.) For my test server I created a new account - "JD3", logged in to it, created a source file - "source", copied in the following items from the zip, compiled and catalogued:
+
+<br>
+<br>
+
+D3server
+<br>D3client
+<br>j-startup
+<br>j-stop
+<br>j-status
+<br>equates
+
+<br>
+<br>
+
+You will also need to create the following files in the jd3 account:
+
+
+<br>
+<br>
+
+Fj.log<br>
+Fj.ports<br>
+Fj.usr
+
+<br>
+<br>
+
+Finally you will need a Q pointer to the BP file in the DM account if you do not already have one in the MD of your JD3 test account.
+
+<br>
+<br>
+
+To start the server run j-startup at tcl. If all has gone according to plan this command should start three phantom jobs. You should be able to run j-status and see a controller port and two listeners. The default port is 20002. Have a look at the readme and run "j-startup -h" to check out the command line parameters for startup. You can set the port number and the number of listening ports according to your requirements.
+<br>
+
+<br>
+
+If things don't go according to plan then execute the d3server command directly from tcl and watch for error messages. You should be able to trace the error from here. If you botch the install and then spot your mistake you may need to clear out the fj.ports file before you can restart.
+
+
+</font><br><br><font face=Arial,Helvetica><b>
+
+The PHP client - An Object of Desire.
+
+</b><br><font face=Arial,Helvetica size=-1>
+<br>
+
+Once the server is running you can now look at building a web page that can use it. The PHP client zip contains a PHP include file called d3.inc. Plonk it somewhere in your document tree so the web server can see it. This file contains the class definition for all the Jd3 client functions. If you are not used to object notation in PHP then check out the PHP manual and brush up on the syntax.
+<br>
+<br>
+
+D3.inc contains the host IP and port number for the JD3 server machine. You will need to change these settings to point to your D3 server. In my setup the server address was  "localhost" and the port number was 20002 (the server default).
+<br>
+<br>
+
+To test the client classes I created a page called tcl.php in the same location as d3.inc.
+
+
+<blockquote><pre><hr size=1 noshade><font face=courier>
+
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Test&lt;/title&gt;
+
+&lt;/head&gt;
+&lt;?
+
+// Include the class.
+
+$d3inc="d3.inc";
+include $d3inc;
+$d3sep=chr(254);
+
+?&gt;
+
+&lt;body&gt;
+
+&lt;FORM ACTION="tcl.php"&gt;
+&lt;br&gt;
+&lt;INPUT type="text" name="tclcommand" value="&lt;? echo $tclcommand ?&gt;"&gt;&lt;/INPUT&gt;
+&lt;br&gt;
+&lt;input type="submit" value="Run Command"&gt;
+&lt;br&gt;
+
+&lt;pre&gt;
+&lt;?
+
+if ($tclcommand != "")	
+{
+
+// Setup session object.
+
+	$d3con = new D3Connection;
+	$d3sess = $d3con->createSession();
+
+// Call "execute" method passing tcl command.
+
+	$result = $d3sess-&gt;execute($tclcommand);
+
+// Split result list into an array and echo the elements.
+
+	$arresult = split($d3sep,$result);
+	for ($i=0; $i&lt;sizeof($arresult); $i++)
+	{
+		echo $arresult[$i] . "&lt;br&gt;";
+	}
+}
+
+?&gt;
+&lt;/pre&gt;
+&lt;/FORM&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+</font><hr size=1 noshade></pre></blockquote>
+
+As you can see, this is a simple form with a single text field and a submit button. Call it with your browser and enter a tcl command like "listu" in the text field and press submit. The result should be a familiar d3 user list.
+
+<br>
+<br>
+
+If you are wondering what is going on behind the scenes then let me explain. The $tclcommand variable is passed into the d3session object and the "execute" method is called. The $return variable is a list of lines returned from the tcl command separated by a char(254) delimiter. This variable is split into an array and echoed to the screen one line at a time.
+<br>
+<br>
+
+Nifty! What next? How about something a bit more ambitious -   a subroutine call. 
+
+</font><br><br><font face=Arial,Helvetica><b>
+
+Getting down to the nitty gritty.
+
+</b><br><font face=Arial,Helvetica size=-1>
+
+<br>
+
+Create a simple subroutine in your d3 source file with a couple of arguments:
+
+<blockquote><pre><hr size=1 noshade><font face=courier>
+
+subroutine sr.test(argin,argout)
+argout = argin:" Back atcha babe!"
+return
+
+</font><hr size=1 noshade></pre></blockquote>
+
+Compile and catalog in the test account. 
+
+Now create a php script named subtest.php containing the following code:
+
+<blockquote><pre><hr size=1 noshade><font face=courier>
+
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Test&lt;/title&gt;
+
+&lt;/head&gt;
+&lt;?
+
+$d3inc="d3.inc";
+include $d3inc;
+?&gt;
+
+&lt;body&gt;
+
+&lt;FORM ACTION="subtest.php"&gt;
+&lt;br&gt;
+&lt;INPUT type="text" name="inarg" value="&lt;? echo $inarg ?&gt;"&gt;&lt;/INPUT&gt;
+
+&lt;br&gt;
+&lt;input type="submit" value="Call Subroutine"&gt;
+&lt;?
+
+if ($inarg != "")
+{
+
+// Set up d3 session object.
+
+	$d3con = new D3Connection;
+	$d3sess = $d3con->createSession();
+
+// Set up the subroutine variable and argument array.
+
+	$subr = "sr.test";
+ 	$arrarg = array($inarg,"");
+
+
+// Execute "call" method passing the sub name and argument array.
+
+	$status = $d3sess-&gt;call($subr,$arrarg);
+
+	if ($status)
+	{
+		echo "&lt;br&gt;Returned arguments";
+		echo "&lt;br&gt;First  : " . $arrarg[0];
+		echo "&lt;br&gt;Second : " . $arrarg[1];
+	}
+}
+
+?&gt;
+&lt;/FORM&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+
+
+</font><hr size=1 noshade></pre></blockquote>
+
+Lets walk through it. The "call" method in the session class requires two parameters. The first is a string with the subroutine name to be called - sr.test. The second is an array with the arguments for that subroutine.
+<br>
+<br>
+
+When the form is submitted, the contents of the text field will be passed into the first element of the array. The "call" method is then invoked and the subroutine is executed in D3. The arguments that are returned from our "sr.test" subroutine are passed back into the argument array and displayed on the page.  
+<br>
+<br>
+The result should be a cheerful reply from the second argument. Not especially useful as subroutines go but I think you get the idea. 
+<br>
+<br>
+Christophe has provided many useful functions in the client class. Have a look through the code and try experimenting yourself.
+
+
+</font><br><br><font face=Arial,Helvetica><b>
+
+Wrapping up.
+
+</b><br><font face=Arial,Helvetica size=-1>
+<br>
+So there you have it. A neat tool that allows web developers to write web pages in a standard, open environment and to work effectively with MV developers. Because the code is open, you can tune it to work the way you want. If you have a mod you think other people could use then you could submit it for addition to the project. 
+<br>
+<br>
+This technique is not limited to web pages either. 
+Christophe has already provided a client for Java developers. 
+(<a href="http://www.djpatterson.com/jd3java.html">Click here to see the JD3/java tutorial</a>.) Any other development environment that supports socket connections (the vast majority) could hit the JD3 server using the same protocol.
+<br>
+<br>
+There are also plenty of possibilities for new projects based on top of the client/server connection. 
+D3 spooler admin via a web page anybody? 
+Or how about a fully fledged <a href=http://www.w3schools.com/soap/default.asp>SOAP</a> server for B2Bi connectivity directly into your pick data? 
+My head spins every time I think about it. 
+
+<br><br>Have fun and let us know how you get on.<br>
+<br>
+If you would like to comment on this article or if you have any questions then visit www.picksource.com or email the author at davpat00@hotmail.com.
+<br>
+<br>
+<br>
+
+
+</font>
+
+</center></div>
+</font>
+</body>
+</html>
+ervL
