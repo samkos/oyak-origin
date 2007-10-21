@@ -52,6 +52,9 @@ non reporte dans 0.28
 bug : avec la nouvelle version du site les clients ne se chargent pas
       sur la device
 
+ok : pb dans get_data --> separation en get_data 
+                          et get_data2 (support additionnel de prix_stock et balance)
+                                      
 
 non reporte dans 0.28
 
@@ -64,7 +67,7 @@ non reporte dans 0.28
 
 ---------------------------------------------------------------
 
-bug :
+feature : envoyer le code apres le '*' lorsque l'on envoie la facture
 
 
 non reporte dans 0.28
