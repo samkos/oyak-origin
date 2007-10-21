@@ -7,28 +7,31 @@ if ($header) {
 ?>
  <center>
 <table border="0" cellpadding="2" cellspacing="0">
-<tr >
-    <td /> <a href="../query/get_data.php?clients=1&header=1">Liste Brute Client</a></td> <br>
-    <td /> <a href="../query/get_data.php?clients=1&header=1&date=1">Date Brute Client</a></td>
-    <td /> <a href="../query/get_data.php?clients=1&header=1&from=45">liste Brute Client>45</a></td>
+<tr>
+  <td colspan=4> <b> nouvelle version avec timestamp </b> </td>
 </tr>
 <tr >
-    <td /> <a href="../query/get_data.php?fournisseurs=1&header=1">Liste Brute Fournisseur</a></td><br>
-    <td /> <a href="../query/get_data.php?fournisseurs=1&header=1&date=1">Date Brute Fournisseur</a></td>
-    <td /> <a href="../query/get_data.php?fournisseurs=1&header=1&from=1">Date Brute Fournisseur>20</a></td>
+    <td /> <a href="../query/get_data2.php?clients=1&header=1">Liste Brute Client</a></td> <br>
+    <td /> <a href="../query/get_data2.php?clients=1&header=1&date=1">Date Brute Client</a></td>
+    <td /> <a href="../query/get_data2.php?clients=1&header=1&from=45">liste Brute Client>45</a></td>
 </tr>
 <tr >
-    <td /> <a href="../query/get_data.php?produits=1&header=1">Liste Brute Produit</a></td><br>
-    <td /> <a href="../query/get_data.php?produits=1&header=1&date=1">Date Brute Produit</a></td>
-    <td /> <a href="../query/get_data.php?produits=1&header=1&from=45">liste Brute Produit>45</a></td>
+    <td /> <a href="../query/get_data2.php?fournisseurs=1&header=1">Liste Brute Fournisseur</a></td><br>
+    <td /> <a href="../query/get_data2.php?fournisseurs=1&header=1&date=1">Date Brute Fournisseur</a></td>
+    <td /> <a href="../query/get_data2.php?fournisseurs=1&header=1&from=20">Date Brute Fournisseur>20</a></td>
 </tr>
 <tr >
-    <td /> <a href="../query/get_data.php?vendeurs=1&header=1">Liste Brute Vendeur</a></td><br>
-    <td /> <a href="../query/get_data.php?vendeurs=1&header=1&date=1">Date Brute Vendeur</a></td>
-    <td /> <a href="../query/get_data.php?vendeurs=1&header=1&from=2">liste Brute Vendeur>2</a></td>
+    <td /> <a href="../query/get_data2.php?produits=1&header=1">Liste Brute Produit</a></td><br>
+    <td /> <a href="../query/get_data2.php?produits=1&header=1&date=1">Date Brute Produit</a></td>
+    <td /> <a href="../query/get_data2.php?produits=1&header=1&from=45">liste Brute Produit>45</a></td>
 </tr>
 <tr >
-    <td /> <a href="../query/get_data.php?releases=1&header=1">Liste Brute releases</a></td>
+    <td /> <a href="../query/get_data2.php?vendeurs=1&header=1">Liste Brute Vendeur</a></td><br>
+    <td /> <a href="../query/get_data2.php?vendeurs=1&header=1&date=1">Date Brute Vendeur</a></td>
+    <td /> <a href="../query/get_data2.php?vendeurs=1&header=1&from=2">liste Brute Vendeur>2</a></td>
+</tr>
+<tr >
+    <td /> <a href="../query/get_data2.php?releases=1&header=1">Liste Brute releases</a></td>
 </tr>
 <tr >
     <td /> <a href="../admin/">Retour Admin</a></td>
