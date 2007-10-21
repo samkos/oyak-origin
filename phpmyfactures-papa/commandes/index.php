@@ -108,17 +108,17 @@ else {
 		<table border="0" align="center" cellpadding="3" cellspacing="1" bgcolor="#000000" width="770">
 <?		 
     print "<tr> ";
-	  print "<td bgcolor='#99CCCC' align='center' colspan=8>  Commande : $commande - $date</td>";
+	  print "<td bgcolor='#99CCCC' align='center' colspan=9>  Commande : $commande - $date</td>";
 		print "</tr>";
 		
     print "<tr> ";
-	  print "<td bgcolor='#99CCCC' align='left' colspan=3>  Vendeur : $vendeur </td>";
-	  print "<td bgcolor='#99CCCC' align='right' colspan=5> Client : $client <BR> </td>";
+	  print "<td bgcolor='#99CCCC' align='left' colspan=4>  Vendeur : $vendeur </td>";
+	  print "<td bgcolor='#99CCCC' align='right' colspan=6> Client : $client <BR> </td>";
 		print "</tr>";
 		
 		if ($action=="brute") {
 		  print "<tr> ";
-	    print "<td bgcolor='#ffffff' align='left' colspan=3>  $contenu</td>";
+	    print "<td bgcolor='#ffffff' align='left' colspan=5>  $contenu</td>";
 		  print "</tr>";
       print "</table> <br /><br />";
 
@@ -136,6 +136,7 @@ else {
         <td bgcolor="#99CCCC" align="center" width="15%" rowspan=2><b>Date</b></td>
   	    <td bgcolor="#99CCCC" align="center" width="15%" rowspan=2><b>Quantite</b></td>
   	    <td bgcolor="#99CCCC" align="center" width="15%" rowspan=2><b>Prix</b></td>
+  	    <td bgcolor="#99CCCC" align="center" width="15%" rowspan=2><b>Parametre</b></td>
        </tr>
   
      	<tr>
@@ -147,40 +148,41 @@ else {
        </tr>
   <?
       $lignes=split(";",$contenu);
-  		array_shift($lignes);
-  		array_shift($lignes);
-  		while ($ligne=array_shift($lignes)) {
-  		  $col=split("!",$ligne);
-  			$code=$col[0];
-        $racourci=$col[1];  			
-        $fournisseur=$col[2];  			
-        $date=$col[3];  			
-  			$quantite=$col[4];
-  			$prix=$col[5];
-  	
-        $query="select titre from ".$prefixe_table."produits where barcode=\"$code\"";
-        $req = mysql_query($query);
-  			//print $req;
-  			//print "query = ".$query."<BR>";
-        while($ligne = mysql_fetch_array($req))
-        {	
+	array_shift($lignes);
+	array_shift($lignes);
+	while ($ligne=array_shift($lignes)) {
+	  $col=split("!",$ligne);
+	  $code=$col[0];
+	  $racourci=$col[1];  			
+	  $fournisseur=$col[2];  			
+	  $date=$col[3];  			
+	  $quantite=$col[4];
+	  $prix=$col[5];
+	  $parametre=$col[6];
+	  
+	  $query="select titre from ".$prefixe_table."produits where barcode=\"$code\"";
+	  $req = mysql_query($query);
+	  //print $req;
+	  //print "query = ".$query."<BR>";
+	  while($ligne = mysql_fetch_array($req))
+	    {	
   				//print_r($ligne);
-  			  $produit = $ligne["titre"];
-        }
+	      $produit = $ligne["titre"];
+	    }
   
-        $query="select societe from ".$prefixe_table."fournisseurs where clef=\"$fournisseur\"";
-        $query=sprintf("select societe from ".$prefixe_table."fournisseurs where clef=\"%d\"",$fournisseur);
-        $req = mysql_query($query);
-  			//print $req;
-  			//print "query = ".$query."<BR>";
-        while($ligne = mysql_fetch_array($req))
-        {	
-  				//print_r($ligne);
-  			  $societe = $ligne["societe"];
-        }
+	  $query="select societe from ".$prefixe_table."fournisseurs where clef=\"$fournisseur\"";
+	  $query=sprintf("select societe from ".$prefixe_table."fournisseurs where clef=\"%d\"",$fournisseur);
+	  $req = mysql_query($query);
+	  //print $req;
+	  //print "query = ".$query."<BR>";
+	  while($ligne = mysql_fetch_array($req))
+	    {	
+	      //print_r($ligne);
+	      $societe = $ligne["societe"];
+	    }
   
-  			
-  		  print "
+	  
+	  print "
   		 <tr>
   		   <td bgcolor='#ffffff' align='left'> $produit </td>
   		   <td bgcolor='#ffffff' align='left'> $code</td>
@@ -190,6 +192,7 @@ else {
   		   <td bgcolor='#ffffff' align='right'> $date</td>
   		   <td bgcolor='#ffffff' align='right'> $quantite</td>
   		   <td bgcolor='#ffffff' align='right'> $prix</td>
+  		   <td bgcolor='#ffffff' align='right'> $parametre </td>
   		</tr>";
   		}
   		

@@ -1667,7 +1667,7 @@ class processFacture:
     def neRienFaire(self):
         return
     
-    def envoyer(self):
+    def envoyer(self,parametre=""):
         global ihm
 
         ihm.showMessage("Traitement Commande en  cours ",self.neRienFaire)
@@ -1683,7 +1683,8 @@ class processFacture:
              s=s+"%s%s"%(self.selectedFournisseur[l],sep2)
              s=s+"%s%s"%(self.selectedDate[l],sep2)
              s=s+"%s%s"%(self.selectedQuantite[l],sep2)
-             s=s+"%s%s"%(self.selectedPrix[l],sep1)
+             s=s+"%s%s"%(self.selectedPrix[l],sep2)
+             s=s+"%s%s"%(parametre,sep2)
         params = urllib.urlencode({'vendeur': self.vendeur_numero, 'commande':s})
         try:
             f = urllib.urlopen(url_send_commande, params)
@@ -1716,8 +1717,8 @@ class processFacture:
             self.deleteCode("fake")
             return
         # * ->  La commande est envoye
-        if racourci=="*" or fournisseur=="*":
-            self.envoyer()
+        if racourci[0]=="*" :
+            self.envoyer(racourci[1:])
             return
         # * ou x ->  on tue la facture courrante
         if racourci=="x" or fournisseur=="x":
