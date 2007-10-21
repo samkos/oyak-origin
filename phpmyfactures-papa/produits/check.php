@@ -26,14 +26,13 @@ $req = mysql_query("delete from ".$prefixe_table."produits where id=\"$id_produi
 
    // recuperation nom fournisseur
 	 
-	 $req = mysql_query("select clef,societe from ".$prefixe_table."fournisseurs");
+	 $req = mysql_query("select id,societe from ".$prefixe_table."fournisseurs");
 	 while($ligne = mysql_fetch_array($req))
 	 {
-	   $id = $ligne["clef"];
+	   $id = $ligne["id"];
 	   $societe = $ligne["societe"];
-	   $fournisseur_nom[$id]="$societe";
-	   //print "<BR> $id = $societe";
-	 }
+		 $fournisseur_nom[$id]="$societe";
+		}
 
 
 $nb_produit = 300;
