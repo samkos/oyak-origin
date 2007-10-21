@@ -34,12 +34,13 @@ else:
     raiseError=1
     isReadFromServer=1
     website_address="http://127.0.0.1/phpmyfactures"
-    fichierIp="c:/Program Files/EasyPHP1-8/www/cible/a copier/Platform/test/S24Profiles.reg"
-    fichierIpBackup="c:/Program Files/EasyPHP1-8/www/cible/a copier/Platform/test/S24old.reg"
-    fichierIpNew="c:/Program Files/EasyPHP1-8/www/cible/a copier/Platform/test/S24new.reg"
-    fichierIpTemplate="c:/Program Files/EasyPHP1-8/www/cible/a copier/Application/Oyak/S24Profiles.reg"
-    fichierAppTemplate="c:/Program Files/EasyPHP1-8/www/cible/a copier/Application/Oyak/Data/%s.bak"
-    fichierAppOldTemplate="c:/Program Files/EasyPHP1-8/www/cible/a copier/Application/Oyak/Data/%s.old"
+    root_address="c:/Program Files/EasyPHP1-8/www/phpmyfactures/device/a copier/"
+    fichierIp=root_address+"Platform/test/S24Profiles.reg"
+    fichierIpBackup=root_address+"Platform/test/S24old.reg"
+    fichierIpNew=root_address+"Platform/test/S24new.reg"
+    fichierIpTemplate=root_address+"Application/Oyak/S24Profiles.reg"
+    fichierAppTemplate=root_address+"Application/Oyak/Data/%s.bak"
+    fichierAppOldTemplate=root_address+"Application/Oyak/Data/%s.old"
 
 myVendeur=0
 myClient=0;
@@ -83,7 +84,7 @@ url_update_commande=website_address+"/query/download.php?"
 fichierBackup_Template='\Oyak\%s.bak'
 fichierTemp_Template='\Oyak\%s.tmp'
 fichierOld_Template='\Oyak\%s.old'
-url_get_Template=website_address+"/query/get_data2.php?%s=1"
+url_get_Template=website_address+"/query/get_data.php?%s=1"
 
 
 sep1=";"
@@ -613,18 +614,18 @@ class getData:
             # lecture sur fichier backup d'abord
             if debugMessages:
                 print "lecture from Backup pour %s"%what
-            self.readFromBackup()
-            self.readSource(lengthArticle)
-            self.closeSource()
+            if self.readFromBackup()==0:
+                self.readSource(lengthArticle)
+                self.closeSource()
 
         # lecture depuis la base
         if debugMessages:
             print "lecture from web pour %s :minval=%s,maxval=%s,inf=%s,sup=%s "%(what,self.minval,self.maxval,self.inf,self.sup)
         self.urlName=url_get_Template%what+"&from=%s"%(self.maxval+1)
 
-        self.readFromUrl()
-        self.readSource(lengthArticle)
-        self.closeSource()
+        if self.readFromUrl()==0:
+            self.readSource(lengthArticle)
+            self.closeSource()
 
         timestamp[what,'min']=self.minval
         timestamp[what,'max']=self.maxval
@@ -754,7 +755,7 @@ class getData:
                 article=string.split(a,"!")
                 if len(article)==lengthArticle:
                     if self.collect(article):
-                        self.tmpFile.write(l)
+                        self.tmpFile.write(a)
                         self.nbArticles+=1
 
     def closeSource(self):                    
@@ -1100,7 +1101,7 @@ class chooseClient(chooseXXX):
     def collect(self,article):
         (societe,ville,clef,timestamp)=article
         if (timestamp>=self.inf):
-            Clients[societe+"/"+ville]=(societe,ville,clef,balance)
+            Clients[societe+"/"+ville]=(societe,ville,clef)
             self.updateTimestamp(timestamp)
             return 1
         return 0
