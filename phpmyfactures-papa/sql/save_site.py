@@ -8,7 +8,7 @@ work_dir="C:\Program Files\EasyPHP1-8\www\SAVE"
 dirname=string.split(from_dir,'\\')[-1]
 to_dir=work_dir+"\\"+dirname
 
-debug=10
+debug=0
 
 def deltree(dir):
     global debug
@@ -32,7 +32,8 @@ def deltree(dir):
                   raise
       # It's a directory, remove it
       try:
-          print "D- "+dir
+          if debug>0:
+                print "D- "+dir
           os.rmdir(dir)
       except:
           print "erreur Effacement Dir "+dir
@@ -76,19 +77,37 @@ def copytree(dir,from_dir,to_dir):
                     print "F+ "+to_pathname
     
 
+def save_database():
+
+    os.system("save_site.bat")
+
+             
 if __name__ == '__main__':
 
+    print """
+-------------------------------------------------
+-------------------------------------------------
+-------------------------------------------------
+!  sauvegarde du site
+-------------------------------------------------
+-------------------------------------------------
+-------------------------------------------------
+-------------------------------------------------
+"""
+
+
     # effacement de la sauvegarde eventuelle
-    deltree(work_dir)
+    print "! Effacement de l'ancienne sauvegarde..."
+    
     try:
         deltree(work_dir)
-        print "Effacement "+work_dir
+        if debug>0:
+            print "Effacement "+work_dir
     except:
         print "Erreur effacement " + work_dir
         pass
 
     # creation du diretory cible
-    os.mkdir(work_dir)
     try:
         os.mkdir(work_dir)
     except:
@@ -103,12 +122,15 @@ if __name__ == '__main__':
     
 
     # recopie du site web
+    print "! Sauvegarde site web"
     copytree(from_dir,from_dir, to_dir)
 
     # sauvegarde de la base
+    save_database()
 
     # construction du fichier 7z
 
-    
+    print "-- FIN --"
+    input("Le site est sauvegarde")
 
 
