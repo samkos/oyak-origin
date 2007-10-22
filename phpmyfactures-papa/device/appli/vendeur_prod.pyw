@@ -952,7 +952,7 @@ def ipChange(ipAddress,ipSid):
 ##################################################################################
 
 class chooseXXX(getData):
-
+ 
     def __init__(self,what,updateOnly=0):
         global ihm
 
@@ -969,22 +969,15 @@ class chooseXXX(getData):
         
         self.what=what
         self.killable=killable
-
-        
         self.filtre=filtre
-
         self.initPanel()
-
         self.setFiltre(filtre)
-
         self.ihmChoix()
 
         ihm.okButton[what]["command"]=lambda x="fake" : self.go("fake")
-        
         self.listePrepare()
 
         ihm.show(what)
-        
         self.action()
         
     def initPanel(self):
@@ -1259,7 +1252,10 @@ class chooseFournisseur(chooseXXX):
         chooseXXX.ihmShow(self,"fournisseurs",killable=1)
         
     def initPanel(self):
-        self.fournisseurs = ProduitsFournisseurs[self.racourci]
+        if self.racourci=="TOUT FOURNISSEUR":
+            self.fournisseurs = Fournisseurs.keys()
+        else:   
+            self.fournisseurs = ProduitsFournisseurs[self.racourci]
         self.filtreName="%s > "%ProduitsRacourcis[self.racourci]
 
     def collect(self,article):
@@ -1280,7 +1276,10 @@ class chooseFournisseur(chooseXXX):
           return  
 
         (societe,ville,clef) = choix
-        self.facture.acceptProduit(self.racourci,clef)
+        if clef==0: # selection de tous les fournisseurs
+            self.ihmShow(self.facture,"TOUT FOURNISSEUR")
+        else:                
+            self.facture.acceptProduit(self.racourci,clef)
 
     def action(self,event="fake"):
         self.listbox.delete(0,END)
@@ -1298,7 +1297,12 @@ class chooseFournisseur(chooseXXX):
                 self.listbox.insert(END, s)
                 self.clefs[i]=(societe,ville,clef)
                 i=i+1
-                
+
+	# ajout de 'TOUS'
+	self.listbox.insert(END, "TOUS LES FOURNISSEURS")
+        self.clefs[i]=("TOUS","PARTOUT",0)
+				
+                        
         self.listbox.focus_set()
         self.listbox.selection_set(0)
 
