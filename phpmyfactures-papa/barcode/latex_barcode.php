@@ -77,6 +77,9 @@ $req = mysql_query("$sql_query ");
 
 $nb=0;
 
+$name_line="";
+$etiquette_line="";
+
  foreach (array_keys($barcodes) as $key) {
    for ($i=1;$i<=$quantites[$key];$i++) {
      $python_line=sprintf('
@@ -84,16 +87,20 @@ $nb=0;
      fwrite ($fpython, $python_line);
      fwrite ($fpython, $python_line);
 
-     fwrite($ftex, sprintf("
-                            \includegraphics[height=3.2 cm,width=6.5 cm]{%s.eps}  ",$barcodes[$key]) );
+		 $name_line=$name_line."\\begin{huge}".$produits[$key]."\\end{huge}";
+     $etiquette_line=$etiquette_line.sprintf("\includegraphics[height=2.1 cm,width=6.5 cm]{%s.eps}  ",$barcodes[$key]);
      $nb=$nb+1;
      if ($nb<$nb_per_line) {
-       fwrite($ftex,"&");
+         $name_line=$name_line."&";
+         $etiquette_line=$etiquette_line."&";
      }
      else {
        $nb=0;
        $nb_lignes=$nb_lignes+1;
-       fwrite($ftex," \\\\ \\hline  ");
+			 fwrite($ftex," \\\\ $name_line\\\\   ");
+			 fwrite($ftex," $etiquette_line \\\\ \\hline  ");
+			 $name_line="";
+			 $etiquette_line="";
      }
   
      if ($nb_lignes==$nb_per_page) {
@@ -104,6 +111,8 @@ $nb=0;
    }
  }
 }	
+			 fwrite($ftex," $name_line\\\\   ");
+			 fwrite($ftex," $etiquette_line \\\\ \\hline  ");
 fwrite ($ftex,"\\hline \\end{tabular}    \\end{small} \\end{document}\n");
 fwrite($fpython,"];
 		");

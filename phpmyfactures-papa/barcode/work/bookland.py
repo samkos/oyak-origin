@@ -921,8 +921,9 @@ class ean13print(barCodeSymbol):
         self.ps.lines = self.ps.header(self.isbn.s,comments,ean13font,isbnfont,upc5font) + \
                         [ "ean13font" ] + \
                         self.ean13Symbol.pslines() +\
-                        [ "isbnfont" ] + \
-                        self.ean13Symbol.psTopCenterText("%s" % (self.isbn.name),isbnfont,fit=0)
+                        [ "isbnfont" ]\
+												# + \
+                        # self.ean13Symbol.psTopCenterText("%s" % (self.isbn.name),isbnfont,fit=0)
 #                        self.ean13Symbol.psTopCenterText("%s %s" % (self.isbn.name,self.isbn.s),isbnfont,fit=1)
 
         # 5-digit add-on:  (optional for ISBN only)
