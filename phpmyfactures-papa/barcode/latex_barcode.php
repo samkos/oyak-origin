@@ -87,8 +87,8 @@ $etiquette_line="";
      fwrite ($fpython, $python_line);
      fwrite ($fpython, $python_line);
 
-		 $name_line=$name_line."\\begin{huge}".$produits[$key]."\\end{huge}";
-     $etiquette_line=$etiquette_line.sprintf("\includegraphics[height=2.1 cm,width=6.5 cm]{%s.eps}  ",$barcodes[$key]);
+		 $name_line=$name_line."\n \\begin{bf} \\begin{large} \\parbox{6cm}{\\begin{center}".$produits[$key]."\\end{center}} \\end{large} \\end{bf} ";
+     $etiquette_line=$etiquette_line.sprintf("\n \includegraphics[height=2.1 cm,width=6.5 cm]{%s.eps}  ",$barcodes[$key]);
      $nb=$nb+1;
      if ($nb<$nb_per_line) {
          $name_line=$name_line."&";
@@ -97,7 +97,7 @@ $etiquette_line="";
      else {
        $nb=0;
        $nb_lignes=$nb_lignes+1;
-			 fwrite($ftex," \\\\ $name_line\\\\   ");
+			 fwrite($ftex," $name_line \\\\   ");
 			 fwrite($ftex," $etiquette_line \\\\ \\hline  ");
 			 $name_line="";
 			 $etiquette_line="";
