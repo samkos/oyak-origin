@@ -17,6 +17,7 @@
    <tr>
       <td bgcolor="#99CCCC" align="center" width="10%"><b> Choix </b></td>
       <td bgcolor="#99CCCC" align="center" width="11%"><b>Quantité</b></td>
+      <td bgcolor="#99CCCC" align="center" width="40%"><b>Fournisseur</b></td>
       <td bgcolor="#99CCCC" align="center" width="40%"><b>Titre</b></td>
 	   <td bgcolor="#99CCCC" align="center" width="39%" colspan="3"><b>Code Barre</b></td>
    </tr>
@@ -24,8 +25,11 @@
  
 <td bgcolor="#99CCCC" colspan=1> </td>
 <td bgcolor="#99CCCC" colspan=1> </td>
-<td bgcolor="#99CCCC" colspan=1>
   <form action="">
+<td bgcolor="#99CCCC" colspan=1>
+	<input type=text name=filtre_fournisseur value="<? echo $filtre_fournisseur ?>">
+  <input type="submit" value="Filtrer"> </td>
+	<td bgcolor="#99CCCC" colspan=1>
 	<input type=text name=filtre_titre size=40 value="<? echo $filtre_titre ?>"> <BR> 
   <input type="submit" value="Filtrer"> </td>
 	<td bgcolor="#99CCCC" colspan=1>
@@ -42,7 +46,7 @@ $nb_produit = 1000;
 if(!$start) {$start=0;}
 
 
-$sql_query = "select id,titre,stock,barcode from ".$prefixe_table."produits ";
+$sql_query = "select id,titre,stock,barcode,fournisseur from ".$prefixe_table."produits ";
 
 $sql_filtre=" where id_cat=\"$id_cat\"  ";
 $url_filtre="";
@@ -50,6 +54,11 @@ $url_filtre="";
 if ($filtre_titre) { 
    $sql_filtre = $sql_filtre."  and (titre like \"".str_replace("*", "%", $filtre_titre)."\" ) ";
    $url_filtre = $url_filtre."&filtre_titre=$filtre_titre";
+}
+
+if ($filtre_fournisseur) { 
+   $sql_filtre = $sql_filtre."  and (fournisseur like \"".str_replace("*", "%", $filtre_fournisseur)."\" ) ";
+   $url_filtre = $url_filtre."&filtre_fournisseur=$filtre_fournisseur";
 }
 
 if ($filtre_barcode) { 
@@ -76,7 +85,7 @@ $req = mysql_query("$sql_query $sql_filtre limit $start,$nb_produit");
 	<input type=button value="Set" onClick="setAll()">
 </td>
 <td bgcolor="#99CCCC" colspan=1> </td>
-<td bgcolor="#99CCCC" colspan=1>
+<td bgcolor="#99CCCC" colspan=2>
   <input type="submit" value="Imprime"> 
 </td>
 </tr>
@@ -90,6 +99,7 @@ while($ligne = mysql_fetch_array($req))
 $nb++;
 $id = $ligne["id"];
 $titre = $ligne["titre"];
+$fournisseur = $ligne["fournisseur"];
 $stock = $ligne["stock"];
 $barcode = $ligne["barcode"];
 
@@ -108,6 +118,7 @@ echo("<tr>
 	  <input name='quantite$nb' type=integer value='$nb_print'   /> </td>
 	  <input name='produit$nb' type=hidden value='$titre'   /> </td>
 		<input name='id$nb' type=hidden value='$id'   /> </td>
+   <td bgcolor=\"#ffffff\" align=\"left\" width=\"60%\">$fournisseur</td>
    <td bgcolor=\"#ffffff\" align=\"left\" width=\"60%\">$titre</td>
    <td bgcolor=\"#ffffff\" align=\"center\" width=\"20%\">$barcode</td>
 </tr>");
