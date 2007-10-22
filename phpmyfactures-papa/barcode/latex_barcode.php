@@ -45,7 +45,7 @@ if ($action=="print") {
    \setlength{\textwidth}{550pt}
 
    \setlength{\topmargin}{1cm}
-   \setlength{\textheight}{27cm}
+   \setlength{\textheight}{2cm}
 
    \setlength{\headheight}{90pt}
 
@@ -86,9 +86,10 @@ $etiquette_line="";
 			    ("%s", "%s", "%s"),',$barcodes[$key],$produits[$key],"99.99", $barcodes[$key]); 
      fwrite ($fpython, $python_line);
      fwrite ($fpython, $python_line);
-
-		 $name_line=$name_line."\n \\begin{bf} \\begin{large} \\parbox{6cm}{\\begin{center}".$produits[$key]."\\end{center}} \\end{large} \\end{bf} ";
-     $etiquette_line=$etiquette_line.sprintf("\n \includegraphics[height=2.1 cm,width=6.5 cm]{%s.eps}  ",$barcodes[$key]);
+		 $produit=substr($produits[$key],0,17);
+		 
+		 $name_line=$name_line."\n \\begin{bf} \\begin{large} \\parbox{6cm}{\\begin{center}".$produit."\\end{center}} \\end{large} \\end{bf} ";
+     $etiquette_line=$etiquette_line.sprintf("\n \includegraphics[height=2.5 cm,width=6.5 cm]{%s.eps}  ",$barcodes[$key]);
      $nb=$nb+1;
      if ($nb<$nb_per_line) {
          $name_line=$name_line."&";
