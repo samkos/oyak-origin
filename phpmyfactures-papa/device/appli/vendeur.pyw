@@ -757,12 +757,12 @@ class getData:
         self.fileList = self.origFileh.readlines()
         self.nbArticles=0
         for l in self.fileList:
+            self.tmpFile.write(l)
             articles=string.split(l,"=")
             for a in articles:
                 article=string.split(a,"!")
                 if len(article)==lengthArticle:
                     if self.collect(article):
-                        self.tmpFile.write(a)
                         self.nbArticles+=1
 
     def closeSource(self):                    
@@ -1303,7 +1303,7 @@ class chooseFournisseur(chooseXXX):
                 i=i+1
 
 	# ajout de 'TOUS'
-	self.listbox.insert(END, "TOUS LES FOURNISSEURS")
+        self.listbox.insert(END, "TOUS LES FOURNISSEURS")
         self.clefs[i]=("TOUS","PARTOUT",0)
 				
                         
@@ -1648,13 +1648,12 @@ class processFacture:
     def addFacture(self,event):
         global ihm
 
-        prix=self.prix.get()
-        if len(prix)==0:
-                prix=self.prix_default
-        self.prix_saisi=prix
+        self.prix_saisi=self.prix.get()
+        if len(self.prix_saisi)==0:
+                self.prix_saisi=self.prix_default
         try :
-          if (eval(prix)+0.0)<eval(self.prix_plancher)+0.:
-            ihm.showMessageOuiNon("le prix %s est inferieur au prix plancher %6.2f! \n Entrée valide?"%(prix,(eval(self.prix_plancher)+0.00)),
+          if (eval(self.prix_saisi)+0.0)<eval(self.prix_plancher)+0.:
+            ihm.showMessageOuiNon("le prix %s est inferieur au prix plancher %6.2f! \n Entrée valide?"%(self.prix_saisi,(eval(self.prix_plancher)+0.00)),
                            siOui=self.ajouteArticle, siNon=self.goToPrice)
             return
         except:
@@ -1664,18 +1663,18 @@ class processFacture:
         self.ajouteArticle()
         
     def ajouteArticle(self):
-        prix=self.prix_saisi
+        ihm.show("facture%d"%self.nb,title="Oyak? Facture ")
         quantite=self.quantite.get()
         if len(quantite)==0:
                 quantite=self.poids
 
         article=self.article.get()
         try :
-          self.listbox.insert(END, formatFact%(float(quantite),article,float(prix)))
+          self.listbox.insert(END, formatFact%(float(quantite),article,float(self.prix_saisi)))
         except :
             self.deleteCode("fake")
 
-        self.selectedPrix[self.nbArticles]=prix
+        self.selectedPrix[self.nbArticles]=self.prix_saisi
         self.selectedQuantite[self.nbArticles]=quantite
         self.selectedDate[self.nbArticles]=self.date.get()
         self.nbArticles=self.nbArticles+1
