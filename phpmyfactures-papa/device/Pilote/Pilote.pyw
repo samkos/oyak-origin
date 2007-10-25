@@ -83,6 +83,14 @@ class IHM   :
     def warmReboot(self):
         self.run("preboot")
 
+    # fonction appelee par l'appui sur le bouton Lire registre WLAN
+    def copieVendeur(self):
+        pput='bin\pput.exe ..\\appli\\vendeur.pyw \\Oyak\\vendeur.pyw'
+        print pput
+        output=self.run(pput,pipe=1)
+        self.affiche(output)
+        
+
 
     # fonction appelee par l'appui sur le bouton Lire registre WLAN
     def getWlanReg(self,reg,outFile=0,pipe=0):
