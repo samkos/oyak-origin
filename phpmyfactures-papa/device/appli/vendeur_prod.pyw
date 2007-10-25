@@ -1651,15 +1651,20 @@ class processFacture:
         prix=self.prix.get()
         if len(prix)==0:
                 prix=self.prix_default
+        self.prix_saisi=prix
         try :
           if (eval(prix)+0.0)<eval(self.prix_plancher)+0.:
-            ihm.showMessageOuiNon("le prix %s est inferieur au prix plancher %6.2f! \n Valider quand meme?"%(prix,(eval(self.prix_plancher)+0.00)),
-                            siNon=self.goToPrice)
+            ihm.showMessageOuiNon("le prix %s est inferieur au prix plancher %6.2f! \n Entrée valide?"%(prix,(eval(self.prix_plancher)+0.00)),
+                           siOui=self.ajouteArticle, siNon=self.goToPrice)
             return
         except:
             self.prix.delete(0,END)
             ihm.showMessage("le prix "+prix+" n'est pas reconnu",self.goToPrice)
             return
+        self.ajouteArticle()
+        
+    def ajouteArticle(self):
+        prix=self.prix_saisi
         quantite=self.quantite.get()
         if len(quantite)==0:
                 quantite=self.poids
