@@ -56,7 +56,7 @@ ProduitsCodes={}
 Clients={}
 Vendeurs={}
 Fournisseurs={}
-Fournisseurs['9999']=('XXXX','xxxx','9999','0000000000000')
+Fournisseurs['9999']=('XXXX','xxxx','9999')
 Releases={}
 Factures={}
 clientNB = {}
@@ -621,7 +621,7 @@ class getData:
             # lecture sur fichier backup d'abord
             if debugMessages:
                 print "lecture from Backup pour %s"%what
-            if self.readFromBackup()==0:
+            if self.readFromBackup()==1000:
                 self.readSource(lengthArticle)
                 self.closeSource()
 
@@ -1293,6 +1293,7 @@ class chooseFournisseur(chooseXXX):
         liste=self.fournisseurs
         n=len(self.filtre)
         for code in liste:
+            print Fournisseurs[code],code
             (societe,ville,clef)=Fournisseurs[code]
             s="%04d-%s"%(int(clef),societe)
             c="%d"%int(clef)
