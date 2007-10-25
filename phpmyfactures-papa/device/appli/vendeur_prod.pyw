@@ -1283,7 +1283,7 @@ class chooseFournisseur(chooseXXX):
         if clef==0: # selection de tous les fournisseurs
             self.ihmShow(self.facture,self.racourci,all=1)
         else:                
-            self.facture.acceptProduit(self.racourci,clef)
+            self.facture.acceptProduit(self.racourci,clef,autre_fournisseur=self.all)
 
     def action(self,event="fake"):
         self.listbox.delete(0,END)
@@ -1572,8 +1572,10 @@ class processFacture:
         myProduit.ihmShow(self,valeur)
 
 
-    def acceptProduit(self,racourci,fournisseur):
+    def acceptProduit(self,racourci,fournisseur,autre_fournisseur=0):
         global ihm
+        self.autre_fournisseur=autre_fournisseur
+        
         try:
           # que se passe-t-il si on vire la fenetre de facturation qui
           # a appelé??
@@ -1584,10 +1586,20 @@ class processFacture:
           return
             
         ihm.show("facture%d"%self.nb,title="Oyak? Facture ")
+
         # le produit selectionne a un code barre
         if (racourci,fournisseur) in ProduitsCodes.keys():
             code = ProduitsCodes[racourci,fournisseur]
             (libelle,prix,racourci,prix_plancher,poids,fournisseur)=Produits[code]
+
+        # le fournisseur est forcé par un appel a autre fournisseur
+        if autre_fournisseur:
+            code = 00
+            (libelle,prix,prix_plancher,poids)=(ProduitsRacourcis[racourci],"0","0","0")
+            
+
+        if (racourci,fournisseur) in ProduitsCodes.keys() or autre_fournisseur:
+
             (societe,ville,clef)=Fournisseurs[fournisseur]
             self.fournisseur.insert(END,societe)
             self.fournisseur_label.set("Fournisseur : %s"%fournisseur)
@@ -1641,8 +1653,8 @@ class processFacture:
                 prix=self.prix_default
         try :
           if (eval(prix)+0.0)<eval(self.prix_plancher)+0.:
-            ihm.showMessage("Impossible le prix plancher est %6.2f > %s"%((eval(self.prix_plancher)+0.00),prix),
-                            self.goToPrice)
+            ihm.showMessageOuiNon("le prix %s est inferieur au prix plancher %6.2f! \n Valider quand meme?"%(prix,(eval(self.prix_plancher)+0.00)),
+                            siNon=self.goToPrice)
             return
         except:
             self.prix.delete(0,END)
