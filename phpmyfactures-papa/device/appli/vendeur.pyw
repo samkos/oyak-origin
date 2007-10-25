@@ -10,16 +10,16 @@ import traceback
 maxDigits=130
 cible=os.path.exists('\Platform')
 oneFrame=01
-version="0.28"
+version="0.29"
 time_last_key=0
 isServeurInjoignable=0
-
 
 if cible:
     zoomedWindow=1
     erreurCatch=0
     debugMessages=0
     raiseError=0
+    isReadFromServer=0
     website_address="http://192.168.111.77/phpmyfactures"
     fichierIp='\Platform\S24Profiles.reg'
     fichierIpBackup='\\Oyak\\S24old.reg'
@@ -58,16 +58,16 @@ Vendeurs={}
 Fournisseurs={}
 Fournisseurs['9999']=('XXXX','xxxx','9999','0000000000000')
 Releases={}
-timestamp = {}
-
 Factures={}
 clientNB = {}
+timestamp = {}
+
 for i in range(10):
     clientNB[i]=0
     
 clefsClients=list()
-nbChamps = {"vendeurs":4, "fournisseurs":4, "clients":5,
-            "releases":2,"produits":10}
+nbChamps = {"vendeurs":4, "fournisseurs":4, "clients":4,
+            "releases":2,"produits":8}
 isAlreadyPaneled = {"vendeurs":0, "fournisseurs":0, "clients":0,
             "releases":0,"produits":0}
 barSize = {"vendeurs":0.1, "fournisseurs":0.9, "clients":0.3,
@@ -84,7 +84,8 @@ url_update_commande=website_address+"/query/download.php?"
 fichierBackup_Template='\Oyak\%s.bak'
 fichierTemp_Template='\Oyak\%s.tmp'
 fichierOld_Template='\Oyak\%s.old'
-url_get_Template=website_address+"/query/get_data2.php?%s=1"
+url_get_Template=website_address+"/query/get_data.php?%s=1"
+
 
 sep1=";"
 sep2="!"
@@ -305,6 +306,9 @@ class ihmRoot:
         label = Button(self.ihm, text="Nouvelle Facture", command=processFacture,height=4,width=self.Xmax)
         self.add(panelName,"autre",label,3,0)
 
+        label = Button(self.ihm, text="Choisir Vendeur", command=self.changeVendeur,height=4,width=self.Xmax)
+        self.add(panelName,"vendeur",label,5,0)
+
         label = Button(self.ihm, text="Relire Donnée", command=self.rechargeBase,height=4,width=self.Xmax)
         self.add(panelName,"reloader",label,6,0)
         
@@ -453,7 +457,7 @@ class ihmRoot:
         if zoomedWindow:
             self.ihm.wm_state(newstate="zoomed")
         self.startProgressBar("OYAK v %s \n\n\n Bienvenue"%version)
-        self.ihm.after(500,self.lectureDonnee)
+        self.ihm.after(2000,self.lectureDonnee)
         self.ihm.mainloop()
 
     def facturePrevious(self):
@@ -483,8 +487,6 @@ class ihmRoot:
         self.showMessage("Pas d'autre\nFacture!!!")
 
     def showFactureFirst(self,menu=0):
-        global myClient
-        
         i=getFirstFacture()
         if  i<0 and menu==0:
             self.factureNew()
@@ -504,15 +506,20 @@ class ihmRoot:
         self.showFactureFirst(menu=1)
 
     def lectureDonnee(self):
-        global myVendeur,myClient
-        lisData(clearAll=1)
+        global isReadFromServer
+##0.26##        lisData(isReadFromServer)
+        lisData_new(clearAll=1)
         myVendeur.ihmShow()
-        
-        
+
     def rechargeBase(self):
         ihm.showMessage("Telechargement du serveur")
-        lisData(clearAll=1)
+##0.26##        lisData(readFromServer=1)
+        lisData_new(clearAll=1)
         ihm.showMessage("OK...",self.showMenu)
+
+    def changeVendeur(self):
+        global myVendeur
+        myVendeur.ihmShow()
 
 
 
@@ -524,8 +531,27 @@ class ihmRoot:
 
 class lisData:
 
+    def __init__(self,readFromServer=0):
+        global ihm
+
+        self.readFromServer=readFromServer
+        es=ihm.updateProgressBar("Chargement Data",0.)
+        
+#        ihm.updateProgressBar("vendeur...",0.1)
+#        getVendeurs(self.readFromServer)
+#        ihm.updateProgressBar("Produits...",0.3)
+#        getProduits(self.readFromServer)
+#        ihm.updateProgressBar("client...",0.6)
+#        getClients(self.readFromServer)
+#        ihm.updateProgressBar("fournisseur...",0.9)
+#        getFournisseurs(self.readFromServer)
+#        ihm.updateProgressBar("Releases...",0.95)
+#        getReleases(readFromServer=1)
+
+class lisData_new:
+
     def __init__(self,clearAll=0,updateOnly=0):
-        global ihm,myClient,myVendeur,myProduit,myFournisseur
+        global ihm,myClient,myVendeur,myProduit,myFournisseur, isReadFromServer
 
         es=ihm.updateProgressBar("Chargement Data",0.)
 
@@ -551,12 +577,12 @@ class lisData:
         myFournisseur=chooseFournisseur(updateOnly)
 
 
-
+    
 class getData:
 
     def __init__(self,what,updateOnly):
         global ihm, timestamp, fichierBackup_Template,url_get_Templare, nbChamps,barSize
-        global fichierOld_Template, fichierAppTemplate, fichierAppOldTemplate
+        global fichierOld_Template, fichierAppTemplate, fichierAppOldTemplate,isAlreadyPaneled
         
         ihm.updateProgressBar("Chargement %s..."%what,barSize[what])
         
@@ -595,18 +621,18 @@ class getData:
             # lecture sur fichier backup d'abord
             if debugMessages:
                 print "lecture from Backup pour %s"%what
-            self.readFromBackup()
-            self.readSource(lengthArticle)
-            self.closeSource()
+            if self.readFromBackup()==0:
+                self.readSource(lengthArticle)
+                self.closeSource()
 
         # lecture depuis la base
         if debugMessages:
-            print "lecture from web pour %s depuis %s "%(what,self.maxval+1)
+            print "lecture from web pour %s :minval=%s,maxval=%s,inf=%s,sup=%s "%(what,self.minval,self.maxval,self.inf,self.sup)
         self.urlName=url_get_Template%what+"&from=%s"%(self.maxval+1)
 
-        self.readFromUrl()
-        self.readSource(lengthArticle)
-        self.closeSource()
+        if self.readFromUrl()==0:
+            self.readSource(lengthArticle)
+            self.closeSource()
 
         timestamp[what,'min']=self.minval
         timestamp[what,'max']=self.maxval
@@ -634,7 +660,6 @@ class getData:
             
         # creation du panel lie a cette variable
 
-        
         if not(isAlreadyPaneled[what]):
             self.choosePanelCreate(what)
             isAlreadyPaneled[what]=1
@@ -732,13 +757,13 @@ class getData:
         self.fileList = self.origFileh.readlines()
         self.nbArticles=0
         for l in self.fileList:
-            self.tmpFile.write(l)
             articles=string.split(l,"=")
             for a in articles:
                 article=string.split(a,"!")
                 if len(article)==lengthArticle:
-                    self.collect(article)
-                    self.nbArticles+=1
+                    if self.collect(article):
+                        self.tmpFile.write(a)
+                        self.nbArticles+=1
 
     def closeSource(self):                    
         self.origFileh.close()
@@ -751,11 +776,147 @@ class getData:
 
     def updateTimestamp(self,ts):
         global timestamp
-
         self.minval=min(self.minval,int(ts))
         self.maxval=max(self.maxval,int(ts))
 
 
+class getData_old:
+
+    def __init__(self,what,readFromServer):
+        global ihm, fichierBackup_Template,url_get_Templare, nbChamps,barSize
+
+        if not(isAlreadyLoaded[what]):
+            ihm.updateProgressBar("Chargement %s..."%what,barSize[what])
+
+            # initialisation
+            self.create_backup=0
+            self.what=what
+            self.readFromServer=readFromServer
+            self.urlName=url_get_Template%what
+            self.fichierBackup=fichierBackup_Template%what
+
+            lengthArticle=nbChamps[what]
+
+            self.dataAvailable=self.openSource()
+            if self.dataAvailable==0:
+                self.readSource(lengthArticle)
+                self.closeSource()
+
+            self.choosePanelCreate(what)
+            isAlreadyLoaded[what]=1
+
+
+    # creation fenetre type choix
+    
+    def choosePanelCreate(self,what):
+        global ihm
+        
+        panelName = what
+        panelName0 = what+"0"
+        
+        # Menu
+        label = Button(ihm.ihm, text="MENU", command=ihm.showMenu,height=2)
+        ihm.add(panelName,"menu",label,0,0,colspan=2)
+        ihm.add(panelName0,"menu",label,0,0,colspan=2)
+        
+        # filtre
+        ihm.filtreLabel[what]=StringVar("")
+        ihm.filtreLabel[what].set("filtre >")
+        label = Label(ihm.ihm, textvariable=ihm.filtreLabel[what],
+                      width=ihm.Xmax-1, height=1,justify="left", fg="red")
+        ihm.add(panelName,"filtreLabel",label,1,0,sticky="W")
+        ihm.add(panelName0,"filtreLabel",label,1,0,sticky="W")
+        
+        # liste box
+
+        scrollbar = Scrollbar(ihm.ihm)
+        scrollbar0 = Scrollbar(ihm.ihm)
+        ihm.add(panelName,"scrollbar",scrollbar,2,1,sticky=N+S)
+        ihm.add(panelName0,"scrollbar",scrollbar0,2,1,sticky=N+S)
+        
+        ihm.listbox[what] = Listbox(ihm.ihm, height=ihm.Ymax-6, yscrollcommand=scrollbar.set)
+        ihm.add(panelName,"listbox",ihm.listbox[what],2,0)
+        scrollbar.config(command=ihm.listbox[what].yview)
+
+        ihm.listbox0[what] = Listbox(ihm.ihm, height=ihm.Ymax-6, yscrollcommand=scrollbar.set)
+        ihm.add(panelName0,"listbox",ihm.listbox0[what],2,0)
+        scrollbar0.config(command=ihm.listbox0[what].yview)
+
+
+        # Menu
+        button = Button(ihm.ihm, text="OK", height=3)
+        ihm.okButton[what]=button
+        ihm.add(panelName,"OK",button,3,0,colspan=2)
+        ihm.add(panelName0,"OK",button,3,0,colspan=2)
+
+
+
+
+    def readFromUrl(self):
+        global isServeurInjoignable
+        try:
+           self.origFileh = urllib.urlopen(self.urlName)
+           if debugMessages:
+              print "creation fichier Backup OK pour ",self.what
+           self.create_backup=1
+           self.backupFile = open(self.fichierBackup,"w")
+           return 0
+        except:
+           if self.readFromServer:
+               if not(isServeurInjoignable):
+                   ihm.showMessage("Solveur injoignable\n Impossibe de télécharger les data du serveur \n Repli sur Backup")
+               isServeurInjoignable=1
+           return -1 
+            
+    def readFromBackup(self):
+           global debugMessages
+
+           try :
+               self.origFileh = open(self.fichierBackup)
+           except :
+                return -1     
+           if debugMessages:
+              print "lecture fichier Backup OK pour ",self.what
+           if self.origFileh:
+                return 0
+           else:
+                return -1
+            
+    def openSource(self):
+       global debugMessages
+       
+       if self.readFromServer:
+           if debugMessages:
+               print "Force la lecture des Data %s sur serveur"%self.what
+           isreached=self.readFromUrl()
+       if not(self.readFromServer) or isreached<0:
+           isreached=self.readFromBackup()
+           if isreached<0:
+               isreached=self.readFromUrl()
+       if isreached>=0:     
+          self.fileList = self.origFileh.readlines()
+          return 0
+       else:
+          return -1
+
+    def readSource(self,lengthArticle):
+        self.nbArticles=0
+        for l in self.fileList:
+            if self.create_backup:
+                self.backupFile.write(l)
+            articles=string.split(l,"=")
+            for a in articles:
+                article=string.split(a,"!")
+                if len(article)==lengthArticle:
+                    self.collect(article)
+                    self.nbArticles+=1
+
+    def closeSource(self):                    
+        self.origFileh.close()
+        if self.create_backup:
+            self.backupFile.close()
+        if debugMessages:
+            print "%d %s lus "%(self.nbArticles,self.what)
 
 ###############################################################################################
 # Gestion adresse IP et reseau
@@ -791,7 +952,7 @@ def ipChange(ipAddress,ipSid):
 ##################################################################################
 
 class chooseXXX(getData):
-
+ 
     def __init__(self,what,updateOnly=0):
         global ihm
 
@@ -801,7 +962,6 @@ class chooseXXX(getData):
         
     def ihmShow(self,what,filtre="",killable=0):
         global ihm
-
         
         self.listbox = ihm.listbox[what]
         self.listbox0 = ihm.listbox0[what]
@@ -809,22 +969,15 @@ class chooseXXX(getData):
         
         self.what=what
         self.killable=killable
-
-        
         self.filtre=filtre
-
         self.initPanel()
-
         self.setFiltre(filtre)
-
         self.ihmChoix()
 
         ihm.okButton[what]["command"]=lambda x="fake" : self.go("fake")
-        
         self.listePrepare()
 
         ihm.show(what)
-        
         self.action()
         
     def initPanel(self):
@@ -884,7 +1037,9 @@ class chooseVendeur(chooseXXX):
         if (timestamp>=self.inf):
             Vendeurs[numero]=(numero,nom,prenom)
             self.updateTimestamp(timestamp)
-        
+            return 1
+        return 0
+                                    
     def initPanel(self):
         self.filtreName="Vendeur > "
 
@@ -897,7 +1052,7 @@ class chooseVendeur(chooseXXX):
           if len(self.filtre)==0 and len(self.clefs0)>0:
               clef=self.listbox0.curselection()[0]
               choix=self.clefs0[int(clef)]
-              print clef,choix
+              #print clef,choix
           else:
               clef=self.listbox.curselection()[0]
               choix=self.clefs[int(clef)]
@@ -943,20 +1098,22 @@ class chooseClient(chooseXXX):
     def ihmShow(self):
         chooseXXX.ihmShow(self,"clients")
         
-
     def collect(self,article):
-        (societe,ville,clef,balance,timestamp)=article
+        (societe,ville,clef,timestamp)=article
         if (timestamp>=self.inf):
-            Clients[societe+"/"+ville]=(societe,ville,clef,balance)
+            Clients[societe+"/"+ville]=(societe,ville,clef)
             self.updateTimestamp(timestamp)
-        
+            return 1
+        return 0
+
     def listePrepare(self):
         clefsClients=Clients.keys()
         clefsClients.sort(key=str.lower)
 
         i=0
         for clef in clefsClients:
-            self.listbox0.insert(END,clef)
+            (societe,ville,nb)=Clients[clef]
+            self.listbox0.insert(END, "%04d-%s"%(int(nb[1:]),clef))
             self.clefs0[i]=clef
             i=i+1
         #print self.listbox0
@@ -1002,8 +1159,10 @@ class chooseClient(chooseXXX):
             self.listbox.focus_set()
             self.listbox.selection_set(0)
             for clef in Clients.keys():
-                if string.lower(clef[:n])==self.filtre:
-                    self.listbox.insert(END, clef)
+                (societe,ville,nb)=Clients[clef]
+                nb=nb[1:]
+                if string.lower(clef[:n])==self.filtre or  nb.find(self.filtre)==0:
+                    self.listbox.insert(END, "%04d-%s"%(int(nb),clef))
                     self.clefs[i]=clef
                     i=i+1
 
@@ -1022,8 +1181,8 @@ class chooseProduit(chooseXXX):
         
         self.facture=facture
         self.valeur=valeur
-        (societe,ville,clef,balance) = facture.client
-        self.filtreName="%s >"%(societe)
+        (societe,ville,clef) = facture.client
+        self.filtreName="%s >"%societe
         chooseXXX.ihmShow(self,"produits",killable=1)
         
     def initPanel(self):
@@ -1031,8 +1190,8 @@ class chooseProduit(chooseXXX):
         
 
     def collect(self,article):
-        (code,clef,fournisseur,prix,prix_plancher,prix_stock,stock,poids,libele,timestamp)=article
-        if (timestamp>=self.inf):
+         (code,clef,fournisseur,prix,prix_plancher,poids,libele,timestamp)=article
+         if (timestamp>=self.inf):
             self.updateTimestamp(timestamp)
             #racourci = int(code[2:7])
             racourci = int(clef)
@@ -1042,8 +1201,9 @@ class chooseProduit(chooseXXX):
             else:
                 ProduitsFournisseurs[racourci]=[fournisseur]
             ProduitsCodes[racourci,fournisseur]=code
-            Produits[code]=(libele,prix,racourci,prix_plancher,prix_stock,stock,poids,fournisseur)
-
+            Produits[code]=(libele,prix,racourci,prix_plancher,poids,fournisseur)
+            return 1
+         return 0
 
     def listePrepare(self):
         self.liste=ProduitsRacourcis.keys()
@@ -1051,7 +1211,7 @@ class chooseProduit(chooseXXX):
         
     def go(self,event):
         global myFournisseur
-        
+
         try:
             clef=self.listbox.curselection()[0]
             (racourci,libelle)=self.clefs[int(clef)]
@@ -1089,21 +1249,29 @@ class chooseFournisseur(chooseXXX):
     def __init__(self,updateOnly=0):
         chooseXXX.__init__(self,"fournisseurs",updateOnly)
         
-    def ihmShow(self,facture,racourci):
+    def ihmShow(self,facture,racourci,all=0):
         self.facture=facture
         self.racourci=racourci
+        self.all=all
         chooseXXX.ihmShow(self,"fournisseurs",killable=1)
-
+        
     def initPanel(self):
-        self.fournisseurs = ProduitsFournisseurs[self.racourci]
+        if self.all:
+            self.fournisseurs = Fournisseurs.keys()
+        else:   
+            self.fournisseurs = ProduitsFournisseurs[self.racourci]
         self.filtreName="%s > "%ProduitsRacourcis[self.racourci]
 
     def collect(self,article):
         (societe,ville,clef,timestamp)=article
+        #print "in fournisseur : timestamp=%s, inf=%s, cond=%s"%(timestamp,self.inf,timestamp>=self.inf)
+        #print article
         if (timestamp>=self.inf):
             self.updateTimestamp(timestamp)
             Fournisseurs[clef]=(societe,ville,clef)
-
+            return 1
+        return 0
+    
     def go(self,event):
         try:
           clef=self.listbox.curselection()[0]
@@ -1112,7 +1280,10 @@ class chooseFournisseur(chooseXXX):
           return  
 
         (societe,ville,clef) = choix
-        self.facture.acceptProduit(self.racourci,clef)
+        if clef==0: # selection de tous les fournisseurs
+            self.ihmShow(self.facture,self.racourci,all=1)
+        else:                
+            self.facture.acceptProduit(self.racourci,clef,autre_fournisseur=self.all)
 
     def action(self,event="fake"):
         self.listbox.delete(0,END)
@@ -1130,7 +1301,12 @@ class chooseFournisseur(chooseXXX):
                 self.listbox.insert(END, s)
                 self.clefs[i]=(societe,ville,clef)
                 i=i+1
-                
+
+	# ajout de 'TOUS'
+	self.listbox.insert(END, "TOUS LES FOURNISSEURS")
+        self.clefs[i]=("TOUS","PARTOUT",0)
+				
+                        
         self.listbox.focus_set()
         self.listbox.selection_set(0)
 
@@ -1151,8 +1327,7 @@ class chooseRelease(chooseXXX):
 
     def collect(self,article):
         (numero,filename)=article
-        if (timestamp>=self.inf):
-            Releases[numero]=(numero,filename)
+        Releases[numero]=(numero,filename)
 
     def go(self,event):
         global ihm
@@ -1255,21 +1430,18 @@ class processFacture:
 
         
         if self.nb==0 and client==0:
-            global myClient
-            
             self.vendeur=vendeurChoisi
             self.clefs={}
         
-            myClient.ihmShow()
+            chooseClient()
             return
 
         else:
             self.client=client
-            (societe,ville,clef,balance)=self.client
+            (societe,ville,clef)=self.client
         
 
             self.nb=getNBfacture()
-            self.balance=balance
             factureCurrent=self.nb
             Factures[self.nb]=self
             
@@ -1344,17 +1516,17 @@ class processFacture:
         self.listFrame.pack(side=TOP,expand=1,fill=BOTH)
 
 
-        (societe,ville,clef,balance)=self.client
+        (societe,ville,clef)=self.client
         self.clientClef=clef
 
         # rappel nom client
         label = Label(self.clientFrame,
-                      text="%s>%s (%s)"%(self.vendeur_prenom,societe,self.balance), justify="center", fg="red",width=36)
+                      text="%s>%s"%(self.vendeur_prenom,societe), justify="center", fg="red",width=36)
         label.pack(side=TOP)
 
         # quantite, prix, article, fournisseur, date
 
-        self.quantite_label,self.quantite = self.addLabelEntry("Quant:")
+        self.quantite_label,self.quantite = self.addLabelEntry("Quantite:")
         self.prix_label,self.prix = self.addLabelEntry("Prix:")
         self.article_label,self.article = self.addLabelEntry("Article:")
         self.fournisseur_label,self.fournisseur = self.addLabelEntry("Fournisseur:")
@@ -1394,13 +1566,16 @@ class processFacture:
 
     def processProduit(self,event):
         global myProduit
+        
         valeur=self.article.get()
         self.article.delete(0,END)
         myProduit.ihmShow(self,valeur)
 
 
-    def acceptProduit(self,racourci,fournisseur):
+    def acceptProduit(self,racourci,fournisseur,autre_fournisseur=0):
         global ihm
+        self.autre_fournisseur=autre_fournisseur
+        
         try:
           # que se passe-t-il si on vire la fenetre de facturation qui
           # a appelé??
@@ -1411,10 +1586,20 @@ class processFacture:
           return
             
         ihm.show("facture%d"%self.nb,title="Oyak? Facture ")
+
         # le produit selectionne a un code barre
         if (racourci,fournisseur) in ProduitsCodes.keys():
             code = ProduitsCodes[racourci,fournisseur]
-            (libelle,prix,racourci,prix_plancher,prix_stock,stock,poids,fournisseur)=Produits[code]
+            (libelle,prix,racourci,prix_plancher,poids,fournisseur)=Produits[code]
+
+        # le fournisseur est forcé par un appel a autre fournisseur
+        if autre_fournisseur:
+            code = 00
+            (libelle,prix,prix_plancher,poids)=(ProduitsRacourcis[racourci],"0","0","0")
+            
+
+        if (racourci,fournisseur) in ProduitsCodes.keys() or autre_fournisseur:
+
             (societe,ville,clef)=Fournisseurs[fournisseur]
             self.fournisseur.insert(END,societe)
             self.fournisseur_label.set("Fournisseur : %s"%fournisseur)
@@ -1422,8 +1607,8 @@ class processFacture:
             self.article.insert(END,libelle)
             self.article_label.set("Article : %d"%racourci)
       
-            self.quantite_label.set("Quant : ("+"%6.2f/%6.2f"%(eval(poids)+0.00,eval(stock)+0.00)+")")
-            self.prix_label.set("Prix : ("+"%6.2f/%6.2f"%(eval(prix)+0.00,eval(prix_stock)+0.00)+")")
+            self.quantite_label.set("Quantite : ("+"%6.2f"%(eval(poids)+0.00)+")")
+            self.prix_label.set("Prix : ("+"%6.2f"%(eval(prix)+0.00)+")")
             self.prix_default=prix
             self.prix_plancher=prix_plancher
             self.poids=poids
@@ -1466,15 +1651,20 @@ class processFacture:
         prix=self.prix.get()
         if len(prix)==0:
                 prix=self.prix_default
+        self.prix_saisi=prix
         try :
           if (eval(prix)+0.0)<eval(self.prix_plancher)+0.:
-            ihm.showMessage("Impossible le prix plancher est %6.2f > %s"%((eval(self.prix_plancher)+0.00),prix),
-                            self.goToPrice)
+            ihm.showMessageOuiNon("le prix %s est inferieur au prix plancher %6.2f! \n Entrée valide?"%(prix,(eval(self.prix_plancher)+0.00)),
+                           siOui=self.ajouteArticle, siNon=self.goToPrice)
             return
         except:
             self.prix.delete(0,END)
             ihm.showMessage("le prix "+prix+" n'est pas reconnu",self.goToPrice)
             return
+        self.ajouteArticle()
+        
+    def ajouteArticle(self):
+        prix=self.prix_saisi
         quantite=self.quantite.get()
         if len(quantite)==0:
                 quantite=self.poids
@@ -1499,9 +1689,13 @@ class processFacture:
 
         self.deleteCode("fake")
 
-    def envoyer(self):
+    def neRienFaire(self):
+        return
+    
+    def envoyer(self,parametre=""):
         global ihm
 
+        ihm.showMessage("Traitement Commande en  cours ",self.neRienFaire)
         if self.nbArticles==0:
               self.article.delete(0,END)
               ihm.showMessage("La commande est vide!!!",self.goToArticle)
@@ -1514,7 +1708,8 @@ class processFacture:
              s=s+"%s%s"%(self.selectedFournisseur[l],sep2)
              s=s+"%s%s"%(self.selectedDate[l],sep2)
              s=s+"%s%s"%(self.selectedQuantite[l],sep2)
-             s=s+"%s%s"%(self.selectedPrix[l],sep1)
+             s=s+"%s%s"%(self.selectedPrix[l],sep2)
+             s=s+"*%s%s"%(parametre,sep1)
         params = urllib.urlencode({'vendeur': self.vendeur_numero, 'commande':s})
         try:
             f = urllib.urlopen(url_send_commande, params)
@@ -1524,7 +1719,6 @@ class processFacture:
         ack=f.readlines()
         ok=ack[0]
         if (ok[0]=="0"):
-            lisData(updateOnly=1)
             ihm.showMessage("Commande %s!"%ok[2:],ihm.delCurrentFacture)
         else:
             ihm.showMessage("Commande perdue!",ihm.delCurrentFacture)
@@ -1532,9 +1726,12 @@ class processFacture:
             
     
     def route(self,event):
-        global ihm, myFournisseur
+        global ihm,myFournisseur
         
         racourci=self.article.get()
+        if len(racourci)==0:
+            ihm.showMessage("Article vide!",self.goToArticle)
+            return
         if racourci in Produits.keys():
             (libelle,prix,racourci,prix_plancher,poids,fournisseur)=Produits[racourci]
             self.acceptProduit(racourci,fournisseur)
@@ -1548,8 +1745,8 @@ class processFacture:
             self.deleteCode("fake")
             return
         # * ->  La commande est envoye
-        if racourci=="*" or fournisseur=="*":
-            self.envoyer()
+        if racourci[0]=="*" :
+            self.envoyer(racourci[1:])
             return
         # * ou x ->  on tue la facture courrante
         if racourci=="x" or fournisseur=="x":
@@ -1557,7 +1754,8 @@ class processFacture:
             return
         if racourci=="DDD" or racourci=="ddd":
             ihm.showMessage("Telechargement du serveur")
-            lisData(clearAll=1)
+##0.26##            lisData(readFromServer=1)
+            lisData_new(clearAll=1)
             ihm.showMessage("OK...",self.goToArticle)
             return
         if racourci=="vvv" or racourci=="vvv":
@@ -1583,14 +1781,23 @@ class processFacture:
 
         
 def run():
+    global isReadFromServer
     global ihm
 
     if oneFrame:
        ihm = ihmRoot()
        ihm.start()
     else:
-        lisData(clearAll=1)
-        choixVendeur()
+##        if erreurCatch:
+##            try:
+##               lisData() 
+##               choixVendeur()
+##            except:
+##               pass
+##        else:
+##0.26##            lisData(isReadFromServer)
+            lisData_new(clearAll=1)
+            choixVendeur()
 
 
 if __name__ == "__main__":
