@@ -49,6 +49,11 @@ class IHM   :
         # placement du Bouton dans la frame principale
         Bouton.pack(expand=1,fill=X)
 
+        # definition d'un bouton Copie Vendeur
+        Bouton = Button(self.boutonFrame, text="Copie Vendeur", command=self.copieVendeur)
+        # placement du Bouton dans la frame principale
+        Bouton.pack(expand=1,fill=X)
+
 
     def addButtonReadReg(self,reg,pipe=1):
         # definition d'un bouton lire WLAN valeur
