@@ -621,9 +621,9 @@ class getData:
             # lecture sur fichier backup d'abord
             if debugMessages:
                 print "lecture from Backup pour %s"%what
-            if self.readFromBackup()==1000:
-                self.readSource(lengthArticle)
-                self.closeSource()
+                if self.readFromBackup()==0:
+                    self.readSource(lengthArticle)
+                    self.closeSource()
 
         # lecture depuis la base
         if debugMessages:
@@ -1293,7 +1293,6 @@ class chooseFournisseur(chooseXXX):
         liste=self.fournisseurs
         n=len(self.filtre)
         for code in liste:
-            print Fournisseurs[code],code
             (societe,ville,clef)=Fournisseurs[code]
             s="%04d-%s"%(int(clef),societe)
             c="%d"%int(clef)
