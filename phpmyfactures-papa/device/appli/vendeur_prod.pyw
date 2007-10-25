@@ -1724,6 +1724,9 @@ class processFacture:
         global ihm,myFournisseur
         
         racourci=self.article.get()
+        if len(racourci)==0:
+            ihm.showMessage("Article vide!",self.goToArticle)
+            return
         if racourci in Produits.keys():
             (libelle,prix,racourci,prix_plancher,poids,fournisseur)=Produits[racourci]
             self.acceptProduit(racourci,fournisseur)
