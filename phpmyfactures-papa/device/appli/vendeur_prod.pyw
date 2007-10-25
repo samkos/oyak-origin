@@ -10,7 +10,7 @@ import traceback
 maxDigits=130
 cible=os.path.exists('\Platform')
 oneFrame=01
-version="0.26.1"
+version="0.29"
 time_last_key=0
 isServeurInjoignable=0
 
