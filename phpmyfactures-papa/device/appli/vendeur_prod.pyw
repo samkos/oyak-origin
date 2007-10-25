@@ -1112,7 +1112,8 @@ class chooseClient(chooseXXX):
 
         i=0
         for clef in clefsClients:
-            self.listbox0.insert(END,clef)
+            (societe,ville,nb)=Clients[clef]
+            self.listbox0.insert(END, "%04d-%s"%(int(nb[1:]),clef))
             self.clefs0[i]=clef
             i=i+1
         #print self.listbox0
@@ -1158,8 +1159,10 @@ class chooseClient(chooseXXX):
             self.listbox.focus_set()
             self.listbox.selection_set(0)
             for clef in Clients.keys():
-                if string.lower(clef[:n])==self.filtre:
-                    self.listbox.insert(END, clef)
+                (societe,ville,nb)=Clients[clef]
+                nb=nb[1:]
+                if string.lower(clef[:n])==self.filtre or  nb.find(self.filtre)==0:
+                    self.listbox.insert(END, "%04d-%s"%(int(nb),clef))
                     self.clefs[i]=clef
                     i=i+1
 
@@ -1246,13 +1249,14 @@ class chooseFournisseur(chooseXXX):
     def __init__(self,updateOnly=0):
         chooseXXX.__init__(self,"fournisseurs",updateOnly)
         
-    def ihmShow(self,facture,racourci):
+    def ihmShow(self,facture,racourci,all=0):
         self.facture=facture
         self.racourci=racourci
+        self.all=all
         chooseXXX.ihmShow(self,"fournisseurs",killable=1)
         
     def initPanel(self):
-        if self.racourci=="TOUT FOURNISSEUR":
+        if self.all:
             self.fournisseurs = Fournisseurs.keys()
         else:   
             self.fournisseurs = ProduitsFournisseurs[self.racourci]
@@ -1277,7 +1281,7 @@ class chooseFournisseur(chooseXXX):
 
         (societe,ville,clef) = choix
         if clef==0: # selection de tous les fournisseurs
-            self.ihmShow(self.facture,"TOUT FOURNISSEUR")
+            self.ihmShow(self.facture,self.racourci,all=1)
         else:                
             self.facture.acceptProduit(self.racourci,clef)
 
@@ -1688,7 +1692,7 @@ class processFacture:
              s=s+"%s%s"%(self.selectedDate[l],sep2)
              s=s+"%s%s"%(self.selectedQuantite[l],sep2)
              s=s+"%s%s"%(self.selectedPrix[l],sep2)
-             s=s+"%s%s"%(parametre,sep2)
+             s=s+"*%s%s"%(parametre,sep1)
         params = urllib.urlencode({'vendeur': self.vendeur_numero, 'commande':s})
         try:
             f = urllib.urlopen(url_send_commande, params)

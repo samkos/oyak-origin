@@ -74,6 +74,60 @@ non reporte dans 0.28
 
 ---------------------------------------------------------------
 
+bug : quand o change de vendeur et retour chariot, la base est recharger
+
+
+non reporte dans 0.28
+
+
+
+---------------------------------------------------------------
+
+bug quand tu envpoe *L, le ';'manque a la fin
+
+
+non reporte dans 0.28
+
+
+
+---------------------------------------------------------------
+
+feature  : un *L lance l'impression d'un BL systematiquement
+
+
+non reporte dans 0.28
+
+
+
+---------------------------------------------------------------
+
+feature : saisie client par numero
+
+
+non reporte dans 0.28
+
+
+
+---------------------------------------------------------------
+
+bug :prix plaancher = avertissement seuleement
+
+
+non reporte dans 0.28
+
+
+
+---------------------------------------------------------------
+
+bug :
+
+
+non reporte dans 0.28
+
+
+
+---------------------------------------------------------------
+
 bug :
 
 
