@@ -1658,7 +1658,7 @@ class processFacture:
             return
         except:
             self.prix.delete(0,END)
-            ihm.showMessage("le prix "+prix+" n'est pas reconnu",self.goToPrice)
+            ihm.showMessage("le prix "+self.prix_saisi+" n'est pas reconnu",self.goToPrice)
             return
         self.ajouteArticle()
         
