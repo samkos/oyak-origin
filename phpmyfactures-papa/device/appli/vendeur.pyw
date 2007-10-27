@@ -523,13 +523,6 @@ class ihmRoot:
 #
 ###################################################################
 
-class lisData:
-
-    def __init__(self,readFromServer=0):
-        global ihm
-
-        self.readFromServer=readFromServer
-        es=ihm.updateProgressBar("Chargement Data",0.)
         
 class lisData:
 
@@ -1536,8 +1529,8 @@ class processFacture:
             return
         if racourci=="DDD" or racourci=="ddd":
             ihm.showMessage("Telechargement du serveur")
-##0.26##            lisData(readFromServer=1)
-            lisData(clearAll=1)
+            lisData(clearAll=1,forceRecharge=1)
+            self.article.delete(0,END)
             ihm.showMessage("OK...",self.goToArticle)
             return
         if racourci=="vvv" or racourci=="vvv":
