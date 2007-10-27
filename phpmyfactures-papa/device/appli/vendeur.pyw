@@ -9,7 +9,6 @@ import traceback
 
 maxDigits=130
 cible=os.path.exists('\Platform')
-oneFrame=01
 version="0.29"
 time_last_key=0
 isServeurInjoignable=0
@@ -19,7 +18,6 @@ if cible:
     erreurCatch=0
     debugMessages=0
     raiseError=0
-    isReadFromServer=0
     website_address="http://192.168.111.77/phpmyfactures"
     fichierIp='\Platform\S24Profiles.reg'
     fichierIpBackup='\\Oyak\\S24old.reg'
@@ -32,7 +30,6 @@ else:
     debugMessages=1
     zoomedWindow=0
     raiseError=1
-    isReadFromServer=1
     website_address="http://127.0.0.1/phpmyfactures"
     root_address="c:/Program Files/EasyPHP1-8/www/phpmyfactures/device/a copier/"
     fichierIp=root_address+"Platform/test/S24Profiles.reg"
@@ -506,15 +503,12 @@ class ihmRoot:
         self.showFactureFirst(menu=1)
 
     def lectureDonnee(self):
-        global isReadFromServer
-##0.26##        lisData(isReadFromServer)
-        lisData_new(clearAll=1)
+        lisData(clearAll=1)
         myVendeur.ihmShow()
 
     def rechargeBase(self):
         ihm.showMessage("Telechargement du serveur")
-##0.26##        lisData(readFromServer=1)
-        lisData_new(clearAll=1)
+        lisData(clearAll=1,forceRecharge=1)
         ihm.showMessage("OK...",self.showMenu)
 
     def changeVendeur(self):
@@ -537,25 +531,14 @@ class lisData:
         self.readFromServer=readFromServer
         es=ihm.updateProgressBar("Chargement Data",0.)
         
-#        ihm.updateProgressBar("vendeur...",0.1)
-#        getVendeurs(self.readFromServer)
-#        ihm.updateProgressBar("Produits...",0.3)
-#        getProduits(self.readFromServer)
-#        ihm.updateProgressBar("client...",0.6)
-#        getClients(self.readFromServer)
-#        ihm.updateProgressBar("fournisseur...",0.9)
-#        getFournisseurs(self.readFromServer)
-#        ihm.updateProgressBar("Releases...",0.95)
-#        getReleases(readFromServer=1)
+class lisData:
 
-class lisData_new:
-
-    def __init__(self,clearAll=0,updateOnly=0):
-        global ihm,myClient,myVendeur,myProduit,myFournisseur, isReadFromServer
+    def __init__(self,clearAll=0,forceRecharge=0):
+        global ihm,myClient,myVendeur,myProduit,myFournisseur
 
         es=ihm.updateProgressBar("Chargement Data",0.)
 
-        self.updateOnly=updateOnly
+        self.forceRecharge=forceRecharge
         self.clearAll=clearAll
         
         if clearAll:
@@ -566,96 +549,71 @@ class lisData_new:
             Clients={}
             Vendeurs={}
             Fournisseurs={}
-            Fournisseurs['9999']=('XXXX','xxxx','9999','0000000000000')
+            Fournisseurs['9999']=('XXXX','xxxx','9999')
             Releases={}
             timestamp = {}
 
 
-        myVendeur=chooseVendeur(updateOnly)
-        myClient=chooseClient(updateOnly)
-        myProduit=chooseProduit(updateOnly)
-        myFournisseur=chooseFournisseur(updateOnly)
+        myVendeur=chooseVendeur(forceRecharge)
+        myClient=chooseClient(forceRecharge)
+        myProduit=chooseProduit(forceRecharge)
+        myFournisseur=chooseFournisseur(forceRecharge)
 
 
     
 class getData:
 
-    def __init__(self,what,updateOnly):
+    def __init__(self,what,forceRecharge):
         global ihm, timestamp, fichierBackup_Template,url_get_Templare, nbChamps,barSize
         global fichierOld_Template, fichierAppTemplate, fichierAppOldTemplate,isAlreadyPaneled
         
         ihm.updateProgressBar("Chargement %s..."%what,barSize[what])
         
         # initialisation
-        self.create_backup=0
         self.what=what
         
         lengthArticle=nbChamps[what]
 
-        self.minval=99999999999999L
-        self.maxval=0L
-
-        
-        # on demande au serveur les bornes des data
-        
-        self.getBounds()
-
-
         # creation des nom de fichiers
         self.fichierBackup=fichierBackup_Template%what
         self.fichierTemp=fichierTemp_Template%what
-        if updateOnly:
-            self.minval=timestamp[what,'min']
-            self.maxval=timestamp[what,'max']
-            if self.maxval>=self.sup:
-                # on est en phase avec la base
-                return
 
-            # ouverture du fichier temporaire en ajout
-            self.tmpFile = open(self.fichierTemp,"a")
-        else:
-
-            # ouverture du fichier temporaire
-            self.tmpFile = open(self.fichierTemp,"w")
+        # ouverture du fichier temporaire
             
-            # lecture sur fichier backup d'abord
+        # lecture sur fichier backup d'abord
+        if not(forceRecharge) and self.readFromBackup()==0:
             if debugMessages:
                 print "lecture from Backup pour %s"%what
-                if self.readFromBackup()==0:
-                    self.readSource(lengthArticle)
-                    self.closeSource()
-
-        # lecture depuis la base
-        if debugMessages:
-            print "lecture from web pour %s :minval=%s,maxval=%s,inf=%s,sup=%s "%(what,self.minval,self.maxval,self.inf,self.sup)
-        self.urlName=url_get_Template%what+"&from=%s"%(self.maxval+1)
-
-        if self.readFromUrl()==0:
             self.readSource(lengthArticle)
             self.closeSource()
+        # lecture depuis la base
+        else:
+            if debugMessages:
+                print "lecture from web pour %s "%what
 
-        timestamp[what,'min']=self.minval
-        timestamp[what,'max']=self.maxval
+            self.tmpFile = open(self.fichierTemp,"w")
+            self.urlName=url_get_Template%what
+
+            if self.readFromUrl()==0:
+                self.readSource(lengthArticle)
+                self.closeSource()
 
         # sauvegarde sur la device des données
-        self.tmpFile.close()
-        self.fichierOld=fichierOld_Template%what
-        try :
-            isThere=os.path.exists(self.fichierBackup)
-            if isThere:
-                os.rename(self.fichierBackup,self.fichierOld)
-            os.rename(self.fichierTemp,self.fichierBackup)
-            if isThere:
-                os.unlink(self.fichierOld)
+            self.tmpFile.close()
+            self.fichierOld=fichierOld_Template%what
+            try :
+                isThere=os.path.exists(self.fichierBackup)
+                if isThere:
+                    os.unlink(self.fichierBackup)
+                os.rename(self.fichierTemp,self.fichierBackup)
 
-            # recopie dans la zone permanente
-            if not(updateOnly):
+                # recopie dans la zone permanente
                 shutil.copy(fichierAppTemplate%what,fichierAppOldTemplate%what)
                 shutil.copy(self.fichierBackup,fichierAppTemplate%what)
                 os.unlink(fichierAppOldTemplate%what)
-        except:
-            if debugMessages:
-                print "pb a la sauvegarde du fichier Backup"
+            except:
+                if debugMessages:
+                    print "pb a la sauvegarde du fichier Backup"
                 raise
             
         # creation du panel lie a cette variable
@@ -709,30 +667,11 @@ class getData:
         ihm.add(panelName0,"OK",button,3,0,colspan=2)
 
 
-    def getBounds(self):
-        global isServeurInjoignable
-
-        # lecture des bornes depuis la base
-        self.urlName=url_get_Template%self.what+"&date=1"
-
-        try:
-           self.origFileh = urllib.urlopen(self.urlName)
-           rep = self.origFileh.readlines()
-           (a,b)=string.split(rep[0],"!")
-           self.inf=int(a)
-           self.sup=int(b[:-1])
-           if debugMessages:
-               print self.inf,self.sup
-           return 0
-        except:
-           if not(isServeurInjoignable):
-              ihm.showMessage("Solveur injoignable\n Impossibe de télécharger les data du serveur \n Repli sur Backup")
-           isServeurInjoignable=1
-           return -1 
         
-
     def readFromUrl(self):
         global isServeurInjoignable
+
+        self.create_backup=1
 
         if not(isServeurInjoignable):
             try:
@@ -744,20 +683,23 @@ class getData:
         return -1 
             
     def readFromBackup(self):
-           global debugMessages
+        global debugMessages
 
-           try :
-               self.origFileh = open(self.fichierBackup)
-               return 0
-           except :
-                return -1     
+        self.create_backup=0
+        
+        try :
+            self.origFileh = open(self.fichierBackup)
+            return 0
+        except :
+            return -1     
 
             
     def readSource(self,lengthArticle):
         self.fileList = self.origFileh.readlines()
         self.nbArticles=0
         for l in self.fileList:
-            self.tmpFile.write(l)
+            if self.create_backup:
+                self.tmpFile.write(l)
             articles=string.split(l,"=")
             for a in articles:
                 article=string.split(a,"!")
@@ -767,156 +709,12 @@ class getData:
 
     def closeSource(self):                    
         self.origFileh.close()
-        if self.create_backup:
-            self.backupFile.close()
         if debugMessages:
-            print "%d %s lus, timestamp from %s to %s"%(self.nbArticles,self.what,self.minval,self.maxval)
+            print "%d %s lus"%(self.nbArticles,self.what)
             print
             
 
-    def updateTimestamp(self,ts):
-        global timestamp
-        self.minval=min(self.minval,int(ts))
-        self.maxval=max(self.maxval,int(ts))
 
-
-class getData_old:
-
-    def __init__(self,what,readFromServer):
-        global ihm, fichierBackup_Template,url_get_Templare, nbChamps,barSize
-
-        if not(isAlreadyLoaded[what]):
-            ihm.updateProgressBar("Chargement %s..."%what,barSize[what])
-
-            # initialisation
-            self.create_backup=0
-            self.what=what
-            self.readFromServer=readFromServer
-            self.urlName=url_get_Template%what
-            self.fichierBackup=fichierBackup_Template%what
-
-            lengthArticle=nbChamps[what]
-
-            self.dataAvailable=self.openSource()
-            if self.dataAvailable==0:
-                self.readSource(lengthArticle)
-                self.closeSource()
-
-            self.choosePanelCreate(what)
-            isAlreadyLoaded[what]=1
-
-
-    # creation fenetre type choix
-    
-    def choosePanelCreate(self,what):
-        global ihm
-        
-        panelName = what
-        panelName0 = what+"0"
-        
-        # Menu
-        label = Button(ihm.ihm, text="MENU", command=ihm.showMenu,height=2)
-        ihm.add(panelName,"menu",label,0,0,colspan=2)
-        ihm.add(panelName0,"menu",label,0,0,colspan=2)
-        
-        # filtre
-        ihm.filtreLabel[what]=StringVar("")
-        ihm.filtreLabel[what].set("filtre >")
-        label = Label(ihm.ihm, textvariable=ihm.filtreLabel[what],
-                      width=ihm.Xmax-1, height=1,justify="left", fg="red")
-        ihm.add(panelName,"filtreLabel",label,1,0,sticky="W")
-        ihm.add(panelName0,"filtreLabel",label,1,0,sticky="W")
-        
-        # liste box
-
-        scrollbar = Scrollbar(ihm.ihm)
-        scrollbar0 = Scrollbar(ihm.ihm)
-        ihm.add(panelName,"scrollbar",scrollbar,2,1,sticky=N+S)
-        ihm.add(panelName0,"scrollbar",scrollbar0,2,1,sticky=N+S)
-        
-        ihm.listbox[what] = Listbox(ihm.ihm, height=ihm.Ymax-6, yscrollcommand=scrollbar.set)
-        ihm.add(panelName,"listbox",ihm.listbox[what],2,0)
-        scrollbar.config(command=ihm.listbox[what].yview)
-
-        ihm.listbox0[what] = Listbox(ihm.ihm, height=ihm.Ymax-6, yscrollcommand=scrollbar.set)
-        ihm.add(panelName0,"listbox",ihm.listbox0[what],2,0)
-        scrollbar0.config(command=ihm.listbox0[what].yview)
-
-
-        # Menu
-        button = Button(ihm.ihm, text="OK", height=3)
-        ihm.okButton[what]=button
-        ihm.add(panelName,"OK",button,3,0,colspan=2)
-        ihm.add(panelName0,"OK",button,3,0,colspan=2)
-
-
-
-
-    def readFromUrl(self):
-        global isServeurInjoignable
-        try:
-           self.origFileh = urllib.urlopen(self.urlName)
-           if debugMessages:
-              print "creation fichier Backup OK pour ",self.what
-           self.create_backup=1
-           self.backupFile = open(self.fichierBackup,"w")
-           return 0
-        except:
-           if self.readFromServer:
-               if not(isServeurInjoignable):
-                   ihm.showMessage("Solveur injoignable\n Impossibe de télécharger les data du serveur \n Repli sur Backup")
-               isServeurInjoignable=1
-           return -1 
-            
-    def readFromBackup(self):
-           global debugMessages
-
-           try :
-               self.origFileh = open(self.fichierBackup)
-           except :
-                return -1     
-           if debugMessages:
-              print "lecture fichier Backup OK pour ",self.what
-           if self.origFileh:
-                return 0
-           else:
-                return -1
-            
-    def openSource(self):
-       global debugMessages
-       
-       if self.readFromServer:
-           if debugMessages:
-               print "Force la lecture des Data %s sur serveur"%self.what
-           isreached=self.readFromUrl()
-       if not(self.readFromServer) or isreached<0:
-           isreached=self.readFromBackup()
-           if isreached<0:
-               isreached=self.readFromUrl()
-       if isreached>=0:     
-          self.fileList = self.origFileh.readlines()
-          return 0
-       else:
-          return -1
-
-    def readSource(self,lengthArticle):
-        self.nbArticles=0
-        for l in self.fileList:
-            if self.create_backup:
-                self.backupFile.write(l)
-            articles=string.split(l,"=")
-            for a in articles:
-                article=string.split(a,"!")
-                if len(article)==lengthArticle:
-                    self.collect(article)
-                    self.nbArticles+=1
-
-    def closeSource(self):                    
-        self.origFileh.close()
-        if self.create_backup:
-            self.backupFile.close()
-        if debugMessages:
-            print "%d %s lus "%(self.nbArticles,self.what)
 
 ###############################################################################################
 # Gestion adresse IP et reseau
@@ -953,11 +751,11 @@ def ipChange(ipAddress,ipSid):
 
 class chooseXXX(getData):
  
-    def __init__(self,what,updateOnly=0):
+    def __init__(self,what,forceRecharge=0):
         global ihm
 
         # chargement des données
-        getData.__init__(self,what,updateOnly)
+        getData.__init__(self,what,forceRecharge)
 
         
     def ihmShow(self,what,filtre="",killable=0):
@@ -1026,19 +824,16 @@ class chooseXXX(getData):
 
 class chooseVendeur(chooseXXX):
 
-    def __init__(self,updateOnly=0):
-        chooseXXX.__init__(self,"vendeurs",updateOnly)        
+    def __init__(self,forceRecharge=0):
+        chooseXXX.__init__(self,"vendeurs",forceRecharge)        
 
     def ihmShow(self):
         chooseXXX.ihmShow(self,"vendeurs")        
 
     def collect(self,article):
         (numero,nom,prenom,timestamp)=article
-        if (timestamp>=self.inf):
-            Vendeurs[numero]=(numero,nom,prenom)
-            self.updateTimestamp(timestamp)
-            return 1
-        return 0
+        Vendeurs[numero]=(numero,nom,prenom)
+        return 1
                                     
     def initPanel(self):
         self.filtreName="Vendeur > "
@@ -1092,19 +887,16 @@ class chooseVendeur(chooseXXX):
 
 class chooseClient(chooseXXX):
 
-    def __init__(self,updateOnly=0):
-        chooseXXX.__init__(self,"clients",updateOnly)
+    def __init__(self,forceRecharge=0):
+        chooseXXX.__init__(self,"clients",forceRecharge)
         
     def ihmShow(self):
         chooseXXX.ihmShow(self,"clients")
         
     def collect(self,article):
         (societe,ville,clef,timestamp)=article
-        if (timestamp>=self.inf):
-            Clients[societe+"/"+ville]=(societe,ville,clef)
-            self.updateTimestamp(timestamp)
-            return 1
-        return 0
+        Clients[societe+"/"+ville]=(societe,ville,clef)
+        return 1
 
     def listePrepare(self):
         clefsClients=Clients.keys()
@@ -1171,9 +963,9 @@ class chooseClient(chooseXXX):
 
 class chooseProduit(chooseXXX):
 
-    def __init__(self,updateOnly=0):
+    def __init__(self,forceRecharge=0):
         
-        chooseXXX.__init__(self,"produits",updateOnly)
+        chooseXXX.__init__(self,"produits",forceRecharge)
         
     def ihmShow(self,facture,valeur):
         self.liste0={}
@@ -1191,19 +983,15 @@ class chooseProduit(chooseXXX):
 
     def collect(self,article):
          (code,clef,fournisseur,prix,prix_plancher,poids,libele,timestamp)=article
-         if (timestamp>=self.inf):
-            self.updateTimestamp(timestamp)
-            #racourci = int(code[2:7])
-            racourci = int(clef)
-            ProduitsRacourcis[racourci]=libele
-            if racourci in ProduitsFournisseurs.keys():
-                ProduitsFournisseurs[racourci].append(fournisseur)
-            else:
-                ProduitsFournisseurs[racourci]=[fournisseur]
-            ProduitsCodes[racourci,fournisseur]=code
-            Produits[code]=(libele,prix,racourci,prix_plancher,poids,fournisseur)
-            return 1
-         return 0
+         racourci = int(clef)
+         ProduitsRacourcis[racourci]=libele
+         if racourci in ProduitsFournisseurs.keys():
+             ProduitsFournisseurs[racourci].append(fournisseur)
+         else:
+             ProduitsFournisseurs[racourci]=[fournisseur]
+         ProduitsCodes[racourci,fournisseur]=code
+         Produits[code]=(libele,prix,racourci,prix_plancher,poids,fournisseur)
+         return 1
 
     def listePrepare(self):
         self.liste=ProduitsRacourcis.keys()
@@ -1246,8 +1034,8 @@ class chooseProduit(chooseXXX):
 
 class chooseFournisseur(chooseXXX):
 
-    def __init__(self,updateOnly=0):
-        chooseXXX.__init__(self,"fournisseurs",updateOnly)
+    def __init__(self,forceRecharge=0):
+        chooseXXX.__init__(self,"fournisseurs",forceRecharge)
         
     def ihmShow(self,facture,racourci,all=0):
         self.facture=facture
@@ -1264,13 +1052,8 @@ class chooseFournisseur(chooseXXX):
 
     def collect(self,article):
         (societe,ville,clef,timestamp)=article
-        #print "in fournisseur : timestamp=%s, inf=%s, cond=%s"%(timestamp,self.inf,timestamp>=self.inf)
-        #print article
-        if (timestamp>=self.inf):
-            self.updateTimestamp(timestamp)
-            Fournisseurs[clef]=(societe,ville,clef)
-            return 1
-        return 0
+        Fournisseurs[clef]=(societe,ville,clef)
+        return 1
     
     def go(self,event):
         try:
@@ -1314,7 +1097,7 @@ class chooseFournisseur(chooseXXX):
 
 class chooseRelease(chooseXXX):
 
-    def __init__(self,updateOnly=0):
+    def __init__(self,forceRecharge=0):
         chooseXXX.__init__(self,"releases")
 
     def ihmShow(self,facture,racourci,save=0):
@@ -1754,7 +1537,7 @@ class processFacture:
         if racourci=="DDD" or racourci=="ddd":
             ihm.showMessage("Telechargement du serveur")
 ##0.26##            lisData(readFromServer=1)
-            lisData_new(clearAll=1)
+            lisData(clearAll=1)
             ihm.showMessage("OK...",self.goToArticle)
             return
         if racourci=="vvv" or racourci=="vvv":
@@ -1780,24 +1563,10 @@ class processFacture:
 
         
 def run():
-    global isReadFromServer
     global ihm
 
-    if oneFrame:
-       ihm = ihmRoot()
-       ihm.start()
-    else:
-##        if erreurCatch:
-##            try:
-##               lisData() 
-##               choixVendeur()
-##            except:
-##               pass
-##        else:
-##0.26##            lisData(isReadFromServer)
-            lisData_new(clearAll=1)
-            choixVendeur()
-
+    ihm = ihmRoot()
+    ihm.start()
 
 if __name__ == "__main__":
     if cible:
