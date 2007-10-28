@@ -60,7 +60,6 @@ if ($commande) {
   $articles=split(";",$commande);
   $client=array_shift($articles);
   $parametre=array_pop($articles);
-  $parametre=array_pop($articles);
 
    // recuperation nom client
 
