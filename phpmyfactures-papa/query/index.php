@@ -178,9 +178,9 @@ if ($commande) {
   
   $in_bltex=$in_bltex.'
     \hline
-    \end{tabular} ';
+    \end{tabular} \end{center}';
 
-  $end_bltex = '\end{center} \end{document}';
+  $end_bltex = '\end{document}';
 
   $nom="bl-$nom_commande";
   $file_out=fopen("$nom.tex","w");
@@ -194,7 +194,7 @@ if ($commande) {
   if ($header)  {
       print "compile.bat bl-$nom_commande";
 	}
-  system("./compile bl-$nom_commande > out" ,$result);
+  system("compile.bat bl-$nom_commande > out" ,$result);
 
   mysql_close($connect_db);
 

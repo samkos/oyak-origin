@@ -5,5 +5,5 @@ dvips %1
 copy %1.ps c:\Oyak\%1.ps
 rem 
 copy %1.ps c:\Oyak\ToPrint\%1.ps
-rem del %1.*
+del %1.*
 rem gsprint all.ps
