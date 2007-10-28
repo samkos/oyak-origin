@@ -9,7 +9,7 @@ import traceback
 
 maxDigits=130
 cible=os.path.exists('\Platform')
-version="0.29"
+version="0.30"
 time_last_key=0
 isServeurInjoignable=0
 
@@ -584,6 +584,9 @@ class getData:
             if debugMessages:
                 print "lecture from web pour %s "%what
 
+            isThere=os.path.exists(self.fichierBackup)
+            if isThere:
+               os.unlink(self.fichierBackup)
             self.tmpFile = open(self.fichierTemp,"w")
             self.urlName=url_get_Template%what
 
@@ -595,9 +598,6 @@ class getData:
             self.tmpFile.close()
             self.fichierOld=fichierOld_Template%what
             try :
-                isThere=os.path.exists(self.fichierBackup)
-                if isThere:
-                    os.unlink(self.fichierBackup)
                 os.rename(self.fichierTemp,self.fichierBackup)
 
                 # recopie dans la zone permanente
