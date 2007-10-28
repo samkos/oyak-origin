@@ -1,11 +1,13 @@
 <?
 $hauteur_etiquette="2.5 cm";
 $largeur_etiquette="6.5 cm";
-$entre_ligne_etiquette="0 cm";
+$entre_ligne_etiquette="0.2 cm";
 $vertical_offset="-6.2 cm";
 $horizontal_offset="-3.4 cm";
 $nb_per_line=3;
 $nb_per_page=8;
+
+$exe_print="\"c:/Program Files/Ghostgum/gsview/gsprint.exe\"   ";
 
 ?>
 
@@ -28,22 +30,22 @@ $format=" c c c";
 print "$action ...<br />";
 
 if ($action=="print") {
-	 foreach (array_keys($GLOBALS) as $var) {
-   				 if (preg_match("/^choisis([0-9]{1,2})/",$var,$reg)) {
-					 		print $GLOBALS[$var]." : ".$GLOBALS["quantite".$reg[1]]."x".$GLOBALS["produit".$reg[1]]."<BR>";
-							$barcodes[$reg[1]]=$GLOBALS["choisis".$reg[1]];
-							$quantites[$reg[1]]=$GLOBALS["quantite".$reg[1]];
-							$produits[$reg[1]]=$GLOBALS["produit".$reg[1]];
-						}
-	}
-//  $GLOBALS[$var]=$_SESSION[$var];
-   print "----------------------------------";
-	 //print_r($barcodes);												
-	 $ftex=fopen($tex_file,"w");
- 	 $fpython=fopen($python_file,"w");							
+  foreach (array_keys($GLOBALS) as $var) {
+    if (preg_match("/^choisis([0-9]{1,2})/",$var,$reg)) {
+      print $GLOBALS[$var]." : ".$GLOBALS["quantite".$reg[1]]."x".$GLOBALS["produit".$reg[1]]."<BR>";
+      $barcodes[$reg[1]]=$GLOBALS["choisis".$reg[1]];
+      $quantites[$reg[1]]=$GLOBALS["quantite".$reg[1]];
+      $produits[$reg[1]]=$GLOBALS["produit".$reg[1]];
+    }
+  }
+  //  $GLOBALS[$var]=$_SESSION[$var];
+  print "----------------------------------";
+  //print_r($barcodes);												
+  $ftex=fopen($tex_file,"w");
+  $fpython=fopen($python_file,"w");							
 
-   fwrite($ftex,
-  '\documentclass[a4paper]{article}
+  fwrite($ftex,
+	 '\documentclass[a4paper]{article}
    %
    \usepackage{graphicx}
    %
@@ -73,61 +75,61 @@ if ($action=="print") {
    \begin{tabular}{'.$format.'}
    ');
 
-   fwrite($fpython,"codebarlist = [\\");
+  fwrite($fpython,"codebarlist = [\\");
 	 
-   $nb_lignes=0;
+  $nb_lignes=0;
 
 
 
-// capture info code barre
+  // capture info code barre
 
-$sql_query = "select id,titre,stock,barcode from ".$prefixe_table."produits  ";
+  $sql_query = "select id,titre,stock,barcode from ".$prefixe_table."produits  ";
 
-print "<BR> $sql_query <BR>";
-$req = mysql_query("$sql_query ");
+  print "<BR> $sql_query <BR>";
+  $req = mysql_query("$sql_query ");
 
-$nb=0;
-
-$name_line="";
-$etiquette_line="";
-
- foreach (array_keys($barcodes) as $key) {
-   for ($i=1;$i<=$quantites[$key];$i++) {
-     $python_line=sprintf('
-			    ("%s", "%s", "%s"),',$barcodes[$key],$produits[$key],"99.99", $barcodes[$key]); 
-     fwrite ($fpython, $python_line);
-     fwrite ($fpython, $python_line);
-		 $produit=substr($produits[$key],0,17);
-		 
-		 $name_line=$name_line."\n \\begin{bf} \\begin{large} \\parbox{6cm}{\\begin{center}".$produit."\\end{center}} \\end{large} \\end{bf} ";
-     $etiquette_line=$etiquette_line.sprintf("\includegraphics[height=$hauteur_etiquette,width=$largeur_etiquette]{%s.eps}  ",$barcodes[$key]);
-     $nb=$nb+1;
-     if ($nb<$nb_per_line) {
-         $name_line=$name_line."&";
-         $etiquette_line=$etiquette_line."&";
-     }
-     else {
-       $nb=0;
-       $nb_lignes=$nb_lignes+1;
-       fwrite($ftex,"  $name_line \\\\   ");
-       fwrite($ftex," \\vspace{-0.7cm} \\\\ $etiquette_line \\\\   ");
-       $name_line="";
-       $etiquette_line="";
+  $nb=0;
   
-       if ($nb_lignes==$nb_per_page) {
-	 fwrite ($ftex,' \\ \end{tabular} \eject \n' );
-	 fwrite ($ftex,'\begin{tabular}{'.$format.'} ');
-	 $nb_lignes=0;
-       }
-       else {
-	 fwrite($ftex," \\vspace{-0.6cm} \\\\ \\vspace{".$entre_ligne_etiquette."} \\\\    ");
-       }
-     }
-   }
- }
+  $name_line="";
+  $etiquette_line="";
+
+  foreach (array_keys($barcodes) as $key) {
+    for ($i=1;$i<=$quantites[$key];$i++) {
+      $python_line=sprintf('
+			    ("%s", "%s", "%s"),',$barcodes[$key],$produits[$key],"99.99", $barcodes[$key]); 
+      fwrite ($fpython, $python_line);
+      fwrite ($fpython, $python_line);
+      $produit=substr($produits[$key],0,17);
+		 
+      $name_line=$name_line."\n \\begin{bf} \\begin{large} \\parbox{6cm}{\\begin{center}".$produit."\\end{center}} \\end{large} \\end{bf} ";
+      $etiquette_line=$etiquette_line.sprintf("\includegraphics[height=$hauteur_etiquette,width=$largeur_etiquette]{%s.eps}  ",$barcodes[$key]);
+      $nb=$nb+1;
+      if ($nb<$nb_per_line) {
+	$name_line=$name_line."&";
+	$etiquette_line=$etiquette_line."&";
+      }
+      else {
+	$nb=0;
+	$nb_lignes=$nb_lignes+1;
+	fwrite($ftex,"  $name_line \\\\   ");
+	fwrite($ftex," \\vspace{-0.7cm} \\\\ $etiquette_line \\\\   ");
+	$name_line="";
+	$etiquette_line="";
+  
+	if ($nb_lignes==$nb_per_page) {
+	  fwrite ($ftex,' \\ \end{tabular} \eject \n' );
+	  fwrite ($ftex,'\begin{tabular}{'.$format.'} ');
+	  $nb_lignes=0;
+	}
+	else {
+	  fwrite($ftex," \\vspace{-0.6cm} \\\\ \\vspace{".$entre_ligne_etiquette."} \\\\    ");
+	}
+      }
+    }
+  }
 }	
-			 fwrite($ftex," $name_line\\\\   ");
-			 fwrite($ftex," $etiquette_line \\\\  ");
+fwrite($ftex," $name_line\\\\   ");
+fwrite($ftex," $etiquette_line \\\\  ");
 fwrite ($ftex,"\\end{tabular}    \\end{small} \\end{document}\n");
 fwrite($fpython,"];
 		");
@@ -153,7 +155,7 @@ print "resultat-> $status";
 
 function loadPage() {
 
- document.location.href = "../welcome/index.php";
+  document.location.href = "../welcome/index.php";
 }
 
 //loadPage();

@@ -60,7 +60,9 @@ if (!$message) { $message="&nbsp;";}
   </td> </tr>
   <tr >
       <td /> <a href="../query/releases.php?liste=1&header=1">Télécharger logiciel vendeur</a></td>
-      <td> <a target=blank href="lancer.php?prog=python&which=../device/appli/vendeur_prod.pyw">Device Prod</a></td>
+      <td> <a href="../factures/traite.php?noprint=1">Creer les factures  </a> </br>
+           <a href="../factures/traite.php">Creer & Imprimer les factures </a></td>
+      <td> <a target=blank href="lancer.php?prog=batch&which=vendeur.bat">Device </a></td>
   </tr>
   <tr> <td> <br />
   <br />

@@ -2,11 +2,14 @@
 <?php include("../inc/fonctions.php"); ?>
 <?php
 
+$exe_print="\"c:\\Program Files\\Ghostgum\\gsview\\gsprint.exe\"   ";
+$exe_python="c:\\Python24\\python.exe ..\\print\\demon.pyw";
+
 $header=1;
 $nb_lignes_facture=20;
 
-
 include("../inc/header.php");
+$debug=0;
 
 // lecture des masques
 $dir=".";
@@ -21,30 +24,46 @@ $footer2=join("",file("$dir/footer2.tex"));
 $conclusion=join("",file("$dir/conclusion.tex"));
 
 
-$file_out=fopen("all.tex","w");
-
-fwrite($file_out,$preambule);
 
 $i=0;
-foreach (glob("\Oyak\work\*") as $filename) {
-  if ($i>0) {
-    fwrite($file_out,"\\clearpage");
+$filenames=glob("\Oyak\work\*");
+if ($filenames) {
+  $file_out=fopen("all.tex","w");
+  fwrite($file_out,$preambule);
+
+  foreach ($filenames as $filename) {
+    if ($i>0) {
+      fwrite($file_out,"\\clearpage");
+    }
+    $i=$i+1;
+    echo "<BR> Traitement factture $filename................................................";
+    $out=make_facture($filename);
+    fwrite($file_out,$out);
+    unlink($filename);
   }
-  $i=$i+1;
-  echo "<BR> Traitement factture $filename...";
-  $out=make_facture($filename);
-  fwrite($file_out,$out);
+
+  fwrite($file_out,$conclusion);
+  fclose($file_out);
+
+  system("compile.bat > out",$status);
+  //print "res=$status";
+  print "<BR> $i crées<BR> ";
+
+  if (0) {
+    sleep(3);
+    $commande=$exe_print." c:\\Oyak\\barcodes.ps > out";
+    $commande=$exe_python." > out";
+    system($commande,$status);
+    print "<BR> $commande <BR> $i factures imprimées<BR> ";
+  }
 }
-
-fwrite($file_out,$conclusion);
-fclose($file_out);
-
-system("compile.bat > out",$status);
-//print "res=$status";
+else {
+  print "pas de facture en attente <BR>";
+}
 
 //echo "<blockquote> $out </blockquote>";
 
-echo "OK";
+
 print "<BR> <a href='../admin/index.php>  Retour Administration\n";
 
 
@@ -126,8 +145,8 @@ function make_facture ($file) {
     }
   }
   
-    print print_r($find,TRUE)."<BR>";
   if ($debug) {
+    print print_r($find,TRUE)."<BR>";
     print_r($replace);
   }
 
