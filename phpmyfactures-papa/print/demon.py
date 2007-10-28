@@ -63,6 +63,9 @@ def touchDate():
 def checkRunning():
     now=datetime.datetime.now()
     timestamp="%s%s"%(now.strftime("%Y%m%d"),now.strftime("%H%M%S"))
+
+    if not(os.path.exists(timeTouchFile)):
+        return 0
     
     f=open(timeTouchFile,"r")
     l=f.readlines()
