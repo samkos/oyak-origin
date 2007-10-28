@@ -6,7 +6,7 @@ import time,datetime
 timeTouchFile="/Oyak/ToPrint/PrintDemon.txt"
 
 dir_printTODO="/Oyak/ToPrint"
-dir_factureTODO="/Oyak/Work"
+dir_factureTODO="/facprint"
 exe_print="\"c:/Program Files/Ghostgum/gsview/gsprint.exe\" "
 exe_facture="\"c:/Program Files/EasyPHP1-8/www/phpmyfactures/factures/traite.bat\" ";
 

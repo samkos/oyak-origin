@@ -5,6 +5,9 @@
 $exe_print="\"c:\\Program Files\\Ghostgum\\gsview\\gsprint.exe\"   ";
 $exe_python="c:\\Python24\\python.exe ..\\print\\demon.pyw";
 
+//$dir_facture=""\Oyak\work\*";
+$dir_facture="\facprint\*";
+
 $header=1;
 $nb_lignes_facture=20;
 
@@ -26,7 +29,7 @@ $conclusion=join("",file("$dir/conclusion.tex"));
 
 
 $i=0;
-$filenames=glob("\Oyak\work\*");
+$filenames=glob($dir_facture);
 if ($filenames) {
   $file_out=fopen("all.tex","w");
   fwrite($file_out,$preambule);
