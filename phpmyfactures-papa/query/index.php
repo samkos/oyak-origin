@@ -11,7 +11,8 @@ if ($header) {
 if ($header) {
 
   print "<BR> <a href='index.php?commande=06;C3426;3700008000671!8!0067!!12!8.00!*;0!16!0012!!109!7.0!*;&vendeur=1&header=1'>Test passage commande</a>";
-  print "<BR> <a href='../admin/'>Retour a l'administration </a> <br />";
+  print "<BR> <a href='index.php?commande=06;C3426;3700008000671!8!0067!!12!8.00!*;0!16!0012!!109!7.0!*l;&vendeur=1&header=1'>Test passage commande avec *l</a>";
+  print "<BR> <br> <a href='../admin/'>Retour a l'administration </a> <br />  <br>";
 }
 
 if ($commande) {
@@ -59,7 +60,6 @@ if ($commande) {
 	
   $articles=split(";",$commande);
   $client=array_shift($articles);
-  $parametre=array_pop($articles);
 
    // recuperation nom client
 
@@ -127,6 +127,7 @@ if ($commande) {
 
   while ($article=array_shift($articles)) {
     $col=split("!",$article);
+		$parametre=array_pop($col);
     $code=$col[0];
     $racourci=$col[1];  			
     $fournisseur=$col[2];  			
@@ -182,20 +183,28 @@ if ($commande) {
 
   $end_bltex = '\end{document}';
 
-  $nom="bl-$nom_commande";
-  $file_out=fopen("$nom.tex","w");
-  fwrite($file_out,$start_bltex.$in_bltex."\\\\  \vspace{3cm} \\\\".$in_bltex.$end_bltex);
-  fclose($file_out);
-
-  if ($header) {
+	
+	 if ($header) {
     print "</table> <br /><br />";
   }
+  
+	if ($parametre=="*l" or $parametre=="*L") {
+      $nom="bl-$nom_commande";
+      $file_out=fopen("$nom.tex","w");
+      fwrite($file_out,$start_bltex.$in_bltex."\\\\  \vspace{3cm} \\\\".$in_bltex.$end_bltex);
+      fclose($file_out);
 
-  if ($header)  {
-      print "compile.bat bl-$nom_commande";
-	}
-  system("compile.bat bl-$nom_commande > out" ,$result);
-
+			if ($header) {
+			      print "compile.bat bl-$nom_commande";
+			}			
+ 			system("compile.bat bl-$nom_commande > out" ,$result);
+  }
+	else {
+			if ($header) {
+			      print "Pas de sortie BL : pas *l   ";
+			}			
+	}	
+	
   mysql_close($connect_db);
 
 }
