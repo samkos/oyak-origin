@@ -191,8 +191,9 @@ if ($commande) {
     print "</table> <br /><br />";
   }
 
-
-  print "compile.bat bl-$nom_commande";
+  if ($header)  {
+      print "compile.bat bl-$nom_commande";
+	}
   system("./compile bl-$nom_commande > out" ,$result);
 
   mysql_close($connect_db);
