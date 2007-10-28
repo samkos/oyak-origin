@@ -584,7 +584,7 @@ class getData:
             if debugMessages:
                 print "lecture from web pour %s "%what
 
-            isThere=os.path.exists(self.fichierBackup)
+	    isThere=os.path.exists(self.fichierBackup)
             if isThere:
                os.unlink(self.fichierBackup)
             self.tmpFile = open(self.fichierTemp,"w")
@@ -601,9 +601,7 @@ class getData:
                 os.rename(self.fichierTemp,self.fichierBackup)
 
                 # recopie dans la zone permanente
-                shutil.copy(fichierAppTemplate%what,fichierAppOldTemplate%what)
                 shutil.copy(self.fichierBackup,fichierAppTemplate%what)
-                os.unlink(fichierAppOldTemplate%what)
             except:
                 if debugMessages:
                     print "pb a la sauvegarde du fichier Backup"
