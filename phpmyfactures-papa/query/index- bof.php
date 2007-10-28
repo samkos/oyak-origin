@@ -77,8 +77,6 @@ if ($commande) {
   $start_bltex='
       \documentclass[a4paper]{article}
       %
-      \usepackage{graphicx}
-      %
       \setlength{\voffset}{-4.5cm}
       \setlength{\hoffset}{-1.6cm}
 
@@ -110,11 +108,11 @@ if ($commande) {
                 Date : ".date("d/m/y")." \\\\ Vendeur : $vendeur_name   \\\\ Client : $client_name \\\\ ".'
                 \end{bf} \end{Large} 
               \\\\ \vspace{1cm} \\\\
-	      \begin{tabular}{|p{4.5cm}|p{2cm}|p{1.5cm}|}
+	      \begin{tabular}|p{5cm}|p{2cm}|p{1.5cm}|}
 	        \hline
 	        \textbf{\small{Désignation}} &
 	        \textbf{\small{Quant.}} & 
-	        \textbf{\small{Prix}} & 
+	        \textbf{\small{Prix}} &
 	        \hline
 	          ';
 
@@ -192,8 +190,7 @@ if ($commande) {
   }
 
 
-  print "compile.bat bl-$nom_commande";
-  system("./compile bl-$nom_commande > out" ,$result);
+  system("compile.bat $nom > out" ,$result);
 
   mysql_close($connect_db);
 
