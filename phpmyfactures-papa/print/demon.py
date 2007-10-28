@@ -77,6 +77,8 @@ def checkRunning():
         return 0
     die
 
+if not(os.path.exists(dir_printTODO)):
+    os.mkdir(dir_printTODO)
 
 if checkRunning():
     print "Demon OK"
@@ -85,8 +87,6 @@ else:
     
     if debug:
         print "Demarrage Print Daemon"
-    if not(os.path.exists(dir_printTODO)):
-        os.mkdir(dir_printTODO)
 
     while 1:
         touchDate()
