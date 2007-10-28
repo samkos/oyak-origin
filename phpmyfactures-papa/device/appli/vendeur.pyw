@@ -1206,8 +1206,9 @@ class processFacture:
         if self.nb==0 and client==0:
             self.vendeur=vendeurChoisi
             self.clefs={}
-        
-            chooseClient()
+            myClient.ihmShow()
+
+            ## chooseClient()
             return
 
         else:
