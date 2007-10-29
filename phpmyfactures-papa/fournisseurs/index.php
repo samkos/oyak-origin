@@ -1,6 +1,7 @@
 <?php include("../inc/conf.php"); ?>
 <?php include("../inc/fonctions.php"); ?>
 <?php
+$nb_fournisseur = 3000;
 
 if ($action == "delete")
 {
@@ -34,7 +35,6 @@ $req = mysql_query("delete from ".$prefixe_table."fournisseurs where id=\"$id_fo
 </tr>
 <?php
 
-$nb_fournisseur = 30;
 if(!$start) 
 {$start=0;}
 

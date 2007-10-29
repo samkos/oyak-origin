@@ -1,7 +1,7 @@
 <?php include("../inc/conf.php"); ?>
 <?php include("../inc/fonctions.php"); ?>
 <?php
-
+$nb_produit = 3000;
 if ($action == "delete")
 {
 $req = mysql_query("delete from ".$prefixe_table."produits where id=\"$id_produit\"");
@@ -58,7 +58,7 @@ $req = mysql_query("delete from ".$prefixe_table."produits where id=\"$id_produi
 		}
 
 
-$nb_produit = 30;
+
 if(!$start) 
 {$start=0;}
 
