@@ -80,7 +80,7 @@ if ($commande) {
       \usepackage{graphicx}
       %
       \setlength{\voffset}{-4.5cm}
-      \setlength{\hoffset}{-1.6cm}
+      \setlength{\hoffset}{-3.cm}
 
       \setlength{\oddsidemargin}{0pt}
       \setlength{\evensidemargin}{0.5cm}
@@ -191,7 +191,10 @@ if ($commande) {
 	if ($parametre=="*l" or $parametre=="*L") {
       $nom="bl-$nom_commande";
       $file_out=fopen("$nom.tex","w");
-      fwrite($file_out,$start_bltex.$in_bltex."\\\\  \vspace{3cm} \\\\".$in_bltex.$end_bltex);
+      $inside_tex= '\begin{minipage}{0.5\linewidth}'.$in_bltex.'\end{minipage}'
+	.'\hspace{1cm}'
+	.'\begin{minipage}{0.5\linewidth}'.$in_bltex.'\end{minipage}';
+      fwrite($file_out,$start_bltex.$inside_tex.$end_bltex);
       fclose($file_out);
 
 			if ($header) {
