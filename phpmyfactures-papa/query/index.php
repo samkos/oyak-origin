@@ -11,7 +11,7 @@ if ($header) {
 if ($header) {
 
   print "<BR> <a href='index.php?commande=06;C3426;3700008000671!8!0067!!12!8.00!*;0!16!0012!!109!7.0!*;&vendeur=1&header=1'>Test passage commande</a>";
-  print "<BR> <a href='index.php?commande=06;C3426;3700008000671!8!0067!!12!8.00!*;0!16!0012!!109!7.0!*l;&vendeur=1&header=1'>Test passage commande avec *l</a>";
+  print "<BR> <a href='index.php?commande=01;C3183;3700005000049!5!0004!!1.00!1.80!*l;3700022000107!22!0010!!1.00!1.23!*l;&vendeur=1&header=1'>Test passage commande avec *l</a>";
   print "<BR> <br> <a href='../admin/'>Retour a l'administration </a> <br />  <br>";
 }
 
@@ -112,7 +112,7 @@ if ($commande) {
               \\\\ \vspace{1cm} \\\\
 	      \begin{tabular}{|p{4.5cm}|p{2cm}|p{1.5cm}|}
 	        \hline
-	        \textbf{\small{Désignation}} &
+	        \textbf{\small{Designation}} &
 	        \textbf{\small{Quant.}} & 
 	        \textbf{\small{Prix}} & 
 	        \hline
@@ -159,9 +159,11 @@ if ($commande) {
 	$societe = $ligne["societe"];
       }
    
-
+    $quantite=ereg_replace("\..*$","",$quantite);
+    
     $in_bltex=$in_bltex
-      ."$produit & $quantite & $prix \\\\ \n";
+      ."\small{".$produit."} & \multicolumn{1}{r|}{".$quantite
+      ."} & \multicolumn{1}{r|}{".sprintf("%7.2f",$prix)."} \\\\ \n";
       
 	  
     if ($header) {
