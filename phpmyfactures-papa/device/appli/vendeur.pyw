@@ -9,7 +9,7 @@ import traceback
 
 maxDigits=130
 cible=os.path.exists('\Platform')
-version="0.30"
+version="0.31"
 time_last_key=0
 isServeurInjoignable=0
 
@@ -528,6 +528,8 @@ class lisData:
 
     def __init__(self,clearAll=0,forceRecharge=0):
         global ihm,myClient,myVendeur,myProduit,myFournisseur
+        global Produits,ProduitsFournisseurs,ProduitsRacourcis,ProduitsCodes
+        global Clients,Vendeurs,Fournisseurs,Releases,timestamp
 
         es=ihm.updateProgressBar("Chargement Data",0.)
 
@@ -822,6 +824,7 @@ class chooseVendeur(chooseXXX):
         chooseXXX.ihmShow(self,"vendeurs")        
 
     def collect(self,article):
+        global Vendeurs
         (numero,nom,prenom,timestamp)=article
         Vendeurs[numero]=(numero,nom,prenom)
         return 1
@@ -885,6 +888,7 @@ class chooseClient(chooseXXX):
         chooseXXX.ihmShow(self,"clients")
         
     def collect(self,article):
+        global Clients
         (societe,ville,clef,timestamp)=article
         Clients[societe+"/"+ville]=(societe,ville,clef)
         return 1
@@ -973,6 +977,8 @@ class chooseProduit(chooseXXX):
         
 
     def collect(self,article):
+         global Produits,ProduitsFournisseurs,ProduitsRacourcis,ProduitsCodes
+
          (code,clef,fournisseur,prix,prix_plancher,poids,libele,timestamp)=article
          racourci = int(clef)
          ProduitsRacourcis[racourci]=libele
@@ -1042,6 +1048,8 @@ class chooseFournisseur(chooseXXX):
         self.filtreName="%s > "%ProduitsRacourcis[self.racourci]
 
     def collect(self,article):
+        global Fournisseurs
+        
         (societe,ville,clef,timestamp)=article
         Fournisseurs[clef]=(societe,ville,clef)
         return 1

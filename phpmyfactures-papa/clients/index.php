@@ -63,7 +63,7 @@ echo("<tr>
    <td bgcolor=\"#ffffff\" align=\"left\" width=\"23%\">$nom</td>
    <td bgcolor=\"#ffffff\" align=\"left\" width=\"23%\">$ville</td>
    <td bgcolor=\"#ffffff\" align=\"center\" width=\"20%\"><a href=\"#null\" onclick=\"javascript:if(confirm('Etes-vous sûr de vouloir supprimer ce client ?')) document.location.replace('index.php?action=delete&id_client=$id');\">Supprimer</a></td>
-   <td bgcolor=\"#ffffff\" align=\"center\" width=\"20%\"><a href=\"modifier_client.php?id_client=$id\">Modifier</a></td>
+   <td bgcolor=\"#ffffff\" align=\"center\" width=\"20%\"><a href=\"modifier_client.php?id_client=$clef\">Modifier</a></td>
 </tr>");
 }
 

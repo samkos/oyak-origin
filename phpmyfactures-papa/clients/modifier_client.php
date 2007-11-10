@@ -2,7 +2,7 @@
 <?php include("../inc/fonctions.php"); ?>
 <?php
 
-$req = mysql_query("select civilite,nom,prenom,clef,adresse,adresse2,ville,code_postal,telephone,fax,portable,email,societe,pays from ".$prefixe_table."clients where id=\"$id_client\"");
+$req = mysql_query("select civilite,nom,prenom,clef,adresse,adresse2,ville,code_postal,telephone,fax,portable,email,societe,pays from ".$prefixe_table."clients where clef=\"$id_client\"");
 if (mysql_num_rows($req)==0)
 {
 mysql_close($connect_db);
@@ -90,8 +90,9 @@ $societe = stripslashes($societe);
   		$fax = addslashes($fax);
   		$portable = addslashes($portable);
   		$email = addslashes($email);
-  		
-  		$req = mysql_query("update ".$prefixe_table."clients set clef=\"$clef\",pays=\"$pays\",email=\"$email\",portable=\"$portable\",fax=\"$fax\",telephone=\"$telephone\",code_postal=\"$code_postal\",nom=\"$nom\",prenom=\"$prenom\",societe=\"$societe\",adresse=\"$adresse\",adresse2=\"$adresse2\",ville=\"$ville\",clef=\"$clef\",timestamp=NULL where id=\"$id_client\"") or die(mysql_error());
+  		$query="update ".$prefixe_table."clients set pays=\"$pays\",email=\"$email\",portable=\"$portable\",fax=\"$fax\",telephone=\"$telephone\",code_postal=\"$code_postal\",nom=\"$nom\",prenom=\"$prenom\",societe=\"$societe\",adresse=\"$adresse\",adresse2=\"$adresse2\",ville=\"$ville\",timestamp=NULL where clef=\"$id_client\"";
+		print $query."<BR>";
+  		$req = mysql_query($query) or die(mysql_error());
   		
   		mysql_close($connect_db);
   		header("location: modifier_client.php?id_client=$id_client&msg=Client+modifié+!");
@@ -115,7 +116,6 @@ $portable = mysql_result($req,0,"portable");
 $email = mysql_result($req,0,"email");
 
 ?>
-<?php include("../verif.php"); ?>
 <?php include("../inc/header.php"); ?>
 
 <?php

@@ -1,0 +1,2 @@
+# This is an example crontab file
+* * * * * "C:\Program Files\EasyPHP1-8\www\phpmyfactures\print\start_demon.bat" 
