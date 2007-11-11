@@ -1358,13 +1358,13 @@ class processFacture:
         scrollbar.pack(side=RIGHT, expand=0, fill=BOTH)
 
         self.quantiteListFrame = Frame(self.listFrame)
-        self.quantiteListFrame.pack(side=LEFT)
+        self.quantiteListFrame.pack(side=LEFT,expand=1,fill=BOTH)
 
         self.produitListFrame = Frame(self.listFrame)
-        self.produitListFrame.pack(side=LEFT)
+        self.produitListFrame.pack(side=LEFT,expand=1,fill=BOTH)
 
         self.prixListFrame = Frame(self.listFrame)
-        self.prixListFrame.pack(side=LEFT)
+        self.prixListFrame.pack(side=LEFT,expand=1,fill=BOTH)
 
 
 
@@ -1502,16 +1502,29 @@ class processFacture:
         self.ajouteArticle()
 
 
-    def ajouteLigneFacture(self,quantite,produit,prix):
+    def ajouteLigneFacture(self,quantite,produit,prix,ligne=-1):
 
-        l=Label(self.quantiteListFrame,text=quantite)
-        l.pack(side=TOP)
+        if ligne==-1:
+            l=Label(self.quantiteListFrame,text=quantite)
+            l.pack(side=TOP)
+            l=Label(self.produitListFrame,text=produit)
+            l.pack(side=TOP)
+            l=Label(self.prixListFrame,text=prix)
+            l.pack(side=TOP)
+        else:
+            l=Button(self.quantiteListFrame,text=quantite,
+                     command=lambda x=1:self.getArticle(ligne,"quantite")) 
+            l.pack(side=TOP,expand=1,fill=BOTH)
+            l=Button(self.produitListFrame,text=produit,
+                     command=lambda x=1:self.getArticle(ligne,"produit"))
+            l.pack(side=TOP,expand=1,fill=BOTH)
+            l=Button(self.prixListFrame,text=prix,
+                     command=lambda x=1:self.getArticle(ligne,"prix"))
+            l.pack(side=TOP,expand=1,fill=BOTH)
 
-        l=Label(self.produitListFrame,text=produit)
-        l.pack(side=TOP)
+    def getArticle(ligne):
+        return
 
-        l=Label(self.prixListFrame,text=prix)
-        l.pack(side=TOP)
 
     def ajouteArticle(self):
         ihm.show("facture%d"%self.nb,title="Oyak? Facture ")
@@ -1522,7 +1535,7 @@ class processFacture:
         article=self.article.get()
         try :
           #self.listbox.insert(END, formatFact%(float(quantite),article,float(self.prix_saisi)))
-          self.ajouteLigneFacture(quantite,article,float(self.prix_saisi))
+          self.ajouteLigneFacture(quantite,article,float(self.prix_saisi),self.nbArticles)
         except :
             self.deleteCode("fake")
 
