@@ -1309,6 +1309,9 @@ class processFacture:
         self.prixFrame = Frame(self.root)
         self.prixFrame.pack(side=TOP)
 
+        self.ligneFrame = Frame(self.root)
+        self.ligneFrame.pack(side=TOP,expand=1,fill=BOTH)
+
         self.nameFrame = Frame(self.prixFrame)
         self.nameFrame.pack(side=LEFT)
 
@@ -1335,6 +1338,19 @@ class processFacture:
         self.date_label,self.date,self.date_focus = self.addLabelEntry("Date:")
         self.quantite_label,self.quantite,self.quantite_focus = self.addLabelEntry("Quantite:")
         self.prix_label,self.prix,self.prix_focus = self.addLabelEntry("Prix:")
+
+        # action sur les lignes
+
+        b=Button(self.ligneFrame,text='copier')
+        b.pack(side=LEFT,expand=1,fill=BOTH)
+        
+        b=Button(self.ligneFrame,text='effacer')
+        b.pack(side=LEFT,expand=1,fill=BOTH)
+        
+        self.valider=Button(self.ligneFrame,text='Valider',command=lambda x=1:self.addFacture())
+        self.valider.bind("<Return>",lambda x="fake":self.valider.invoke())
+        self.valider.pack(side=LEFT,expand=1,fill=BOTH)
+        
 
         # liste box
 
@@ -1364,7 +1380,7 @@ class processFacture:
         self.article.bind("<Return>",self.route)
         self.date.bind("<Return>",self.goToQuantite)
         self.quantite.bind("<Return>",self.goToPrice)
-        self.prix.bind("<Return>",self.addFacture)
+        self.prix.bind("<Return>",lambda x=1:self.valider.focus_set())
 
         self.ajouteLigneFacture("Quant.","Produit","Prix")
 #        self.listbox.delete(0,END)
@@ -1468,7 +1484,7 @@ class processFacture:
     def goToDate(self,event="fake"):
         self.labelEntryFocus(self.date,self.date_focus)
 
-    def addFacture(self,event):
+    def addFacture(self):
         global ihm
 
         try :
