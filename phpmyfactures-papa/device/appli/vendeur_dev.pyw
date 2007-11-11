@@ -1522,7 +1522,15 @@ class processFacture:
                      command=lambda x=1:self.getArticle(ligne,"prix"))
             l.pack(side=TOP,expand=1,fill=BOTH)
 
-    def getArticle(ligne):
+    def getArticle(self,ligne,focus):
+        self.currentArticle=ligne
+        self.acceptProduit(self.selectedRacourci[ligne],self.selectedFournisseur[ligne])
+        if focus=="quantite":
+            self.goToQuantite()
+        if focus=="produit":
+            self.goToArticle()
+        if focus=="prix":
+            self.goToPrice()
         return
 
 
@@ -1542,7 +1550,9 @@ class processFacture:
         self.selectedPrix[self.nbArticles]=self.prix_saisi
         self.selectedQuantite[self.nbArticles]=quantite
         self.selectedDate[self.nbArticles]=self.date.get()
+
         self.nbArticles=self.nbArticles+1
+        self.currentArticle=self.nbArticles
 
         self.selectedCode[self.nbArticles]=""
         self.selectedRacourci[self.nbArticles]=""
