@@ -125,6 +125,8 @@ if ($commande) {
     print '	<BR>	<table border="0" align="center" cellpadding="3" cellspacing="1" bgcolor="#000000" width="770">';
   }
 
+  $total=0.;
+
   while ($article=array_shift($articles)) {
     $col=split("!",$article);
 		$parametre=array_pop($col);
@@ -134,7 +136,8 @@ if ($commande) {
     $date=$col[3];  			
     $quantite=$col[4];
     $prix=$col[5];
-  
+    
+    $total = $total+$prix*$quantite;
     
     $query="select titre from ".$prefixe_table."produits where barcode=\"$code\"";
     $req = mysql_query($query);
@@ -178,6 +181,12 @@ if ($commande) {
   		</tr>";
       }
   }
+
+
+    $in_bltex=$in_bltex
+      .'\hline \multicolumn{2}{|r|}{Total H.T.: '
+      ."} & \multicolumn{1}{r|}{".sprintf("%7.2f",$total)."} \\\\ \n";
+      
   
   $in_bltex=$in_bltex.'
     \hline
