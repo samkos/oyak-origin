@@ -1,1 +1,1 @@
-python "C:\Program Files\EasyPHP1-8\www\phpmyfactures\print\demon.py"
+c:\python24\python "C:\Program Files\EasyPHP1-8\www\phpmyfactures\print\demon.py"
