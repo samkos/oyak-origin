@@ -31,7 +31,7 @@ print "$action ...<br />";
 
 if ($action=="print") {
   foreach (array_keys($GLOBALS) as $var) {
-    if (preg_match("/^choisis([0-9]{1,2})/",$var,$reg)) {
+    if (preg_match("/^choisis([0-9]+)/",$var,$reg)) {
       print $GLOBALS[$var]." : ".$GLOBALS["quantite".$reg[1]]."x".$GLOBALS["produit".$reg[1]]."<BR>";
       $barcodes[$reg[1]]=$GLOBALS["choisis".$reg[1]];
       $quantites[$reg[1]]=$GLOBALS["quantite".$reg[1]];
