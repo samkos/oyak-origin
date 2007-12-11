@@ -53,6 +53,7 @@ if ($filenames) {
   //print "res=$status";
   print "<BR> $i crées<BR> ";
 
+  @mkdir ("c:/Oyak/ToPrint",0755);
   if ($printer=="default") {
     copy ("all.ps", "c:/Oyak/ToPrint/facture.ps");
     copy ("all.ps", "c:/Oyak/facture.ps");
