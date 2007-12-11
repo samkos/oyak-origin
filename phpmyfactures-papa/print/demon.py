@@ -3,6 +3,7 @@ import string
 import re
 import time,datetime
 import sys
+from stat import *
 
 timeTouchFile="/Oyak/ToPrint/PrintDemon.txt"
 timeOK=30
@@ -11,6 +12,9 @@ dir_printTODO="/Oyak/ToPrint"
 dir_workTODO="/Oyak/Work"
 dir_factureTODO="/facprint"
 exe_print="\"c:\Program Files\Ghostgum\gsview\gsprint.exe\" -printer \"test1\""
+exe_print="\"c:\Program Files\Ghostgum\gsview\gsprint.exe\" -printer \"test1\""
+exe_print="print.bat "
+exe_printTo="printTo.bat "
 exe_facture="\"c:/Program Files/EasyPHP1-8/www/phpmyfactures/factures/traite.bat\" ";
 
 debug=01
@@ -36,26 +40,36 @@ def probeFacture():
             print "%s"%timestamp+":"+"Pas de facture en attente"
         
 
-def probePrint():
+def probePrint(dir_print,printer="default"):
     global timestamp
 
-    files=os.listdir(dir_printTODO)
+    files=os.listdir(dir_print)
 
     nb=0
     for file in files:
 
         if not(file=="PrintDemon.txt"):
-            # mpression fichier
-            filename=dir_printTODO+"/"+file
-            commande = exe_print+" "+filename
-            if debug:
-                print "%s"%timestamp+":"+commande
-            os.system(commande)
-        
-            if msg:
-                print "%s"%timestamp+":"+ "Impression de %s "%filename
+            filename=dir_print+"/"+file
 
-            os.remove(filename)
+            # est-ce un repertoire, si oui on recurse
+            mode = os.stat(filename)[ST_MODE]
+            if S_ISDIR(mode):
+                probePrint(filename,file)
+                
+            else:
+            # mpression fichier
+                if printer=="default":
+                   commande = exe_print+" "+filename
+                else:
+                   commande = exe_printTo+" "+filename+" "+printer
+                if debug:
+                    print "%s"%timestamp+":"+commande
+                os.system(commande)
+        
+                if msg:
+                    print "%s"%timestamp+":"+ "Impression de %s "%filename
+
+                os.remove(filename)
 
     return
 
@@ -113,5 +127,5 @@ else:
         if msg:
             print "%s"%timestamp+":"+"checking files pending..."
         probeFacture()
-        probePrint()
+        probePrint(dir_printTODO)
         time.sleep(10)

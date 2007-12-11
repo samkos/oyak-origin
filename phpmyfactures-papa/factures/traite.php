@@ -9,7 +9,7 @@ $exe_python="c:\\Python24\\python.exe ..\\print\\demon.pyw";
 $dir_facture="\facprint\*";
 
 $header=1;
-$nb_lignes_facture=20;
+$nb_lignes_facture=18;
 
 include("../inc/header.php");
 $debug=0;
@@ -25,7 +25,8 @@ $body_vide=join("",file("$dir/body_vide.tex"));
 $footer=join("",file("$dir/footer.tex"));
 $footer2=join("",file("$dir/footer2.tex"));
 $conclusion=join("",file("$dir/conclusion.tex"));
-
+$printer="default";
+$copies=1;
 
 
 $i=0;
@@ -52,13 +53,16 @@ if ($filenames) {
   //print "res=$status";
   print "<BR> $i crées<BR> ";
 
-  if (0) {
-    sleep(3);
-    $commande=$exe_print." c:\\Oyak\\barcodes.ps > out";
-    $commande=$exe_python." > out";
-    system($commande,$status);
-    print "<BR> $commande <BR> $i factures imprimées<BR> ";
+  if ($printer=="default") {
+    copy ("all.ps", "c:/Oyak/ToPrint/facture.ps");
+    copy ("all.ps", "c:/Oyak/facture.ps");
   }
+  else {
+    @mkdir ("c:/Oyak/ToPrint/$printer",0755);
+    copy ("all.ps", "c:/Oyak/ToPrint/$printer/facture.ps");
+    copy ("all.ps", "c:/Oyak/facture.ps");
+  }
+
 }
 else {
   print "pas de facture en attente <BR>";
@@ -74,8 +78,10 @@ print "<BR> <a href='../admin/index.php>  Retour Administration\n";
 
 function make_facture ($file) {
   global $debug, $header, $footer,$body,$body_vide,
-    $nb_lignes_facture,$footer2,$header2;
+    $nb_lignes_facture,$footer2,$header2,$printer,$copies;
   
+
+  $document="";
   $nb_ligne=0;
   $total=0;
   $out=$header;
@@ -94,6 +100,20 @@ function make_facture ($file) {
 #print_r($champs);
 
     $i=0;
+
+# Z0,1!PR1!1!Bon de Livraison
+    if (ereg("^Z0,1",$clef))  { 
+      // nom de l'imprimante, nombre d'impression, type de document
+	$printer=array_shift($champs);
+	$copies=array_shift($champs);
+	$document=array_shift($champs);	
+
+	$cherche=sprintf("#%s#",$clef);
+	$par=$document;
+	array_push($find,$cherche);
+	array_push($replace,$par);
+    
+        }
 
     if (ereg("^Z5,",$clef))  { // nouvelle ligne
       $nb_ligne=$nb_ligne+1;
@@ -156,6 +176,17 @@ function make_facture ($file) {
   for ($i=$nb_ligne;$i<$nb_lignes_facture;$i++) {
     $out=$out.$body_vide;
   }
+
+  # traitement type de document
+  if ($document=="") {
+    $document="Facture";
+  }
+
+  $cherche=sprintf("#%s#","Z0,1");
+  $par=$document;
+  array_push($find,$cherche);
+  array_push($replace,$par);
+
 
   $out=$out.$footer;
   $out=str_replace($find,$replace,$out);
