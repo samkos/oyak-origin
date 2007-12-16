@@ -200,8 +200,10 @@ function make_facture ($file) {
 
   $out=ereg_replace("__PETIT__","{\\tiny ",$out);
   $out=ereg_replace("__GRAS__","\\textbf{ ",$out);
+  $out=ereg_replace("__GRIS__","\\colorbox[gray]{0.8}{ ",$out);
   $out=ereg_replace("__petit__","}",$out);
   $out=ereg_replace("__gras__","}",$out);
+  $out=ereg_replace("__gris__","}",$out);
 
   return $out;
 }
