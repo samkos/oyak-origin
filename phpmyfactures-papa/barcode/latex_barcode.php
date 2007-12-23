@@ -40,10 +40,47 @@ if ($action=="print") {
   }
   //  $GLOBALS[$var]=$_SESSION[$var];
   print "----------------------------------";
-  //print_r($barcodes);												
-  $ftex=fopen($tex_file,"w");
-  $fpython=fopen($python_file,"w");							
+}
 
+else  {
+  $dir_etiquette="\etiqprint\*";
+  $filenames=glob($dir_etiquette);
+  $nb_etiq=0;
+
+  foreach ($filenames as $filename) {
+    echo "<BR> Traitement fichier etiquette $filename................................................";
+    $lines=file($filename);
+    foreach ($lines as $line) {
+      $champs = split("!",$line);
+      $clef=array_shift($champs);
+      //print "$line, xxxxxx $clef <BR>";
+      
+      if (ereg("^Z0,1",$clef))  { 
+	// nom de l'imprimante, nombre d'impression, type de document
+	$printer=array_shift($champs);
+	$copies=array_shift($champs);
+	$document=array_shift($champs);	
+      }
+
+      if (ereg("^Z2,",$clef))  { // nouvelle etiquette
+	$nb_etiq=$nb_etiq+1;
+	$barcode=array_shift($champs);
+	$produit=array_shift($champs);
+	$barcodes[$nb_etiq]=$barcode;
+	$quantites[$nb_etiq]=1;
+	$produits[$nb_etiq]=$produit;
+	print "$barcode : 1 x $produit <BR>";
+      }
+    }
+    unlink($filename);
+  }
+  print "----------------------------------";
+}
+
+
+  //print_r($barcodes);
+  $ftex=fopen($tex_file,"w");
+  $fpython=fopen($python_file,"w");
   fwrite($ftex,
 	 '\documentclass[a4paper]{article}
    %
@@ -67,8 +104,7 @@ if ($action=="print") {
    \setlength{\parskip}{0.2cm}
 
    \setlength{\marginparwidth}{0pt}
-   \setlength{\marginparsep}{0pt}
-   %
+   \setlength{\marginparsep}{0pt}   %
    \begin{document}
 
    \begin{small}
@@ -127,7 +163,7 @@ if ($action=="print") {
       }
     }
   }
-}	
+	
 fwrite($ftex," $name_line\\\\   ");
 fwrite($ftex," $etiquette_line \\\\  ");
 fwrite ($ftex,"\\end{tabular}    \\end{small} \\end{document}\n");
