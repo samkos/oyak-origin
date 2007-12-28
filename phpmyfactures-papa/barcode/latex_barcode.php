@@ -8,6 +8,7 @@ $nb_per_line=3;
 $nb_per_page=8;
 
 $exe_print="\"c:/Program Files/Ghostgum/gsview/gsprint.exe\"   ";
+$printer="default";
 
 ?>
 
@@ -176,6 +177,16 @@ fclose($fpython);
 //system("compile.bat > work/compile.out ",$status);
 system("compile.bat  ",$status);
 print "resultat-> $status";
+
+  if ($printer=="default") {
+    copy ("work/barcodes.ps", "c:/Oyak/ToPrint/barcodes.ps");
+    copy ("work/barcodes.ps", "c:/Oyak/barcodes.ps");
+  }
+  else {
+    @mkdir ("c:/Oyak/ToPrint/$printer",0755);
+    copy ("work/barcodes.ps", "c:/Oyak/ToPrint/$printer/barcodes.ps");
+    copy ("work/barcodes.ps", "c:/Oyak/barcodes.ps");
+  }
 
 
 

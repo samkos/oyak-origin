@@ -5,8 +5,8 @@ copy ..\bookland.py .
 python create_barcodes.py
 latex "\nonstopmode\input{barcodes.tex}"
 dvips barcodes
-copy barcodes.ps c:\Oyak\barcodes.ps
-copy barcodes.ps c:\Oyak\ToPrint\barcodes.ps
+rem copy barcodes.ps c:\Oyak\barcodes.ps
+rem copy barcodes.ps c:\Oyak\ToPrint\PR1\barcodes.ps
 cd ..
 
 

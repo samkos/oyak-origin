@@ -8,7 +8,7 @@ from stat import *
 timeTouchFile="/Oyak/ToPrint/PrintDemon.txt"
 timeOK=30
 
-dir_printTODO="/Oyak/ToPrint"
+dir_printTODO='c:\Oyak\ToPrint'
 dir_workTODO="/Oyak/Work"
 dir_factureTODO="/facprint"
 dir_etiqTODO="/etiqprint"
