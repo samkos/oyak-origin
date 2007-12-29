@@ -1,4 +1,4 @@
-C:\PROGRA~1\EASYPH~1\www\phpmyfactures\print\pycron-0.5.9.0
-copy C:\PROGRA~1\EASYPH~1\www\phpmyfactures\print\crontab.txt c:C:\PROGRA~1\pycron\crontab.txt
+pycron-0.5.9.0
+copy "C:\Program Files\EasyPHP1-8\www\phpmyfactures\print\crontab.txt" "C:\Program Files\pycron\crontab.txt"
 
 
