@@ -5,11 +5,11 @@
 $exe_print="\"c:\\Program Files\\Ghostgum\\gsview\\gsprint.exe\"   ";
 $exe_python="c:\\Python24\\python.exe ..\\print\\demon.pyw";
 
-//$dir_facture=""\Oyak\work\*";
-$dir_facture="\facprint\*";
+//$dir_imprime=""\Oyak\work\*";
+$dir_imprime="\impprint\*";
 
 $header=1;
-$nb_lignes_facture=18;
+$nb_lignes_imprime=18;
 
 include("../inc/header.php");
 $debug=0;
@@ -18,19 +18,13 @@ $debug=0;
 $dir=".";
 
 $preambule=join("",file("$dir/preambule.tex"));
-$header=join("",file("$dir/header.tex"));
-$header2=join("",file("$dir/header2.tex"));
-$body=join("",file("$dir/body.tex"));
-$body_vide=join("",file("$dir/body_vide.tex"));
-$footer=join("",file("$dir/footer.tex"));
-$footer2=join("",file("$dir/footer2.tex"));
 $conclusion=join("",file("$dir/conclusion.tex"));
 $printer="default";
 $copies=1;
 
 
 $i=0;
-$filenames=glob($dir_facture);
+$filenames=glob($dir_imprime);
 if ($filenames) {
   $file_out=fopen("all.tex","w");
   fwrite($file_out,$preambule);
@@ -40,8 +34,8 @@ if ($filenames) {
       fwrite($file_out,"\\clearpage");
     }
     $i=$i+1;
-    echo "<BR> Traitement factture $filename................................................";
-    $out=make_facture($filename);
+    echo "<BR> Traitement impression $filename................................................";
+    $out=make_imprime($filename);
     fwrite($file_out,$out);
     unlink($filename);
   }
@@ -55,18 +49,18 @@ if ($filenames) {
 
   @mkdir ("c:/Oyak/ToPrint",0755);
   if ($printer=="default") {
-    copy ("all.ps", "c:/Oyak/ToPrint/facture.ps");
-    copy ("all.ps", "c:/Oyak/facture.ps");
+    copy ("all.ps", "c:/Oyak/ToPrint/imprime.ps");
+    copy ("all.ps", "c:/Oyak/imprime.ps");
   }
   else {
     @mkdir ("c:/Oyak/ToPrint/$printer",0755);
-    copy ("all.ps", "c:/Oyak/ToPrint/$printer/facture.ps");
-    copy ("all.ps", "c:/Oyak/facture.ps");
+    copy ("all.ps", "c:/Oyak/ToPrint/$printer/imprime.ps");
+    copy ("all.ps", "c:/Oyak/imprime.ps");
   }
 
 }
 else {
-  print "pas de facture en attente <BR>";
+  print "pas de imprime en attente <BR>";
 }
 
 //echo "<blockquote> $out </blockquote>";
@@ -77,9 +71,9 @@ print "<BR> <a href='../admin/index.php>  Retour Administration\n";
 
 
 
-function make_facture ($file) {
+function make_imprime ($file) {
   global $debug, $header, $footer,$body,$body_vide,
-    $nb_lignes_facture,$footer2,$header2,$printer,$copies;
+    $nb_lignes_imprime,$footer2,$header2,$printer,$copies;
   
 
   $document="";
@@ -119,8 +113,8 @@ function make_facture ($file) {
     if (ereg("^Z5,",$clef))  { // nouvelle ligne
       $nb_ligne=$nb_ligne+1;
 
-      // si facture trop grande on cree une nouvelle page
-      if ($nb_ligne>$nb_lignes_facture) {
+      // si imprime trop grande on cree une nouvelle page
+      if ($nb_ligne>$nb_lignes_imprime) {
 	$out = $out.$footer2.$header2;
 	$nb_ligne=0;
 	echo "new pag!!!";
@@ -174,13 +168,13 @@ function make_facture ($file) {
     print_r($replace);
   }
 
-  for ($i=$nb_ligne;$i<$nb_lignes_facture;$i++) {
+  for ($i=$nb_ligne;$i<$nb_lignes_imprime;$i++) {
     $out=$out.$body_vide;
   }
 
   # traitement type de document
   if ($document=="") {
-    $document="Facture";
+    $document="Imprime";
   }
 
   $cherche=sprintf("#%s#","Z0,1");
