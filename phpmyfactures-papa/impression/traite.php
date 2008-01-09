@@ -37,7 +37,8 @@ if ($filenames) {
     echo "<BR> Traitement impression $filename................................................";
     $out=make_imprime($filename);
     fwrite($file_out,$out);
-    unlink($filename);
+    echo "<BR> Effacement $filename NON FAIT   NON FAIT.......................................";
+    //unlink($filename);
   }
 
   fwrite($file_out,$conclusion);
