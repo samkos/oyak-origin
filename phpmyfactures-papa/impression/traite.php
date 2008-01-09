@@ -9,7 +9,7 @@ $exe_python="c:\\Python24\\python.exe ..\\print\\demon.pyw";
 $dir_imprime="\impprint\*";
 $dir_imprime="test\*";
 
-$header=1;
+$header="";
 $nb_lignes_imprime=18;
 
 include("../inc/header.php");
@@ -96,14 +96,13 @@ function make_imprime ($file) {
 
     if ($what=="TXT") {
       $text=array_shift($champs);
-      $out=$out.'  \null   
+      $out=$out.'  \null 
                    \vspace{'.$y.'.cm}   \hspace{'.$x.'.cm}   
                    \begin{minipage}[t]{\linewidth}';
       $out=$out." $text ";
+      $out=$out.'                               \end{minipage}';
       $out=$out.'    
                    \vspace{-'.$y.'.cm}   \hspace{-'.$x.'.cm}   ';
-      $out=$out.'                               \end{minipage}
-            ';
     }
 
   }
