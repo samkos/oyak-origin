@@ -1,46 +1,50 @@
 \documentclass[a4paper]{article}
-%
-\usepackage{graphicx}
-\usepackage{color}
-%
-%\setlength{\voffset}{-3.5cm}
-%\setlength{\hoffset}{-2.6cm}
+\setlength{\voffset}{-1in}
+\setlength{\hoffset}{-1in}
 
 \setlength{\oddsidemargin}{0pt}
-\setlength{\evensidemargin}{0cm}
+\setlength{\evensidemargin}{0.5cm}
+
+\setlength{\textwidth}{550pt}
+
 \setlength{\topmargin}{0cm}
 
-\setlength{\textwidth}{21cm}
+
 \setlength{\textheight}{29.7cm}
+\setlength{\textwidth}{21cm}
 
 \setlength{\headheight}{0pt}
-
 \setlength{\headsep}{0pt}
-\setlength{\parindent}{0cm}
-\setlength{\parskip}{0cm}
+
+\setlength{\parindent}{1cm}
+\setlength{\parskip}{0.2cm}
 
 \setlength{\marginparwidth}{0pt}
 \setlength{\marginparsep}{0pt}
 %
+\setlength{\unitlength}{1cm}
 \begin{document}
-  \null 
-                   \vspace{0.cm}   \hspace{0.cm}   
-                   \begin{minipage}[t]{\linewidth} Essai 0 0 0
-                                \end{minipage}    
-                   \vspace{-0.cm}   \hspace{-0.cm}     \null 
-                   \vspace{16.cm}   \hspace{10.cm}   
-                   \begin{minipage}[t]{\linewidth} Essai 4 10 16
-                                \end{minipage}    
-                   \vspace{-16.cm}   \hspace{-10.cm}     \null 
-                   \vspace{2.cm}   \hspace{1.cm}   
-                   \begin{minipage}[t]{\linewidth} Essai 1 1 2
-                                \end{minipage}    
-                   \vspace{-2.cm}   \hspace{-1.cm}     \null 
-                   \vspace{5.cm}   \hspace{10.cm}   
-                   \begin{minipage}[t]{\linewidth} Essai 2 10 5
-                                \end{minipage}    
-                   \vspace{-5.cm}   \hspace{-10.cm}     \null 
-                   \vspace{20.cm}   \hspace{5.cm}   
-                   \begin{minipage}[t]{\linewidth} Essai 3 5 20
-                                \end{minipage}    
-                   \vspace{-20.cm}   \hspace{-5.cm}   \end{document}
+\begin{picture}(0,29.7)
+\put(0,29){Essai 0 0 0
+}
+\put(10,13){Essai 4 10 16
+}
+\put(1,27){Essai 1 1 2
+}
+\put(10,24){Essai 2 10 5
+}
+\put(5,9){Essai 3 5 20
+}
+\put(5,17){
+\begin{tabular}{|p{2cm}|p{3cm}|p{3cm}|p{2cm}|}
+\hline 
+\textbf{col1} &\textbf{col2} &\textbf{col3} &\textbf{col4} \\ 
+\hline
+\multicolumn{1}{|l|}{cont1} &\multicolumn{1}{l|}{cont2} &\multicolumn{1}{l|}{cont3} &\multicolumn{1}{l|}{cont4} \\ 
+\multicolumn{1}{|l|}{cont1_bis} &\multicolumn{1}{l|}{cont2_bis} &\multicolumn{1}{l|}{cont3_bis} &\multicolumn{1}{l|}{cont4_bis
+} \\ 
+\hline
+\end{tabular}}
+\end{picture}
+
+\end{document}

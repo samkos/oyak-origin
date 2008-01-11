@@ -19,6 +19,8 @@ $debug=0;
 $dir=".";
 
 $preambule=join("",file("$dir/preambule.tex"));
+$header=join("",file("$dir/header.tex"));
+$footer=join("",file("$dir/footer.tex"));
 $conclusion=join("",file("$dir/conclusion.tex"));
 $printer="default";
 $copies=1;
@@ -94,19 +96,63 @@ function make_imprime ($file) {
     $y=array_shift($champs);
     $what=array_shift($champs);
 
+    $out=$out.'\put('.$x.','.(29-$y).'){' ;
+
+    // texte simple
     if ($what=="TXT") {
       $text=array_shift($champs);
-      $out=$out.'  \null 
-                   \vspace{'.$y.'.cm}   \hspace{'.$x.'.cm}   
-                   \begin{minipage}[t]{\linewidth}';
-      $out=$out." $text ";
-      $out=$out.'                               \end{minipage}';
-      $out=$out.'    
-                   \vspace{-'.$y.'.cm}   \hspace{-'.$x.'.cm}   ';
+      $out=$out."$text";
     }
 
+    // tableau
+    if ($what=="TAB") {
+      $intitules=split("=",array_shift($champs));
+      $tailles=split("=",array_shift($champs));
+
+      $out=$out."\n".'\begin{tabular}{';
+      while ($taille=array_shift($tailles)) {
+	$out=$out."|p{".$taille."cm}";
+      }
+      $out=$out."|}\n";
+      $out=$out.'\hline '."\n";
+      $nb_int=0;
+      while ($intitule=array_shift($intitules)) {
+	if ($nb_int) { $out = $out.'&';}
+	$nb_int=$nb_int+1;
+	$out=$out.'\textbf{'.$intitule.'} ';
+	  }
+      $out=$out.'\\\\ '."\n".'\hline'."\n";
+
+      $nb_lin=0;
+      while ($line=array_shift($champs)) {
+	if ($nb_lin) { $out=$out.'\\\\ '."\n";}
+	$nb_lin=$nb_lin+1;
+
+	$cells=split("=",$line);
+	$nb_int=0;
+
+	while ($cell=array_shift($cells)) {
+	  $bord="|";
+	  if ($nb_int) { $out = $out.'&'; $bord="";}
+	  $nb_int=$nb_int+1;
+	  $out=$out.'\multicolumn{1}{'.$bord.'l|}{'.$cell.'} ';
+	}
+	
+      }
+
+      $out=$out.'\\\\ '."\n".'\hline'."\n";
+
+      $out=$out.'\end{tabular}';
+      
+
+    }
+
+
+    $out=$out."}\n";
   }
   
+  $out=$out.$footer."\n\n";
+
   return $out;
 }
 

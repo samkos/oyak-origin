@@ -3,4 +3,4 @@
 1!2!TXT!Essai 1 1 2
 10!5!TXT!Essai 2 10 5
 5!20!TXT!Essai 3 5 20
-5!20!TAB!4!col1!col2!col3!col4!2!3!3!2!cont1!cont2!cont3!cont4!cont1_bis!cont2_bis!cont3_bis!cont4_bis
+5!12!TAB!col1=col2=col3=col4!2=3=3=2!cont1=cont2=cont3=cont4!cont1_bis=cont2_bis=cont3_bis=cont4_bis
