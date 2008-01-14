@@ -7,7 +7,7 @@ $exe_python="c:\\Python24\\python.exe ..\\print\\demon.pyw";
 
 //$dir_imprime=""\Oyak\work\*";
 $dir_imprime="\impprint\*";
-$dir_imprime="test\*";
+//$dir_imprime="test\*";
 
 $header="";
 $nb_lignes_imprime=18;
@@ -40,8 +40,8 @@ if ($filenames) {
     echo "<BR> Traitement impression $filename................................................";
     $out=make_imprime($filename);
     fwrite($file_out,$out);
-    echo "<BR> Effacement $filename NON FAIT   NON FAIT.......................................";
-    //unlink($filename);
+    //echo "<BR> Effacement $filename NON FAIT   NON FAIT.......................................";
+    unlink($filename);
   }
 
   fwrite($file_out,$conclusion);
@@ -59,8 +59,7 @@ if ($filenames) {
   else {
     @mkdir ("c:/Oyak/ToPrint/$printer",0755);
     copy ("all.ps", "c:/Oyak/ToPrint/$printer/imprime.ps");
-    copy ("all.ps", "c:/Oyak/imprime.ps");
-  }
+    copy ("all.ps", "c:/Oyak/imprime.ps");  }
 
 }
 else {
@@ -83,6 +82,8 @@ function make_imprime ($file) {
   $total=0;
   $out=$header;
 
+  $hline="\n".' \hline'."\n";
+
   $find=array();
   $replace=array();
   
@@ -92,66 +93,119 @@ function make_imprime ($file) {
 
   foreach ($lines as $line) {
     $champs = split("!",$line);
-    $x=array_shift($champs);
-    $y=array_shift($champs);
     $what=array_shift($champs);
 
-    $out=$out.'\put('.$x.','.(29-$y).'){' ;
-
-    // texte simple
-    if ($what=="TXT") {
-      $text=array_shift($champs);
-      $out=$out."$text";
+    if (ereg("^Z0,1",$what))  { 
+      // nom de l'imprimante, nombre d'impression, type de document
+      $printer=array_shift($champs);
+      $copies=array_shift($champs);
+      $document=array_shift($champs);	
     }
+    else {
 
-    // tableau
-    if ($what=="TAB") {
-      $intitules=split("=",array_shift($champs));
-      $tailles=split("=",array_shift($champs));
 
-      $out=$out."\n".'\begin{tabular}{';
-      while ($taille=array_shift($tailles)) {
-	$out=$out."|p{".$taille."cm}";
+      $x=array_shift($champs);
+      $y=array_shift($champs);
+
+      $out=$out.'\put('.$x.','.(29-$y).'){' ;
+
+      // texte simple
+      if ($what=="TXT") {
+	$text=array_shift($champs);
+	$out=$out."$text";
       }
-      $out=$out."|}\n";
-      $out=$out.'\hline '."\n";
-      $nb_int=0;
-      while ($intitule=array_shift($intitules)) {
-	if ($nb_int) { $out = $out.'&';}
-	$nb_int=$nb_int+1;
-	$out=$out.'\textbf{'.$intitule.'} ';
-	  }
-      $out=$out.'\\\\ '."\n".'\hline'."\n";
 
-      $nb_lin=0;
-      while ($line=array_shift($champs)) {
-	if ($nb_lin) { $out=$out.'\\\\ '."\n";}
-	$nb_lin=$nb_lin+1;
+      // tableau
+      if ($what=="TAB") {
+	$tailles=split("=",array_shift($champs));
 
-	$cells=split("=",$line);
-	$nb_int=0;
-
-	while ($cell=array_shift($cells)) {
-	  $bord="|";
-	  if ($nb_int) { $out = $out.'&'; $bord="";}
-	  $nb_int=$nb_int+1;
-	  $out=$out.'\multicolumn{1}{'.$bord.'l|}{'.$cell.'} ';
+	$out=$out."\n".'\begin{tabular}{';
+	while ($taille=array_shift($tailles)) {
+	  $out=$out."p{".$taille."cm}";
 	}
-	
-      }
+	$out=$out."}\n";
 
-      $out=$out.'\\\\ '."\n".'\hline'."\n";
+	$nb_lin=0;
+	while ($line=array_shift($champs)) {
+	  $cells=split("=",$line);
+	  $nb_int=0;
 
-      $out=$out.'\end{tabular}';
+	  $col=1;
+	  while ($cell=array_shift($cells)) {
+
+	    $fields=split(";",$cell);
+	    $texte=array_shift($fields);
+	    $format=array_shift($fields);
+	    $masque='\multicolumn{1}{l}{%s}';
+		
+	    // y a-t-il un format associe a la scene?
+	    if ($format) {		
+	      $cadrage=substr($format,0,1);	  
+	      $bords  =substr($format,1,1);	  
+	      $couleur=substr($format,2,1);	  
+	      $font   =substr($format,3,1);	  
+	      $nb_cols=substr($format,4,1);
+	      if (!$nb_cols) {$nb_cols=1;}	  
+
+	      //$out=$out."\n\n %===> texte=$texte; format=$format; cadrage='$cadrage'; bords='$bords'; couleur='$couleur'; font='$font'; nb_cols='$nb_cols';\n";
+	    
+	      $bord_left=""; $bord_right="";
+	      switch($bords) {
+	      case "g": $bord_left="|";                  break; 
+	      case "d": $bord_right="|";                 break; 
+	      case "c": $bord_left="|"; $bord_right="|"; break;
+	      default : $bord_left=""; $bord_right="";    
+	      }
+
+	      switch($font) {
+	      case "g": $in='\textbf{%s}'; break; 
+	      case "i": $in='\textsl{%s}'; break;
+	      default : $in='%s';    
+	      }
+
+	      $masque='\multicolumn{'.$nb_cols.'}{'.$bord_left.$cadrage.$bord_right.'}{'.$in.'}';
+
+	      switch($cadrage) {
+	      case "T": $masque=$hline; break; 
+	      case "t": $masque='\cline{'.$col.'-'.($col+$nb_cols-1).'}';  break;
+	      case ".": $cadrage="l"; break;
+	      default : $cadrafe="l";
+	      }
+
+	    }
+		
+	    if ($col>1) { $out = $out.'&';}
+	    $col=$col+1;
+	    $out=$out.sprintf($masque,$texte);
+	  }
+
+	  if ($masque!=$hline) {
+	    $out=$out.'\\\\ '."\n";
+	  }
+	}
+
+
+	$out=$out.'\end{tabular}';
       
 
+      }
+
+
+      $out=$out."}\n";
+
     }
-
-
-    $out=$out."}\n";
   }
   
   $out=$out.$footer."\n\n";
+
+
+  $out=ereg_replace("__PETIT__","{\\tiny ",$out);
+  $out=ereg_replace("__GRAS__","\\textbf{ ",$out);
+  $out=ereg_replace("__GRIS__","\\colorbox[gray]{0.8}{ ",$out);
+  $out=ereg_replace("__petit__","}",$out);
+  $out=ereg_replace("__gras__","}",$out);
+  $out=ereg_replace("__gris__","}",$out);
+
 
   return $out;
 }

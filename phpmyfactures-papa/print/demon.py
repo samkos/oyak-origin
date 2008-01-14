@@ -12,12 +12,14 @@ dir_printTODO='c:\Oyak\ToPrint'
 dir_workTODO="/Oyak/Work"
 dir_factureTODO="/facprint"
 dir_etiqTODO="/etiqprint"
+dir_impTODO="/impprint"
 exe_print="\"c:\Program Files\Ghostgum\gsview\gsprint.exe\" -printer \"test1\""
 exe_print="\"c:\Program Files\Ghostgum\gsview\gsprint.exe\" -printer \"test1\""
 exe_print="print.bat "
 exe_printTo="printTo.bat "
 exe_facture="\"c:/Program Files/EasyPHP1-8/www/phpmyfactures/factures/traite.bat\" ";
 exe_etiq="\"c:/Program Files/EasyPHP1-8/www/phpmyfactures/barcode/traite.bat\" ";
+exe_imp="\"c:/Program Files/EasyPHP1-8/www/phpmyfactures/impression/traite.bat\" ";
 
 debug=01
 msg=1
@@ -55,6 +57,21 @@ def probeEtiq():
     else:
         if msg:
             print "%s"%timestamp+":"+"Pas d'etiquette en attente"
+        
+
+def probeImp():
+    global timestamp
+    
+    files=os.listdir(dir_impTODO)
+
+    if files:
+        if msg:
+            print "%s"%timestamp+":"+"traitement des impressions generale en attente"
+        commande=exe_imp
+        os.system(commande)
+    else:
+        if msg:
+            print "%s"%timestamp+":"+"Pas d'impression generale en attente"
         
 
 def probePrint(dir_print,printer="default"):
@@ -131,6 +148,9 @@ if not(os.path.exists(dir_factureTODO)):
 if not(os.path.exists(dir_etiqTODO)):
     os.mkdir(dir_etiqTODO)
 
+if not(os.path.exists(dir_impTODO)):
+    os.mkdir(dir_impTODO)
+
 if not(os.path.exists(dir_workTODO)):
     os.mkdir(dir_workTODO)
 
@@ -148,5 +168,6 @@ else:
             print "%s"%timestamp+":"+"checking files pending..."
         probeFacture()
         probeEtiq()
+        probeImp()
         probePrint(dir_printTODO)
         time.sleep(10)
