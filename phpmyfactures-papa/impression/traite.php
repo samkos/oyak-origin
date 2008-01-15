@@ -40,8 +40,8 @@ if ($filenames) {
     echo "<BR> Traitement impression $filename................................................";
     $out=make_imprime($filename);
     fwrite($file_out,$out);
-    //echo "<BR> Effacement $filename NON FAIT   NON FAIT.......................................";
-    unlink($filename);
+    echo "<BR> Effacement $filename NON FAIT   NON FAIT.......................................";
+    //unlink($filename);
   }
 
   fwrite($file_out,$conclusion);
@@ -83,9 +83,6 @@ function make_imprime ($file) {
   $out=$header;
 
   $hline="\n".' \hline'."\n";
-
-  $find=array();
-  $replace=array();
   
   $lines=file($file);
 
@@ -120,8 +117,12 @@ function make_imprime ($file) {
 	$tailles=split("=",array_shift($champs));
 
 	$out=$out."\n".'\begin{tabular}{';
+
+	$col=1;
 	while ($taille=array_shift($tailles)) {
-	  $out=$out."p{".$taille."cm}";
+	  $format_cell[$col]="p{".$taille."cm}";
+	  $out=$out.$format_cell[$col];
+		$col=$col+1;
 	}
 	$out=$out."}\n";
 
@@ -136,7 +137,7 @@ function make_imprime ($file) {
 	    $fields=split(";",$cell);
 	    $texte=array_shift($fields);
 	    $format=array_shift($fields);
-	    $masque='\multicolumn{1}{l}{%s}';
+	    $masque='\multicolumn{1}{'.$format_cell[$col].'}{%s}';
 		
 	    // y a-t-il un format associe a la scene?
 	    if ($format) {		
@@ -144,7 +145,7 @@ function make_imprime ($file) {
 	      $bords  =substr($format,1,1);	  
 	      $couleur=substr($format,2,1);	  
 	      $font   =substr($format,3,1);	  
-	      $nb_cols=substr($format,4,1);
+	      $nb_cols=substr($format,4,2);
 	      if (!$nb_cols) {$nb_cols=1;}	  
 
 	      //$out=$out."\n\n %===> texte=$texte; format=$format; cadrage='$cadrage'; bords='$bords'; couleur='$couleur'; font='$font'; nb_cols='$nb_cols';\n";
