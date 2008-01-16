@@ -10,6 +10,7 @@ $dir_imprime="\impprint\*";
 //$dir_imprime="test\*";
 
 $header="";
+$orientation="portrait";
 $nb_lignes_imprime=18;
 
 include("../inc/header.php");
@@ -96,7 +97,8 @@ function make_imprime ($file) {
       // nom de l'imprimante, nombre d'impression, type de document
       $printer=array_shift($champs);
       $copies=array_shift($champs);
-      $document=array_shift($champs);	
+      $document=array_shift($champs);
+			$orientation=array_shift($champs);
     }
     else {
 
@@ -206,8 +208,12 @@ function make_imprime ($file) {
   $out=ereg_replace("__petit__","}",$out);
   $out=ereg_replace("__gras__","}",$out);
   $out=ereg_replace("__gris__","}",$out);
-
-
+	
+	if (strstr($orientation,"PAYSAGE")) {
+		 $out='\begin{landscape}'."\n".$out."\n".'\end{landscape}';
+  }
+	$out=$out.$orientation;
+	
   return $out;
 }
 
