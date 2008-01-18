@@ -124,9 +124,14 @@ function make_imprime ($file) {
 	while ($taille=array_shift($tailles)) {
 	  $format_cell[$col]="p{".$taille."cm}";
 	  $out=$out.$format_cell[$col];
-		$col=$col+1;
+	  $col=$col+1;
 	}
 	$out=$out."}\n";
+
+	for ($c=0;$c<$col-2;$c++) {
+	  $out = $out." & ";
+	}
+	$out=$out.'\\\\';
 
 	$nb_lin=0;
 	while ($line=array_shift($champs)) {
@@ -151,6 +156,19 @@ function make_imprime ($file) {
 	      if (!$nb_cols) {$nb_cols=1;}	  
 
 	      //$out=$out."\n\n %===> texte=$texte; format=$format; cadrage='$cadrage'; bords='$bords'; couleur='$couleur'; font='$font'; nb_cols='$nb_cols';\n";
+	    
+	      $bord_left=""; $bord_right="";
+	      switch($bords) {
+	      case "g": $bord_left="|";                  break; 
+	      case "d": $bord_right="|";                 break; 
+	      case "c": $bord_left="|"; $bord_right="|"; break;
+	      default : $bord_left=""; $bord_right="";    
+	      }
+
+	    
+	      if ($cadrage=="d") {
+		$cadrage="r";
+	      }
 	    
 	      $bord_left=""; $bord_right="";
 	      switch($bords) {
