@@ -51,6 +51,10 @@ if ($filenames) {
       }
       else {
 	@unlink("all_landscape.tex");
+	@unlink("all_landscape.dvi");
+	@unlink("all_landscape.ps");
+	@unlink("all_landscape.aux");
+	@unlink('c:/Oyak/imprime_landscape.ps');
 	$file_landscape_out=fopen("all_landscape.tex","w");
 	fwrite($file_landscape_out,$preambule_landscape);
       }
@@ -63,6 +67,10 @@ if ($filenames) {
       }
       else {
 	@unlink("all_portrait.tex");
+	@unlink("all_portrait.dvi");
+	@unlink("all_portrait.ps");
+	@unlink("all_portrait.aux");
+	@unlink('c:/Oyak/imprime_portrait.ps');
 	$file_portrait_out=fopen("all_portrait.tex","w");
 	fwrite($file_portrait_out,$preambule_portrait);
       }
@@ -70,8 +78,8 @@ if ($filenames) {
       fwrite($file_portrait_out,$out);
     }
 
-    echo "<BR> Effacement $filename NON FAIT   NON FAIT.......................................";
-    unlink($filename);
+    echo "<BR> Effacement $filename NON FAIT   NON FAIT.... <BR> <BR>.";
+    //unlink($filename);
   }
 
   if ($nb_pages_portrait) {
@@ -80,8 +88,22 @@ if ($filenames) {
 
     system("compile_portrait.bat > out",$status);
     //print "res=$status";
-
-    print_all("portrait");
+    $lines=file("out");
+    $l=array_shift($lines);
+    $msg="";
+    while($l){
+      $msg=$msg."$l <BR>";
+      $l=array_shift($lines);
+    } 
+    
+    if (ereg("Emergency stop",$msg) or ereg("No pages of output",$msg))  { 
+      $msg=ereg_replace("^.*aux))","ERREUR : ",$msg);
+      $msg=ereg_replace("No pages of output.*$","No pages of ouput",$msg);
+      print "<BR> <BOLD> <br> <B> ERREUR D'INTERPRETATION dans $filename !!!! </B> <BR> $msg <BR>";
+    }
+    else {
+      print_all("portrait");
+    }
 
   }
 
@@ -150,12 +172,14 @@ function make_imprime ($file) {
       $copies=array_shift($champs);
       $document=array_shift($champs);
       $orientation=array_shift($champs);
+      print " <-- <B> OK </B>";
       next;
     }
 
     if (ereg("^EJECT",$what))  { 
       // saut de page
       $out=$out."\n".$footer."\n"."\\clearpage".$header."\n";
+      print " <-- <B> OK </B>";
       next;
     }
 
@@ -170,7 +194,9 @@ function make_imprime ($file) {
       // texte simple
       if ($what=="TXT") {
 	$text=array_shift($champs);
-	$out=$out."\null $text";
+	$out=$out."$text";
+	print " <-- <B> OK </B>";
+	next;
       }
 
       // tableau
@@ -266,10 +292,9 @@ function make_imprime ($file) {
 
 
 	$out=$out.'\end{tabular}';
-      
-
+	print " <-- <B> OK </B>";
+	next;
       }
-
 
       $out=$out."}\n";
 
