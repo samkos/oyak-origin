@@ -19,7 +19,8 @@ $debug=0;
 // lecture des masques
 $dir=".";
 
-$preambule=join("",file("$dir/preambule.tex"));
+$preambule_portrait=join("",file("$dir/preambule.tex"));
+$preambule_landscape=join("",file("$dir/preambule_landscape.tex"));
 $header=join("",file("$dir/header.tex"));
 $footer=join("",file("$dir/footer.tex"));
 $conclusion=join("",file("$dir/conclusion.tex"));
@@ -27,40 +28,76 @@ $printer="default";
 $copies=1;
 
 
-$i=0;
+$nb_pages_portrait=0;
+$nb_pages_landscape=0;
 $filenames=glob($dir_imprime);
+
 if ($filenames) {
-  $file_out=fopen("all.tex","w");
-  fwrite($file_out,$preambule);
+
 
   foreach ($filenames as $filename) {
-    if ($i>0) {
-      fwrite($file_out,"\\clearpage");
-    }
-    $i=$i+1;
+
+    $orientation="PORTRAIT";
+    // traitement fichier en cours
     echo "<BR> Traitement impression $filename................................................";
     $out=make_imprime($filename);
-    fwrite($file_out,$out);
+
+    // ecriture vers le fichier all_portrait ou all_landscape.tex
+
+
+    if (strstr($orientation,"PAYSAGE")) {
+      if ($nb_pages_landscape>0) {
+	fwrite($file_landscape_out,"\\clearpage");
+      }
+      else {
+	@unlink("all_landscape.tex");
+	$file_landscape_out=fopen("all_landscape.tex","w");
+	fwrite($file_landscape_out,$preambule_landscape);
+      }
+      $nb_pages_landscape=$nb_pages_landscape+1;
+      fwrite($file_landscape_out,$out);
+     }
+    else {
+      if ($nb_pages_portrait>0) {
+	fwrite($file_portrait_out,"\\clearpage");
+      }
+      else {
+	@unlink("all_portrait.tex");
+	$file_portrait_out=fopen("all_portrait.tex","w");
+	fwrite($file_portrait_out,$preambule_portrait);
+      }
+      $nb_pages_portrait=$nb_pages_portrait+1;
+      fwrite($file_portrait_out,$out);
+    }
+
     echo "<BR> Effacement $filename NON FAIT   NON FAIT.......................................";
-    //unlink($filename);
+    unlink($filename);
   }
 
-  fwrite($file_out,$conclusion);
-  fclose($file_out);
+  if ($nb_pages_portrait) {
+    fwrite($file_portrait_out,$conclusion);
+    fclose($file_portrait_out);
 
-  system("compile.bat > out",$status);
-  //print "res=$status";
-  print "<BR> $i crées<BR> ";
+    system("compile_portrait.bat > out",$status);
+    //print "res=$status";
 
-  @mkdir ("c:/Oyak/ToPrint",0755);
-  if ($printer=="default") {
-    copy ("all.ps", "c:/Oyak/ToPrint/imprime.ps");
-    copy ("all.ps", "c:/Oyak/imprime.ps");
+    print_all("portrait");
+
   }
-  else {
-    @mkdir ("c:/Oyak/ToPrint/$printer",0755);
-    copy ("all.ps", "c:/Oyak/ToPrint/$printer/imprime.ps");
-    copy ("all.ps", "c:/Oyak/imprime.ps");  }
+
+  if ($nb_pages_landscape) {
+    fwrite($file_landscape_out,$conclusion);
+    fclose($file_landscape_out);
+
+    system("compile_landscape.bat > out");
+    //print "res=$status";
+
+    print_all("landscape");
+
+  }
+
+  print "<BR> ".($nb_pages_portrait+$nb_pages_landscape)." crées<BR> ";
+  
 
 }
 else {
@@ -71,10 +108,23 @@ else {
 print "<BR> <a href='../admin/index.php>  Retour Administration\n";
 
 
-
+function print_all($orientation) {
+  global $printer;
+  
+  @mkdir ("c:/Oyak/ToPrint",0755);
+  if ($printer=="default") {
+    copy ("all_$orientation.ps", "c:/Oyak/ToPrint/imprime_$orientation.ps");
+    copy ("all_$orientation.ps", "c:/Oyak/imprime_$orientation.ps");
+  }
+  else {
+    @mkdir ("c:/Oyak/ToPrint/$printer",0755);
+    copy ("all_$orientation.ps", "c:/Oyak/ToPrint/$printer/imprime_$orientation.ps");
+    copy ("all_$orientation.ps", "c:/Oyak/imprime_$orientation.ps");  
+  }
+}
 
 function make_imprime ($file) {
-  global $debug, $header, $footer,$body,$body_vide,
+  global $debug, $orientation,$header, $footer,$body,$body_vide,
     $nb_lignes_imprime,$footer2,$header2,$printer,$copies;
   
 
@@ -92,15 +142,24 @@ function make_imprime ($file) {
   foreach ($lines as $line) {
     $champs = split("!",$line);
     $what=array_shift($champs);
-
+    
+    print "<BR> what  = $what";
     if (ereg("^Z0,1",$what))  { 
       // nom de l'imprimante, nombre d'impression, type de document
       $printer=array_shift($champs);
       $copies=array_shift($champs);
       $document=array_shift($champs);
-			$orientation=array_shift($champs);
+      $orientation=array_shift($champs);
+      next;
     }
-    else {
+
+    if (ereg("^EJECT",$what))  { 
+      // saut de page
+      $out=$out."\n".$footer."\n"."\\clearpage".$header."\n";
+      next;
+    }
+
+    {
 
 
       $x=array_shift($champs);
@@ -111,7 +170,7 @@ function make_imprime ($file) {
       // texte simple
       if ($what=="TXT") {
 	$text=array_shift($champs);
-	$out=$out."$text";
+	$out=$out."\null $text";
       }
 
       // tableau
@@ -221,16 +280,12 @@ function make_imprime ($file) {
 
 
   $out=ereg_replace("__PETIT__","{\\tiny ",$out);
-  $out=ereg_replace("__GRAS__","\\textbf{ ",$out);
+  $out=ereg_replace("__GRAS__","\\textbf{",$out);
   $out=ereg_replace("__GRIS__","\\colorbox[gray]{0.8}{ ",$out);
   $out=ereg_replace("__petit__","}",$out);
   $out=ereg_replace("__gras__","}",$out);
   $out=ereg_replace("__gris__","}",$out);
 	
-	if (strstr($orientation,"PAYSAGE")) {
-		 $out='\begin{landscape}'."\n".$out."\n".'\end{landscape}';
-  }
-	$out=$out.$orientation;
 	
   return $out;
 }
