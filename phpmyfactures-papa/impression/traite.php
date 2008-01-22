@@ -228,6 +228,10 @@ function make_imprime ($file) {
 
 	    $fields=split(";",$cell);
 	    $texte=array_shift($fields);
+	    $texte=ereg_replace('&','\&',$texte);
+	    $texte=ereg_replace('{','\{',$texte);
+	    $texte=ereg_replace('}','\}',$texte);
+	    $texte=ereg_replace('%','\%',$texte);
 	    $format=array_shift($fields);
 	    $masque='\multicolumn{1}{'.$format_cell[$col].'}{%s}';
 		
@@ -253,6 +257,10 @@ function make_imprime ($file) {
 	    
 	      if ($cadrage=="d") {
 		$cadrage="r";
+	      }
+	    
+	      if ($cadrage=="g") {
+		$cadrage="l";
 	      }
 	    
 	      $bord_left=""; $bord_right="";
