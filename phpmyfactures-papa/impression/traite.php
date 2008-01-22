@@ -203,7 +203,7 @@ function make_imprime ($file) {
       if ($what=="TAB") {
 	$tailles=split("=",array_shift($champs));
 
-	$out=$out."\n".'\begin{tabular}{';
+	$out=$out."\n".'\begin{tabular}[t]{';
 
 	$col=1;
 	while ($taille=array_shift($tailles)) {
