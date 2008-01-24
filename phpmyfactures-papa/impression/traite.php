@@ -193,8 +193,12 @@ function make_imprime ($file) {
 
       // texte simple
       if ($what=="TXT") {
-	$text=array_shift($champs);
-	$out=$out."$text";
+	$texte=array_shift($champs);
+	$texte=ereg_replace('&','\&',$texte);
+	$texte=ereg_replace('{','\{',$texte);
+	$texte=ereg_replace('}','\}',$texte);
+	$texte=ereg_replace('%','\%',$texte);
+	$out=$out."$texte";
 	print " <-- <B> OK </B>";
 	next;
       }
@@ -259,7 +263,7 @@ function make_imprime ($file) {
 		$cadrage="r";
 	      }
 	    
-	      if ($cadrage=="g") {
+	      if ($cadrage=="g" or $cadrage==".") {
 		$cadrage="l";
 	      }
 	    
