@@ -258,15 +258,12 @@ function make_imprime ($file) {
 	      default : $bord_left=""; $bord_right="";    
 	      }
 
-	    
-	      if ($cadrage=="d") {
-		$cadrage="r";
+	      switch($cadrage) {
+	      case "d" : $cadrage="r"; break;
+	      case "g" : $cadrage="l"; break;
+	      case "." : $cadrage=$format_cell[$col]; break;
 	      }
-	    
-	      if ($cadrage=="g" or $cadrage==".") {
-		$cadrage="l";
-	      }
-	    
+
 	      $bord_left=""; $bord_right="";
 	      switch($bords) {
 	      case "g": $bord_left="|";                  break; 
@@ -286,8 +283,6 @@ function make_imprime ($file) {
 	      switch($cadrage) {
 	      case "T": $masque=$hline; break; 
 	      case "t": $masque='\cline{'.$col.'-'.($col+$nb_cols-1).'}';  break;
-	      case ".": $cadrage="l"; break;
-	      default : $cadrafe="l";
 	      }
 
 	    }
