@@ -1209,6 +1209,10 @@ class processFacture:
         self.selectedPrix={}
         self.selectedQuantite={}
 
+        self.buttonQuantite=list()
+        self.buttonProduit=list()
+        self.buttonPrix=list()
+
 
         
         if self.nb==0 and client==0:
@@ -1341,10 +1345,10 @@ class processFacture:
 
         # action sur les lignes
 
-        b=Button(self.ligneFrame,text='copier')
+        b=Button(self.ligneFrame,text='copier',command=lambda x=1:self.addFacture(operation='copie'))
         b.pack(side=LEFT,expand=1,fill=BOTH)
         
-        b=Button(self.ligneFrame,text='effacer')
+        b=Button(self.ligneFrame,text='effacer',command=lambda x=1:self.addFacture(operation='supression'))
         b.pack(side=LEFT,expand=1,fill=BOTH)
         
         self.valider=Button(self.ligneFrame,text='Valider',command=lambda x=1:self.addFacture())
@@ -1386,13 +1390,14 @@ class processFacture:
 #        self.listbox.delete(0,END)
 #        self.listbox.insert(END, enteteFact)
         self.nbArticles=0
-
-        self.selectedCode[self.nbArticles]=""
-        self.selectedRacourci[self.nbArticles]=""
-        self.selectedFournisseur[self.nbArticles]=""
-        self.selectedDate[self.nbArticles]=""
-        self.selectedQuantite[self.nbArticles]=""
-        self.selectedPrix[self.nbArticles]=""
+        self.currentArticle=0
+        
+        self.selectedCode[self.currentArticle]=""
+        self.selectedRacourci[self.currentArticle]=""
+        self.selectedFournisseur[self.currentArticle]=""
+        self.selectedDate[self.currentArticle]=""
+        self.selectedQuantite[self.currentArticle]=""
+        self.selectedPrix[self.currentArticle]=""
 
 
 
@@ -1446,9 +1451,9 @@ class processFacture:
             self.poids=poids
             self.produit=code
 
-            self.selectedCode[self.nbArticles]=code
-            self.selectedRacourci[self.nbArticles]=racourci
-            self.selectedFournisseur[self.nbArticles]=fournisseur    
+            self.selectedCode[self.currentArticle]=code
+            self.selectedRacourci[self.currentArticle]=racourci
+            self.selectedFournisseur[self.currentArticle]=fournisseur    
 
             self.goToDate()
         else:
@@ -1484,7 +1489,7 @@ class processFacture:
     def goToDate(self,event="fake"):
         self.labelEntryFocus(self.date,self.date_focus)
 
-    def addFacture(self):
+    def addFacture(self,operation="create"):
         global ihm
 
         try :
@@ -1499,7 +1504,7 @@ class processFacture:
             self.prix.delete(0,END)
             ihm.showMessage("le prix "+self.prix_saisi+" n'est pas reconnu",self.goToPrice)
             return
-        self.ajouteArticle()
+        self.ajouteArticle(operation)
 
 
     def ajouteLigneFacture(self,quantite,produit,prix,ligne=-1):
@@ -1512,16 +1517,22 @@ class processFacture:
             l=Label(self.prixListFrame,text=prix)
             l.pack(side=TOP)
         else:
-            l=Button(self.quantiteListFrame,text=quantite,
-                     command=lambda x=1:self.getArticle(ligne,"quantite")) 
-            l.pack(side=TOP,expand=1,fill=BOTH)
-            l=Button(self.produitListFrame,text=produit,
-                     command=lambda x=1:self.getArticle(ligne,"produit"))
-            l.pack(side=TOP,expand=1,fill=BOTH)
-            l=Button(self.prixListFrame,text=prix,
-                     command=lambda x=1:self.getArticle(ligne,"prix"))
-            l.pack(side=TOP,expand=1,fill=BOTH)
+            if ligne==self.nbArticles:
+                l=Button(self.quantiteListFrame,text=quantite,
+                         command=lambda x=1:self.getArticle(ligne,"quantite")) 
+                self.buttonQuantite.add(l)
+                l.pack(side=TOP,expand=1,fill=BOTH)
+                l=Button(self.produitListFrame,text=produit,
+                         command=lambda x=1:self.getArticle(ligne,"produit"))
+                self.buttonProduit.add(l)
+                l.pack(side=TOP,expand=1,fill=BOTH)
+                l=Button(self.prixListFrame,text=prix,
+                         command=lambda x=1:self.getArticle(ligne,"prix"))
+                self.buttonPrix.add(l)
+                l.pack(side=TOP,expand=1,fill=BOTH)
 
+
+            
     def getArticle(self,ligne,focus):
         self.currentArticle=ligne
         self.acceptProduit(self.selectedRacourci[ligne],self.selectedFournisseur[ligne])
@@ -1534,32 +1545,36 @@ class processFacture:
         return
 
 
-    def ajouteArticle(self):
+    def ajouteArticle(self,operation='creation'):
         ihm.show("facture%d"%self.nb,title="Oyak? Facture ")
         quantite=self.quantite.get()
         if len(quantite)==0:
                 quantite=self.poids
 
         article=self.article.get()
+        if operation=='copie':
+            self.currentArticle=self.nbArticles
+        
         try :
           #self.listbox.insert(END, formatFact%(float(quantite),article,float(self.prix_saisi)))
-          self.ajouteLigneFacture(quantite,article,float(self.prix_saisi),self.nbArticles)
+          self.ajouteLigneFacture(quantite,article,float(self.prix_saisi),self.currentArticle)
         except :
             self.deleteCode("fake")
 
-        self.selectedPrix[self.nbArticles]=self.prix_saisi
-        self.selectedQuantite[self.nbArticles]=quantite
-        self.selectedDate[self.nbArticles]=self.date.get()
+        self.selectedPrix[self.currentArticle]=self.prix_saisi
+        self.selectedQuantite[self.currentArticle]=quantite
+        self.selectedDate[self.currentArticle]=self.date.get()
 
-        self.nbArticles=self.nbArticles+1
+        if self.nbArticles==self.currentArticle:
+            self.nbArticles=self.nbArticles+1
         self.currentArticle=self.nbArticles
 
-        self.selectedCode[self.nbArticles]=""
-        self.selectedRacourci[self.nbArticles]=""
-        self.selectedFournisseur[self.nbArticles]=""
-        self.selectedDate[self.nbArticles]=""
-        self.selectedQuantite[self.nbArticles]=""
-        self.selectedPrix[self.nbArticles]=""
+        self.selectedCode[self.currentArticle]=""
+        self.selectedRacourci[self.currentArticle]=""
+        self.selectedFournisseur[self.currentArticle]=""
+        self.selectedDate[self.currentArticle]=""
+        self.selectedQuantite[self.currentArticle]=""
+        self.selectedPrix[self.currentArticle]=""
 
         self.deleteCode("fake")
 
