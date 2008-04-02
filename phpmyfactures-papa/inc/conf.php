@@ -2,6 +2,9 @@
 
 // Configuration mySQL
 
+extract($_POST, EXTR_SKIP);
+extract($_GET, EXTR_SKIP);
+
 $host_db = "localhost";
 $user_db = "root";
 $password_db = "";
