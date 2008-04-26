@@ -51,8 +51,10 @@ text-decoration: underline;
       <td width="12%" align="center"><a href="/<?php echo("$prefixe_dossier"); ?>produits/">Produits</a></td>
       <td width="12%" align="center"><a href="/<?php echo("$prefixe_dossier"); ?>vendeurs/">Vendeurs</a></td>
       <td width="12%" align="center"><a href="/<?php echo("$prefixe_dossier"); ?>commandes/">Commandes</a></td>
-      <td width="12%" align="center"><a href="/<?php echo("$prefixe_dossier"); ?>admin/">Administrer</a> <BR>
-			            <a href="/<?php echo("$prefixe_dossier"); ?>produits/check.php">Vérifier</a>
+      <td width="12%" align="center">
+     <a href="/<?php echo("$prefixe_dossier"); ?>admin/">Administrer</a> <BR>
+     <a href="/<?php echo("$prefixe_dossier"); ?>params/">Options</a> <BR>
+     <a href="/<?php echo("$prefixe_dossier"); ?>produits/check.php">Vérifier</a>
 			</td>
    </tr>
    <tr>
