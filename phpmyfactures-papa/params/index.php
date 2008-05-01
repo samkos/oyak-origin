@@ -16,6 +16,7 @@ $req = mysql_query("delete from ".$prefixe_table."produits where id=\"$id_produi
       <td bgcolor="#99CCCC" align="center" width="8%"><b>N°</b></td>
       <td bgcolor="#99CCCC" align="center" width="8%"><b>Nom</b></td>
       <td bgcolor="#99CCCC" align="center" width="50%"><b>Description</b></td>
+      <td bgcolor="#99CCCC" align="center" width="50%"><b>Fichiers concernés</b></td>
       <td bgcolor="#99CCCC" align="center" width="50%"><b>Valeur</b></td>
 	  <td bgcolor="#99CCCC" align="center" width="18%" colspan="3"><b>Actions</b></td>
    </tr>
@@ -37,6 +38,9 @@ $req = mysql_query("delete from ".$prefixe_table."produits where id=\"$id_produi
 if(!$start) 
 {$start=0;}
 
+$files2update=array();
+$params=array();
+
 if (!$filtre_clef) {$filtre_clef='*';}
 if (!$filtre_fournisseur) {$filtre_fournisseur='*';}
 if (!$filtre_param) {$filtre_param='*';}
@@ -53,17 +57,24 @@ $query="select id,titre,stock,fournisseur,clef,description from ".$prefixe_table
 $req = mysql_query($query);
 while($ligne = mysql_fetch_array($req))
 {
-$id = $ligne["id"];
-$barcode = $ligne["barcode"];
-$fournisseur = $ligne["fournisseur"];
-$clef = $ligne["clef"];
-$param = $clef;
-$prix_vente_ht = $ligne["prix_vente_ht"];
-$description = $ligne["description"];
-$prix_plancher_ht = $ligne["prix_plancher_ht"];
-$titre = $ligne["titre"];
-$stock = $ligne["stock"];
+  $id = $ligne["id"];
+ $barcode = $ligne["barcode"];
+ $fournisseur = $ligne["fournisseur"];
+ $clef = $ligne["clef"];
+ $param = $clef;
+ $prix_vente_ht = $ligne["prix_vente_ht"];
+ $descriptions = split("--DESCRIPTION--",$ligne["description"]);
+ $description=array_pop($descriptions);
+ $fichiers=array_pop($descriptions);
+ $prix_plancher_ht = $ligne["prix_plancher_ht"];
+ $titre = $ligne["titre"];
+ $stock = $ligne["stock"];
 
+
+ $params[$fournisseur]=$titre;
+ if ($fichiers) {
+   array_push($files2update,$fichiers);
+ }
 
 $id_d = sprintf("%08s",$id);
 
@@ -72,14 +83,18 @@ echo("<tr>
    <!--  <td bgcolor=\"#ffffff\" align=\"center\" width=\"10%\">$id</td> -->
    <td bgcolor=\"#ffffff\" align=\"center\" width=\"8%\">$param</td>
    <td bgcolor=\"#ffffff\" align=\"center\" width=\"8%\">$fournisseur <BR> </td>
-   <td bgcolor=\"#ffffff\" align=\"center\" width=\"8%\">$description</td>
+  <td bgcolor=\"#ffffff\" align=\"center\" width=\"8%\">$description</td>
+   <td bgcolor=\"#ffffff\" align=\"center\" width=\"8%\">$fichiers</td>
    <td bgcolor=\"#ffffff\" align=\"left\" width=\"50%\">$titre</td>
-   <td bgcolor=\"#ffffff\" align=\"center\" width=\"9%\"><a href=\"modifier_param.php?id_param=$id&start=$start\">Modifier</a></td>
+   <td bgcolor=\"#ffffff\" align=\"center\" width=\"9%\"><a href=\"modifier_param.php?clef_param=$clef\">Modifier</a></td>
 </td>
 </tr>");
+
+
 }
 
 ?>
+
 </table>
 
 <br>
@@ -113,7 +128,33 @@ for($index=1;($index*$nb_produit)<$row[0];$index++)
    }
 }
 
-?> ]</center>
+
+
+echo "] <BR> <BR> <a href='params/index.php?create=1'>Créer l'environnement</a>";
+
+print_r($params);
+print_r($files2update);
+
+$files2update=glob("../query/*_MOD.*");
+print_r($files2update);
+
+while ($file=array_pop($files2update)) {
+  $content = join(file($file),"<BR>");
+  print "<BR> modification de $file <BR> <LEFT> $content";
+  foreach($params as $key => $value) {
+    print "<BR> $key,$value";
+    $content=preg_replace("/__".$key."__/",$value,$content);
+  }
+  print $content."</LEFT>";
+  $content_saved=join(split("<BR>",$content),"");
+  $new_file=preg_replace("/MOD/","x",$file);
+  $f=fopen($new_file."x","w");
+  fwrite($f,$content_saved);
+  fclose($f);
+}
+
+?> 
+</center>
 
 
 <?php include("../inc/footer.php"); ?>
