@@ -93,7 +93,8 @@ else {
   }
   	 
   if ($produits) {
-    $query="select barcode,clef,fournisseur,prix_vente_ht,prix_plancher_ht,poids,titre,timestamp from ".$prefixe_table."produits";
+    $query="select barcode,clef,fournisseur,prix_vente_ht,prix_plancher_ht,poids,titre,timestamp from "
+      .$prefixe_table."produits where clef<10000";
   	//print $query;
     $req = mysql_query($query);
   	while($ligne = mysql_fetch_array($req))
