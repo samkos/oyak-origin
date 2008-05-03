@@ -149,9 +149,10 @@ while ($file=array_pop($files2update)) {
       //print "<BR> $key,$value";
       $content=preg_replace("/__".$key."__/",$value,$content);
     }
+    //print "<BR> $content";
     $content_saved=join(split("<BR>",$content),"");
-    $new_file=preg_replace("/MOD/","x",$file);
-    $f=fopen($new_file."x","w");
+    $new_file=preg_replace("/_MOD/","",$file);
+    $f=fopen($new_file,"w");
     fwrite($f,$content_saved);
     fclose($f);
   }

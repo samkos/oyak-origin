@@ -64,7 +64,7 @@ if ($action == "send")
   $req = mysql_query($commande);
   
   mysql_close($connect_db);
-  header("location: modifier_param.php?clef_param=$clef_param&msg=Parametre+modifié+!");
+  header("location: index.php");
   exit();
 
 }
