@@ -8,7 +8,29 @@ $req = mysql_query("delete from ".$prefixe_table."produits where id=\"$id_produi
 }
 
 ?>
-<?php include("../inc/header.php"); ?>
+<?php include("../inc/header.php"); 
+
+if (!$filtre_clef) {$filtre_clef='*';}
+if (!$filtre_fournisseur) {$filtre_fournisseur='*';}
+if (!$filtre_param) {$filtre_param='*';}
+if (!$filtre_ref) {$filtre_ref='*';}
+if (!$filtre_titre) {$filtre_titre='*';}
+
+$sql_filtre=str_replace("*","%","where clef > '9999'") ;
+//print $sql_filtre;
+
+$query="select count(titre) from ".$prefixe_table ."produits $sql_filtre";
+//echo "query=$query <BR>";
+$req = mysql_query($query);
+$ligne = mysql_fetch_array($req);
+$nb_params=$ligne[0];
+//print "<BR> $nb_params;";
+if ($nb_params==0) {
+  system("param_init.bat > out.txt");
+}
+
+
+?>
 
 <table border="0" align="center" cellpadding="3" cellspacing="1" bgcolor="#000000" width="770">
    <tr>
@@ -40,41 +62,30 @@ if(!$start)
 $files2update=array();
 $params=array();
 
-if (!$filtre_clef) {$filtre_clef='*';}
-if (!$filtre_fournisseur) {$filtre_fournisseur='*';}
-if (!$filtre_param) {$filtre_param='*';}
-if (!$filtre_ref) {$filtre_ref='*';}
-if (!$filtre_titre) {$filtre_titre='*';}
 
-$sql_filtre=str_replace("*","%","where clef > '9999'") ;
-//print $sql_filtre;
 
-$query="select id,titre,stock,fournisseur,clef,description from ".$prefixe_table
+
+$query="select titre,fournisseur,clef,description from ".$prefixe_table
 							 ."produits $sql_filtre"
                        ."order by clef";
 //echo "query=$query <BR>";
 $req = mysql_query($query);
+
 while($ligne = mysql_fetch_array($req))
 {
-  $id = $ligne["id"];
- $barcode = $ligne["barcode"];
- $fournisseur = $ligne["fournisseur"];
- $clef = $ligne["clef"];
- $param = $clef;
- $prix_vente_ht = $ligne["prix_vente_ht"];
- $description = $ligne["description"];
- $prix_plancher_ht = $ligne["prix_plancher_ht"];
- $titre = $ligne["titre"];
- $stock = $ligne["stock"];
+  $fournisseur = $ligne["fournisseur"];
+  $clef = $ligne["clef"];
+  $param = $clef;
+  $description = $ligne["description"];
+  $titre = $ligne["titre"];
+  $stock = $ligne["stock"];
+
+  $params[$fournisseur]=$titre;
+
+  $id_d = sprintf("%08s",$id);
 
 
- $params[$fournisseur]=$titre;
-
-$id_d = sprintf("%08s",$id);
-
-
-echo("<tr>
-   <!--  <td bgcolor=\"#ffffff\" align=\"center\" width=\"10%\">$id</td> -->
+  echo("<tr>
    <td bgcolor=\"#ffffff\" align=\"center\" width=\"8%\">$param</td>
    <td bgcolor=\"#ffffff\" align=\"center\" width=\"8%\">$fournisseur <BR> </td>
   <td bgcolor=\"#ffffff\" align=\"center\" width=\"8%\">$description</td>
@@ -82,8 +93,8 @@ echo("<tr>
    <td bgcolor=\"#ffffff\" align=\"center\" width=\"9%\"><a href=\"modifier_param.php?clef_param=$clef\">Modifier</a></td>
 </td>
 </tr>");
-
-
+  
+  
 }
 
 ?>
