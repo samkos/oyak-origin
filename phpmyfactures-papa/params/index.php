@@ -8,7 +8,13 @@ $req = mysql_query("delete from ".$prefixe_table."produits where id=\"$id_produi
 }
 
 ?>
-<?php include("../inc/header.php"); 
+<?php 
+
+include("../inc/header.php"); 
+
+extract($_POST, EXTR_SKIP);
+extract($_GET, EXTR_SKIP);
+
 
 if (!$filtre_clef) {$filtre_clef='*';}
 if (!$filtre_fournisseur) {$filtre_fournisseur='*';}
