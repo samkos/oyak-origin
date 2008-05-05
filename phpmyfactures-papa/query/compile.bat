@@ -4,6 +4,7 @@ latex "\nonstopmode\input" %1.tex
 dvips %1
 copy %1.ps c:\Oyak\%1.ps
 rem 
-copy %1.ps c:\Oyak\ToPrint\%1.ps
+@md \Oyak\ToPrint\PR421
+copy %1.ps c:\Oyak\ToPrint\PR421\%1.ps
 del %1.*
 rem gsprint all.ps
