@@ -27,7 +27,7 @@ $release_dir="../dist/releases";
 $commande_dir="c:\\ventesjour\\";
 
 require "debug.php";
-$version="0.2";
+$version="0.3";
 
 
 

@@ -17,7 +17,7 @@ font-size: 12px;
 font-family: Verdana;
 }
 
-a
+
 {
 color: #000000;
 font-size: 12px;
