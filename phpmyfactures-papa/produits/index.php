@@ -68,7 +68,7 @@ if (!$filtre_produit) {$filtre_produit='*';}
 if (!$filtre_ref) {$filtre_ref='*';}
 if (!$filtre_titre) {$filtre_titre='*';}
 
-$sql_filtre=str_replace("*","%","where id_cat=\"$id_cat\" and clef like '$filtre_produit' and barcode like '$filtre_ref' and fournisseur like '$filtre_fournisseur' and titre like '$filtre_titre'");
+$sql_filtre=str_replace("*","%","where id_cat=\"$id_cat\" and clef like '$filtre_produit' and barcode like '$filtre_ref' and fournisseur like '$filtre_fournisseur' and titre like '$filtre_titre' and not(clef > 9999)" );
 //print $sql_filtre;
 
 $query="select id,titre,stock,barcode,prix_vente_ht,prix_plancher_ht,fournisseur,clef,poids from ".$prefixe_table
