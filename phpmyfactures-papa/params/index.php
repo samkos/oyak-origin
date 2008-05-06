@@ -31,19 +31,24 @@ $req = mysql_query($query);
 $ligne = mysql_fetch_array($req);
 $nb_params=$ligne[0];
 //print "<BR> $nb_params;";
-if (1 or $nb_params==0) {
+if ($nb_params==0) {
   $params=file("params_default.txt");
   //print_r($params);
   print "<BR>";
   $r=split("__SEPOYAK0__",$params[0]);
-  print_r($r);
-  print "<BR>";
+  //print_r($r);
+  //print "<BR>";
+  $clef=10000;
   while ($p=array_shift($r)) {
       $rr=split("__SEPOYAK1__",$p);
-      print_r($rr); print "<BR>";
-      $cmd="INSERT INTO `pcfact_produits` (titre,fournisseur,clef,description) VALUES ($rr[0],`$rr[1]`,NULL,`$rr[3]`)";
+      //print_r($rr); print "<BR>";
+      $cmd="INSERT INTO `pcfact_produits` (`titre`, `fournisseur`, `clef`, `description`) VALUES (\"$rr[0]\", \"$rr[1]\", $clef, \"$rr[3]\")";
       print $cmd."<BR>";
-      $req = mysql_query($cmd);
+      $clef=$clef+1;
+      $result = mysql_query($cmd);
+      if (!$result) {
+	die('Requête invalide : ' . mysql_error());
+      }
   }
 }
 
