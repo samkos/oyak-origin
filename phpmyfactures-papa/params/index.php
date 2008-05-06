@@ -34,7 +34,7 @@ $nb_params=$ligne[0];
 if ($nb_params==0) {
   $params=file("params_default.txt");
   //print_r($params);
-  print "<BR>";
+  //print "<BR>";
   $r=split("__SEPOYAK0__",$params[0]);
   //print_r($r);
   //print "<BR>";
@@ -43,13 +43,14 @@ if ($nb_params==0) {
       $rr=split("__SEPOYAK1__",$p);
       //print_r($rr); print "<BR>";
       $cmd="INSERT INTO `pcfact_produits` (`titre`, `fournisseur`, `clef`, `description`) VALUES (\"$rr[0]\", \"$rr[1]\", $clef, \"$rr[3]\")";
-      print $cmd."<BR>";
+      //print $cmd."<BR>";
       $clef=$clef+1;
       $result = mysql_query($cmd);
       if (!$result) {
 	die('Requête invalide : ' . mysql_error());
       }
   }
+  print ($clef-10000)." options ajoutees <BR>";
 }
 
 
