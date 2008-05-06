@@ -31,9 +31,23 @@ $req = mysql_query($query);
 $ligne = mysql_fetch_array($req);
 $nb_params=$ligne[0];
 //print "<BR> $nb_params;";
-if ($nb_params==0) {
-  system("param_init.bat > out.txt");
+if (1 or $nb_params==0) {
+  $params=file("params_default.txt");
+  //print_r($params);
+  print "<BR>";
+  $r=split("__SEPOYAK0__",$params[0]);
+  print_r($r);
+  print "<BR>";
+  while ($p=array_shift($r)) {
+      $rr=split("__SEPOYAK1__",$p);
+      print_r($rr); print "<BR>";
+      $cmd="INSERT INTO `pcfact_produits` (titre,fournisseur,clef,description) VALUES ($rr[0],`$rr[1]`,NULL,`$rr[3]`)";
+      print $cmd."<BR>";
+      $req = mysql_query($cmd);
+  }
 }
+
+
 
 
 ?>
@@ -50,18 +64,6 @@ if ($nb_params==0) {
 <?php
 
 
-   // recuperation nom fournisseur
-	 
-	 $req = mysql_query("select id,societe from ".$prefixe_table."fournisseurs");
-	 while($ligne = mysql_fetch_array($req))
-	 {
-	   $id = $ligne["id"];
-	   $societe = $ligne["societe"];
-		 $fournisseur_nom[$id]="$societe";
-		}
-
-
-
 if(!$start) 
 {$start=0;}
 
@@ -69,7 +71,7 @@ $files2update=array();
 $params=array();
 
 
-
+$params_saved_file=fopen("params_default.txt","w");
 
 $query="select titre,fournisseur,clef,description from ".$prefixe_table
 							 ."produits $sql_filtre"
@@ -85,6 +87,9 @@ while($ligne = mysql_fetch_array($req))
   $description = $ligne["description"];
   $titre = $ligne["titre"];
   $stock = $ligne["stock"];
+
+
+  fwrite($params_saved_file,$titre."__SEPOYAK1__".$fournisseur."__SEPOYAK1__".$clef."__SEPOYAK1__".$description."__SEPOYAK0__");
 
   $params[$fournisseur]=$titre;
 
@@ -102,6 +107,9 @@ while($ligne = mysql_fetch_array($req))
   
   
 }
+
+
+fclose($params_saved_file);
 
 ?>
 
