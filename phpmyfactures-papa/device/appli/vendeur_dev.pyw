@@ -165,6 +165,7 @@ class ihmRoot:
 
        self.progressBarCreate()
        self.menuCreate()
+       self.keyboardCreate()
        self.adminCreate()
        self.ipCreate()
        
@@ -309,11 +310,14 @@ class ihmRoot:
         label = Button(self.ihm, text="Relire Donnée", command=self.rechargeBase,height=4,width=self.Xmax)
         self.add(panelName,"reloader",label,6,0)
         
+        label = Button(self.ihm, text="Clavier", command=self.showKeyboard,height=4,width=self.Xmax)
+        self.add(panelName,"reloader",label,7,0)
+
 #        label = Button(self.ihm, text="Reglages", command=self.showIp,height=4,width=self.Xmax)
-#        self.add(panelName,"update",label,7,0)
+#        self.add(panelName,"update",label,8,0)
 
 #        label = Button(self.ihm, text="Reactiver Scanner", command=self.scanner,height=4,width=self.Xmax)
-#        self.add(panelName,"scanner",label,8,0)
+#        self.add(panelName,"scanner",label,9,0)
 
 
         label = Button(self.ihm, text="QUITTER", command=self.ihm.quit,height=4,width=self.Xmax)
@@ -515,6 +519,48 @@ class ihmRoot:
         global myVendeur
         myVendeur.ihmShow()
 
+
+
+    # creation fenetre type keyboard
+    def keyboardCreate(self):
+
+        panelName="keyboard"
+        self.input=StringVar()
+        self.inputString=""
+
+        inputFrame=Frame(self.ihm)
+
+        Label(inputFrame,text=">").pack(side=LEFT,expand=1,fill=BOTH)
+        Entry(inputFrame,textvariable=self.input).pack(side=LEFT,expand=1,fill=BOTH)
+        self.add(panelName,"input",inputFrame,0,0)
+
+        keys=Frame(self.ihm)
+        self.add(panelName,"keys",keys,1,0)
+#        keys=Frame(keyb).pack(side=LEFT,expand=1,fill=BOTH)
+#        ctrl=Frame(keyb).pack(side=LEFT,expand=1,fill=BOTH)
+
+
+        j=1
+        for l in ["1234567890","AZERTYUIOP","QSDFGHJKLM","WXCVBN,.-*",
+                  " ",["DEL","ENTER"]]:
+            i=0
+            line=Frame(keys)
+            for c in l:
+                b=Button(line,text=c)
+                b["command"]=lambda x=c:self.addKey(car=x)
+                b.pack(side=LEFT,expand=1,fill=BOTH)
+                i=i+1
+            j=j+1
+            line.pack(side=TOP,expand=1,fill=BOTH)
+            
+
+    def showKeyboard(self):
+        self.show("keyboard")
+    
+    def addKey(self,car):
+        print car
+        self.inputString=self.inputString+car
+        self.input.set(self.inputString)
 
 
 ###################################################################
