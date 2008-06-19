@@ -140,6 +140,8 @@ class ihmRoot:
 
     def __init__(self):
        self.ihm=Tk()
+       self.kbd=Tk()
+       
        if cible:
            self.ihm.overrideredirect(1)
 
@@ -188,13 +190,14 @@ class ihmRoot:
             (widget,row,column,rowspan,colspan,sticky)=self.ihmPanelsContents[panelName,widgetName]
             widget.grid_forget()
             
-    def show(self,panelName,title="Oyak"):
+    def show(self,panelName,title="Oyak",hidingAll=1):
         global zoomedWindow,Factures
 
         #self.oldFocus=self.ihm.tk.call('focus')
         #print "yyyyy",self.oldFocus
-        
-        self.hideAll()
+
+        if hidingAll:
+            self.hideAll()
         
         self.ihm.title(title)
         for widgetName in self.ihmPanels[panelName]:
@@ -210,7 +213,8 @@ class ihmRoot:
 
     def hideAll(self):
         for panel in self.ihmPanels.keys():
-            self.hide(panel)
+            if not(panel=="keyboard"):
+                self.hide(panel)
 
     def returnPrevious(self):
         self.show(self.previousShown)
@@ -310,8 +314,8 @@ class ihmRoot:
         label = Button(self.ihm, text="Relire Donnée", command=self.rechargeBase,height=4,width=self.Xmax)
         self.add(panelName,"reloader",label,6,0)
         
-        label = Button(self.ihm, text="Clavier", command=self.showKeyboard,height=4,width=self.Xmax)
-        self.add(panelName,"reloader",label,7,0)
+#        label = Button(self.ihm, text="Clavier", command=self.showKeyboard,height=4,width=self.Xmax)
+#        self.add(panelName,"reloader",label,7,0)
 
 #        label = Button(self.ihm, text="Reglages", command=self.showIp,height=4,width=self.Xmax)
 #        self.add(panelName,"update",label,8,0)
@@ -423,8 +427,13 @@ class ihmRoot:
         panelName = "facture"+what
         
         # Menu
-        label = Button(self.ihm, text="MENU", command=self.showMenu,height=3,width=self.Xmax+1)
-        self.add(panelName,"filtreLabel",label,0,0,colspan=5)
+        frame = Frame(ihm.ihm)
+        ihm.add(panelName,"menu",frame,0,0,colspan=5)
+        label = Button(frame, text="MENU", command=ihm.showMenu,height=2)
+        label.pack(side=LEFT,expand=1,fill=BOTH)
+        label = Button(frame, text="KEYB", command=ihm.showKeyboard,height=2)
+        label.pack(side=LEFT,expand=1,fill=BOTH)
+
         
         # frame
 
@@ -459,6 +468,7 @@ class ihmRoot:
             self.ihm.wm_state(newstate="zoomed")
         self.startProgressBar("OYAK v %s \n\n\n Bienvenue"%version)
         self.ihm.after(2000,self.lectureDonnee)
+        self.showKeyboard()
         self.ihm.mainloop()
 
     def facturePrevious(self):
@@ -525,23 +535,26 @@ class ihmRoot:
     def keyboardCreate(self):
 
         panelName="keyboard"
-        self.input=StringVar()
-        self.inputString=""
+        self.keyboardSV=StringVar()
+        self.keyboardString="xxx"
+        
 
-        inputFrame=Frame(self.ihm)
+        keyboardFrame=Frame(self.kbd)
 
-        Label(inputFrame,text=">").pack(side=LEFT,expand=1,fill=BOTH)
-        Entry(inputFrame,textvariable=self.input).pack(side=LEFT,expand=1,fill=BOTH)
-        self.add(panelName,"input",inputFrame,0,0)
+        Label(keyboardFrame,text=">").pack(side=LEFT,expand=1,fill=BOTH)
+        Label(keyboardFrame,textvariable=self.keyboardSV).pack(side=LEFT,expand=1,fill=BOTH)
+        j=16
+        self.add(panelName,"input",keyboardFrame,j,0,colspan=7)
+        self.keyboardSV.set(self.keyboardString)
 
-        keys=Frame(self.ihm)
-        self.add(panelName,"keys",keys,1,0)
+        keys=Frame(self.kbd)
+        self.add(panelName,"keys",keys,j+1,0,colspan=7)
 #        keys=Frame(keyb).pack(side=LEFT,expand=1,fill=BOTH)
 #        ctrl=Frame(keyb).pack(side=LEFT,expand=1,fill=BOTH)
 
 
-        j=1
-        for l in ["1234567890","AZERTYUIOP","QSDFGHJKLM","WXCVBN,.-*",
+        for l in [["^^^^^^^"],
+                  "1234567890","AZERTYUIOP","QSDFGHJKLM","WXCVBN,.-*",
                   " ",["DEL","ENTER"]]:
             i=0
             line=Frame(keys)
@@ -550,17 +563,19 @@ class ihmRoot:
                 b["command"]=lambda x=c:self.addKey(car=x)
                 b.pack(side=LEFT,expand=1,fill=BOTH)
                 i=i+1
-            j=j+1
             line.pack(side=TOP,expand=1,fill=BOTH)
             
 
     def showKeyboard(self):
-        self.show("keyboard")
+        self.show("keyboard",hidingAll=0)
     
     def addKey(self,car):
-        print car
-        self.inputString=self.inputString+car
-        self.input.set(self.inputString)
+        if car=="DEL":
+            self.keyboardString=self.keyboardString[:-1]
+        else:
+            self.keyboardString=self.keyboardString+car
+        print car,self.keyboardString
+        self.keyboardSV.set(self.keyboardString)
 
 
 ###################################################################
@@ -671,9 +686,12 @@ class getData:
         panelName0 = what+"0"
         
         # Menu
-        label = Button(ihm.ihm, text="MENU", command=ihm.showMenu,height=2)
-        ihm.add(panelName,"menu",label,0,0,colspan=2)
-        ihm.add(panelName0,"menu",label,0,0,colspan=2)
+        frame = Frame(ihm.ihm)
+        ihm.add(panelName,"menu",frame,0,0,colspan=2)
+        label = Button(frame, text="MENU", command=ihm.showMenu,height=2)
+        label.pack(side=LEFT,expand=1,fill=BOTH)
+        label = Button(frame, text="KEYB", command=ihm.showKeyboard,height=2)
+        label.pack(side=LEFT,expand=1,fill=BOTH)
         
         # filtre
         ihm.filtreLabel[what]=StringVar("")
