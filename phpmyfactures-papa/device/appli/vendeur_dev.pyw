@@ -8,7 +8,7 @@ import traceback
 
 maxDigits=130
 cible=os.path.exists('\Platform')
-version="0.32"
+version="0.33"
 time_last_key=0
 isServeurInjoignable=0
 
