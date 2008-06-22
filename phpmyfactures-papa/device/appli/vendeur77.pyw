@@ -32,6 +32,7 @@ else:
     raiseError=1
     website_address="http://127.0.0.1/phpmyfactures"
     website_address="http://192.168.111.77/phpmyfactures"
+    #website_address="http://192.168.123.2/phpmyfactures"
     root_address="c:/Program Files/EasyPHP1-8/www/phpmyfactures/device/a copier/"
     fichierIp=root_address+"Platform/test/S24Profiles.reg"
     fichierIpBackup=root_address+"Platform/test/S24old.reg"
