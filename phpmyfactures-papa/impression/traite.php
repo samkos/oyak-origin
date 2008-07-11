@@ -190,11 +190,11 @@ function make_imprime ($file) {
 			$y=array_shift($champs);
 	
 			if (!($x=="." and $y=="."))  {
-				$out=$out."}\n";
-				$out=$out.'\put('.$x.','.(29-$y).'){' ;
+				$out=$out."}}\n";
+				$out=$out.'\put('.$x.','.(29-$y).'){\mbox{' ;
 			}
 			else {
-				$out=$out.'\\\\';
+				$out=$out.'\\\\'."\n";
 			}
 
 			// texte simple
@@ -314,7 +314,7 @@ function make_imprime ($file) {
 		}
 		
 	}
-	$out=$out."}xxxnb\n";
+	$out=$out."}}\n";
 	$out=$out.$footer."\n\n";
 
 
