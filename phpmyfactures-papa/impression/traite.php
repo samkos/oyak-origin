@@ -128,7 +128,7 @@ else {
 }
 
 
-print "<BR> <a href='../admin/index.php>  Retour Administration </a>\n";
+print "<BR> <a href='../admin/index.php'>  Retour Administration </a>\n";
 
 
 function print_all($orientation) {
@@ -156,7 +156,7 @@ function make_imprime ($file) {
 	$total=0;
 	$out=$header;
 
-	$hline="\n".' \hline'."\n";
+	$hline='\hline'."\n";
 
 	$lines=file($file);
 
@@ -195,7 +195,7 @@ function make_imprime ($file) {
 				if ($box_open) {
 					$out=$out."}}\n";	
 				}
-				$out=$out.'\put('.$x.','.(29-$y).'){\shortstack{' ;
+				$out=$out.'\put('.$x.','.(29-$y).'){\shortstack[l]{' ;
 				$box_open=1;
 				
 			}
@@ -219,7 +219,7 @@ function make_imprime ($file) {
 			if ($what=="TAB") {
 				$tailles=split("=",array_shift($champs));
 
-				$out=$out."\n".'\begin{tabular}[t]{';
+				$out=$out.'\mbox{\begin{tabular}[t]{';
 
 				$col=1;
 				while ($taille=array_shift($tailles)) {
@@ -310,7 +310,7 @@ function make_imprime ($file) {
 				}
 
 
-				$out=$out.'\end{tabular}';
+				$out=$out.'\end{tabular}}';
 				print " <-- <B> OK </B>";
 				next;
 			}
