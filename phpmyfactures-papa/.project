@@ -6,6 +6,16 @@
 	</projects>
 	<buildSpec>
 		<buildCommand>
+			<name>net.sourceforge.texlipse.builder.TexlipseBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.python.pydev.PyDevBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
 			<name>org.eclipse.php.core.PhpIncrementalProjectBuilder</name>
 			<arguments>
 			</arguments>
@@ -17,6 +27,30 @@
 		</buildCommand>
 	</buildSpec>
 	<natures>
+		<nature>net.sourceforge.texlipse.builder.TexlipseNature</nature>
 		<nature>org.eclipse.php.core.PHPNature</nature>
+		<nature>org.python.pydev.pythonNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>00Out/Oyak</name>
+			<type>2</type>
+			<location>C:/Oyak</location>
+		</link>
+		<link>
+			<name>facprint/Oyak</name>
+			<type>2</type>
+			<location>C:/Oyak</location>
+		</link>
+		<link>
+			<name>00Out/impprint</name>
+			<type>2</type>
+			<location>C:/impprint</location>
+		</link>
+		<link>
+			<name>00Out/facprint</name>
+			<type>2</type>
+			<location>C:/facprint</location>
+		</link>
+	</linkedResources>
 </projectDescription>
