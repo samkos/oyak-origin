@@ -115,7 +115,6 @@ $portable = mysql_result($req,0,"portable");
 $email = mysql_result($req,0,"email");
 
 ?>
-<?php include("../verif.php"); ?>
 <?php include("../inc/header.php"); ?>
 
 <?php
