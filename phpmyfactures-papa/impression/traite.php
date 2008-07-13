@@ -103,6 +103,7 @@ if ($filenames) {
 		}
 		else {
 			print_all("portrait");
+			print "<BR> <BOLD> <br> <B> semble ok dans $filename !!!! </B> <BR> $msg <BR>";
 		}
 
 	}
@@ -178,9 +179,10 @@ function make_imprime ($file) {
 
 		if (ereg("^EJECT",$what))  {
 			// saut de page
-			$out=$out."\n".$footer."\n"."\\clearpage".$header."\n";
+			$out=$out.$footer."\n"."\\clearpage".$header."\n";
 			print " <-- <B> OK </B>";
 			next;
+			$box_open=0;
 		}
 
 		{
@@ -189,9 +191,13 @@ function make_imprime ($file) {
 			$x=array_shift($champs);
 			$y=array_shift($champs);
 	
-			if (!($x=="." and $y=="."))  {
-				$out=$out."}}\n";
-				$out=$out.'\put('.$x.','.(29-$y).'){\mbox{' ;
+			if (!($x=="." and $y==".")) {  
+				if ($box_open) {
+					$out=$out."}}\n";	
+				}
+				$out=$out.'\put('.$x.','.(29-$y).'){\shortstack{' ;
+				$box_open=1;
+				
 			}
 			else {
 				$out=$out.'\\\\'."\n";
@@ -314,7 +320,7 @@ function make_imprime ($file) {
 		}
 		
 	}
-	$out=$out."}}\n";
+//	$out=$out."}}\n";
 	$out=$out.$footer."\n\n";
 
 
