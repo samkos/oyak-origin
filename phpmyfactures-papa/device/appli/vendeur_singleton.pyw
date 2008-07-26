@@ -1596,6 +1596,10 @@ class processFacture:
                          command=lambda x=1:self.getArticle(ligne, "prix"))
                 self.buttonPrix.append(l)
                 l.pack(side=TOP, expand=1, fill=BOTH)
+            else:
+                self.buttonQuantite[ligne].config(text=quantite)
+                self.buttonProduit[ligne].config(text=produit)
+                self.buttonPrix[ligne].config(text=prix)
 
 
             
