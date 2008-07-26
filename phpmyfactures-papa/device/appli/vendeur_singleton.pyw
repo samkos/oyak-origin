@@ -111,7 +111,7 @@ class singleton:
     #
     ###################################################################
     
-    def getNBfacture() :
+    def getNBfacture(self) :
         i=1
         for i in range(10):
             if oyak.clientNB[i]==0:
@@ -119,16 +119,16 @@ class singleton:
                 return i
         return -1
     
-    def getFirstFacture() :
+    def getFirstFacture(self) :
        for i in range(10):
             if oyak.clientNB[i]>0:
                 return i
        return -1
     
-    def releaseNBfacture(i):
+    def releaseNBfacture(self,i):
         oyak.clientNB[i]=0
     
-    def  isNBfacture(i):
+    def  isNBfacture(self,i):
           return oyak.clientNB[i]
     
     def bindElementKeysFunction(self,element, keys, func):
@@ -433,11 +433,11 @@ class ihmRoot:
         panelName = "facture"+what
         
         # Menu
-        frame = Frame(ihm.ihm)
-        ihm.add(panelName, "menu", frame, 0, 0, colspan=5)
-        label = Button(frame, text="MENU", command=ihm.showMenu, height=2)
+        frame = Frame(self.ihm)
+        self.add(panelName, "menu", frame, 0, 0, colspan=5)
+        label = Button(frame, text="MENU", command=self.showMenu, height=2)
         label.pack(side=LEFT, expand=1, fill=BOTH)
-        label = Button(frame, text="KEYB", command=ihm.showKeyboard, height=2)
+        label = Button(frame, text="KEYB", command=self.showKeyboard, height=2)
         label.pack(side=LEFT, expand=1, fill=BOTH)
 
         
@@ -573,14 +573,14 @@ class ihmRoot:
         #self.kdb.Raise()
     
     def addKey(self, car):
-        global myCurrentAddChar, myCurrentDelChar, myCurrentEnterChar
+        global oyak
         if car=="DEL":
-            myCurrentDelChar("fake")
+            oyak.myCurrentDelChar("fake")
             return
         if car=="ENTER":
-            myCurrentEnterChar("fake")
+            oyak.myCurrentEnterChar("fake")
             return
-        myCurrentAddChar(car)
+        oyak.myCurrentAddChar(car)
 
 
 ###################################################################
@@ -982,14 +982,14 @@ class chooseClient(chooseXXX):
         self.filtreName="%s > "%prenom
 
     def go(self, event):
-
+        global oyak
         try :
           if len(self.filtre)==0 and len(self.clefs0)>0:
               clef=self.listbox0.curselection()[0]
-              choix=Clients[self.clefs0[int(clef)]]
+              choix=oyak.Clients[self.clefs0[int(clef)]]
           else:
               clef=self.listbox.curselection()[0]
-              choix=Clients[self.clefs[int(clef)]]
+              choix=oyak.Clients[self.clefs[int(clef)]]
         except:
             oyak.ihm.showMessage("Choix impossible!!!", self.action)
             return 0
@@ -1058,7 +1058,7 @@ class chooseProduit(chooseXXX):
          return 1
 
     def listePrepare(self):
-        self.liste=ProduitsRacourcis.keys()
+        self.liste=oyak.ProduitsRacourcis.keys()
         self.liste.sort()
         
     def go(self, event):
@@ -1078,7 +1078,7 @@ class chooseProduit(chooseXXX):
         i=0
 
         for racourci in self.liste:
-            (libelle) = ProduitsRacourcis[racourci]
+            (libelle) = oyak.ProduitsRacourcis[racourci]
             libelle.lower()
             s="%04d-%s"%(racourci, libelle)
             c="%s"%racourci
@@ -1109,8 +1109,8 @@ class chooseFournisseur(chooseXXX):
         if self.all:
             self.fournisseurs = Fournisseurs.keys()
         else:   
-            self.fournisseurs = ProduitsFournisseurs[self.racourci]
-        self.filtreName="%s > "%ProduitsRacourcis[self.racourci]
+            self.fournisseurs = oyak.ProduitsFournisseurs[self.racourci]
+        self.filtreName="%s > "%oyak.ProduitsRacourcis[self.racourci]
 
     def collect(self, article):
         (societe, ville, clef, timestamp)=article
@@ -1138,7 +1138,7 @@ class chooseFournisseur(chooseXXX):
         liste=self.fournisseurs
         n=len(self.filtre)
         for code in liste:
-            (societe, ville, clef)=Fournisseurs[code]
+            (societe, ville, clef)=oyak.Fournisseurs[code]
             s="%04d-%s"%(int(clef), societe)
             c="%d"%int(clef)
             n=len(self.filtre)
@@ -1289,9 +1289,9 @@ class processFacture:
             (societe, ville, clef)=self.client
         
 
-            self.nb=getNBfacture()
-            factureCurrent=self.nb
-            Factures[self.nb]=self
+            self.nb=oyak.getNBfacture()
+            oyak.factureCurrent=self.nb
+            oyak.Factures[self.nb]=self
             
             self.root=oyak.ihm.factureCreate(self.nb)
 
@@ -1340,16 +1340,18 @@ class processFacture:
         f = Frame(self.inputFrame)
         f.pack(side=TOP)
 
-        e = Entry(f, fg="black")
+        eVar=StringVar()
+        
+        e = Entry(f, fg="black",textvariable=eVar)
         e.pack(side=LEFT)
-
+        
         button = Button(f, textvariable=hVar, fg="red")
-        button["command"]=lambda x=1:self.labelEntryFocus(e, hVar)
+        button["command"]=lambda x=1:self.labelEntryFocus(e, hVar, eVar)
         button.pack(side=LEFT)
+        
+        return (sVar, e, hVar, eVar)
 
-        return (sVar, e, hVar)
-
-    def labelEntryFocus(self, e, h):
+    def labelEntryFocus(self, e, h, content):
         self.article_focus.set("---")
         self.fournisseur_focus.set("---")
         self.date_focus.set("---")
@@ -1358,13 +1360,16 @@ class processFacture:
         h.set("<<")
         e.focus_set()
         oyak.myCurrentAddChar=self.addcharFromKbd
-        oyak.myCurrentEntry=e
+        oyak.myCurrentDelChar=self.delcharFromKbd
+        oyak.myCurrentEntry=content
 
     def addcharFromKbd(self, char):
+        valeur=oyak.myCurrentEntry.get()+char
+        oyak.myCurrentEntry.set(valeur) 
+        
+    def delcharFromKbd(self,char):
         valeur=oyak.myCurrentEntry.get()
-        print valeur
-        oyak.myCurrrentEntry.append(char,END) 
-#        myCurrentEntry.set(valeur+char)
+        oyak.myCurrentEntry.set(valeur[:-1]) 
         
     def ihmFacture(self):
                
@@ -1400,11 +1405,11 @@ class processFacture:
 
         # quantite, prix, article, fournisseur, date
 
-        self.article_label, self.article, self.article_focus = self.addLabelEntry("Article:")
-        self.fournisseur_label, self.fournisseur, self.fournisseur_focus = self.addLabelEntry("Fournisseur:")
-        self.date_label, self.date, self.date_focus = self.addLabelEntry("Date:")
-        self.quantite_label, self.quantite, self.quantite_focus = self.addLabelEntry("Quantite:")
-        self.prix_label, self.prix, self.prix_focus = self.addLabelEntry("Prix:")
+        self.article_label, self.article, self.article_focus, self.article_content = self.addLabelEntry("Article:")
+        self.fournisseur_label, self.fournisseur, self.fournisseur_focus, self.fournisseur_content = self.addLabelEntry("Fournisseur:")
+        self.date_label, self.date, self.date_focus, self.date_content = self.addLabelEntry("Date:")
+        self.quantite_label, self.quantite, self.quantite_focus, self.quantite_content = self.addLabelEntry("Quantite:")
+        self.prix_label, self.prix, self.prix_focus, self.prix_content = self.addLabelEntry("Prix:")
 
         # action sur les lignes
 
@@ -1486,19 +1491,19 @@ class processFacture:
         oyak.ihm.show("facture%d"%self.nb, title="Oyak? Facture ")
 
         # le produit selectionne a un code barre
-        if (racourci, fournisseur) in ProduitsCodes.keys():
-            code = ProduitsCodes[racourci, fournisseur]
-            (libelle, prix, racourci, prix_plancher, poids, fournisseur)=Produits[code]
+        if (racourci, fournisseur) in oyak.ProduitsCodes.keys():
+            code = oyak.ProduitsCodes[racourci, fournisseur]
+            (libelle, prix, racourci, prix_plancher, poids, fournisseur)=oyak.Produits[code]
 
         # le fournisseur est forcé par un appel a autre fournisseur
         if autre_fournisseur:
             code = 00
-            (libelle, prix, prix_plancher, poids)=(ProduitsRacourcis[racourci], "0", "0", "0")
+            (libelle, prix, prix_plancher, poids)=(oyak.ProduitsRacourcis[racourci], "0", "0", "0")
             
 
-        if (racourci, fournisseur) in ProduitsCodes.keys() or autre_fournisseur:
+        if (racourci, fournisseur) in oyak.ProduitsCodes.keys() or autre_fournisseur:
 
-            (societe, ville, clef)=Fournisseurs[fournisseur]
+            (societe, ville, clef)=oyak.Fournisseurs[fournisseur]
             self.fournisseur.insert(END, societe)
             self.fournisseur_label.set("Fournisseur : %s"%fournisseur)
               
@@ -1533,22 +1538,22 @@ class processFacture:
 
     def goToArticle(self, event="fake"):
         oyak.ihm.show("facture%d"%self.nb, title="Oyak? Facture ")
-        self.labelEntryFocus(self.article, self.article_focus)
+        self.labelEntryFocus(self.article, self.article_focus,self.article_content)
 
 
     def goToFournisseur(self, event="fake"):
-        self.labelEntryFocus(self.fournisseur, self.fournisseur_focus)
+        self.labelEntryFocus(self.fournisseur, self.fournisseur_focus,self.fournisseur_content)
 
 
     def goToPrice(self, event="fake"):
         oyak.ihm.show("facture%d"%self.nb, title="Oyak? Facture ")
-        self.labelEntryFocus(self.prix, self.prix_focus)
+        self.labelEntryFocus(self.prix, self.prix_focus,self.prix_content)
 
     def goToQuantite(self, event="fake"):
-        self.labelEntryFocus(self.quantite, self.quantite_focus)
+        self.labelEntryFocus(self.quantite, self.quantite_focus,self.quantite_content)
 
     def goToDate(self, event="fake"):
-        self.labelEntryFocus(self.date, self.date_focus)
+        self.labelEntryFocus(self.date, self.date_focus,self.date_content)
 
     def addFacture(self, operation="create"):
 
@@ -1679,8 +1684,8 @@ class processFacture:
         if len(racourci)==0:
             oyak.ihm.showMessage("Article vide!", self.goToArticle)
             return
-        if racourci in Produits.keys():
-            (libelle, prix, racourci, prix_plancher, poids, fournisseur)=Produits[racourci]
+        if racourci in oyak.Produits.keys():
+            (libelle, prix, racourci, prix_plancher, poids, fournisseur)=oyak.Produits[racourci]
             self.acceptProduit(racourci, fournisseur)
             return
         fournisseur=self.fournisseur.get()
@@ -1718,7 +1723,7 @@ class processFacture:
             self.article.delete(0, END)
             oyak.ihm.showMessage("%s n'est pas un code reconnu!"%racourci, self.goToArticle)
             return
-        if racourci in ProduitsRacourcis.keys() and len(fournisseur)==0:
+        if racourci in oyak.ProduitsRacourcis.keys() and len(fournisseur)==0:
             myFournisseur.ihmShow(self, racourci)
         else:
             self.article.delete(0, END)
