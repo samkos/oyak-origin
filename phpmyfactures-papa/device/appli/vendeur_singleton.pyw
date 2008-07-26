@@ -1361,6 +1361,7 @@ class processFacture:
         e.focus_set()
         oyak.myCurrentAddChar=self.addcharFromKbd
         oyak.myCurrentDelChar=self.delcharFromKbd
+        oyak.myCurrentEnterChar=0
         oyak.myCurrentEntry=content
 
     def addcharFromKbd(self, char):
@@ -1585,15 +1586,15 @@ class processFacture:
             if ligne==self.nbArticles:
                 l=Button(self.quantiteListFrame, text=quantite,
                          command=lambda x=1:self.getArticle(ligne, "quantite")) 
-                self.buttonQuantite.add(l)
+                self.buttonQuantite.append(l)
                 l.pack(side=TOP, expand=1, fill=BOTH)
                 l=Button(self.produitListFrame, text=produit,
                          command=lambda x=1:self.getArticle(ligne, "produit"))
-                self.buttonProduit.add(l)
+                self.buttonProduit.append(l)
                 l.pack(side=TOP, expand=1, fill=BOTH)
                 l=Button(self.prixListFrame, text=prix,
                          command=lambda x=1:self.getArticle(ligne, "prix"))
-                self.buttonPrix.add(l)
+                self.buttonPrix.append(l)
                 l.pack(side=TOP, expand=1, fill=BOTH)
 
 
@@ -1620,11 +1621,11 @@ class processFacture:
         if operation=='copie':
             self.currentArticle=self.nbArticles
         
-        try :
-          #self.listbox.insert(END, formatFact%(float(quantite),article,float(self.prix_saisi)))
-          self.ajouteLigneFacture(quantite, article, float(self.prix_saisi), self.currentArticle)
-        except :
-            self.deleteCode("fake")
+#        try :
+#          #self.listbox.insert(END, formatFact%(float(quantite),article,float(self.prix_saisi)))
+        self.ajouteLigneFacture(quantite, article, float(self.prix_saisi), self.currentArticle)
+#        except :
+#            self.deleteCode("fake")
 
         self.selectedPrix[self.currentArticle]=self.prix_saisi
         self.selectedQuantite[self.currentArticle]=quantite
