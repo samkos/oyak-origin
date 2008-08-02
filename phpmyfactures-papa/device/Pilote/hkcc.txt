@@ -1,2 +1,0 @@
-ERROR: Failed to open key 'hkcc' - Le fichier spécifié est introuvable.
-

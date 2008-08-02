@@ -1,2 +1,0 @@
-ERROR: Failed to open key 'hku' - Le fichier spécifié est introuvable.
-
