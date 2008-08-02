@@ -19,7 +19,7 @@ REGEDIT4
 "HideAllTaskBars"=dword:00000000
 "HideDoneButton"=dword:00000000
 "HideStartMenu"=dword:00000000
-"HideSip"=dword:00000001
+"HideSip"=dword:00000000
 "AutoStart"=dword:00000000
 "StartupDelay"=dword:00000000
 "RelaunchInterval"=dword:00000000
