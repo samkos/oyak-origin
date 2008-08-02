@@ -3,6 +3,7 @@
 from Tkinter import *
 import os
 
+#curDir="C:\\Program Files\\EasyPHP1-8\\www\\phpmyfactures\\device\\Pilote\\"
 rapiDir="bin\\"
 regSymbol="hklm\\SOFTWARE\\Symbol Technologies, Inc.\\Profiles"
 regWLAN1="hklm\COMM\NETWLAN1"
@@ -14,7 +15,7 @@ class IHM   :
 
     def __init__(self):
 
-        self.debug=0
+        self.debug=1
 
         # obtention d'une frame principale
         self.root = Tk()
@@ -66,14 +67,14 @@ class IHM   :
 
     # execute une commande sur la device
     def run(self,what,pipe=0):
-            commande=rapiDir+what
-            if self.debug:
-                print commande
-            if pipe==0:
-               os.system(commande)
-            else:
-               output=os.popen(commande)
+            commande="%s\\%s"%(rapiDir,what)
+            output=os.popen(commande)
+            res=output.readlines()
+            if pipe:
                return output.readlines()
+            else:
+               for r in res:
+                   print r[6:-1]
 
     # fonction appelee par l'appui sur le bouton MobileCompanion
     def launchMobileCompanion(self):
@@ -85,8 +86,7 @@ class IHM   :
 
     # fonction appelee par l'appui sur le bouton Lire registre WLAN
     def copieVendeur(self):
-        pput='bin\pput.exe ..\\appli\\vendeur.pyw \\Oyak\\vendeur.pyw'
-        print pput
+        pput='pput.exe -f ..\\appli\\vendeur.pyw \\Oyak\\vendeur00.pyw'
         output=self.run(pput,pipe=1)
         self.affiche(output)
         
@@ -94,22 +94,18 @@ class IHM   :
 
     # fonction appelee par l'appui sur le bouton Lire registre WLAN
     def getWlanReg(self,reg,outFile=0,pipe=0):
-        print reg,dir(reg),outFile,pipe
+        print reg,outFile,pipe
         lisReg="pregdmp \""+reg+"\""
-        print lisReg
-        if outFile:
-           self.run(lisReg+" > "+outFileName)
-        elif pipe:
-           output=self.run(lisReg,pipe=1)
-           self.affiche(output)
-
+        self.run(lisReg,pipe)
+        
     def affiche(self,output):
             self.listbox.delete(0,END)
-            out=file("out.txt","w")
+            out=file("out.txt","r")
             for line in output:
                 toprint=line.replace("\t","   ")
                 self.listbox.insert(END,toprint[:-1])
                 out.write(toprint[6:])
+                print toprint[6:]
             out.close()
 
     def start(self):
