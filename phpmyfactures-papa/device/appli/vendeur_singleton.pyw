@@ -1586,15 +1586,15 @@ class processFacture:
               oyak.ihm.showMessage("La commande est vide!!!", self.goToArticle)
               return            
 
-        s="%s%s"%(self.clientClef, sep1)
+        s="%s%s"%(self.clientClef, oyak.sep1)
         for l in range(0, self.nbArticles):
-             s=s+"%s%s"%(self.selectedCode[l], sep2)
-             s=s+"%s%s"%(self.selectedRacourci[l], sep2)
-             s=s+"%s%s"%(self.selectedFournisseur[l], sep2)
-             s=s+"%s%s"%(self.selectedDate[l], sep2)
-             s=s+"%s%s"%(self.selectedQuantite[l], sep2)
-             s=s+"%s%s"%(self.selectedPrix[l], sep2)
-             s=s+"*%s%s"%(parametre, sep1)
+             s=s+"%s%s"%(self.selectedCode[l], oyak.sep2)
+             s=s+"%s%s"%(self.selectedRacourci[l], oyak.sep2)
+             s=s+"%s%s"%(self.selectedFournisseur[l], oyak.sep2)
+             s=s+"%s%s"%(self.selectedDate[l], oyak.sep2)
+             s=s+"%s%s"%(self.selectedQuantite[l], oyak.sep2)
+             s=s+"%s%s"%(self.selectedPrix[l], oyak.sep2)
+             s=s+"*%s%s"%(parametre, oyak.sep1)
         params = urllib.urlencode({'vendeur': self.vendeur_numero, 'commande':s})
         try:
             f = urllib.urlopen(url_send_commande, params)
