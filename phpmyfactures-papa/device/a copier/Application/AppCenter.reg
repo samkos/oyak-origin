@@ -1,12 +1,12 @@
 REGEDIT4
 
 [HKEY_CURRENT_USER\SOFTWARE\Symbol\AppCenter]
-"HideStartMenu"=dword:00000001
-"ShowTime"=dword:00000001
-"ShowAirBEAM"=dword:00000000
-"ShowSignalStrength"=dword:00000001
-"ShowBatteryLevel"=dword:00000001
 "ShowHome"=dword:00000000
+"ShowBatteryLevel"=dword:00000001
+"ShowSignalStrength"=dword:00000001
+"ShowAirBEAM"=dword:00000000
+"ShowTime"=dword:00000001
+"HideStartMenu"=dword:00000001
 
 [HKEY_CURRENT_USER\SOFTWARE\Symbol\AppCenter\scanwedge]
 "Description"="scanwedge"
@@ -62,7 +62,7 @@ REGEDIT4
 "HideAllTaskBars"=dword:00000000
 "HideDoneButton"=dword:00000000
 "HideStartMenu"=dword:00000001
-"HideSip"=dword:00000001
+"HideSip"=dword:00000000
 "AutoStart"=dword:00000000
 "StartupDelay"=dword:00000000
 "RelaunchInterval"=dword:00000000
@@ -84,25 +84,25 @@ REGEDIT4
 "RelaunchInterval"=dword:00000000
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\Symbol\AppCenter]
-"BrowseAllShortcuts"=dword:00000001
-"BrowseExtensions"="exe|vb"
-"BrowseFolders"="\\Program Files|\\Windows"
-"AdminLoginDisabled"=dword:00000000
-"AlternateTitle"=""
-"UnresponsiveAppTimeout"=dword:00000005
-"AdapterName"="NETWLAN1"
-"DisplayIpAddress"=dword:00000000
-"DisplayMacAddress"=dword:00000000
-"TitleBold"=dword:00000001
-"TitleFontSize"=dword:0000000B
-"24HourTimeFormat"=dword:00000000
-"BatteryPercentFormat"=dword:00000000
-"MobileCompanionMode"=dword:00000002
-"FusionMode"=dword:00000000
-"ShowKeyStates"=dword:00000000
-"RegFileName"="\\Application\\AppCenter.reg"
-"LogFileName"="\\AppCenterLog.txt"
-"AdminLoginHotKey"=dword:00000000
-"{2EACC9DF-C9BF-428E-9074-D50B57D0D747}"=hex:2F,00,53,00,22,00,24,00,3B,00,3B,00,41,00,13,00,07,00,1F,00,17,00,3C,00,2B,00,25,00,27,00,25,00,16,00,0A,00,3C,00,3D,00,0D,00,2A,00,3E,00,25,00,37,00,21,00,08,00,06,00,19,00,11,00,0C,00,57,00
 "{B6235F29-5B71-4389-A0A6-ACF2758AC1DC}"=hex:00,00,00,00
+"{2EACC9DF-C9BF-428E-9074-D50B57D0D747}"=hex:2F,00,53,00,22,00,24,00,3B,00,3B,00,41,00,13,00,07,00,1F,00,17,00,3C,00,2B,00,25,00,27,00,25,00,16,00,0A,00,3C,00,3D,00,0D,00,2A,00,3E,00,25,00,37,00,21,00,08,00,06,00,19,00,11,00,0C,00,57,00
+"AdminLoginHotKey"=dword:00000000
+"LogFileName"="\\AppCenterLog.txt"
+"RegFileName"="\\Application\\AppCenter.reg"
+"ShowKeyStates"=dword:00000000
+"FusionMode"=dword:00000000
+"MobileCompanionMode"=dword:00000002
+"BatteryPercentFormat"=dword:00000000
+"24HourTimeFormat"=dword:00000000
+"TitleFontSize"=dword:0000000B
+"TitleBold"=dword:00000001
+"DisplayMacAddress"=dword:00000000
+"DisplayIpAddress"=dword:00000000
+"AdapterName"="NETWLAN1"
+"UnresponsiveAppTimeout"=dword:00000005
+"AlternateTitle"=""
+"AdminLoginDisabled"=dword:00000000
+"BrowseFolders"="\\Program Files|\\Windows"
+"BrowseExtensions"="exe|vb"
+"BrowseAllShortcuts"=dword:00000001
 
