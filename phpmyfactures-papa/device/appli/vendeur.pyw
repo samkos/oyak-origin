@@ -18,7 +18,7 @@ if cible:
     erreurCatch=0
     debugMessages=0
     raiseError=0
-    website_address="http://192.168.111.150/phpmyfactures"
+    website_address="http://192.168.111.77/phpmyfactures"
     fichierIp='\Platform\S24Profiles.reg'
     fichierIpBackup='\\Oyak\\S24old.reg'
     fichierIpNew='\\Oyak\\S24New.reg'

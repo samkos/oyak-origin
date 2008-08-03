@@ -15,7 +15,7 @@ class IHM   :
 
     def __init__(self):
 
-        self.debug=1
+        self.debug=01
 
         # obtention d'une frame principale
         self.root = Tk()
@@ -29,12 +29,22 @@ class IHM   :
         self.resultFrame=Frame(self.root)
         self.resultFrame.pack(expand=1,fill=BOTH)
 
-        self.scrollbar = Scrollbar(self.resultFrame)
-        self.scrollbar.pack(side=RIGHT,expand=0,fill=Y)
+        self.scrollbarY = Scrollbar(self.resultFrame)
+        self.scrollbarY.pack(side=RIGHT,expand=0,fill=Y)
 
-        self.listbox = Listbox(self.resultFrame, yscrollcommand=self.scrollbar.set)
+        self.scrollbarX = Scrollbar(self.resultFrame,orient=HORIZONTAL)
+        self.scrollbarX.pack(side=BOTTOM,expand=0,fill=X)
+
+        self.listbox = Listbox(self.resultFrame, xscrollcommand=self.scrollbarX.set, yscrollcommand=self.scrollbarY.set)
         self.listbox.pack(side=LEFT, expand=1, fill=BOTH)
-        self.scrollbar.config(command=self.listbox.yview)
+        self.scrollbarX.config(command=self.listbox.xview)
+        self.scrollbarY.config(command=self.listbox.yview)
+
+
+        # definition d'un bouton Wifi
+        Titre = Label(self.boutonFrame, text="PILOTE DEVICE v0.1", width=80, height=5)
+        # placement du Bouton dans la frame principale
+        Titre.pack(expand=1,fill=X)
 
         # definition d'un bouton Wifi
         Bouton = Button(self.boutonFrame, text="Regler la Connection Wifi", command=self.launchMobileCompanion)
@@ -72,7 +82,12 @@ class IHM   :
         Bouton.pack(expand=1,fill=X)
 
         # definition d'un bouton Copie Vendeur
-        Bouton = Button(self.boutonFrame, text="kill Vendeur", command=self.killVendeur)
+        Bouton = Button(self.boutonFrame, text="kill Vendeur", command=lambda x="fake":self.killProcess("python"))
+        # placement du Bouton dans la frame principale
+        Bouton.pack(expand=1,fill=X)
+
+        # definition d'un bouton kill Appcenter
+        Bouton = Button(self.boutonFrame, text="kill AppCenter", command=lambda x="fake":self.killProcess("AppCenter.exe"))
         # placement du Bouton dans la frame principale
         Bouton.pack(expand=1,fill=X)
 
@@ -92,6 +107,13 @@ class IHM   :
         # placement du Bouton dans la frame principale
         Bouton.pack(expand=1,fill=X)
 
+        # definition d'un bouton del cache
+        Bouton = Button(self.boutonFrame, text="Effacer output", command=lambda x="fake":self.clearWindow())
+        # placement du Bouton dans la frame principale
+        Bouton.pack(expand=1,fill=X)
+
+
+
 
     def addButtonReadReg(self,reg,pipe=1):
         # definition d'un bouton lire WLAN valeur
@@ -106,14 +128,19 @@ class IHM   :
     def run(self,what,pipe=0):
             commande="%s\\%s"%(rapiDir,what)
             if self.debug:
-                print "EXEC : "+commande
+                self.affiche("EXEC : "+commande)
             output=os.popen(commande)
             res=output.readlines()
             if pipe:
                return output.readlines()
             else:
                for r in res:
-                   print r
+                   self.affiche(r)
+                   
+
+    def clearWindow(self):
+        self.listbox.delete(0, END)
+
 
     # fonction appelee par l'appui sur le bouton MobileCompanion
     def launchMobileCompanion(self):
@@ -129,48 +156,51 @@ class IHM   :
         self.run(pput,pipe=0)
         pput="pput.exe -f ..\\appli\\%s.pyw \\Application\\Oyak\\vendeur.pyw"%name
         self.run(pput,pipe=0)
-        print "vendeur copié"
+        self.affiche("vendeur copié avec succès")
         
     def runVendeur(self):
         prun="prun.exe \\Python25\\python /nopcceshell \\Oyak\\vendeur.pyw"
         output=self.run(prun,pipe=0)
+        self.affiche("Application vendeur lancée")
 
-    def killVendeur(self):
-        prun="pkill.exe python"
+    def killProcess(self,name):
+        prun="pkill.exe %s"%name
         output=self.run(prun,pipe=0)
+        self.affiche("Application %s arretée"%name)
 
     def installAppli(self):
+        self.listbox.delete(0, END)
         self.installReg()
         self.copieVendeur("vendeur_singleton")
-        
+        self.affiche("Application Installée correctement")
+
     def installReg(self):
         pput="pput.exe -f \"..\\a copier\\Application\\AppCenter.reg\"  \\Application\\AppCenter.reg"
         self.run(pput,pipe=0)
-        print "fichier registre Appcenter copié"
+        self.affiche("fichier registre Appcenter Installé avec Succès");
+        
         
     def initCache(self):
         self.run("pput.exe  -f c:\\Oyak\\*.bak \\Oyak\\")
+        self.affiche("fichier de Cache copiés")
 
 
 
     def delCache(self):
         self.run("pdel.exe  \\Oyak\\*.bak")
+        self.affiche("fichiers de cache effacés")
 
     # fonction appelee par l'appui sur le bouton Lire registre WLAN
     def getWlanReg(self,reg,outFile=0,pipe=0):
         print reg,outFile,pipe
         lisReg="pregdmp \""+reg+"\""
         self.run(lisReg,pipe)
+        self.affiche("Application de configuration réseau lancée")
+
         
     def affiche(self,output):
-            self.listbox.delete(0,END)
-            out=file("out.txt","r")
-            for line in output:
-                toprint=line.replace("\t","   ")
-                self.listbox.insert(END,toprint[:-1])
-                out.write(toprint[6:])
-                print toprint[6:]
-            out.close()
+        self.listbox.insert(END,output);
+        print output
 
     def start(self):
        # demarrage de la boucle d'evenements

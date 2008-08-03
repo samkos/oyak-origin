@@ -23,7 +23,7 @@ class singleton:
             self.erreurCatch=0
             self.debugMessages=0
             self.raiseError=0
-            self.website_address="http://192.168.111.150/phpmyfactures"
+            self.website_address="http://192.168.111.77/phpmyfactures"
             self.fichierIp='\Platform\S24Profiles.reg'
             self.fichierIpBackup='\\Oyak\\S24old.reg'
             self.fichierIpNew='\\Oyak\\S24New.reg'
@@ -1387,7 +1387,8 @@ class processFacture:
         oyak.myProduit.ihmShow(self, valeur)
 
 
-    def acceptProduit(self, racourci, fournisseur, autre_fournisseur=0):
+    def acceptProduit(self, racourci, fournisseur, autre_fournisseur=0, 
+                      date="-99",quantite=-99, prix=-99):
         self.autre_fournisseur=autre_fournisseur
         
         try:
@@ -1421,10 +1422,14 @@ class processFacture:
             self.article.insert(END, libelle)
             self.article_label.set("Article : %d"%racourci)
       
-            self.quantite.insert(END, quantite)
+            if quantite>0:
+                self.quantite.delete(0, END)
+                self.quantite.insert(END, quantite)
             self.quantite_label.set("Quantite : ("+"%6.2f"%(eval(poids)+0.00)+")")
 
-            self.prix.insert(END,prix)
+            if prix>0:
+                self.prix.delete(0, END)
+                self.prix.insert(END,prix)
             self.prix_label.set("Prix : ("+"%6.2f"%(eval(prix)+0.00)+")")
             self.prix_default=prix
             self.prix_plancher=prix_plancher
@@ -1434,6 +1439,10 @@ class processFacture:
             self.selectedCode[self.currentArticle]=code
             self.selectedRacourci[self.currentArticle]=racourci
             self.selectedFournisseur[self.currentArticle]=fournisseur    
+
+            if not(date=="-99"):
+                self.date.delete(0, END)
+                self.date.insert(END,date)
 
             self.goToDate()
         else:
@@ -1518,7 +1527,12 @@ class processFacture:
             
     def getArticle(self, ligne, focus):
         self.currentArticle=ligne
-        self.acceptProduit(self.selectedRacourci[ligne], self.selectedFournisseur[ligne])
+        self.acceptProduit(self.selectedRacourci[ligne], 
+                           self.selectedFournisseur[ligne],
+                           00,
+                           self.selectedDate[ligne], 
+                           self.selectedQuantite[ligne],
+                           self.selectedPrix[ligne])
         if focus=="quantite":
             self.goToQuantite()
         if focus=="produit":
@@ -1642,7 +1656,7 @@ class processFacture:
             oyak.ihm.showMessage("%s n'est pas un code reconnu!"%racourci, self.goToArticle)
             return
         if racourci in oyak.ProduitsRacourcis.keys() and len(fournisseur)==0:
-            myFournisseur.ihmShow(self, racourci)
+            oyak.myFournisseur.ihmShow(self, racourci)
         else:
             self.article.delete(0, END)
             oyak.ihm.showMessage("%d n'est pas un code reconnu!"%racourci, self.goToArticle)
