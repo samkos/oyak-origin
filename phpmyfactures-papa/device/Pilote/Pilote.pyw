@@ -172,6 +172,7 @@ class IHM   :
         self.listbox.delete(0, END)
         self.installReg()
         self.copieVendeur("vendeur_singleton")
+        self.initCache()
         self.affiche("Application Installée correctement")
 
     def installReg(self):
