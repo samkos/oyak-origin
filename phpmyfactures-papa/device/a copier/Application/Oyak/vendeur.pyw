@@ -1,123 +1,140 @@
 # -*- coding: cp1252 -*-
 from Tkinter import *
-import string
-import urllib
 import os
-import time
 import shutil
+import string
 import traceback
+import urllib
 
-maxDigits=130
-cible=os.path.exists('\Platform')
-oneFrame=01
-version="0.26"
-time_last_key=0
-isServeurInjoignable=0
+oyak=0
 
-if cible:
-    zoomedWindow=1
-    erreurCatch=0
-    debugMessages=0
-    raiseError=0
-    isReadFromServer=0
-    website_address="http://192.168.111.77/phpmyfactures"
-    fichierIp='\Platform\S24Profiles.reg'
-    fichierIpBackup='\\Oyak\\S24old.reg'
-    fichierIpNew='\\Oyak\\S24New.reg'
-    fichierIpTemplate='\\Application\\Oyak\\S24Profiles.reg'
-else:
-    erreurCatch=0
-    debugMessages=1
-    zoomedWindow=0
-    raiseError=1
-    isReadFromServer=1
-    website_address="http://127.0.0.1/phpmyfactures"
-    fichierIp="c:/Program Files/EasyPHP1-8/www/cible/a copier/Platform/test/S24Profiles.reg"
-    fichierIpBackup="c:/Program Files/EasyPHP1-8/www/cible/a copier/Platform/test/S24old.reg"
-    fichierIpNew="c:/Program Files/EasyPHP1-8/www/cible/a copier/Platform/test/S24new.reg"
-    fichierIpTemplate="c:/Program Files/EasyPHP1-8/www/cible/a copier/Application/Oyak/S24Profiles.reg"
-
-
-Produits={}
-ProduitsFournisseurs={}
-ProduitsRacourcis={}
-ProduitsCodes={}
-Clients={}
-Vendeurs={}
-Fournisseurs={}
-Fournisseurs['9999']=('XXXX','xxxx','9999','0000000000000')
-Releases={}
-Factures={}
-clientNB = {}
-
-
-for i in range(10):
-    clientNB[i]=0
+class singleton:
     
-clefsClients=list()
-nbChamps = {"vendeurs":4, "fournisseurs":4, "clients":4,
-            "releases":2,"produits":8}
-isAlreadyLoaded = {"vendeurs":0, "fournisseurs":0, "clients":0,
-            "releases":0,"produits":0}
-barSize = {"vendeurs":0.1, "fournisseurs":0.9, "clients":0.3,
-            "releases":0.96,"produits":0.6}
+    def __init__(self):
+        
+        self.maxDigits=130
+        self.cible=os.path.exists('\Platform')
+        self.version="0.33"
+        self.time_last_key=0
+        self.isServeurInjoignable=0
+        
+        if self.cible:
+            self.zoomedWindow=1
+            self.erreurCatch=0
+            self.debugMessages=0
+            self.raiseError=0
+            self.website_address="http://192.168.111.77/phpmyfactures"
+            self.fichierIp='\Platform\S24Profiles.reg'
+            self.fichierIpBackup='\\Oyak\\S24old.reg'
+            self.fichierIpNew='\\Oyak\\S24New.reg'
+            self.fichierIpTemplate='\\Application\\Oyak\\S24Profiles.reg'
+            self.fichierAppTemplate='\\Application\\Oyak\\Data\\%s.bak'
+            self.fichierAppOldTemplate='\\Application\\Oyak\\Data\\%s.old'
+            self.fichierBackup_Template='\Oyak\%s.bak'
+            self.fichierTemp_Template='\Oyak\%s.tmp'
+            self.fichierOld_Template='\Oyak\%s.old'
+        else:
+            self.erreurCatch=0
+            self.debugMessages=1
+            self.zoomedWindow=0
+            self.raiseError=1
+            self.website_address="http://127.0.0.1/phpmyfactures"
+            self.root_address="c:/Program Files/EasyPHP1-8/www/phpmyfactures/device/a copier/"
+            self.fichierIp=self.root_address+"Platform/test/S24Profiles.reg"
+            self.fichierIpBackup=self.root_address+"Platform/test/S24old.reg"
+            self.fichierIpNew=self.root_address+"Platform/test/S24new.reg"
+            self.fichierIpTemplate=self.root_address+"Application/Oyak/S24Profiles.reg"
+            self.fichierAppTemplate=self.root_address+"Application/Oyak/Data/%s.bak"
+            self.fichierAppOldTemplate=self.root_address+"Application/Oyak/Data/%s.old"
+            self.fichierBackup_Template='c:\Oyak\%s.bak'
+            self.fichierTemp_Template='c:\Oyak\%s.tmp'
+            self.fichierOld_Template='c:\Oyak\%s.old'
+        
+        self.myVendeur=0
+        self.myClient=0;
+        self.myFournisseur=0
+        self.myProduit=0
+        self.myRelease=0
+        
+        self.myCurrentAddChar=0
+        self.myCurrentDelChar=0
+        self.myCurrentEnterChar=0
+        self.myCurrentEntry=0
+        
+        self.Produits={}
+        self.ProduitsFournisseurs={}
+        self.ProduitsRacourcis={}
+        self.ProduitsCodes={}
+        self.Clients={}
+        self.Vendeurs={}
+        self.Fournisseurs={}
+        self.Fournisseurs['9999']=('XXXX', 'xxxx', '9999')
+        self.Releases={}
+        self.Factures={}
+        self.clientNB = {}
+        self.timestamp = {}
+        
+        for i in range(10):
+            self.clientNB[i]=0
+            
+        self.clefsClients=list()
+        self.nbChamps = {"vendeurs":4, "fournisseurs":4, "clients":4,
+                    "releases":2, "produits":8}
+        self.isAlreadyPaneled = {"vendeurs":0, "fournisseurs":0, "clients":0,
+                    "releases":0, "produits":0}
+        self.barSize = {"vendeurs":0.1, "fournisseurs":0.9, "clients":0.3,
+                    "releases":0.96, "produits":0.6}
+        
+        self.formatFact="%5.2f|%15s|%5.2f"
+        self.enteteFact="%5s|%15s|%5s"%("quant", "produit", "prix")
+        
+        
+        
+        self.url_send_commande=self.website_address+"/query/index.php?"
+        self.url_update_commande=self.website_address+"/query/download.php?"
+        
+        self.url_get_Template=self.website_address+"/query/get_data.php?%s=1"
+        
+        
+        self.sep1=";"
+        self.sep2="!"
+        
+        
+        self.vendeurChoisi=(0, "xxx", 'xx')
+        self.factureCurrent=0
+        self.ihm=0
 
-formatFact="%5.2f|%15s|%5.2f"
-enteteFact="%5s|%15s|%5s"%("quant","produit","prix")
 
-
-
-url_send_commande=website_address+"/query/index.php?"
-url_update_commande=website_address+"/query/download.php?"
-
-fichierBackup_Template='\Oyak\%s.bak'
-url_get_Template=website_address+"/query/get_data.php?%s=1"
-
-sep1=";"
-sep2="!"
-
-
-vendeurChoisi=(0,"xxx",'xx')
-factureCurrent=0
-ihm=0
-
-
-###################################################################
-#
-#  fonction IHM annexe
-#
-###################################################################
-
-def getNBfacture() :
-    global clientNB
-    i=1
-    for i in range(10):
-        if clientNB[i]==0:
-            clientNB[i]=1
-            return i
-    return -1
-
-def getFirstFacture() :
-    global clientNB
-
-    for i in range(10):
-        if clientNB[i]>0:
-            return i
-    return -1
-
-def releaseNBfacture(i):
-    global clientNB
-    clientNB[i]=0
-
-def  isNBfacture(i):
-    global clientNB
-
-    return clientNB[i]
-
-def bindElementKeysFunction(element, keys, func):
-    for c in keys:
-        element.bind(c,func)
-
+    ###################################################################
+    #
+    #  fonction IHM annexe
+    #
+    ###################################################################
+    
+    def getNBfacture(self) :
+        i=1
+        for i in range(10):
+            if oyak.clientNB[i]==0:
+                oyak.clientNB[i]=1
+                return i
+        return -1
+    
+    def getFirstFacture(self) :
+       for i in range(10):
+            if oyak.clientNB[i]>0:
+                return i
+       return -1
+    
+    def releaseNBfacture(self,i):
+        oyak.clientNB[i]=0
+    
+    def  isNBfacture(self,i):
+          return oyak.clientNB[i]
+    
+    def bindElementKeysFunction(self,element, keys, func):
+        for c in keys:
+            element.bind(c, func)
+    
 
 
 ###############################################################################################
@@ -126,10 +143,14 @@ def bindElementKeysFunction(element, keys, func):
 
 
 class ihmRoot:
+    
+    global oyak
 
     def __init__(self):
        self.ihm=Tk()
-       if cible:
+       self.kbd=Tk()
+       
+       if oyak.cible:
            self.ihm.overrideredirect(1)
 
        self.ihmPanels={}
@@ -141,12 +162,14 @@ class ihmRoot:
        self.facture={}
        self.factureButton={}
        self.okButton={}
+       self.kbd.keyboardSV=StringVar()
+
        
        self.Xmax=38
        self.Ymax=24
 
-       self.ihm.rowconfigure(0,weight=1)
-       self.ihm.columnconfigure(0,weight=1)
+       self.ihm.rowconfigure(0, weight=1)
+       self.ihm.columnconfigure(0, weight=1)
        #self.ihm.master.grid(sticky=W+E+N+S)
        
        self.messagePanelCreate()
@@ -154,6 +177,7 @@ class ihmRoot:
 
        self.progressBarCreate()
        self.menuCreate()
+       self.keyboardCreate()
        self.adminCreate()
        self.ipCreate()
        
@@ -161,35 +185,32 @@ class ihmRoot:
        
     # fonctions de Management des fenetres types
     
-    def title(self,s):
+    def title(self, s):
        self.ihm.title(s)
 
-    def add(self,panelName,widgetName,widget,row,column,rowspan=1,colspan=1,sticky=N+E+W+S):
+    def add(self, panelName, widgetName, widget, row, column, rowspan=1, colspan=1, sticky=N+E+W+S):
         if panelName in self.ihmPanels.keys():
            self.ihmPanels[panelName].append(widgetName)
         else:
            self.ihmPanels[panelName]=[widgetName]
-        self.ihmPanelsContents[panelName,widgetName]=(widget,row,column,rowspan,colspan,sticky)
+        self.ihmPanelsContents[panelName, widgetName]=(widget, row, column, rowspan, colspan, sticky)
       
-    def hide(self,panelName):
+    def hide(self, panelName):
         for widgetName in self.ihmPanels[panelName]:
-            (widget,row,column,rowspan,colspan,sticky)=self.ihmPanelsContents[panelName,widgetName]
+            (widget, row, column, rowspan, colspan, sticky)=self.ihmPanelsContents[panelName, widgetName]
             widget.grid_forget()
             
-    def show(self,panelName,title="Oyak"):
-        global zoomedWindow,Factures
-
-        #self.oldFocus=self.ihm.tk.call('focus')
-        #print "yyyyy",self.oldFocus
+    def show(self, panelName, title="Oyak", hidingAll=1):
         
-        self.hideAll()
+        if hidingAll:
+            self.hideAll()
         
         self.ihm.title(title)
         for widgetName in self.ihmPanels[panelName]:
-            (widget,row,column,rowspan,colspan,sticky)=self.ihmPanelsContents[panelName,widgetName]
-            widget.grid(row=row,column=column,rowspan=rowspan,columnspan=colspan,sticky=sticky)
+            (widget, row, column, rowspan, colspan, sticky)=self.ihmPanelsContents[panelName, widgetName]
+            widget.grid(row=row, column=column, rowspan=rowspan, columnspan=colspan, sticky=sticky)
 
-        if zoomedWindow:
+        if oyak.zoomedWindow:
             self.ihm.wm_state(newstate="zoomed")
 
         self.previousShown=self.currentShown
@@ -198,7 +219,8 @@ class ihmRoot:
 
     def hideAll(self):
         for panel in self.ihmPanels.keys():
-            self.hide(panel)
+            if not(panel=="keyboard"):
+                self.hide(panel)
 
     def returnPrevious(self):
         self.show(self.previousShown)
@@ -210,10 +232,10 @@ class ihmRoot:
     def messagePanelCreate(self):
         self.message=StringVar("")
         self.message.set("Message Type")
-        self.MessageButton=Button(self.ihm,textvariable=self.message,width=self.Xmax,height=self.Ymax)
-        self.add("message","texte",self.MessageButton,0,0)
+        self.MessageButton=Button(self.ihm, textvariable=self.message, width=self.Xmax, height=self.Ymax)
+        self.add("message", "texte", self.MessageButton, 0, 0)
 
-    def showMessage(self,what,commande=0):
+    def showMessage(self, what, commande=0):
         self.message.set(what)
         if not(commande):
             self.MessageButton["command"]=self.returnPrevious
@@ -221,7 +243,7 @@ class ihmRoot:
             self.MessageButton["command"]=commande
         self.show("message")
 
-        self.MessageButton.bind("<Key>",lambda x="fake":self.MessageButton.invoke())
+        self.MessageButton.bind("<Key>", lambda x="fake":self.MessageButton.invoke())
         self.MessageButton.focus_set()
         
 
@@ -230,14 +252,14 @@ class ihmRoot:
     def messageOuiNonPanelCreate(self):
         self.messageOuiNon=StringVar("")
         self.messageOuiNon.set("Message Type")
-        self.labelOuiNon=Label(self.ihm,textvariable=self.messageOuiNon,width=self.Xmax,height=self.Ymax/3)
-        self.add("OuiNon","question",self.labelOuiNon,0,0)
-        self.buttonOui=Button(self.ihm,text="Oui",width=self.Xmax,height=self.Ymax/3)
-        self.add("OuiNon","oui",self.buttonOui,1,0)
-        self.buttonNon=Button(self.ihm,text="Non",width=self.Xmax,height=self.Ymax/3)
-        self.add("OuiNon","non",self.buttonNon,2,0)
+        self.labelOuiNon=Label(self.ihm, textvariable=self.messageOuiNon, width=self.Xmax, height=self.Ymax/3)
+        self.add("OuiNon", "question", self.labelOuiNon, 0, 0)
+        self.buttonOui=Button(self.ihm, text="Oui", width=self.Xmax, height=self.Ymax/3)
+        self.add("OuiNon", "oui", self.buttonOui, 1, 0)
+        self.buttonNon=Button(self.ihm, text="Non", width=self.Xmax, height=self.Ymax/3)
+        self.add("OuiNon", "non", self.buttonNon, 2, 0)
 
-    def showMessageOuiNon(self,what,siOui=0,siNon=0):
+    def showMessageOuiNon(self, what, siOui=0, siNon=0):
         self.messageOuiNon.set(what)
         if not(siOui):
             self.buttonOui["command"]=self.returnPrevious
@@ -251,7 +273,7 @@ class ihmRoot:
 
         self.show("OuiNon")
 
-        self.buttonNon.bind("<Key>",lambda x="fake":self.buttonNon.invoke())
+        self.buttonNon.bind("<Key>", lambda x="fake":self.buttonNon.invoke())
         self.buttonNon.focus_set()
         
 
@@ -259,16 +281,16 @@ class ihmRoot:
     def progressBarCreate(self):
         self.messageBar=StringVar("")
         self.messageBar.set("Message Type")
-        self.labelBar=Button(self.ihm,textvariable=self.messageBar,width=self.Xmax,height=self.Ymax-2)
-        self.add("progress","texte",self.labelBar,0,0)
+        self.labelBar=Button(self.ihm, textvariable=self.messageBar, width=self.Xmax, height=self.Ymax-2)
+        self.add("progress", "texte", self.labelBar, 0, 0)
         self.progressBar=Canvas(self.ihm, width=self.Xmax, height=30)
-        self.add("progress","bar",self.progressBar,1,0)
+        self.add("progress", "bar", self.progressBar, 1, 0)
 
-    def startProgressBar(self,what):
+    def startProgressBar(self, what):
         self.show("progress")
-        self.updateProgressBar(what,0)
+        self.updateProgressBar(what, 0)
     
-    def updateProgressBar(self,what,ratio):
+    def updateProgressBar(self, what, ratio):
         self.show("progress")
         self.messageBar.set(what)
         self.labelBar.update()
@@ -283,27 +305,33 @@ class ihmRoot:
 
         panelName = "menu"
         
-        label = Button(self.ihm, text="Retour", command=self.returnPrevious,height=3,width=self.Xmax)
-        self.add(panelName,"retour",label,1,0)
+        label = Button(self.ihm, text="Retour", command=self.returnPrevious, height=3, width=self.Xmax)
+        self.add(panelName, "retour", label, 1, 0)
 
-        label = Button(self.ihm, text="Factures en Cours", command=self.showFactureFirst,height=4,width=self.Xmax)
-        self.add(panelName,"en cours",label,2,0)
+        label = Button(self.ihm, text="Factures en Cours", command=self.showFactureFirst, height=4, width=self.Xmax)
+        self.add(panelName, "en cours", label, 2, 0)
 
-        label = Button(self.ihm, text="Nouvelle Facture", command=processFacture,height=4,width=self.Xmax)
-        self.add(panelName,"autre",label,3,0)
+        label = Button(self.ihm, text="Nouvelle Facture", command=processFacture, height=4, width=self.Xmax)
+        self.add(panelName, "autre", label, 3, 0)
 
-        label = Button(self.ihm, text="Relire Donnée", command=self.rechargeBase,height=4,width=self.Xmax)
-        self.add(panelName,"reloader",label,6,0)
+        label = Button(self.ihm, text="Choisir Vendeur", command=self.changeVendeur, height=4, width=self.Xmax)
+        self.add(panelName, "vendeur", label, 5, 0)
+
+        label = Button(self.ihm, text="Relire Donnée", command=self.rechargeBase, height=4, width=self.Xmax)
+        self.add(panelName, "reloader", label, 6, 0)
         
+#        label = Button(self.ihm, text="Clavier", command=self.showKeyboard,height=4,width=self.Xmax)
+#        self.add(panelName,"reloader",label,7,0)
+
 #        label = Button(self.ihm, text="Reglages", command=self.showIp,height=4,width=self.Xmax)
-#        self.add(panelName,"update",label,7,0)
+#        self.add(panelName,"update",label,8,0)
 
 #        label = Button(self.ihm, text="Reactiver Scanner", command=self.scanner,height=4,width=self.Xmax)
-#        self.add(panelName,"scanner",label,8,0)
+#        self.add(panelName,"scanner",label,9,0)
 
 
-        label = Button(self.ihm, text="QUITTER", command=self.ihm.quit,height=4,width=self.Xmax)
-        self.add(panelName,"quitter",label,10,0)
+        label = Button(self.ihm, text="QUITTER", command=self.ihm.quit, height=4, width=self.Xmax)
+        self.add(panelName, "quitter", label, 10, 0)
 
          
 #        label = Button(self.ihm, text="Administrer", command=self.showAdmin,height=5,width=self.Xmax)
@@ -315,23 +343,23 @@ class ihmRoot:
 
         panelName = "admin"
         
-        label = Button(self.ihm, text="Retour", command=self.returnPrevious,height=3,width=self.Xmax)
-        self.add(panelName,"retour",label,2,0)
+        label = Button(self.ihm, text="Retour", command=self.returnPrevious, height=3, width=self.Xmax)
+        self.add(panelName, "retour", label, 2, 0)
 
-        label = Button(self.ihm, text="Relire Donnée", command=self.rechargeBase,height=4,width=self.Xmax)
-        self.add(panelName,"reloader",label,6,0)
+        label = Button(self.ihm, text="Relire Donnée", command=self.rechargeBase, height=4, width=self.Xmax)
+        self.add(panelName, "reloader", label, 6, 0)
         
-        label = Button(self.ihm, text="Mettre a jour", command=chooseRelease,height=4,width=self.Xmax)
-        self.add(panelName,"update",label,7,0)
+        label = Button(self.ihm, text="Mettre a jour", command=chooseRelease, height=4, width=self.Xmax)
+        self.add(panelName, "update", label, 7, 0)
         
-        label = Button(self.ihm, text="Connection", command=self.showIp,height=4,width=self.Xmax)
-        self.add(panelName,"update",label,8,0)
+        label = Button(self.ihm, text="Connection", command=self.showIp, height=4, width=self.Xmax)
+        self.add(panelName, "update", label, 8, 0)
         
-        label = Button(self.ihm, text="Retour", command=self.showMenu,height=3,width=self.Xmax)
-        self.add(panelName,"retour",label,9,0)
+        label = Button(self.ihm, text="Retour", command=self.showMenu, height=3, width=self.Xmax)
+        self.add(panelName, "retour", label, 9, 0)
 
-        label = Button(self.ihm, text="QUITTER", command=self.ihm.quit,height=4,width=self.Xmax)
-        self.add(panelName,"quitter",label,10,0)
+        label = Button(self.ihm, text="QUITTER", command=self.ihm.quit, height=4, width=self.Xmax)
+        self.add(panelName, "quitter", label, 10, 0)
         
     # creation fenetre type changement IP
     
@@ -346,15 +374,15 @@ class ihmRoot:
 
         # quantite, prix, article, fournisseur, date
 
-        label=Label(self.ihm,text="Adresse ;")
-        entry  = Entry(self.ihm,textvariable=self.ipAddress)
-        self.add(panelName,"ipLabel",label,2,0)
-        self.add(panelName,"ipEntry",entry,3,0)
+        label=Label(self.ihm, text="Adresse ;")
+        entry  = Entry(self.ihm, textvariable=self.ipAddress)
+        self.add(panelName, "ipLabel", label, 2, 0)
+        self.add(panelName, "ipEntry", entry, 3, 0)
 
-        label=Label(self.ihm,text="Reseau ;")
-        entry  = Entry(self.ihm,textvariable=self.ipSid)
-        self.add(panelName,"sidLabel",label,4,0)
-        self.add(panelName,"sidEntry",entry,5,0)
+        label=Label(self.ihm, text="Reseau ;")
+        entry  = Entry(self.ihm, textvariable=self.ipSid)
+        self.add(panelName, "sidLabel", label, 4, 0)
+        self.add(panelName, "sidEntry", entry, 5, 0)
 
         
         
@@ -362,11 +390,11 @@ class ihmRoot:
 #        self.add(panelName,"ping",label,6,0,colspan=2)
 
         label = Button(self.ihm, text="Mettre a jour",
-                       command=lambda x=1:ipChange(self.ipAddress.get(),self.ipSid.get()),height=4)
-        self.add(panelName,"update",label,7,0,colspan=2)
+                       command=lambda x=1:ipChange(self.ipAddress.get(), self.ipSid.get()), height=4)
+        self.add(panelName, "update", label, 7, 0, colspan=2)
 
-        label = Button(self.ihm, text="QUITTER", command=self.ihm.quit,height=4,width=self.Xmax)
-        self.add(panelName,"quitter",label,10,0)
+        label = Button(self.ihm, text="QUITTER", command=self.ihm.quit, height=4, width=self.Xmax)
+        self.add(panelName, "quitter", label, 10, 0)
 
     # creation fenetre type menu
 
@@ -379,7 +407,7 @@ class ihmRoot:
     def showIp(self):
         global fichierIp
         
-        f=open(fichierIp,"r")
+        f=open(fichierIp, "r")
         l=f.readline()
         f.close
         #print fichierIp
@@ -399,52 +427,56 @@ class ihmRoot:
 
     # creation fenetre type Facture
     
-    def factureCreate(self,num):
+    def factureCreate(self, num):
 
         what="%d"%num
         panelName = "facture"+what
         
         # Menu
-        label = Button(self.ihm, text="MENU", command=self.showMenu,height=3,width=self.Xmax+1)
-        self.add(panelName,"filtreLabel",label,0,0,colspan=5)
+        frame = Frame(self.ihm)
+        self.add(panelName, "menu", frame, 0, 0, colspan=5)
+        label = Button(frame, text="MENU", command=self.showMenu, height=2)
+        label.pack(side=LEFT, expand=1, fill=BOTH)
+        label = Button(frame, text="KEYB", command=self.showKeyboard, height=2)
+        label.pack(side=LEFT, expand=1, fill=BOTH)
+
         
         # frame
 
-        self.facture[what] = Frame(self.ihm,width=self.Xmax,height=self.Ymax-30)
-        self.add(panelName,"facture",self.facture[what],1,0,colspan=5)
+        self.facture[what] = Frame(self.ihm, width=self.Xmax, height=self.Ymax-30)
+        self.add(panelName, "facture", self.facture[what], 1, 0, colspan=5)
 
-        button = Button(self.ihm, text="<<<", command=self.facturePrevious,height=3,width=6)
-        self.add(panelName,"previous",button,3,0)
+        button = Button(self.ihm, text="<<<", command=self.facturePrevious, height=3, width=6)
+        self.add(panelName, "previous", button, 3, 0)
 
-        button = Button(self.ihm, text="Nouvelle\nFacture", command=self.factureNew,height=3,width=6)
-        self.factureButton[num,"ajouter"]=button
-        self.add(panelName,"ajouter",button,3,1)
+        button = Button(self.ihm, text="Nouvelle\nFacture", command=self.factureNew, height=3, width=6)
+        self.factureButton[num, "ajouter"]=button
+        self.add(panelName, "ajouter", button, 3, 1)
         
-        button = Button(self.ihm, text="envoyer\nFacture", command=self.ihm.quit,height=3,width=6)
-        self.factureButton[num,"envoyer"]=button
-        self.add(panelName,"envoyer",button,3,2)
+        button = Button(self.ihm, text="envoyer\nFacture", command=self.ihm.quit, height=3, width=6)
+        self.factureButton[num, "envoyer"]=button
+        self.add(panelName, "envoyer", button, 3, 2)
         
-        button = Button(self.ihm, text="Annuler\nFacture", command=self.ihm.quit,height=3,width=6)
-        self.factureButton[num,"annuler"]=button
-        self.add(panelName,"annuler",button,3,3)
+        button = Button(self.ihm, text="Annuler\nFacture", command=self.ihm.quit, height=3, width=6)
+        self.factureButton[num, "annuler"]=button
+        self.add(panelName, "annuler", button, 3, 3)
 
-        button = Button(self.ihm, text=">>>", command=self.factureNext,height=3,width=6)
-        self.add(panelName,"next",button,3,4)
+        button = Button(self.ihm, text=">>>", command=self.factureNext, height=3, width=6)
+        self.add(panelName, "next", button, 3, 4)
 
 
         return self.facture[what]
 
     def start(self):
-        global zoomedWindow,version
-        
-        if zoomedWindow:
+        if oyak.zoomedWindow:
             self.ihm.wm_state(newstate="zoomed")
-        self.startProgressBar("OYAK v %s \n\n\n Bienvenue"%version)
-        self.ihm.after(2000,self.lectureDonnee)
+        self.startProgressBar("OYAK v %s \n\n\n Bienvenue"%oyak.version)
+        self.ihm.after(2000, self.lectureDonnee)
+        self.showKeyboard()
         self.ihm.mainloop()
 
     def facturePrevious(self):
-        global factureCurrent,clientNB
+        global factureCurrent, clientNB
         
         nbPrevious=factureCurrent-1
 
@@ -457,7 +489,7 @@ class ihmRoot:
         self.showMessage("Pas d'autre\nFacture!!!")
 
     def factureNext(self):
-        global factureCurrent,clientNB
+        global factureCurrent, clientNB
         
         nbNext=factureCurrent+1
 
@@ -469,35 +501,86 @@ class ihmRoot:
 
         self.showMessage("Pas d'autre\nFacture!!!")
 
-    def showFactureFirst(self,menu=0):
+    def showFactureFirst(self, menu=0):
         i=getFirstFacture()
         if  i<0 and menu==0:
             self.factureNew()
         else:
             if i<0:
-                chooseClient()
+                myClient.ihmShow()
             else:
                 Factures[i].show()
 
     def factureNew(self):
-        self.showMessageOuiNon("Demarrer une \nautre Facture?",siOui=processFacture)
+        self.showMessageOuiNon("Demarrer une \nautre Facture?", siOui=processFacture)
 
     def delCurrentFacture(self):
-        global factureCurrent,Factures
+        global factureCurrent, Factures
 
         releaseNBfacture(factureCurrent)
         self.showFactureFirst(menu=1)
 
     def lectureDonnee(self):
-        global isReadFromServer
-        lisData(isReadFromServer)
-        chooseVendeur()
+        lisData(clearAll=1)
+        oyak.myVendeur.ihmShow()
 
     def rechargeBase(self):
         ihm.showMessage("Telechargement du serveur")
-        lisData(readFromServer=1)
-        ihm.showMessage("OK...",self.showMenu)
+        lisData(clearAll=1, forceRecharge=1)
+        ihm.showMessage("OK...", self.showMenu)
 
+    def changeVendeur(self):
+        global myVendeur
+        myVendeur.ihmShow()
+
+
+
+    # creation fenetre type keyboard
+    def keyboardCreate(self):
+
+        panelName="keyboard"
+        self.keyboardString=""
+        
+
+        keyboardFrame=Frame(self.kbd)
+
+#        Label(keyboardFrame, text=">").pack(side=LEFT, expand=1, fill=BOTH)
+#        Label(keyboardFrame, textvariable=self.kbd.keyboardSV).pack(side=LEFT, expand=1, fill=BOTH)
+        j=0
+        self.add(panelName, "input", keyboardFrame, j, 0, colspan=7)
+        self.kbd.keyboardSV.set(self.keyboardString)
+
+        keys=Frame(self.kbd)
+        self.add(panelName, "keys", keys, j+1, 0, colspan=7)
+#        keys=Frame(keyb).pack(side=LEFT,expand=1,fill=BOTH)
+#        ctrl=Frame(keyb).pack(side=LEFT,expand=1,fill=BOTH)
+
+
+        for l in ["1234567890", "azertyuiop", "qsdfghjklm", "wxcvbn,.-*",
+                  " ", ["DEL", "ENTER"]]:
+            i=0
+            line=Frame(keys)
+            for c in l:
+                b=Button(line, text=c)
+                b["command"]=lambda x=c:self.addKey(car=x)
+                b.pack(side=LEFT, expand=1, fill=BOTH)
+                i=i+1
+            line.pack(side=TOP, expand=1, fill=BOTH)
+            
+
+    def showKeyboard(self):
+        self.show("keyboard", hidingAll=0)
+        #self.kdb.Raise()
+    
+    def addKey(self, car):
+        global oyak
+        if car=="DEL":
+            oyak.myCurrentDelChar("fake")
+            return
+        if car=="ENTER":
+            oyak.myCurrentEnterChar("fake")
+            return
+        oyak.myCurrentAddChar(car)
 
 
 ###################################################################
@@ -506,181 +589,206 @@ class ihmRoot:
 #
 ###################################################################
 
+        
 class lisData:
 
-    def __init__(self,readFromServer=0):
-        global ihm
+    global oyak
+    
+    def __init__(self, clearAll=0, forceRecharge=0):
+  
+        oyak.ihm.updateProgressBar("Chargement Data", 0.)
 
-        self.readFromServer=readFromServer
-        es=ihm.updateProgressBar("Chargement Data",0.)
+        self.forceRecharge=forceRecharge
+        self.clearAll=clearAll
         
-#        ihm.updateProgressBar("vendeur...",0.1)
-#        getVendeurs(self.readFromServer)
-#        ihm.updateProgressBar("Produits...",0.3)
-#        getProduits(self.readFromServer)
-#        ihm.updateProgressBar("client...",0.6)
-#        getClients(self.readFromServer)
-#        ihm.updateProgressBar("fournisseur...",0.9)
-#        getFournisseurs(self.readFromServer)
-#        ihm.updateProgressBar("Releases...",0.95)
-#        getReleases(readFromServer=1)
+        if clearAll:
+            Produits={}
+            ProduitsFournisseurs={}
+            ProduitsRacourcis={}
+            ProduitsCodes={}
+            Clients={}
+            Vendeurs={}
+            Fournisseurs={}
+            Fournisseurs['9999']=('XXXX', 'xxxx', '9999')
+            Releases={}
+            timestamp = {}
+
+
+        oyak.myVendeur=chooseVendeur(forceRecharge)
+        oyak.myClient=chooseClient(forceRecharge)
+        oyak.myProduit=chooseProduit(forceRecharge)
+        oyak.myFournisseur=chooseFournisseur(forceRecharge)
+
 
     
-
 class getData:
+    global oyak
 
-    def __init__(self,what,readFromServer):
-        global ihm, fichierBackup_Template,url_get_Templare, nbChamps,barSize
+    def __init__(self, what, forceRecharge):
+        
+        oyak.ihm.updateProgressBar("Chargement %s..."%what, oyak.barSize[what])
+        
+        # initialisation
+        self.what=what
+        
+        lengthArticle=oyak.nbChamps[what]
 
-        if not(isAlreadyLoaded[what]):
-            ihm.updateProgressBar("Chargement %s..."%what,barSize[what])
+        # creation des nom de fichiers
+        self.fichierBackup=oyak.fichierBackup_Template%what
+        self.fichierTemp=oyak.fichierTemp_Template%what
 
-            # initialisation
-            self.create_backup=0
-            self.what=what
-            self.readFromServer=readFromServer
+        # ouverture du fichier temporaire
+            
+        # lecture sur fichier backup d'abord
+        if not(forceRecharge) and self.readFromBackup()==0:
+            if oyak.debugMessages:
+                print "lecture from Backup pour %s"%what
+            self.readSource(lengthArticle)
+            self.closeSource()
+        # lecture depuis la base
+        else:
+            if oyak.debugMessages:
+                print "lecture from web pour %s "%what
+
+	    isThere=os.path.exists(self.fichierBackup)
+            if isThere:
+               os.unlink(self.fichierBackup)
+            self.tmpFile = open(self.fichierTemp, "w")
             self.urlName=url_get_Template%what
-            self.fichierBackup=fichierBackup_Template%what
 
-            lengthArticle=nbChamps[what]
-
-            self.dataAvailable=self.openSource()
-            if self.dataAvailable==0:
+            if self.readFromUrl()==0:
                 self.readSource(lengthArticle)
                 self.closeSource()
 
+        # sauvegarde sur la device des données
+            self.tmpFile.close()
+            self.fichierOld=fichierOld_Template%what
+            try :
+                os.rename(self.fichierTemp, self.fichierBackup)
+
+                # recopie dans la zone permanente
+                shutil.copy(self.fichierBackup, fichierAppTemplate%what)
+            except:
+                if oyak.debugMessages:
+                    print "pb a la sauvegarde du fichier Backup"
+                raise
+            
+        # creation du panel lie a cette variable
+
+        if not(oyak.isAlreadyPaneled[what]):
             self.choosePanelCreate(what)
-            isAlreadyLoaded[what]=1
+            oyak.isAlreadyPaneled[what]=1
 
 
     # creation fenetre type choix
     
-    def choosePanelCreate(self,what):
-        global ihm
+    def choosePanelCreate(self, what):
         
         panelName = what
         panelName0 = what+"0"
         
         # Menu
-        label = Button(ihm.ihm, text="MENU", command=ihm.showMenu,height=2)
-        ihm.add(panelName,"menu",label,0,0,colspan=2)
-        ihm.add(panelName0,"menu",label,0,0,colspan=2)
+        frame = Frame(oyak.ihm.ihm)
+        oyak.ihm.add(panelName, "menu", frame, 0, 0, colspan=2)
+        label = Button(frame, text="MENU", command=oyak.ihm.showMenu, height=2)
+        label.pack(side=LEFT, expand=1, fill=BOTH)
+        label = Button(frame, text="KEYB", command=oyak.ihm.showKeyboard, height=2)
+        label.pack(side=LEFT, expand=1, fill=BOTH)
         
         # filtre
-        ihm.filtreLabel[what]=StringVar("")
-        ihm.filtreLabel[what].set("filtre >")
-        label = Label(ihm.ihm, textvariable=ihm.filtreLabel[what],
-                      width=ihm.Xmax-1, height=1,justify="left", fg="red")
-        ihm.add(panelName,"filtreLabel",label,1,0,sticky="W")
-        ihm.add(panelName0,"filtreLabel",label,1,0,sticky="W")
+        oyak.ihm.filtreLabel[what]=StringVar("")
+        oyak.ihm.filtreLabel[what].set("filtre >")
+        label = Label(oyak.ihm.ihm, textvariable=oyak.ihm.filtreLabel[what],
+                      width=oyak.ihm.Xmax-1, height=1, justify="left", fg="red")
+        oyak.ihm.add(panelName, "filtreLabel", label, 1, 0, sticky="W")
+        oyak.ihm.add(panelName0, "filtreLabel", label, 1, 0, sticky="W")
         
         # liste box
 
-        scrollbar = Scrollbar(ihm.ihm)
-        scrollbar0 = Scrollbar(ihm.ihm)
-        ihm.add(panelName,"scrollbar",scrollbar,2,1,sticky=N+S)
-        ihm.add(panelName0,"scrollbar",scrollbar0,2,1,sticky=N+S)
+        scrollbar = Scrollbar(oyak.ihm.ihm)
+        scrollbar0 = Scrollbar(oyak.ihm.ihm)
+        oyak.ihm.add(panelName, "scrollbar", scrollbar, 2, 1, sticky=N+S)
+        oyak.ihm.add(panelName0, "scrollbar", scrollbar0, 2, 1, sticky=N+S)
         
-        ihm.listbox[what] = Listbox(ihm.ihm, height=ihm.Ymax-6, yscrollcommand=scrollbar.set)
-        ihm.add(panelName,"listbox",ihm.listbox[what],2,0)
-        scrollbar.config(command=ihm.listbox[what].yview)
+        oyak.ihm.listbox[what] = Listbox(oyak.ihm.ihm, height=oyak.ihm.Ymax-6, yscrollcommand=scrollbar.set)
+        oyak.ihm.add(panelName, "listbox", oyak.ihm.listbox[what], 2, 0)
+        scrollbar.config(command=oyak.ihm.listbox[what].yview)
 
-        ihm.listbox0[what] = Listbox(ihm.ihm, height=ihm.Ymax-6, yscrollcommand=scrollbar.set)
-        ihm.add(panelName0,"listbox",ihm.listbox0[what],2,0)
-        scrollbar0.config(command=ihm.listbox0[what].yview)
+        oyak.ihm.listbox0[what] = Listbox(oyak.ihm.ihm, height=oyak.ihm.Ymax-6, yscrollcommand=scrollbar.set)
+        oyak.ihm.add(panelName0, "listbox", oyak.ihm.listbox0[what], 2, 0)
+        scrollbar0.config(command=oyak.ihm.listbox0[what].yview)
 
 
         # Menu
-        button = Button(ihm.ihm, text="OK", height=3)
-        ihm.okButton[what]=button
-        ihm.add(panelName,"OK",button,3,0,colspan=2)
-        ihm.add(panelName0,"OK",button,3,0,colspan=2)
+        button = Button(oyak.ihm.ihm, text="OK", height=3)
+        oyak.ihm.okButton[what]=button
+        oyak.ihm.add(panelName, "OK", button, 3, 0, colspan=2)
+        oyak.ihm.add(panelName0, "OK", button, 3, 0, colspan=2)
 
 
-
-
+        
     def readFromUrl(self):
         global isServeurInjoignable
-        try:
-           self.origFileh = urllib.urlopen(self.urlName)
-           if debugMessages:
-              print "creation fichier Backup OK pour ",self.what
-           self.create_backup=1
-           self.backupFile = open(self.fichierBackup,"w")
-           return 0
-        except:
-           if self.readFromServer:
-               if not(isServeurInjoignable):
-                   ihm.showMessage("Solveur injoignable\n Impossibe de télécharger les data du serveur \n Repli sur Backup")
-               isServeurInjoignable=1
-           return -1 
+
+        self.create_backup=1
+
+        if not(isServeurInjoignable):
+            try:
+                self.origFileh = urllib.urlopen(self.urlName)
+                return 0
+            except:
+                oyak.ihm.showMessage("Solveur injoignable\n Impossibe de télécharger les data du serveur \n Repli sur Backup")
+                isServeurInjoignable=1
+        return -1 
             
     def readFromBackup(self):
-           global debugMessages
+        self.create_backup=0
+        
+        try :
+            self.origFileh = open(self.fichierBackup)
+            return 0
+        except :
+            return -1     
 
-           try :
-               self.origFileh = open(self.fichierBackup)
-           except :
-                return -1     
-           if debugMessages:
-              print "lecture fichier Backup OK pour ",self.what
-           if self.origFileh:
-                return 0
-           else:
-                return -1
             
-    def openSource(self):
-       global debugMessages
-       
-       if self.readFromServer:
-           if debugMessages:
-               print "Force la lecture des Data %s sur serveur"%self.what
-           isreached=self.readFromUrl()
-       if not(self.readFromServer) or isreached<0:
-           isreached=self.readFromBackup()
-           if isreached<0:
-               isreached=self.readFromUrl()
-       if isreached>=0:     
-          self.fileList = self.origFileh.readlines()
-          return 0
-       else:
-          return -1
-
-    def readSource(self,lengthArticle):
+    def readSource(self, lengthArticle):
+        self.fileList = self.origFileh.readlines()
         self.nbArticles=0
         for l in self.fileList:
             if self.create_backup:
-                self.backupFile.write(l)
-            articles=string.split(l,"=")
+                self.tmpFile.write(l)
+            articles=string.split(l, "=")
             for a in articles:
-                article=string.split(a,"!")
+                article=string.split(a, "!")
                 if len(article)==lengthArticle:
-                    self.collect(article)
-                    self.nbArticles+=1
+                    if self.collect(article):
+                        self.nbArticles+=1
 
     def closeSource(self):                    
         self.origFileh.close()
-        if self.create_backup:
-            self.backupFile.close()
-        if debugMessages:
-            print "%d %s lus "%(self.nbArticles,self.what)
+        if oyak.debugMessages:
+            print "%d %s lus"%(self.nbArticles, self.what)
+            print
+            
+
+
 
 ###############################################################################################
 # Gestion adresse IP et reseau
 ###############################################################################################
 
-def ipChange(ipAddress,ipSid):
-    global ipFichier,ipFichierTemplate
+def ipChange(ipAddress, ipSid):
+    global ipFichier, ipFichierTemplate
     
-    shutil.copy(fichierIp,fichierIpBackup)
+    shutil.copy(fichierIp, fichierIpBackup)
 
     f=open(fichierIpTemplate)
-    g=open(fichierIpNew,"w")
+    g=open(fichierIpNew, "w")
     
     l=f.readline()
     while (l):
-        l=string.replace(l,"OYAK_SID",ipSid)
-        l=string.replace(l,"OYAK_IP",ipAddress)
+        l=string.replace(l, "OYAK_SID", ipSid)
+        l=string.replace(l, "OYAK_IP", ipAddress)
         g.write(l)
         l=f.readline()
 
@@ -689,9 +797,9 @@ def ipChange(ipAddress,ipSid):
 
     try :
         os.unlink(fichierIp)
-        os.rename(fichierIpNew,fichierIp)
+        os.rename(fichierIpNew, fichierIp)
     except:
-        shutil.copy(fichierIpBackup,fichierIp)
+        shutil.copy(fichierIpBackup, fichierIp)
 
 
 ################################################################################
@@ -699,36 +807,29 @@ def ipChange(ipAddress,ipSid):
 ##################################################################################
 
 class chooseXXX(getData):
-
-    def __init__(self,what,filtre="",killable=0):
-        global ihm,isReadFromServer
-
-        # chargement des données
-        getData.__init__(self,what,isReadFromServer)
-
+    global oyak
+ 
+    def __init__(self, what, forceRecharge=0):
+        getData.__init__(self, what, forceRecharge)
         
-        self.listbox = ihm.listbox[what]
-        self.listbox0 = ihm.listbox0[what]
+        
+    def ihmShow(self, what, filtre="", killable=0):
+                
+        self.listbox = oyak.ihm.listbox[what]
+        self.listbox0 = oyak.ihm.listbox0[what]
         self.clefs0={}
         
         self.what=what
         self.killable=killable
-
-        
         self.filtre=filtre
-
         self.initPanel()
-
         self.setFiltre(filtre)
-
         self.ihmChoix()
 
-        ihm.okButton[what]["command"]=lambda x="fake" : self.go("fake")
-        
+        oyak.ihm.okButton[what]["command"]=lambda x="fake" : self.go("fake")
         self.listePrepare()
 
-        ihm.show(what)
-        
+        oyak.ihm.show(what)
         self.action()
         
     def initPanel(self):
@@ -737,17 +838,27 @@ class chooseXXX(getData):
     def listePrepare(self):
         pass
             
-    def setFiltre(self,filtre):
-        ihm.filtreLabel[self.what].set(self.filtreName+filtre)
+    def setFiltre(self, filtre):
         
-    def addchar(self,event):
+        oyak.ihm.filtreLabel[self.what].set(self.filtreName+filtre)
+        self.filtre=filtre
+        oyak.myCurrentAddChar=self.addcharFromKbd
+        oyak.myCurrentDelChar=self.delchar
+        oyak.myCurrentEnterChar=self.go
+        
+    def addcharFromKbd(self, char):
+        self.filtre=self.filtre+char
+        self.setFiltre(self.filtre)
+        self.action()
+
+    def addchar(self, event):
         self.filtre=self.filtre+event.char
         self.setFiltre(self.filtre)
         self.action()
 
-    def delchar(self,event):
+    def delchar(self, event):
         if len(self.filtre)==0 and self.killable:
-             ihm.returnPrevious()
+             oyak.ihm.returnPrevious()
              return
         self.filtre=self.filtre[:-1]
         self.setFiltre(self.filtre)
@@ -756,79 +867,83 @@ class chooseXXX(getData):
 
     def ihmChoix(self):
 
-        bindElementKeysFunction(self.listbox,
+        oyak.bindElementKeysFunction(self.listbox,
                                 "0123456789abcdefghijklmnopqrstuvwxyz'-*+",
                                 self.addchar)
 
-        bindElementKeysFunction(self.listbox0,
+        oyak.bindElementKeysFunction(self.listbox0,
                                 "0123456789abcdefghijklmnopqrstuvwxyz'-*+",
                                 self.addchar)
 
-        self.listbox.bind("<space>",self.addchar) 
-        self.listbox.bind("<BackSpace>",self.delchar)
-        self.listbox.bind("<Return>",self.go) 
+        self.listbox.bind("<space>", self.addchar) 
+        self.listbox.bind("<BackSpace>", self.delchar)
+        self.listbox.bind("<Return>", self.go) 
 
-        self.listbox0.bind("<space>",self.addchar) 
-        self.listbox0.bind("<BackSpace>",self.delchar)
-        self.listbox0.bind("<Return>",self.go) 
+        self.listbox0.bind("<space>", self.addchar) 
+        self.listbox0.bind("<BackSpace>", self.delchar)
+        self.listbox0.bind("<Return>", self.go) 
 
 
 
 
 class chooseVendeur(chooseXXX):
+    global oyak
 
-    def __init__(self):
-        chooseXXX.__init__(self,"vendeurs")        
+    def __init__(self, forceRecharge=0):
+        chooseXXX.__init__(self, "vendeurs", forceRecharge)        
 
-    def collect(self,article):
-        (numero,nom,prenom,timestamp)=article
-        Vendeurs[numero]=(numero,nom,prenom)
+    def ihmShow(self):
+        chooseXXX.ihmShow(self, "vendeurs")        
 
+    def collect(self, article):
+        global Vendeurs
+        (numero, nom, prenom, timestamp)=article
+        oyak.Vendeurs[numero]=(numero, nom, prenom)
+        return 1
+                                    
     def initPanel(self):
         self.filtreName="Vendeur > "
 
-    def go(self,event):
-        global vendeurChoisi
-        global ihm
+    def go(self, event):
         
         try :
           #print len(self.clefs0)
           if len(self.filtre)==0 and len(self.clefs0)>0:
               clef=self.listbox0.curselection()[0]
               choix=self.clefs0[int(clef)]
-              print clef,choix
+              #print clef,choix
           else:
               clef=self.listbox.curselection()[0]
               choix=self.clefs[int(clef)]
         except:
           if self.filtre=="ipipip" or self.filtre=="IPIPIP":
-            ihm.showIp()
+            oyak.ihm.showIp()
             return
-          ihm.showMessage("Choix impossible!!!",self.action)
+          oyak.ihm.showMessage("Choix impossible!!!", self.action)
           return
           
         self.filtre=""
         self.setFiltre(self.filtre)
         
-        vendeurChoisi=choix
-        chooseClient()
+        oyak.vendeurChoisi=choix
+        oyak.myClient.ihmShow()
 
-    def action(self,event="fake"):
-        self.listbox.delete(0,END)
+    def action(self, event="fake"):
+        self.listbox.delete(0, END)
 
 
         self.clefs={}
         i=0
-        liste=Vendeurs.keys()
+        liste=oyak.Vendeurs.keys()
         liste.sort(key=str.lower)
         for clef in liste:
-               (numero,nom,prenom) = Vendeurs[clef]
+               (numero, nom, prenom) = oyak.Vendeurs[clef]
                nom.lower()
                if string.lower(nom[:len(self.filtre)])==self.filtre:
-                   self.listbox.insert(END, "%s %s"%(nom,prenom))
-                   self.clefs[i]=(numero,nom,prenom)
+                   self.listbox.insert(END, "%s %s"%(nom, prenom))
+                   self.clefs[i]=(numero, nom, prenom)
                    i=i+1
-        ihm.show(self.what)
+        oyak.ihm.show(self.what)
         self.listbox.focus_set()
         self.listbox.selection_set(0)
 
@@ -836,21 +951,25 @@ class chooseVendeur(chooseXXX):
 
 class chooseClient(chooseXXX):
 
-    def __init__(self):
-        chooseXXX.__init__(self,"clients")
+    def __init__(self, forceRecharge=0):
+        chooseXXX.__init__(self, "clients", forceRecharge)
         
-
-    def collect(self,article):
-        (societe,ville,clef,timestamp)=article
-        Clients[societe+"/"+ville]=(societe,ville,clef)
+    def ihmShow(self):
+        chooseXXX.ihmShow(self, "clients")
+        
+    def collect(self, article):
+        (societe, ville, clef, timestamp)=article
+        oyak.Clients[societe+"/"+ville]=(societe, ville, clef)
+        return 1
 
     def listePrepare(self):
-        clefsClients=Clients.keys()
+        clefsClients=oyak.Clients.keys()
         clefsClients.sort(key=str.lower)
 
         i=0
         for clef in clefsClients:
-            self.listbox0.insert(END,clef)
+            (societe, ville, nb)=oyak.Clients[clef]
+            self.listbox0.insert(END, "%04d-%s"%(int(nb[1:]), clef))
             self.clefs0[i]=clef
             i=i+1
         #print self.listbox0
@@ -859,20 +978,20 @@ class chooseClient(chooseXXX):
 
     def initPanel(self):
         self.clefs={}
-        (numero,nom,prenom)=vendeurChoisi
+        (numero, nom, prenom)=oyak.vendeurChoisi
         self.filtreName="%s > "%prenom
 
-    def go(self,event):
-
+    def go(self, event):
+        global oyak
         try :
           if len(self.filtre)==0 and len(self.clefs0)>0:
               clef=self.listbox0.curselection()[0]
-              choix=Clients[self.clefs0[int(clef)]]
+              choix=oyak.Clients[self.clefs0[int(clef)]]
           else:
               clef=self.listbox.curselection()[0]
-              choix=Clients[self.clefs[int(clef)]]
+              choix=oyak.Clients[self.clefs[int(clef)]]
         except:
-            ihm.showMessage("Choix impossible!!!",self.action)
+            oyak.ihm.showMessage("Choix impossible!!!", self.action)
             return 0
 
         self.filtre=""
@@ -880,24 +999,26 @@ class chooseClient(chooseXXX):
                 
         processFacture(client=choix)
 
-    def action(self,event="fake"):
+    def action(self, event="fake"):
         global clefsClients
 
 
         i=0
         n=len(self.filtre)
         if n==0:
-            ihm.show("clients0")
+            oyak.ihm.show("clients0")
             self.listbox0.focus_set()
             self.listbox0.selection_set(0)
         else:
-            self.listbox.delete(0,END)
-            ihm.show("clients")
+            self.listbox.delete(0, END)
+            oyak.ihm.show("clients")
             self.listbox.focus_set()
             self.listbox.selection_set(0)
-            for clef in Clients.keys():
-                if string.lower(clef[:n])==self.filtre:
-                    self.listbox.insert(END, clef)
+            for clef in oyak.Clients.keys():
+                (societe, ville, nb)=oyak.Clients[clef]
+                nb=nb[1:]
+                if string.lower(clef[:n])==self.filtre or  nb.find(self.filtre)==0:
+                    self.listbox.insert(END, "%04d-%s"%(int(nb), clef))
                     self.clefs[i]=clef
                     i=i+1
 
@@ -906,63 +1027,65 @@ class chooseClient(chooseXXX):
 
 class chooseProduit(chooseXXX):
 
-    def __init__(self,facture,valeur):
+    def __init__(self, forceRecharge=0):
         
+        chooseXXX.__init__(self, "produits", forceRecharge)
+        
+    def ihmShow(self, facture, valeur):
         self.liste0={}
         self.clefs0={}
         
         self.facture=facture
         self.valeur=valeur
-        (societe,ville,clef) = facture.client
+        (societe, ville, clef) = facture.client
         self.filtreName="%s >"%societe
-        chooseXXX.__init__(self,"produits",killable=1)
+        chooseXXX.ihmShow(self, "produits", killable=1)
         
     def initPanel(self):
         self.filtre=self.valeur
         
 
-    def collect(self,article):
-         (code,clef,fournisseur,prix,prix_plancher,poids,libele,timestamp)=article
-         #racourci = int(code[2:7])
+    def collect(self, article):
+         (code, clef, fournisseur, prix, prix_plancher, poids, libele, timestamp)=article
          racourci = int(clef)
-         ProduitsRacourcis[racourci]=libele
-         if racourci in ProduitsFournisseurs.keys():
-            ProduitsFournisseurs[racourci].append(fournisseur)
+         oyak.ProduitsRacourcis[racourci]=libele
+         if racourci in oyak.ProduitsFournisseurs.keys():
+             oyak.ProduitsFournisseurs[racourci].append(fournisseur)
          else:
-            ProduitsFournisseurs[racourci]=[fournisseur]
-         ProduitsCodes[racourci,fournisseur]=code
-         Produits[code]=(libele,prix,racourci,prix_plancher,poids,fournisseur)
-
+             oyak.ProduitsFournisseurs[racourci]=[fournisseur]
+         oyak.ProduitsCodes[racourci, fournisseur]=code
+         oyak.Produits[code]=(libele, prix, racourci, prix_plancher, poids, fournisseur)
+         return 1
 
     def listePrepare(self):
-        self.liste=ProduitsRacourcis.keys()
+        self.liste=oyak.ProduitsRacourcis.keys()
         self.liste.sort()
         
-    def go(self,event):
+    def go(self, event):
         try:
             clef=self.listbox.curselection()[0]
-            (racourci,libelle)=self.clefs[int(clef)]
+            (racourci, libelle)=self.clefs[int(clef)]
         except:
             return
 
-        chooseFournisseur(self.facture,racourci)
+        oyak.myFournisseur.ihmShow(self.facture, racourci)
 
 
-    def action(self,event="fake"):
-        self.listbox.delete(0,END)
+    def action(self, event="fake"):
+        self.listbox.delete(0, END)
 
         self.clefs={}
         i=0
 
         for racourci in self.liste:
-            (libelle) = ProduitsRacourcis[racourci]
+            (libelle) = oyak.ProduitsRacourcis[racourci]
             libelle.lower()
-            s="%04d-%s"%(racourci,libelle)
+            s="%04d-%s"%(racourci, libelle)
             c="%s"%racourci
             n=len(self.filtre)
             if string.lower(libelle[:n])==self.filtre or c.find(self.filtre)==0:
                 self.listbox.insert(END, s)
-                self.clefs[i]=(racourci,libelle)
+                self.clefs[i]=(racourci, libelle)
                 i=i+1
                 if i==25:
                    self.listbox.update()
@@ -973,46 +1096,62 @@ class chooseProduit(chooseXXX):
 
 class chooseFournisseur(chooseXXX):
 
-    def __init__(self,facture,racourci):
+    def __init__(self, forceRecharge=0):
+        chooseXXX.__init__(self, "fournisseurs", forceRecharge)
+        
+    def ihmShow(self, facture, racourci, all=0):
         self.facture=facture
         self.racourci=racourci
-        chooseXXX.__init__(self,"fournisseurs",killable=1)
+        self.all=all
+        chooseXXX.ihmShow(self, "fournisseurs", killable=1)
         
     def initPanel(self):
-        self.fournisseurs = ProduitsFournisseurs[self.racourci]
-        self.filtreName="%s > "%ProduitsRacourcis[self.racourci]
+        if self.all:
+            self.fournisseurs = Fournisseurs.keys()
+        else:   
+            self.fournisseurs = oyak.ProduitsFournisseurs[self.racourci]
+        self.filtreName="%s > "%oyak.ProduitsRacourcis[self.racourci]
 
-    def collect(self,article):
-        (societe,ville,clef,timestamp)=article
-        Fournisseurs[clef]=(societe,ville,clef)
-
-    def go(self,event):
+    def collect(self, article):
+        (societe, ville, clef, timestamp)=article
+        oyak.Fournisseurs[clef]=(societe, ville, clef)
+        return 1
+    
+    def go(self, event):
         try:
           clef=self.listbox.curselection()[0]
           choix=self.clefs[int(clef)]
         except:
           return  
 
-        (societe,ville,clef) = choix
-        self.facture.acceptProduit(self.racourci,clef)
+        (societe, ville, clef) = choix
+        if clef==0: # selection de tous les fournisseurs
+            self.ihmShow(self.facture, self.racourci, all=1)
+        else:                
+            self.facture.acceptProduit(self.racourci, clef, autre_fournisseur=self.all)
 
-    def action(self,event="fake"):
-        self.listbox.delete(0,END)
+    def action(self, event="fake"):
+        self.listbox.delete(0, END)
 
         self.clefs={}
         i=0
         liste=self.fournisseurs
         n=len(self.filtre)
         for code in liste:
-            (societe,ville,clef)=Fournisseurs[code]
-            s="%04d-%s"%(int(clef),societe)
+            (societe, ville, clef)=oyak.Fournisseurs[code]
+            s="%04d-%s"%(int(clef), societe)
             c="%d"%int(clef)
             n=len(self.filtre)
             if string.lower(societe[:n])==self.filtre or c.find(self.filtre)==0:
                 self.listbox.insert(END, s)
-                self.clefs[i]=(societe,ville,clef)
+                self.clefs[i]=(societe, ville, clef)
                 i=i+1
-                
+
+	# ajout de 'TOUS'
+        self.listbox.insert(END, "TOUS LES FOURNISSEURS")
+        self.clefs[i]=("TOUS", "PARTOUT", 0)
+				
+                        
         self.listbox.focus_set()
         self.listbox.selection_set(0)
 
@@ -1020,46 +1159,48 @@ class chooseFournisseur(chooseXXX):
 
 class chooseRelease(chooseXXX):
 
-    def __init__(self,facture,racourci,save=0):
-        chooseXXX.__init__(self,"releases",killable=1)
+    def __init__(self, forceRecharge=0):
+        chooseXXX.__init__(self, "releases")
+
+    def ihmShow(self, facture, racourci, save=0):
+        chooseXXX.ihmShow(self, "releases", killable=1)
 
     def panelInit(self):
         self.facture=facture
         self.save=save
         self.filtreName="Oyak Version > "
 
-    def collect(self,article):
-        (numero,filename)=article
-        Releases[numero]=(numero,filename)
+    def collect(self, article):
+        (numero, filename)=article
+        Releases[numero]=(numero, filename)
 
-    def go(self,event):
-        global ihm
-
+    def go(self, event):
+        
         try:
           clef=self.listbox.curselection()[0]
           choix=self.clefs[int(clef)]
         except:
-          ihm.returnPrevious()  
+          oyak.ihm.returnPrevious()  
 
-        (numero,filename) = choix
-        ihm.messageShow("telechargement %s"%filename)
-        loadRelease(filename,self.save)
+        (numero, filename) = choix
+        oyak.ihm.messageShow("telechargement %s"%filename)
+        loadRelease(filename, self.save)
 
 
-    def action(self,event="fake"):
-        self.listbox.delete(0,END)
+    def action(self, event="fake"):
+        self.listbox.delete(0, END)
 
         self.clefs={}
         i=0
         liste=Releases.keys()
         n=len(self.filtre)
         for code in liste:
-            (numero,filename)=Releases[code]
+            (numero, filename)=Releases[code]
             s="%s"%(filename)
             n=len(self.filtre)
             if filename.find(self.filtre)==0:
                 self.listbox.insert(END, s)
-                self.clefs[i]=(numero,filename)
+                self.clefs[i]=(numero, filename)
                 i=i+1
                 
         self.listbox.focus_set()
@@ -1074,36 +1215,36 @@ class chooseRelease(chooseXXX):
 #
 ###################################################################
 
-def loadRelease(filename,save):
-    global ihm
+def loadRelease(filename, save):
+    global oyak
     
     if not(save):
         params = urllib.urlencode({'dwn': filename})
         try:
             f = urllib.urlopen(url_update_commande, params)
         except:
-            ihm.showMessage("Le serveur Release ne répond pas!")
+            oyak.ihm.showMessage("Le serveur Release ne répond pas!")
             return
         try:
           os.remove("\\Oyak\\%s"%filename)
         except:
           pass
 
-        new=open("\\Oyak\\%s"%filename,"w")
+        new=open("\\Oyak\\%s"%filename, "w")
         program=f.readlines()
         for l in program :
             new.write("%s\n"%l[:-1])
         new.close()
         try:
-            shutil.copy("\\Oyak\\%s"%filename,"\\Windows\\Desktop\\%s"%filename)
+            shutil.copy("\\Oyak\\%s"%filename, "\\Windows\\Desktop\\%s"%filename)
         except:
             pass
     else:
         try:
-            shutil.copy("\\Oyak\\%s"%filename,"\\Application\\Python\\vendeur.pyw")
-            ihm.showMessage("Device Flashe avec %s"%filename)
+            shutil.copy("\\Oyak\\%s"%filename, "\\Application\\Python\\vendeur.pyw")
+            oyak.ihm.showMessage("Device Flashe avec %s"%filename)
         except:
-            ihm.showMessage("Pb dans la mise a jour %s"%filename)
+            oyak.ihm.showMessage("Pb dans la mise a jour %s"%filename)
         
 
     
@@ -1117,10 +1258,9 @@ def loadRelease(filename,save):
 ################################################################################
 
 class processFacture:
-
-    def __init__(self,nb=0,client=0,check=0):
-        global ihm,zoomedWindow,vendeurChoisi,factureCurrent,Factures
-
+    global oyak
+    
+    def __init__(self, nb=0, client=0, check=0):
         self.nb=nb
 
         self.selectedCode={}
@@ -1130,43 +1270,47 @@ class processFacture:
         self.selectedPrix={}
         self.selectedQuantite={}
 
+        self.buttonQuantite=list()
+        self.buttonProduit=list()
+        self.buttonPrix=list()
+
 
         
         if self.nb==0 and client==0:
-            self.vendeur=vendeurChoisi
+            self.vendeur=oyak.vendeurChoisi
             self.clefs={}
-        
-            chooseClient()
+            myClient.ihmShow()
+
+            ## chooseClient()
             return
 
         else:
             self.client=client
-            (societe,ville,clef)=self.client
+            (societe, ville, clef)=self.client
         
 
-            self.nb=getNBfacture()
-            factureCurrent=self.nb
-            Factures[self.nb]=self
+            self.nb=oyak.getNBfacture()
+            oyak.factureCurrent=self.nb
+            oyak.Factures[self.nb]=self
             
-            self.root=ihm.factureCreate(self.nb)
+            self.root=oyak.ihm.factureCreate(self.nb)
 
-            if zoomedWindow:
-                ihm.ihm.wm_state(newstate="zoomed")
+            if oyak.zoomedWindow:
+                oyak.ihm.wm_state(newstate="zoomed")
             
-            (numero,nom,prenom)=vendeurChoisi
+            (numero, nom, prenom)=oyak.vendeurChoisi
             self.vendeur_prenom=prenom
             self.vendeur_numero=numero
 
             self.ihmFacture()
 
-            ihm.factureButton[self.nb,"annuler"]["command"]=self.annuler
-            ihm.factureButton[self.nb,"envoyer"]["command"]=self.envoyer
+            oyak.ihm.factureButton[self.nb, "annuler"]["command"]=self.annuler
+            oyak.ihm.factureButton[self.nb, "envoyer"]["command"]=self.envoyer
         
-            ihm.show("facture%d"%self.nb)
+            oyak.ihm.show("facture%d"%self.nb)
+            self.goToArticle()
 
     def __del__(self):
-        global clientNB
-
         try:
             if self.nb>0:
                 releaseNBfacture(self.nb)
@@ -1175,31 +1319,61 @@ class processFacture:
             pass
            
     def show(self):
-        global factureCurrent
-
-        factureCurrent=self.nb
-        ihm.show("facture%d"%self.nb)
+        oyak.factureCurrent=self.nb
+        oyak.ihm.show("facture%d"%self.nb)
         self.goToArticle()
 
-    def annuler(send):
-        global ihm
-        ihm.showMessageOuiNon("Annuler la \n Facture?",siOui=ihm.delCurrentFacture)
+    def annuler(self, send):
+        oyak.ihm.showMessageOuiNon("Annuler la \n Facture?", siOui=oyak.ihm.delCurrentFacture)
         
 
-    def addLabelEntry(self,s):
+    def addLabelEntry(self, s):
         sVar= StringVar()
         sVar.set(s)
 
-        label = Label(self.nameFrame, textvariable=sVar,  fg="red" )
+        hVar= StringVar()
+        hVar.set("---")
+
+        label = Label(self.nameFrame, textvariable=sVar, fg="red")
         label.pack(side=TOP)
 
-        e = Entry(self.inputFrame, fg="black" )
-        e.pack(side=TOP)
-        return (sVar,e)
+        f = Frame(self.inputFrame)
+        f.pack(side=TOP)
 
-    def ihmFacture(self):
-        global ihm
+        eVar=StringVar()
         
+        e = Entry(f, fg="black",textvariable=eVar)
+        e.pack(side=LEFT)
+        
+        button = Button(f, textvariable=hVar, fg="red")
+        button["command"]=lambda x=1:self.labelEntryFocus(e, hVar, eVar)
+        button.pack(side=LEFT)
+        
+        return (sVar, e, hVar, eVar)
+
+    def labelEntryFocus(self, e, h, content):
+        self.article_focus.set("---")
+        self.fournisseur_focus.set("---")
+        self.date_focus.set("---")
+        self.quantite_focus.set("---")
+        self.prix_focus.set("---")
+        h.set("<<")
+        e.focus_set()
+        oyak.myCurrentAddChar=self.addcharFromKbd
+        oyak.myCurrentDelChar=self.delcharFromKbd
+        oyak.myCurrentEnterChar=0
+        oyak.myCurrentEntry=content
+
+    def addcharFromKbd(self, char):
+        valeur=oyak.myCurrentEntry.get()+char
+        oyak.myCurrentEntry.set(valeur) 
+        
+    def delcharFromKbd(self,char):
+        valeur=oyak.myCurrentEntry.get()
+        oyak.myCurrentEntry.set(valeur[:-1]) 
+        
+    def ihmFacture(self):
+               
         # division de la fenetre en trois
         
         self.clientFrame = Frame(self.root)
@@ -1207,6 +1381,9 @@ class processFacture:
         
         self.prixFrame = Frame(self.root)
         self.prixFrame.pack(side=TOP)
+
+        self.ligneFrame = Frame(self.root)
+        self.ligneFrame.pack(side=TOP, expand=1, fill=BOTH)
 
         self.nameFrame = Frame(self.prixFrame)
         self.nameFrame.pack(side=LEFT)
@@ -1216,84 +1393,122 @@ class processFacture:
 
         
         self.listFrame = Frame(self.root)
-        self.listFrame.pack(side=TOP,expand=1,fill=BOTH)
+        self.listFrame.pack(side=TOP, expand=1, fill=BOTH)
 
 
-        (societe,ville,clef)=self.client
+        (societe, ville, clef)=self.client
         self.clientClef=clef
 
         # rappel nom client
         label = Label(self.clientFrame,
-                      text="%s>%s"%(self.vendeur_prenom,societe), justify="center", fg="red",width=36)
+                      text="%s>%s"%(self.vendeur_prenom, societe), justify="center", fg="red", width=36)
         label.pack(side=TOP)
 
         # quantite, prix, article, fournisseur, date
 
-        self.quantite_label,self.quantite = self.addLabelEntry("Quantite:")
-        self.prix_label,self.prix = self.addLabelEntry("Prix:")
-        self.article_label,self.article = self.addLabelEntry("Article:")
-        self.fournisseur_label,self.fournisseur = self.addLabelEntry("Fournisseur:")
-        self.date_label,self.date = self.addLabelEntry("Date:")
+        self.article_label, self.article, self.article_focus, self.article_content = self.addLabelEntry("Article:")
+        self.fournisseur_label, self.fournisseur, self.fournisseur_focus, self.fournisseur_content = self.addLabelEntry("Fournisseur:")
+        self.date_label, self.date, self.date_focus, self.date_content = self.addLabelEntry("Date:")
+        self.quantite_label, self.quantite, self.quantite_focus, self.quantite_content = self.addLabelEntry("Quantite:")
+        self.prix_label, self.prix, self.prix_focus, self.prix_content = self.addLabelEntry("Prix:")
+
+        # action sur les lignes
+
+        b=Button(self.ligneFrame, text='copier', command=lambda x=1:self.addFacture(operation='copie'))
+        b.pack(side=LEFT, expand=1, fill=BOTH)
+        
+        b=Button(self.ligneFrame, text='effacer', command=lambda x=1:self.addFacture(operation='supression'))
+        b.pack(side=LEFT, expand=1, fill=BOTH)
+        
+        self.valider=Button(self.ligneFrame, text='Valider', command=lambda x=1:self.addFacture())
+        self.valider.bind("<Return>", lambda x="fake":self.valider.invoke())
+        self.valider.pack(side=LEFT, expand=1, fill=BOTH)
+        
 
         # liste box
 
         scrollbar = Scrollbar(self.listFrame)
         scrollbar.pack(side=RIGHT, expand=0, fill=BOTH)
 
-        self.listbox = Listbox(self.listFrame, yscrollcommand=scrollbar.set)
-        self.listbox.pack(side=LEFT, expand=1, fill=BOTH)
-        scrollbar.config(command=self.listbox.yview)
+        self.quantiteListFrame = Frame(self.listFrame)
+        self.quantiteListFrame.pack(side=LEFT, expand=1, fill=BOTH)
+
+        self.produitListFrame = Frame(self.listFrame)
+        self.produitListFrame.pack(side=LEFT, expand=1, fill=BOTH)
+
+        self.prixListFrame = Frame(self.listFrame)
+        self.prixListFrame.pack(side=LEFT, expand=1, fill=BOTH)
+
+
+
+#        self.listbox = Listbox(self.listFrame, yscrollcommand=scrollbar.set)
+#        self.listbox.pack(side=LEFT, expand=1, fill=BOTH)
+#        scrollbar.config(command=self.listbox.yview)
 
         # Bindings...
 
-        self.article.focus_set()
-        self.article.bind(".",self.processProduit)
+        self.goToArticle()
+        self.article.bind(".", self.processProduit)
         
-        self.article.bind("<Return>",self.route)
-        self.date.bind("<Return>",self.goToQuantite)
-        self.quantite.bind("<Return>",self.goToPrice)
-        self.prix.bind("<Return>",self.addFacture)
-        
-        self.listbox.delete(0,END)
-        self.listbox.insert(END, enteteFact)
+        self.article.bind("<Return>", self.route)
+        self.date.bind("<Return>", self.goToQuantite)
+        self.quantite.bind("<Return>", self.goToPrice)
+        self.prix.bind("<Return>", lambda x=1:self.valider.focus_set())
+
+        self.ajouteLigneFacture("Quant.", "Produit", "Prix")
+#        self.listbox.delete(0,END)
+#        self.listbox.insert(END, enteteFact)
         self.nbArticles=0
+        self.currentArticle=0
+        
+        self.selectedCode[self.currentArticle]=""
+        self.selectedRacourci[self.currentArticle]=""
+        self.selectedFournisseur[self.currentArticle]=""
+        self.selectedDate[self.currentArticle]=""
+        self.selectedQuantite[self.currentArticle]=""
+        self.selectedPrix[self.currentArticle]=""
 
-        self.selectedCode[self.nbArticles]=""
-        self.selectedRacourci[self.nbArticles]=""
-        self.selectedFournisseur[self.nbArticles]=""
-        self.selectedDate[self.nbArticles]=""
-        self.selectedQuantite[self.nbArticles]=""
-        self.selectedPrix[self.nbArticles]=""
 
 
-
-    def processProduit(self,event):
+    def processProduit(self, event):
+                
         valeur=self.article.get()
-        self.article.delete(0,END)
-        chooseProduit(self,valeur)
+        self.article.delete(0, END)
+        oyak.myProduit.ihmShow(self, valeur)
 
 
-    def acceptProduit(self,racourci,fournisseur):
-        global ihm
+    def acceptProduit(self, racourci, fournisseur, autre_fournisseur=0):
+        self.autre_fournisseur=autre_fournisseur
+        
         try:
           # que se passe-t-il si on vire la fenetre de facturation qui
           # a appelé??
-          self.article.delete(0,END)
-          self.fournisseur.delete(0,END)
-          self.prix.delete(0,END)
+          self.article.delete(0, END)
+          self.fournisseur.delete(0, END)
+          self.prix.delete(0, END)
         except:
           return
             
-        ihm.show("facture%d"%self.nb,title="Oyak? Facture ")
+        oyak.ihm.show("facture%d"%self.nb, title="Oyak? Facture ")
+
         # le produit selectionne a un code barre
-        if (racourci,fournisseur) in ProduitsCodes.keys():
-            code = ProduitsCodes[racourci,fournisseur]
-            (libelle,prix,racourci,prix_plancher,poids,fournisseur)=Produits[code]
-            (societe,ville,clef)=Fournisseurs[fournisseur]
-            self.fournisseur.insert(END,societe)
+        if (racourci, fournisseur) in oyak.ProduitsCodes.keys():
+            code = oyak.ProduitsCodes[racourci, fournisseur]
+            (libelle, prix, racourci, prix_plancher, poids, fournisseur)=oyak.Produits[code]
+
+        # le fournisseur est forcé par un appel a autre fournisseur
+        if autre_fournisseur:
+            code = 00
+            (libelle, prix, prix_plancher, poids)=(oyak.ProduitsRacourcis[racourci], "0", "0", "0")
+            
+
+        if (racourci, fournisseur) in oyak.ProduitsCodes.keys() or autre_fournisseur:
+
+            (societe, ville, clef)=oyak.Fournisseurs[fournisseur]
+            self.fournisseur.insert(END, societe)
             self.fournisseur_label.set("Fournisseur : %s"%fournisseur)
               
-            self.article.insert(END,libelle)
+            self.article.insert(END, libelle)
             self.article_label.set("Article : %d"%racourci)
       
             self.quantite_label.set("Quantite : ("+"%6.2f"%(eval(poids)+0.00)+")")
@@ -1303,188 +1518,244 @@ class processFacture:
             self.poids=poids
             self.produit=code
 
-            self.selectedCode[self.nbArticles]=code
-            self.selectedRacourci[self.nbArticles]=racourci
-            self.selectedFournisseur[self.nbArticles]=fournisseur    
+            self.selectedCode[self.currentArticle]=code
+            self.selectedRacourci[self.currentArticle]=racourci
+            self.selectedFournisseur[self.currentArticle]=fournisseur    
 
-            self.date.focus_set()
+            self.goToDate()
         else:
-            ihm.showMessage("Article a part numero %s fournisseur %s",racourci,fournisseur)
+            oyak.ihm.showMessage("Article a part numero %s fournisseur %s", racourci, fournisseur)
                 
-    def deleteCode(self,event):
-        self.article.delete(0,END)
+    def deleteCode(self, event):
+        self.article.delete(0, END)
         self.article_label.set("Article :")
-        self.fournisseur.delete(0,END)
+        self.fournisseur.delete(0, END)
         self.fournisseur_label.set("Fournisseur :")
-        self.date.delete(0,END)
-        self.prix.delete(0,END)
+        self.date.delete(0, END)
+        self.prix.delete(0, END)
         self.prix_label.set("Prix :")
-        self.quantite.delete(0,END)
-        self.article.focus_set()
+        self.quantite.delete(0, END)
+        self.goToArticle()
 
-    def goToArticle(self,event="fake"):
-        ihm.show("facture%d"%self.nb,title="Oyak? Facture ")
-        self.article.focus_set()
+    def goToArticle(self, event="fake"):
+        oyak.ihm.show("facture%d"%self.nb, title="Oyak? Facture ")
+        self.labelEntryFocus(self.article, self.article_focus,self.article_content)
 
 
-    def goToPrice(self,event):
-        self.prix.focus_set()
+    def goToFournisseur(self, event="fake"):
+        self.labelEntryFocus(self.fournisseur, self.fournisseur_focus,self.fournisseur_content)
 
-    def goToQuantite(self,event):
-        self.quantite.focus_set()
 
-    def addFacture(self,event):
-        global ihm
+    def goToPrice(self, event="fake"):
+        oyak.ihm.show("facture%d"%self.nb, title="Oyak? Facture ")
+        self.labelEntryFocus(self.prix, self.prix_focus,self.prix_content)
 
-        prix=self.prix.get()
-        if len(prix)==0:
-                prix=self.prix_default
+    def goToQuantite(self, event="fake"):
+        self.labelEntryFocus(self.quantite, self.quantite_focus,self.quantite_content)
+
+    def goToDate(self, event="fake"):
+        self.labelEntryFocus(self.date, self.date_focus,self.date_content)
+
+    def addFacture(self, operation="create"):
+
         try :
-          if (eval(prix)+0.0)<eval(self.prix_plancher)+0.:
-            ihm.showMessage("Impossible le prix plancher est %6.2f > %s"%((eval(self.prix_plancher)+0.00),prix),
-                            self.goToPrice)
+          self.prix_saisi=self.prix.get()
+          if len(self.prix_saisi)==0:
+                self.prix_saisi=self.prix_default
+          if (eval(self.prix_saisi)+0.0)<eval(self.prix_plancher)+0.:
+            oyak.ihm.showMessageOuiNon("le prix %s est inferieur au prix plancher %6.2f! \n Entrée valide?"%(self.prix_saisi, (eval(self.prix_plancher)+0.00)),
+                           siOui=self.ajouteArticle, siNon=self.goToPrice)
             return
         except:
-            self.prix.delete(0,END)
-            ihm.showMessage("le prix "+prix+" n'est pas reconnu",self.goToPrice)
+            self.prix.delete(0, END)
+            oyak.ihm.showMessage("le prix "+self.prix_saisi+" n'est pas reconnu", self.goToPrice)
             return
+        self.ajouteArticle(operation)
+
+
+    def ajouteLigneFacture(self, quantite, produit, prix, ligne=-1):
+
+        if ligne==-1:
+            l=Label(self.quantiteListFrame, text=quantite)
+            l.pack(side=TOP)
+            l=Label(self.produitListFrame, text=produit)
+            l.pack(side=TOP)
+            l=Label(self.prixListFrame, text=prix)
+            l.pack(side=TOP)
+        else:
+            if ligne==self.nbArticles:
+                l=Button(self.quantiteListFrame, text=quantite,
+                         command=lambda x=1:self.getArticle(ligne, "quantite")) 
+                self.buttonQuantite.append(l)
+                l.pack(side=TOP, expand=1, fill=BOTH)
+                l=Button(self.produitListFrame, text=produit,
+                         command=lambda x=1:self.getArticle(ligne, "produit"))
+                self.buttonProduit.append(l)
+                l.pack(side=TOP, expand=1, fill=BOTH)
+                l=Button(self.prixListFrame, text=prix,
+                         command=lambda x=1:self.getArticle(ligne, "prix"))
+                self.buttonPrix.append(l)
+                l.pack(side=TOP, expand=1, fill=BOTH)
+            else:
+                self.buttonQuantite[ligne].config(text=quantite)
+                self.buttonProduit[ligne].config(text=produit)
+                self.buttonPrix[ligne].config(text=prix)
+
+
+            
+    def getArticle(self, ligne, focus):
+        self.currentArticle=ligne
+        self.acceptProduit(self.selectedRacourci[ligne], self.selectedFournisseur[ligne])
+        if focus=="quantite":
+            self.goToQuantite()
+        if focus=="produit":
+            self.goToArticle()
+        if focus=="prix":
+            self.goToPrice()
+        return
+
+
+    def ajouteArticle(self, operation='creation'):
+        oyak.ihm.show("facture%d"%self.nb, title="Oyak? Facture ")
         quantite=self.quantite.get()
         if len(quantite)==0:
                 quantite=self.poids
 
         article=self.article.get()
-        try :
-          self.listbox.insert(END, formatFact%(float(quantite),article,float(prix)))
-        except :
-            self.deleteCode("fake")
+        if operation=='copie':
+            self.currentArticle=self.nbArticles
+        
+#        try :
+#          #self.listbox.insert(END, formatFact%(float(quantite),article,float(self.prix_saisi)))
+        self.ajouteLigneFacture(quantite, article, float(self.prix_saisi), self.currentArticle)
+#        except :
+#            self.deleteCode("fake")
 
-        self.selectedPrix[self.nbArticles]=prix
-        self.selectedQuantite[self.nbArticles]=quantite
-        self.selectedDate[self.nbArticles]=self.date.get()
-        self.nbArticles=self.nbArticles+1
+        self.selectedPrix[self.currentArticle]=self.prix_saisi
+        self.selectedQuantite[self.currentArticle]=quantite
+        self.selectedDate[self.currentArticle]=self.date.get()
 
-        self.selectedCode[self.nbArticles]=""
-        self.selectedRacourci[self.nbArticles]=""
-        self.selectedFournisseur[self.nbArticles]=""
-        self.selectedDate[self.nbArticles]=""
-        self.selectedQuantite[self.nbArticles]=""
-        self.selectedPrix[self.nbArticles]=""
+        if self.nbArticles==self.currentArticle:
+            self.nbArticles=self.nbArticles+1
+        self.currentArticle=self.nbArticles
+
+        self.selectedCode[self.currentArticle]=""
+        self.selectedRacourci[self.currentArticle]=""
+        self.selectedFournisseur[self.currentArticle]=""
+        self.selectedDate[self.currentArticle]=""
+        self.selectedQuantite[self.currentArticle]=""
+        self.selectedPrix[self.currentArticle]=""
 
         self.deleteCode("fake")
 
-    def envoyer(self):
-        global ihm
+    def neRienFaire(self):
+        return
+    
+    def envoyer(self, parametre=""):
 
+        oyak.ihm.showMessage("Traitement Commande en  cours ", self.neRienFaire)
         if self.nbArticles==0:
-              self.article.delete(0,END)
-              ihm.showMessage("La commande est vide!!!",self.goToArticle)
+              self.article.delete(0, END)
+              oyak.ihm.showMessage("La commande est vide!!!", self.goToArticle)
               return            
 
-        s="%s%s"%(self.clientClef,sep1)
-        for l in range(0,self.nbArticles):
-             s=s+"%s%s"%(self.selectedCode[l],sep2)
-             s=s+"%s%s"%(self.selectedRacourci[l],sep2)
-             s=s+"%s%s"%(self.selectedFournisseur[l],sep2)
-             s=s+"%s%s"%(self.selectedDate[l],sep2)
-             s=s+"%s%s"%(self.selectedQuantite[l],sep2)
-             s=s+"%s%s"%(self.selectedPrix[l],sep1)
+        s="%s%s"%(self.clientClef, sep1)
+        for l in range(0, self.nbArticles):
+             s=s+"%s%s"%(self.selectedCode[l], sep2)
+             s=s+"%s%s"%(self.selectedRacourci[l], sep2)
+             s=s+"%s%s"%(self.selectedFournisseur[l], sep2)
+             s=s+"%s%s"%(self.selectedDate[l], sep2)
+             s=s+"%s%s"%(self.selectedQuantite[l], sep2)
+             s=s+"%s%s"%(self.selectedPrix[l], sep2)
+             s=s+"*%s%s"%(parametre, sep1)
         params = urllib.urlencode({'vendeur': self.vendeur_numero, 'commande':s})
         try:
             f = urllib.urlopen(url_send_commande, params)
         except:
-            ihm.showMessage("Le serveur ne répond pas!",self.goToArticle)
+            oyak.ihm.showMessage("Le serveur ne répond pas!", self.goToArticle)
             return
         ack=f.readlines()
         ok=ack[0]
         if (ok[0]=="0"):
-            ihm.showMessage("Commande %s!"%ok[2:],ihm.delCurrentFacture)
+            oyak.ihm.showMessage("Commande %s!"%ok[2:], oyak.ihm.delCurrentFacture)
         else:
-            ihm.showMessage("Commande perdue!",ihm.delCurrentFacture)
+            oyak.ihm.showMessage("Commande perdue!", oyak.ihm.delCurrentFacture)
             return
             
     
-    def route(self,event):
-        global ihm
-        
+    def route(self, event):
+       
         racourci=self.article.get()
-        if racourci in Produits.keys():
-            (libelle,prix,racourci,prix_plancher,poids,fournisseur)=Produits[racourci]
-            self.acceptProduit(racourci,fournisseur)
+        if len(racourci)==0:
+            oyak.ihm.showMessage("Article vide!", self.goToArticle)
+            return
+        if racourci in oyak.Produits.keys():
+            (libelle, prix, racourci, prix_plancher, poids, fournisseur)=oyak.Produits[racourci]
+            self.acceptProduit(racourci, fournisseur)
             return
         fournisseur=self.fournisseur.get()
         if racourci=="e" or fournisseur=="e":
             l=self.listbox.size()
             if l>1:
-                self.listbox.delete(l-1,l)
+                self.listbox.delete(l-1, l)
                 self.nbArticles=self.nbArticles-1
             self.deleteCode("fake")
             return
         # * ->  La commande est envoye
-        if racourci=="*" or fournisseur=="*":
-            self.envoyer()
+        if racourci[0]=="*" :
+            self.envoyer(racourci[1:])
             return
         # * ou x ->  on tue la facture courrante
         if racourci=="x" or fournisseur=="x":
             self.annuler()
             return
         if racourci=="DDD" or racourci=="ddd":
-            ihm.showMessage("Telechargement du serveur")
-            lisData(readFromServer=1)
-            ihm.showMessage("OK...",self.goToArticle)
+            oyak.ihm.showMessage("Telechargement du serveur")
+            lisData(clearAll=1, forceRecharge=1)
+            self.article.delete(0, END)
+            oyak.ihm.showMessage("OK...", self.goToArticle)
             return
         if racourci=="vvv" or racourci=="vvv":
-            chooseRelease(self,racourci)
+            chooseRelease(self, racourci)
             return
         if racourci=="sss" or racourci=="sss":
-            chooseRelease(self,racourci,save=1)
+            chooseRelease(self, racourci, save=1)
             return
         # sinon on process le couple (racourci,fournisseur)
         try :
             racourci=int(racourci)
         except:
-            self.article.delete(0,END)
-            ihm.showMessage("%s n'est pas un code reconnu!"%racourci,self.goToArticle)
+            self.article.delete(0, END)
+            oyak.ihm.showMessage("%s n'est pas un code reconnu!"%racourci, self.goToArticle)
             return
-        if racourci in ProduitsRacourcis.keys() and len(fournisseur)==0:
-            chooseFournisseur(self,racourci)
+        if racourci in oyak.ProduitsRacourcis.keys() and len(fournisseur)==0:
+            myFournisseur.ihmShow(self, racourci)
         else:
-            self.article.delete(0,END)
-            ihm.showMessage("%d n'est pas un code reconnu!"%racourci,self.goToArticle)
+            self.article.delete(0, END)
+            oyak.ihm.showMessage("%d n'est pas un code reconnu!"%racourci, self.goToArticle)
 
 
 
         
 def run():
-    global isReadFromServer
-    global ihm
+    global oyak
 
-    if oneFrame:
-       ihm = ihmRoot()
-       ihm.start()
-    else:
-##        if erreurCatch:
-##            try:
-##               lisData() 
-##               choixVendeur()
-##            except:
-##               pass
-##        else:
-            lisData(isReadFromServer) 
-            choixVendeur()
-
+    oyak.ihm = ihmRoot()
+    oyak.ihm.start()
 
 if __name__ == "__main__":
-    if cible:
+    oyak = singleton()
+    if oyak.cible:
         try:
             run()
         except:
-             f=open('\Oyak\except.out',"w")
+             f=open('\Oyak\except.out', "w")
              f.write("Exception in user code:\n")
              f.write('-'*60)
              traceback.print_exc(file=f)
-             f.write( '-'*60)
+             f.write('-'*60)
              f.close()
-             if ihm:
-                 ihm.showMessage("Une Erreur est survenue!")
+             if oyak.ihm:
+                 oyak.ihm.showMessage("Une Erreur est survenue!")
     else:
         run()

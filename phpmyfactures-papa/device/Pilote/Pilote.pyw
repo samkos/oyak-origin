@@ -51,7 +51,44 @@ class IHM   :
         Bouton.pack(expand=1,fill=X)
 
         # definition d'un bouton Copie Vendeur
-        Bouton = Button(self.boutonFrame, text="Copie Vendeur", command=self.copieVendeur)
+        Bouton = Button(self.boutonFrame, text="Copie Vendeur", command=lambda x="fake":self.copieVendeur("vendeur"))
+        # placement du Bouton dans la frame principale
+        Bouton.pack(expand=1,fill=X)
+
+        # definition d'un bouton Copie Vendeur
+        Bouton = Button(self.boutonFrame, text="Copie Vendeur Singleton", command=lambda x="fake":self.copieVendeur("vendeur_singleton"))
+        # placement du Bouton dans la frame principale
+        Bouton.pack(expand=1,fill=X)
+
+        # definition d'un bouton Installe appli
+        Bouton = Button(self.boutonFrame, text="Installe Application", command=self.installAppli)
+        # placement du Bouton dans la frame principale
+        Bouton.pack(expand=1,fill=X)
+
+        
+        # definition d'un bouton Copie Vendeur
+        Bouton = Button(self.boutonFrame, text="run Vendeur", command=self.runVendeur)
+        # placement du Bouton dans la frame principale
+        Bouton.pack(expand=1,fill=X)
+
+        # definition d'un bouton Copie Vendeur
+        Bouton = Button(self.boutonFrame, text="kill Vendeur", command=self.killVendeur)
+        # placement du Bouton dans la frame principale
+        Bouton.pack(expand=1,fill=X)
+
+
+        # definition d'un bouton Installe appli
+        Bouton = Button(self.boutonFrame, text="Installe Application", command=self.installAppli)
+        # placement du Bouton dans la frame principale
+        Bouton.pack(expand=1,fill=X)
+
+        # definition d'un bouton del cache
+        Bouton = Button(self.boutonFrame, text="Effacer Cache", command=lambda x="fake":self.delCache())
+        # placement du Bouton dans la frame principale
+        Bouton.pack(expand=1,fill=X)
+
+        # definition d'un bouton del cache
+        Bouton = Button(self.boutonFrame, text="Initialiser Cache", command=lambda x="fake":self.initCache())
         # placement du Bouton dans la frame principale
         Bouton.pack(expand=1,fill=X)
 
@@ -68,13 +105,15 @@ class IHM   :
     # execute une commande sur la device
     def run(self,what,pipe=0):
             commande="%s\\%s"%(rapiDir,what)
+            if self.debug:
+                print "EXEC : "+commande
             output=os.popen(commande)
             res=output.readlines()
             if pipe:
                return output.readlines()
             else:
                for r in res:
-                   print r[6:-1]
+                   print r
 
     # fonction appelee par l'appui sur le bouton MobileCompanion
     def launchMobileCompanion(self):
@@ -85,12 +124,37 @@ class IHM   :
         self.run("preboot")
 
     # fonction appelee par l'appui sur le bouton Lire registre WLAN
-    def copieVendeur(self):
-        pput='pput.exe -f ..\\appli\\vendeur.pyw \\Oyak\\vendeur00.pyw'
-        output=self.run(pput,pipe=1)
-        self.affiche(output)
+    def copieVendeur(self,name):
+        pput="pput.exe -f ..\\appli\\%s.pyw \\Oyak\\vendeur.pyw"%name
+        self.run(pput,pipe=0)
+        pput="pput.exe -f ..\\appli\\%s.pyw \\Application\\Oyak\\vendeur.pyw"%name
+        self.run(pput,pipe=0)
+        print "vendeur copié"
         
+    def runVendeur(self):
+        prun="prun.exe \\Python25\\python /nopcceshell \\Oyak\\vendeur.pyw"
+        output=self.run(prun,pipe=0)
 
+    def killVendeur(self):
+        prun="pkill.exe python"
+        output=self.run(prun,pipe=0)
+
+    def installAppli(self):
+        self.installReg()
+        self.copieVendeur("vendeur_singleton")
+        
+    def installReg(self):
+        pput="pput.exe -f \"..\\a copier\\Application\\AppCenter.reg\"  \\Application\\AppCenter.reg"
+        self.run(pput,pipe=0)
+        print "fichier registre Appcenter copié"
+        
+    def initCache(self):
+        self.run("pput.exe  -f c:\\Oyak\\*.bak \\Oyak\\")
+
+
+
+    def delCache(self):
+        self.run("pdel.exe  \\Oyak\\*.bak")
 
     # fonction appelee par l'appui sur le bouton Lire registre WLAN
     def getWlanReg(self,reg,outFile=0,pipe=0):

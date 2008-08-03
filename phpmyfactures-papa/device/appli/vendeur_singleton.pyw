@@ -14,16 +14,16 @@ class singleton:
         
         self.maxDigits=130
         self.cible=os.path.exists('\Platform')
-        self.version="0.33"
+        self.version="0.34 (singleton)"
         self.time_last_key=0
         self.isServeurInjoignable=0
-        
+                
         if self.cible:
             self.zoomedWindow=1
             self.erreurCatch=0
             self.debugMessages=0
             self.raiseError=0
-            self.website_address="http://192.168.111.77/phpmyfactures"
+            self.website_address="http://192.168.111.150/phpmyfactures"
             self.fichierIp='\Platform\S24Profiles.reg'
             self.fichierIpBackup='\\Oyak\\S24old.reg'
             self.fichierIpNew='\\Oyak\\S24New.reg'
@@ -55,11 +55,6 @@ class singleton:
         self.myFournisseur=0
         self.myProduit=0
         self.myRelease=0
-        
-        self.myCurrentAddChar=0
-        self.myCurrentDelChar=0
-        self.myCurrentEnterChar=0
-        self.myCurrentEntry=0
         
         self.Produits={}
         self.ProduitsFournisseurs={}
@@ -148,7 +143,6 @@ class ihmRoot:
 
     def __init__(self):
        self.ihm=Tk()
-       self.kbd=Tk()
        
        if oyak.cible:
            self.ihm.overrideredirect(1)
@@ -162,8 +156,6 @@ class ihmRoot:
        self.facture={}
        self.factureButton={}
        self.okButton={}
-       self.kbd.keyboardSV=StringVar()
-
        
        self.Xmax=38
        self.Ymax=24
@@ -177,7 +169,6 @@ class ihmRoot:
 
        self.progressBarCreate()
        self.menuCreate()
-       self.keyboardCreate()
        self.adminCreate()
        self.ipCreate()
        
@@ -219,8 +210,7 @@ class ihmRoot:
 
     def hideAll(self):
         for panel in self.ihmPanels.keys():
-            if not(panel=="keyboard"):
-                self.hide(panel)
+            self.hide(panel)
 
     def returnPrevious(self):
         self.show(self.previousShown)
@@ -320,9 +310,6 @@ class ihmRoot:
         label = Button(self.ihm, text="Relire Donnée", command=self.rechargeBase, height=4, width=self.Xmax)
         self.add(panelName, "reloader", label, 6, 0)
         
-#        label = Button(self.ihm, text="Clavier", command=self.showKeyboard,height=4,width=self.Xmax)
-#        self.add(panelName,"reloader",label,7,0)
-
 #        label = Button(self.ihm, text="Reglages", command=self.showIp,height=4,width=self.Xmax)
 #        self.add(panelName,"update",label,8,0)
 
@@ -437,9 +424,6 @@ class ihmRoot:
         self.add(panelName, "menu", frame, 0, 0, colspan=5)
         label = Button(frame, text="MENU", command=self.showMenu, height=2)
         label.pack(side=LEFT, expand=1, fill=BOTH)
-        label = Button(frame, text="KEYB", command=self.showKeyboard, height=2)
-        label.pack(side=LEFT, expand=1, fill=BOTH)
-
         
         # frame
 
@@ -472,52 +456,46 @@ class ihmRoot:
             self.ihm.wm_state(newstate="zoomed")
         self.startProgressBar("OYAK v %s \n\n\n Bienvenue"%oyak.version)
         self.ihm.after(2000, self.lectureDonnee)
-        self.showKeyboard()
         self.ihm.mainloop()
 
     def facturePrevious(self):
-        global factureCurrent, clientNB
         
-        nbPrevious=factureCurrent-1
+        nbPrevious=oyak.factureCurrent-1
 
         while nbPrevious>=0:
-            if clientNB[nbPrevious]>0:
-                Factures[nbPrevious].show()
+            if oyak.clientNB[nbPrevious]>0:
+                oyak.Factures[nbPrevious].show()
                 return 
             nbPrevious = nbPrevious-1
 
         self.showMessage("Pas d'autre\nFacture!!!")
 
     def factureNext(self):
-        global factureCurrent, clientNB
-        
-        nbNext=factureCurrent+1
+        nbNext=oyak.factureCurrent+1
 
         while nbNext<10:
-            if clientNB[nbNext]>0:
-                Factures[nbNext].show()
+            if oyak.clientNB[nbNext]>0:
+                oyak.Factures[nbNext].show()
                 return 
             nbNext = nbNext+1
 
         self.showMessage("Pas d'autre\nFacture!!!")
 
     def showFactureFirst(self, menu=0):
-        i=getFirstFacture()
+        i=oyak.getFirstFacture()
         if  i<0 and menu==0:
             self.factureNew()
         else:
             if i<0:
-                myClient.ihmShow()
+                oyak.myClient.ihmShow()
             else:
-                Factures[i].show()
+                oyak.Factures[i].show()
 
     def factureNew(self):
         self.showMessageOuiNon("Demarrer une \nautre Facture?", siOui=processFacture)
 
     def delCurrentFacture(self):
-        global factureCurrent, Factures
-
-        releaseNBfacture(factureCurrent)
+        oyak.releaseNBfacture(oyak.factureCurrent)
         self.showFactureFirst(menu=1)
 
     def lectureDonnee(self):
@@ -534,53 +512,6 @@ class ihmRoot:
         myVendeur.ihmShow()
 
 
-
-    # creation fenetre type keyboard
-    def keyboardCreate(self):
-
-        panelName="keyboard"
-        self.keyboardString=""
-        
-
-        keyboardFrame=Frame(self.kbd)
-
-#        Label(keyboardFrame, text=">").pack(side=LEFT, expand=1, fill=BOTH)
-#        Label(keyboardFrame, textvariable=self.kbd.keyboardSV).pack(side=LEFT, expand=1, fill=BOTH)
-        j=0
-        self.add(panelName, "input", keyboardFrame, j, 0, colspan=7)
-        self.kbd.keyboardSV.set(self.keyboardString)
-
-        keys=Frame(self.kbd)
-        self.add(panelName, "keys", keys, j+1, 0, colspan=7)
-#        keys=Frame(keyb).pack(side=LEFT,expand=1,fill=BOTH)
-#        ctrl=Frame(keyb).pack(side=LEFT,expand=1,fill=BOTH)
-
-
-        for l in ["1234567890", "azertyuiop", "qsdfghjklm", "wxcvbn,.-*",
-                  " ", ["DEL", "ENTER"]]:
-            i=0
-            line=Frame(keys)
-            for c in l:
-                b=Button(line, text=c)
-                b["command"]=lambda x=c:self.addKey(car=x)
-                b.pack(side=LEFT, expand=1, fill=BOTH)
-                i=i+1
-            line.pack(side=TOP, expand=1, fill=BOTH)
-            
-
-    def showKeyboard(self):
-        self.show("keyboard", hidingAll=0)
-        #self.kdb.Raise()
-    
-    def addKey(self, car):
-        global oyak
-        if car=="DEL":
-            oyak.myCurrentDelChar("fake")
-            return
-        if car=="ENTER":
-            oyak.myCurrentEnterChar("fake")
-            return
-        oyak.myCurrentAddChar(car)
 
 
 ###################################################################
@@ -692,7 +623,6 @@ class getData:
         oyak.ihm.add(panelName, "menu", frame, 0, 0, colspan=2)
         label = Button(frame, text="MENU", command=oyak.ihm.showMenu, height=2)
         label.pack(side=LEFT, expand=1, fill=BOTH)
-        label = Button(frame, text="KEYB", command=oyak.ihm.showKeyboard, height=2)
         label.pack(side=LEFT, expand=1, fill=BOTH)
         
         # filtre
@@ -842,14 +772,6 @@ class chooseXXX(getData):
         
         oyak.ihm.filtreLabel[self.what].set(self.filtreName+filtre)
         self.filtre=filtre
-        oyak.myCurrentAddChar=self.addcharFromKbd
-        oyak.myCurrentDelChar=self.delchar
-        oyak.myCurrentEnterChar=self.go
-        
-    def addcharFromKbd(self, char):
-        self.filtre=self.filtre+char
-        self.setFiltre(self.filtre)
-        self.action()
 
     def addchar(self, event):
         self.filtre=self.filtre+event.char
@@ -1279,7 +1201,7 @@ class processFacture:
         if self.nb==0 and client==0:
             self.vendeur=oyak.vendeurChoisi
             self.clefs={}
-            myClient.ihmShow()
+            oyak.myClient.ihmShow()
 
             ## chooseClient()
             return
@@ -1295,8 +1217,8 @@ class processFacture:
             
             self.root=oyak.ihm.factureCreate(self.nb)
 
-            if oyak.zoomedWindow:
-                oyak.ihm.wm_state(newstate="zoomed")
+#            if oyak.zoomedWindow:
+#                oyak.ihm.wm_state(newstate="zoomed")
             
             (numero, nom, prenom)=oyak.vendeurChoisi
             self.vendeur_prenom=prenom
@@ -1313,7 +1235,7 @@ class processFacture:
     def __del__(self):
         try:
             if self.nb>0:
-                releaseNBfacture(self.nb)
+                oyak.releaseNBfacture(self.nb)
                 self.root.quit()
         except:
             pass
@@ -1323,7 +1245,7 @@ class processFacture:
         oyak.ihm.show("facture%d"%self.nb)
         self.goToArticle()
 
-    def annuler(self, send):
+    def annuler(self):
         oyak.ihm.showMessageOuiNon("Annuler la \n Facture?", siOui=oyak.ihm.delCurrentFacture)
         
 
@@ -1359,19 +1281,7 @@ class processFacture:
         self.prix_focus.set("---")
         h.set("<<")
         e.focus_set()
-        oyak.myCurrentAddChar=self.addcharFromKbd
-        oyak.myCurrentDelChar=self.delcharFromKbd
-        oyak.myCurrentEnterChar=0
-        oyak.myCurrentEntry=content
 
-    def addcharFromKbd(self, char):
-        valeur=oyak.myCurrentEntry.get()+char
-        oyak.myCurrentEntry.set(valeur) 
-        
-    def delcharFromKbd(self,char):
-        valeur=oyak.myCurrentEntry.get()
-        oyak.myCurrentEntry.set(valeur[:-1]) 
-        
     def ihmFacture(self):
                
         # division de la fenetre en trois
@@ -1511,7 +1421,10 @@ class processFacture:
             self.article.insert(END, libelle)
             self.article_label.set("Article : %d"%racourci)
       
+            self.quantite.insert(END, quantite)
             self.quantite_label.set("Quantite : ("+"%6.2f"%(eval(poids)+0.00)+")")
+
+            self.prix.insert(END,prix)
             self.prix_label.set("Prix : ("+"%6.2f"%(eval(prix)+0.00)+")")
             self.prix_default=prix
             self.prix_plancher=prix_plancher
@@ -1749,6 +1662,7 @@ if __name__ == "__main__":
         try:
             run()
         except:
+             os.remove("\\Oyak\\except.out")
              f=open('\Oyak\except.out', "w")
              f.write("Exception in user code:\n")
              f.write('-'*60)
