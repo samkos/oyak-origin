@@ -14,16 +14,21 @@ class singleton:
         
         self.maxDigits=130
         self.cible=os.path.exists('\Platform')
-        self.version="0.34 (singleton)"
+        self.ip_serveur="77"
+        self.version="0.34 (singleton/serveur=%s)"%self.ip_serveur
         self.time_last_key=0
         self.isServeurInjoignable=0
+        
+        self.debugFile=0
+        self.debugFileOpen=0
+        self.debugFileName="c:\\Oyak\\debug.out"
                 
         if self.cible:
             self.zoomedWindow=1
             self.erreurCatch=0
             self.debugMessages=0
             self.raiseError=0
-            self.website_address="http://192.168.111.77/phpmyfactures"
+            self.website_address="http://192.168.111.%s/phpmyfactures"%self.ip_serveur
             self.fichierIp='\Platform\S24Profiles.reg'
             self.fichierIpBackup='\\Oyak\\S24old.reg'
             self.fichierIpNew='\\Oyak\\S24New.reg'
@@ -34,6 +39,7 @@ class singleton:
             self.fichierTemp_Template='\Oyak\%s.tmp'
             self.fichierOld_Template='\Oyak\%s.old'
         else:
+            self.version="0.34 (singleton/serveur=%s)"%"localhost"
             self.erreurCatch=0
             self.debugMessages=1
             self.zoomedWindow=0
@@ -130,7 +136,14 @@ class singleton:
         for c in keys:
             element.bind(c, func)
     
-
+    def writeDebug(self,ligne):
+        if self.debugMessages:
+            if self.debugFileOpen==0:
+                self.debugFile=open(self.debugFileName, "w")
+                self.debugFileOpen=1
+            self.debugFile.write(ligne+"\n")
+            self.debugFile.flush()
+            
 
 ###############################################################################################
 # Gestion rationalisée de l'IHM
@@ -529,7 +542,7 @@ class lisData:
   
         oyak.ihm.updateProgressBar("Chargement Data", 0.)
 
-        self.forceRecharge=forceRecharge
+        self.forceRecharge=forceRecharges
         self.clearAll=clearAll
         
         if clearAll:
@@ -585,7 +598,7 @@ class getData:
             if isThere:
                os.unlink(self.fichierBackup)
             self.tmpFile = open(self.fichierTemp, "w")
-            self.urlName=url_get_Template%what
+            self.urlName=oyak.url_get_Template%what
 
             if self.readFromUrl()==0:
                 self.readSource(lengthArticle)
@@ -593,12 +606,12 @@ class getData:
 
         # sauvegarde sur la device des données
             self.tmpFile.close()
-            self.fichierOld=fichierOld_Template%what
+            self.fichierOld=oyak.fichierOld_Template%what
             try :
                 os.rename(self.fichierTemp, self.fichierBackup)
 
                 # recopie dans la zone permanente
-                shutil.copy(self.fichierBackup, fichierAppTemplate%what)
+                shutil.copy(self.fichierBackup, oyak.fichierAppTemplate%what)
             except:
                 if oyak.debugMessages:
                     print "pb a la sauvegarde du fichier Backup"
@@ -658,17 +671,15 @@ class getData:
 
         
     def readFromUrl(self):
-        global isServeurInjoignable
-
         self.create_backup=1
 
-        if not(isServeurInjoignable):
+        if not(oyak.isServeurInjoignable):
             try:
                 self.origFileh = urllib.urlopen(self.urlName)
                 return 0
             except:
                 oyak.ihm.showMessage("Solveur injoignable\n Impossibe de télécharger les data du serveur \n Repli sur Backup")
-                isServeurInjoignable=1
+                oyak.isServeurInjoignable=1
         return -1 
             
     def readFromBackup(self):
@@ -1143,7 +1154,7 @@ def loadRelease(filename, save):
     if not(save):
         params = urllib.urlencode({'dwn': filename})
         try:
-            f = urllib.urlopen(url_update_commande, params)
+            f = urllib.urlopen(oyak.url_update_commande, params)
         except:
             oyak.ihm.showMessage("Le serveur Release ne répond pas!")
             return
@@ -1217,8 +1228,8 @@ class processFacture:
             
             self.root=oyak.ihm.factureCreate(self.nb)
 
-#            if oyak.zoomedWindow:
-#                oyak.ihm.wm_state(newstate="zoomed")
+            if oyak.zoomedWindow:
+                 oyak.ihm.ihm.wm_state(newstate="zoomed")
             
             (numero, nom, prenom)=oyak.vendeurChoisi
             self.vendeur_prenom=prenom
@@ -1597,9 +1608,13 @@ class processFacture:
              s=s+"*%s%s"%(parametre, oyak.sep1)
         params = urllib.urlencode({'vendeur': self.vendeur_numero, 'commande':s})
         try:
-            f = urllib.urlopen(url_send_commande, params)
+            f = urllib.urlopen(oyak.url_send_commande, params)
         except:
             oyak.ihm.showMessage("Le serveur ne répond pas!", self.goToArticle)
+            oyak.ihm.showMessage("Le serveur ne répond pas! \n url=%s \n v=%s \n s=%s"%
+                                 (oyak.url_send_commande,self.vendeur_numero,s), 
+                                 self.goToArticle)
+            oyak.writeDebug("?vendeur=1&params="+s)
             return
         ack=f.readlines()
         ok=ack[0]

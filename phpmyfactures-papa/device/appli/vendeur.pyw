@@ -9,7 +9,8 @@ import traceback
 
 maxDigits=130
 cible=os.path.exists('\Platform')
-version="0.31 (classic)"
+ip_serveur="150"
+version="0.31 (classic/serveur=%s)"%ip_serveur
 time_last_key=0
 isServeurInjoignable=0
 
@@ -18,7 +19,7 @@ if cible:
     erreurCatch=0
     debugMessages=0
     raiseError=0
-    website_address="http://192.168.111.77/phpmyfactures"
+    website_address="http://192.168.111.%s/phpmyfactures"%ip_serveur
     fichierIp='\Platform\S24Profiles.reg'
     fichierIpBackup='\\Oyak\\S24old.reg'
     fichierIpNew='\\Oyak\\S24New.reg'

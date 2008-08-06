@@ -69,6 +69,27 @@ situation client, solde article
 
 
 
+retailler la fenetre facture sur la device pour qu'elle occuppe tout l'ecran
+
+dans la vue facture quand on fait 'f.' ne montrer que les produit commencant par f
+
+faire apparaitre 'menu' en haut de la fenetre de choix de produit quand on a pas tapé de lettre
+
+selectionner en griser le premier de la ligne apres un filtre en succes
+
+grrossirr les boutons de selectio 'prix' qualite ou fournisseur
+
+prq le produit n'est pas automatiquement selectionné lorsque l'on rappelle une ligne??
+
+virer 'copier' de la vue facture
+
+cabler'effacer' de la vue facture
+
+virer 
+ 
+
+
+
 factures 
 --------
 
