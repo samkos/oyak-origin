@@ -542,7 +542,7 @@ class lisData:
   
         oyak.ihm.updateProgressBar("Chargement Data", 0.)
 
-        self.forceRecharge=forceRecharges
+        self.forceRecharge=forceRecharge
         self.clearAll=clearAll
         
         if clearAll:
@@ -634,6 +634,7 @@ class getData:
         # Menu
         frame = Frame(oyak.ihm.ihm)
         oyak.ihm.add(panelName, "menu", frame, 0, 0, colspan=2)
+        oyak.ihm.add(panelName0, "menu", frame, 0, 0, colspan=2)
         label = Button(frame, text="MENU", command=oyak.ihm.showMenu, height=2)
         label.pack(side=LEFT, expand=1, fill=BOTH)
         label.pack(side=LEFT, expand=1, fill=BOTH)
@@ -1335,13 +1336,10 @@ class processFacture:
 
         # action sur les lignes
 
-        b=Button(self.ligneFrame, text='copier', command=lambda x=1:self.addFacture(operation='copie'))
-        b.pack(side=LEFT, expand=1, fill=BOTH)
-        
         b=Button(self.ligneFrame, text='effacer', command=lambda x=1:self.addFacture(operation='supression'))
         b.pack(side=LEFT, expand=1, fill=BOTH)
         
-        self.valider=Button(self.ligneFrame, text='Valider', command=lambda x=1:self.addFacture())
+        self.valider=Button(self.ligneFrame, text='Valider', command=lambda x=1:self.addFacture('creation'))
         self.valider.bind("<Return>", lambda x="fake":self.valider.invoke())
         self.valider.pack(side=LEFT, expand=1, fill=BOTH)
         
@@ -1489,20 +1487,21 @@ class processFacture:
     def goToDate(self, event="fake"):
         self.labelEntryFocus(self.date, self.date_focus,self.date_content)
 
-    def addFacture(self, operation="create"):
+    def addFacture(self, operation="creation"):
 
-        try :
-          self.prix_saisi=self.prix.get()
-          if len(self.prix_saisi)==0:
-                self.prix_saisi=self.prix_default
-          if (eval(self.prix_saisi)+0.0)<eval(self.prix_plancher)+0.:
-            oyak.ihm.showMessageOuiNon("le prix %s est inferieur au prix plancher %6.2f! \n Entrée valide?"%(self.prix_saisi, (eval(self.prix_plancher)+0.00)),
-                           siOui=self.ajouteArticle, siNon=self.goToPrice)
-            return
-        except:
-            self.prix.delete(0, END)
-            oyak.ihm.showMessage("le prix "+self.prix_saisi+" n'est pas reconnu", self.goToPrice)
-            return
+        if operation=="creation":
+            try :
+              self.prix_saisi=self.prix.get()
+              if len(self.prix_saisi)==0:
+                    self.prix_saisi=self.prix_default
+              if (eval(self.prix_saisi)+0.0)<eval(self.prix_plancher)+0.:
+                oyak.ihm.showMessageOuiNon("le prix %s est inferieur au prix plancher %6.2f! \n Entrée valide?"%(self.prix_saisi, (eval(self.prix_plancher)+0.00)),
+                               siOui=self.ajouteArticle, siNon=self.goToPrice)
+                return
+            except:
+                self.prix.delete(0, END)
+                oyak.ihm.showMessage("le prix "+self.prix_saisi+" n'est pas reconnu", self.goToPrice)
+                return
         self.ajouteArticle(operation)
 
 
@@ -1555,27 +1554,38 @@ class processFacture:
 
     def ajouteArticle(self, operation='creation'):
         oyak.ihm.show("facture%d"%self.nb, title="Oyak? Facture ")
-        quantite=self.quantite.get()
-        if len(quantite)==0:
-                quantite=self.poids
-
-        article=self.article.get()
-        if operation=='copie':
-            self.currentArticle=self.nbArticles
         
-#        try :
-#          #self.listbox.insert(END, formatFact%(float(quantite),article,float(self.prix_saisi)))
-        self.ajouteLigneFacture(quantite, article, float(self.prix_saisi), self.currentArticle)
-#        except :
-#            self.deleteCode("fake")
+        if operation=="creation":
+            quantite=self.quantite.get()
+            if len(quantite)==0:
+                    quantite=self.poids
+    
+            article=self.article.get()
+    #        try :
+    #          #self.listbox.insert(END, formatFact%(float(quantite),article,float(self.prix_saisi)))
+            self.ajouteLigneFacture(quantite, article, float(self.prix_saisi), self.currentArticle)
+    #        except :
+    #            self.deleteCode("fake")
+    
+            self.selectedPrix[self.currentArticle]=self.prix_saisi
+            self.selectedQuantite[self.currentArticle]=quantite
+            self.selectedDate[self.currentArticle]=self.date.get()
+    
+            if self.nbArticles==self.currentArticle:
+                self.nbArticles=self.nbArticles+1
+            self.currentArticle=self.nbArticles
 
-        self.selectedPrix[self.currentArticle]=self.prix_saisi
-        self.selectedQuantite[self.currentArticle]=quantite
-        self.selectedDate[self.currentArticle]=self.date.get()
-
-        if self.nbArticles==self.currentArticle:
-            self.nbArticles=self.nbArticles+1
-        self.currentArticle=self.nbArticles
+        if operation=="supression":
+            
+            if self.currentArticle==0:
+                oyak.ihm.showMessage("pas d'article à supprimer!",self.neRienFaire())
+                return
+            
+            if self.currentArticle==self.nbArticles:
+                oyak.ihm.showMessage("Sélectionnez un article\n à supprimer!",self.neRienFaire())
+                return
+            
+            
 
         self.selectedCode[self.currentArticle]=""
         self.selectedRacourci[self.currentArticle]=""
