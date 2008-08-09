@@ -883,7 +883,6 @@ class chooseVendeur(chooseXXX):
         self.listbox.selection_set(0)
 
 
-
 class chooseClient(chooseXXX):
 
     def __init__(self, forceRecharge=0):
