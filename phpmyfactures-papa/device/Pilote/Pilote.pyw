@@ -64,9 +64,15 @@ class IHM   :
         Bouton = Button(self.boutonFrame, text="Copie Vendeur", command=lambda x="fake":self.copieVendeur("vendeur"))
         # placement du Bouton dans la frame principale
         Bouton.pack(expand=1,fill=X)
+        Bouton = Button(self.boutonFrame, text="Copie Vendeur Singleton", command=lambda x="fake":self.copieVendeur("vendeur_singleton"))
+        # placement du Bouton dans la frame principale
+        Bouton.pack(expand=1,fill=X)
 
         # definition d'un bouton Copie Vendeur
-        Bouton = Button(self.boutonFrame, text="Copie Vendeur Singleton", command=lambda x="fake":self.copieVendeur("vendeur_singleton"))
+        Bouton = Button(self.boutonFrame, text="Copie provisoire Vendeur", command=lambda x="fake":self.copieVendeur("vendeur",light=1))
+        # placement du Bouton dans la frame principale
+        Bouton.pack(expand=1,fill=X)
+        Bouton = Button(self.boutonFrame, text="Copie provisoire Vendeur Singleton", command=lambda x="fake":self.copieVendeur("vendeur_singleton",light=1))
         # placement du Bouton dans la frame principale
         Bouton.pack(expand=1,fill=X)
 
@@ -151,11 +157,12 @@ class IHM   :
         self.run("preboot")
 
     # fonction appelee par l'appui sur le bouton Lire registre WLAN
-    def copieVendeur(self,name):
+    def copieVendeur(self,name,light=0):
         pput="pput.exe -f ..\\appli\\%s.pyw \\Oyak\\vendeur.pyw"%name
         self.run(pput,pipe=0)
-        pput="pput.exe -f ..\\appli\\%s.pyw \\Application\\Oyak\\vendeur.pyw"%name
-        self.run(pput,pipe=0)
+        if light==0:
+            pput="pput.exe -f ..\\appli\\%s.pyw \\Application\\Oyak\\vendeur.pyw"%name
+            self.run(pput,pipe=0)
         self.affiche("vendeur copié avec succès")
         
     def runVendeur(self):
