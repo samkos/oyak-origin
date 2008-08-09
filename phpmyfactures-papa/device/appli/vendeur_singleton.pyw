@@ -1353,7 +1353,7 @@ class processFacture:
 
         # liste box
 
-        self.nbLignesVisibles=8
+        self.nbLignesVisibles=7
 
         self.listFrame = Frame(self.root)
         self.listFrame.pack(side=TOP, expand=1, fill=BOTH)
@@ -1428,7 +1428,7 @@ class processFacture:
             l=ligne+self.currentTopArticle
             if oyak.debugging and not(oyak.cible):
                 print "l=%d ligne=%d"%(l,ligne)
-            if l<=self.nbArticles:
+            if l<self.nbArticles:
                 self.buttonQuantite[ligne].config(text=self.buttonQuantiteContent[l])
                 self.buttonQuantite[ligne].update()
                 self.buttonProduit[ligne].config(text=self.buttonProduitContent[l])
@@ -1521,7 +1521,7 @@ class processFacture:
             
             self.goToDate()
         else:
-            oyak.ihm.showMessage("Article a part numero %s fournisseur %s", racourci, fournisseur)
+            oyak.ihm.showMessage("Article a part numero %s fournisseur %s", (racourci, fournisseur), self.neRienFaire())
                 
     def deleteCode(self, event):
         self.article.delete(0, END)
@@ -1583,6 +1583,7 @@ class processFacture:
             self.buttonQuantiteContent.append(quantite)
             self.buttonProduitContent.append(produit)
             self.buttonPrixContent.append(prix)
+            self.nbArticles=self.nbArticles+1
         else:
             self.buttonQuantiteContent[ligne]=quantite
             self.buttonProduitContent[ligne]=produit
@@ -1645,8 +1646,6 @@ class processFacture:
             self.selectedQuantite[self.currentArticle]=quantite
             self.selectedDate[self.currentArticle]=self.date.get()
     
-            if self.nbArticles==self.currentArticle:
-                self.nbArticles=self.nbArticles+1
             self.currentArticle=self.nbArticles
 
         if operation=="supression":
