@@ -766,7 +766,7 @@ class chooseXXX(getData):
         self.killable=killable
         self.filtre=filtre
         self.initPanel()
-        self.setFiltre(filtre)
+        self.setFiltre(self.filtre)
         self.ihmChoix()
 
         oyak.ihm.okButton[what]["command"]=lambda x="fake" : self.go("fake")
