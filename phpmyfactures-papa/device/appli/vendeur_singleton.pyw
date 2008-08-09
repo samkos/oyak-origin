@@ -948,8 +948,6 @@ class chooseClient(chooseXXX):
         else:
             self.listbox.delete(0, END)
             oyak.ihm.show("clients")
-            self.listbox.focus_set()
-            self.listbox.selection_set(0)
             for clef in oyak.Clients.keys():
                 (societe, ville, nb)=oyak.Clients[clef]
                 nb=nb[1:]
@@ -957,7 +955,8 @@ class chooseClient(chooseXXX):
                     self.listbox.insert(END, "%04d-%s"%(int(nb), clef))
                     self.clefs[i]=clef
                     i=i+1
-
+            self.listbox.focus_set()
+            self.listbox.selection_set(0)
 
 
 
@@ -1025,7 +1024,7 @@ class chooseProduit(chooseXXX):
                 i=i+1
                 if i==25:
                    self.listbox.update()
-                
+                   
         self.listbox.focus_set()
         self.listbox.selection_set(0)
 
