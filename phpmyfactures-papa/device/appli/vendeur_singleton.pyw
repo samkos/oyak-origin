@@ -22,6 +22,7 @@ class singleton:
         self.debugFile=0
         self.debugFileOpen=0
         self.debugFileName="c:\\Oyak\\debug.out"
+        self.debugging=0
                 
         if self.cible:
             self.zoomedWindow=1
@@ -436,7 +437,7 @@ class ihmRoot:
         frame = Frame(self.ihm)
         self.add(panelName, "menu", frame, 0, 0, colspan=5)
         label = Button(frame, text="MENU", command=self.showMenu, height=2)
-        label.pack(side=LEFT, expand=1, fill=BOTH)
+        label.pack(side=LEFT, expand=1, fill=X)
         
         # frame
 
@@ -636,8 +637,8 @@ class getData:
         oyak.ihm.add(panelName, "menu", frame, 0, 0, colspan=2)
         oyak.ihm.add(panelName0, "menu", frame, 0, 0, colspan=2)
         label = Button(frame, text="MENU", command=oyak.ihm.showMenu, height=2)
-        label.pack(side=LEFT, expand=1, fill=BOTH)
-        label.pack(side=LEFT, expand=1, fill=BOTH)
+        label.pack(side=LEFT, expand=1, fill=X)
+        #label.pack(side=LEFT, expand=1, fill=BOTH)
         
         # filtre
         oyak.ihm.filtreLabel[what]=StringVar("")
@@ -943,6 +944,7 @@ class chooseClient(chooseXXX):
             oyak.ihm.show("clients0")
             self.listbox0.focus_set()
             self.listbox0.selection_set(0)
+            
         else:
             self.listbox.delete(0, END)
             oyak.ihm.show("clients")
@@ -1207,6 +1209,9 @@ class processFacture:
         self.buttonQuantite=list()
         self.buttonProduit=list()
         self.buttonPrix=list()
+        self.buttonQuantiteContent=list()
+        self.buttonProduitContent=list()
+        self.buttonPrixContent=list()
 
 
         
@@ -1268,8 +1273,8 @@ class processFacture:
         hVar= StringVar()
         hVar.set("---")
 
-        label = Label(self.nameFrame, textvariable=sVar, fg="red")
-        label.pack(side=TOP)
+        label = Button(self.nameFrame, textvariable=sVar, fg="red")
+        label.pack(side=TOP,expand=1,fill=X)
 
         f = Frame(self.inputFrame)
         f.pack(side=TOP)
@@ -1279,8 +1284,9 @@ class processFacture:
         e = Entry(f, fg="black",textvariable=eVar)
         e.pack(side=LEFT)
         
-        button = Button(f, textvariable=hVar, fg="red")
+        button = Button(f, textvariable=hVar, fg="red",width=5)
         button["command"]=lambda x=1:self.labelEntryFocus(e, hVar, eVar)
+        label["command"]=lambda x=1:self.labelEntryFocus(e, hVar, eVar)
         button.pack(side=LEFT)
         
         return (sVar, e, hVar, eVar)
@@ -1293,7 +1299,8 @@ class processFacture:
         self.prix_focus.set("---")
         h.set("<<")
         e.focus_set()
-
+        e.select_range(0,len(e.get()))
+                       
     def ihmFacture(self):
                
         # division de la fenetre en trois
@@ -1314,9 +1321,6 @@ class processFacture:
         self.inputFrame.pack(side=LEFT)
 
         
-        self.listFrame = Frame(self.root)
-        self.listFrame.pack(side=TOP, expand=1, fill=BOTH)
-
 
         (societe, ville, clef)=self.client
         self.clientClef=clef
@@ -1336,6 +1340,10 @@ class processFacture:
 
         # action sur les lignes
 
+        if oyak.debugging:
+            b=Button(self.ligneFrame, text='remplir', command=lambda x=1:self.remplirFaccture())
+            b.pack(side=LEFT, expand=1, fill=BOTH)
+
         b=Button(self.ligneFrame, text='effacer', command=lambda x=1:self.addFacture(operation='supression'))
         b.pack(side=LEFT, expand=1, fill=BOTH)
         
@@ -1346,8 +1354,18 @@ class processFacture:
 
         # liste box
 
-        scrollbar = Scrollbar(self.listFrame)
-        scrollbar.pack(side=RIGHT, expand=0, fill=BOTH)
+        self.nbLignesVisibles=8
+
+        self.listFrame = Frame(self.root)
+        self.listFrame.pack(side=TOP, expand=1, fill=BOTH)
+
+        scrollFrame = Frame(self.listFrame)
+        scrollFrame.pack(side=RIGHT, expand=0, fill=BOTH)
+
+        scrollUp=Button(scrollFrame, text='/\\',command=lambda x=1:self.scrollFacture(-self.nbLignesVisibles+1))
+        scrollUp.pack(side=TOP, expand=1, fill=Y)
+        scrollDown=Button(scrollFrame, text='\\/',command=lambda x=1:self.scrollFacture(+self.nbLignesVisibles-1))
+        scrollDown.pack(side=TOP, expand=1, fill=Y)
 
         self.quantiteListFrame = Frame(self.listFrame)
         self.quantiteListFrame.pack(side=LEFT, expand=1, fill=BOTH)
@@ -1358,11 +1376,30 @@ class processFacture:
         self.prixListFrame = Frame(self.listFrame)
         self.prixListFrame.pack(side=LEFT, expand=1, fill=BOTH)
 
+        # label des colonnes
+        l=Label(self.quantiteListFrame, text='Quantite')
+        l.pack(side=TOP)
+        l=Label(self.produitListFrame, text='Produit')
+        l.pack(side=TOP)
+        l=Label(self.prixListFrame, text='Prix')
+        l.pack(side=TOP)
 
+        # ajout de 4 ligne pre-remplies
 
-#        self.listbox = Listbox(self.listFrame, yscrollcommand=scrollbar.set)
-#        self.listbox.pack(side=LEFT, expand=1, fill=BOTH)
-#        scrollbar.config(command=self.listbox.yview)
+        for ligne in range(self.nbLignesVisibles):
+            l=Button(self.quantiteListFrame, text='---',
+                     command=lambda x=ligne:self.getArticle(x, "quantite")) 
+            l.pack(side=TOP, expand=1, fill=BOTH)
+            self.buttonQuantite.append(l)
+            l=Button(self.produitListFrame, text='---',
+                     command=lambda x=ligne:self.getArticle(x, "produit"))
+            l.pack(side=TOP, expand=1, fill=BOTH)
+            self.buttonProduit.append(l)
+            l=Button(self.prixListFrame, text='---',
+                     command=lambda x=ligne:self.getArticle(x, "prix"))
+            l.pack(side=TOP, expand=1, fill=BOTH)
+            self.buttonPrix.append(l)
+    
 
         # Bindings...
 
@@ -1374,11 +1411,11 @@ class processFacture:
         self.quantite.bind("<Return>", self.goToPrice)
         self.prix.bind("<Return>", lambda x=1:self.valider.focus_set())
 
-        self.ajouteLigneFacture("Quant.", "Produit", "Prix")
 #        self.listbox.delete(0,END)
 #        self.listbox.insert(END, enteteFact)
         self.nbArticles=0
         self.currentArticle=0
+        self.currentTopArticle=0
         
         self.selectedCode[self.currentArticle]=""
         self.selectedRacourci[self.currentArticle]=""
@@ -1387,7 +1424,34 @@ class processFacture:
         self.selectedQuantite[self.currentArticle]=""
         self.selectedPrix[self.currentArticle]=""
 
-
+    def afficheLigne(self):
+        for ligne in range(self.nbLignesVisibles):
+            l=ligne+self.currentTopArticle
+            if oyak.debugging and not(oyak.cible):
+                print "l=%d ligne=%d"%(l,ligne)
+            if l<=self.nbArticles:
+                self.buttonQuantite[ligne].config(text=self.buttonQuantiteContent[l])
+                self.buttonQuantite[ligne].update()
+                self.buttonProduit[ligne].config(text=self.buttonProduitContent[l])
+                self.buttonProduit[ligne].update()
+                self.buttonPrix[ligne].config(text=self.buttonPrixContent[l])
+                self.buttonPrix[ligne].update()
+            else:
+                self.buttonQuantite[ligne].config(text="---")
+                self.buttonQuantite[ligne].update()
+                self.buttonProduit[ligne].config(text="---")
+                self.buttonProduit[ligne].update()
+                self.buttonPrix[ligne].config(text="---")
+                self.buttonPrix[ligne].update()
+    
+    def scrollFacture(self,delta):
+        i=self.currentTopArticle+delta
+        if i>self.nbArticles-self.nbLignesVisibles:
+            i=self.nbArticles-self.nbLignesVisibles
+        if i<0:
+            i=0
+        self.currentTopArticle=i
+        self.afficheLigne()    
 
     def processProduit(self, event):
                 
@@ -1397,7 +1461,7 @@ class processFacture:
 
 
     def acceptProduit(self, racourci, fournisseur, autre_fournisseur=0, 
-                      date="-99",quantite=-99, prix=-99):
+                      date="-99",quantite=-99, prix_input=-99):
         self.autre_fournisseur=autre_fournisseur
         
         try:
@@ -1415,6 +1479,8 @@ class processFacture:
         if (racourci, fournisseur) in oyak.ProduitsCodes.keys():
             code = oyak.ProduitsCodes[racourci, fournisseur]
             (libelle, prix, racourci, prix_plancher, poids, fournisseur)=oyak.Produits[code]
+            if not(prix_input==-99):
+                prix=prix_input
 
         # le fournisseur est forcé par un appel a autre fournisseur
         if autre_fournisseur:
@@ -1452,7 +1518,8 @@ class processFacture:
             if not(date=="-99"):
                 self.date.delete(0, END)
                 self.date.insert(END,date)
-
+                return
+            
             self.goToDate()
         else:
             oyak.ihm.showMessage("Article a part numero %s fournisseur %s", racourci, fournisseur)
@@ -1504,38 +1571,46 @@ class processFacture:
                 return
         self.ajouteArticle(operation)
 
+    def remplirFacture(self):
+        for i in range(self.nbLignesVisibles*3):
+            print
 
     def ajouteLigneFacture(self, quantite, produit, prix, ligne=-1):
 
-        if ligne==-1:
-            l=Label(self.quantiteListFrame, text=quantite)
-            l.pack(side=TOP)
-            l=Label(self.produitListFrame, text=produit)
-            l.pack(side=TOP)
-            l=Label(self.prixListFrame, text=prix)
-            l.pack(side=TOP)
+        if oyak.debugging and not(oyak.cible):
+            print "in ajouteLigneFacture quantite=%s,produit=%s,prix=%s"%(quantite,produit,prix)
+            print "in ajouteLigneFacture ligne%d self.nbArticles=%d"%(ligne,self.nbArticles)
+        if ligne==self.nbArticles:
+            self.buttonQuantiteContent.append(quantite)
+            self.buttonProduitContent.append(produit)
+            self.buttonPrixContent.append(prix)
         else:
-            if ligne==self.nbArticles:
-                l=Button(self.quantiteListFrame, text=quantite,
-                         command=lambda x=1:self.getArticle(ligne, "quantite")) 
-                self.buttonQuantite.append(l)
-                l.pack(side=TOP, expand=1, fill=BOTH)
-                l=Button(self.produitListFrame, text=produit,
-                         command=lambda x=1:self.getArticle(ligne, "produit"))
-                self.buttonProduit.append(l)
-                l.pack(side=TOP, expand=1, fill=BOTH)
-                l=Button(self.prixListFrame, text=prix,
-                         command=lambda x=1:self.getArticle(ligne, "prix"))
-                self.buttonPrix.append(l)
-                l.pack(side=TOP, expand=1, fill=BOTH)
-            else:
-                self.buttonQuantite[ligne].config(text=quantite)
-                self.buttonProduit[ligne].config(text=produit)
-                self.buttonPrix[ligne].config(text=prix)
+            self.buttonQuantiteContent[ligne]=quantite
+            self.buttonProduitContent[ligne]=produit
+            self.buttonPrixContent[ligne]=prix
+        
+        windowLigne=ligne-self.currentTopArticle
+        if oyak.debugging and not(oyak.cible):
+            print "windowLigne=%d, self.currentTopArticle=%d"%(windowLigne,self.currentTopArticle)
+        if windowLigne>self.nbLignesVisibles-1:
+            self.currentTopArticle=ligne-self.nbLignesVisibles+1
+            if self.currentTopArticle<0:
+                self.currentTopArticle=0
+            self.afficheLigne()
+        else:
+            self.buttonQuantite[windowLigne].config(text=quantite)
+            self.buttonProduit[windowLigne].config(text=produit)
+            self.buttonPrix[windowLigne].config(text=prix)
+
 
 
             
-    def getArticle(self, ligne, focus):
+    def getArticle(self, windowLigne, focus):
+        
+        ligne=windowLigne+self.currentTopArticle
+        if ligne>=self.nbArticles:
+            oyak.ihm.showMessage("pas encore d'article ici!!!!",self.neRienFaire())
+            return
         self.currentArticle=ligne
         self.acceptProduit(self.selectedRacourci[ligne], 
                            self.selectedFournisseur[ligne],
@@ -1577,15 +1652,31 @@ class processFacture:
 
         if operation=="supression":
             
-            if self.currentArticle==0:
-                oyak.ihm.showMessage("pas d'article à supprimer!",self.neRienFaire())
-                return
             
             if self.currentArticle==self.nbArticles:
                 oyak.ihm.showMessage("Sélectionnez un article\n à supprimer!",self.neRienFaire())
                 return
             
-            
+            for i in range(self.currentArticle,self.nbArticles-1): 
+                self.selectedPrix[i]       =self.selectedPrix[i+1]    
+                self.selectedQuantite[i]   =self.selectedQuantite[i+1]
+                self.selectedDate[i]       =self.selectedDate[i+1]
+                self.selectedCode[i]       =self.selectedCode[i+1]
+                self.selectedRacourci[i]   =self.selectedRacourci[i+1]
+                self.selectedFournisseur[i]=self.selectedFournisseur[i+1]
+
+                self.buttonPrixContent[i]       =self.buttonPrixContent[i+1]    
+                self.buttonQuantiteContent[i]   =self.buttonQuantiteContent[i+1]
+                self.buttonProduitContent[i]    =self.buttonProduitContent[i+1]
+
+            self.buttonPrixContent[self.nbArticles-1]    ="---"
+            self.buttonProduitContent[self.nbArticles-1] ="---"
+            self.buttonQuantiteContent[self.nbArticles-1]="---"
+
+            self.nbArticles=self.nbArticles-1
+            self.currentArticle=self.nbArticles
+                
+            self.afficheLigne()
 
         self.selectedCode[self.currentArticle]=""
         self.selectedRacourci[self.currentArticle]=""
