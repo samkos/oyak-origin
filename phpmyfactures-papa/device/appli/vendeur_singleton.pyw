@@ -1482,6 +1482,9 @@ class processFacture:
     def acceptProduit(self, racourci, fournisseur, autre_fournisseur=0, 
                       date="-99",quantite=-99, prix_input=-99):
         self.autre_fournisseur=autre_fournisseur
+
+        self.fournisseurCode=fournisseur
+        self.racourci=racourci
         
         try:
           # que se passe-t-il si on vire la fenetre de facturation qui
@@ -1693,7 +1696,10 @@ class processFacture:
             self.selectedPrix[self.currentArticle]=self.prix_saisi
             self.selectedQuantite[self.currentArticle]=quantite
             self.selectedDate[self.currentArticle]=self.date.get()
-    
+            self.selectedCode[self.currentArticle]=0
+            self.selectedRacourci[self.currentArticle]=self.racourci
+            self.selectedFournisseur[self.currentArticle]=self.fournisseurCode
+            
             self.currentArticle=self.nbArticles
 
         if operation=="supression":
@@ -1791,6 +1797,8 @@ class processFacture:
         # sinon on process le couple (racourci,fournisseur)
         try :
             racourci=int(racourci)
+            oyak.Factures[oyak.factureCurrent].racourci=racourci
+            self.racourci=racourci
         except:
             self.article.delete(0, END)
             oyak.ihm.showMessage("%s n'est pas un code reconnu!"%racourci, self.goToArticle)
