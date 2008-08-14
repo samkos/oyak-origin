@@ -14,7 +14,7 @@ class singleton:
         
         self.maxDigits=130
         self.cible=os.path.exists('\Platform')
-        self.linux=os.path.exists('/etc/password')
+        self.linux=os.path.exists('/etc/passwd')
         self.ip_serveur="77"
         self.version="0.34 (singleton/serveur=%s)"%self.ip_serveur
         self.time_last_key=0
@@ -1641,6 +1641,10 @@ class processFacture:
             
             # verification article
             article=self.article.get()
+            if article=="*" or article=="x":
+                self.route()
+                return
+            
             if len(article)==0:
                 oyak.ihm.showMessage("Article vide!", self.goToArticle)
                 return FALSE
@@ -1780,26 +1784,9 @@ class processFacture:
             (libelle, prix, racourci, prix_plancher, poids, fournisseur)=oyak.Produits[racourci]
             self.acceptProduit(racourci, fournisseur)
             return TRUE
-        fournisseur=self.fournisseur.get()
         # * ->  La commande est envoye
         if racourci[0]=="*" :
             self.envoyer(racourci[1:])
-            return TRUE
-        # * ou x ->  on tue la facture courrante
-        if racourci=="x" or fournisseur=="x":
-            self.annuler()
-            return TRUE
-        if racourci=="DDD" or racourci=="ddd":
-            oyak.ihm.showMessage("Telechargement du serveur")
-            lisData(clearAll=1, forceRecharge=1)
-            self.article.delete(0, END)
-            oyak.ihm.showMessage("OK...", self.goToArticle)
-            return TRUE
-        if racourci=="vvv" or racourci=="vvv":
-            chooseRelease(self, racourci)
-            return TRUE
-        if racourci=="sss" or racourci=="sss":
-            chooseRelease(self, racourci, save=1)
             return TRUE
         # sinon on process le couple (racourci,fournisseur)
         try :
