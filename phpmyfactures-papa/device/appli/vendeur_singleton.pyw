@@ -46,7 +46,7 @@ class singleton:
             self.debugMessages=1
             self.zoomedWindow=0
             self.raiseError=1
-            if self.linux:
+            if not(self.linux):
                 self.website_address="http://127.0.0.1/phpmyfactures"
                 self.root_address="c:/Program Files/EasyPHP1-8/www/phpmyfactures/device/a copier/"
                 self.fichierBackup_Template='c:\Oyak\%s.bak'
