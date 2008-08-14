@@ -14,6 +14,7 @@ class singleton:
         
         self.maxDigits=130
         self.cible=os.path.exists('\Platform')
+        self.linux=os.path.exists('/etc/password')
         self.ip_serveur="77"
         self.version="0.34 (singleton/serveur=%s)"%self.ip_serveur
         self.time_last_key=0
@@ -45,17 +46,26 @@ class singleton:
             self.debugMessages=1
             self.zoomedWindow=0
             self.raiseError=1
-            self.website_address="http://127.0.0.1/phpmyfactures"
-            self.root_address="c:/Program Files/EasyPHP1-8/www/phpmyfactures/device/a copier/"
+            if self.linux:
+                self.website_address="http://127.0.0.1/phpmyfactures"
+                self.root_address="c:/Program Files/EasyPHP1-8/www/phpmyfactures/device/a copier/"
+                self.fichierBackup_Template='c:\Oyak\%s.bak'
+                self.fichierTemp_Template='c:\Oyak\%s.tmp'
+                self.fichierOld_Template='c:\Oyak\%s.old'
+            else:
+                self.website_address="http://claui2t0.der.edf.fr:8080/~samuel/phpmyfactures"
+                self.root_address="/local00/users/samuel/public_html/phpmyfactures/device/a copier/"
+                self.tmp_address="/local00/users/samuel/public_html/phpmyfactures/device/tmp"
+                self.fichierBackup_Template=self.tmp_address+'/%s.bak'
+                self.fichierTemp_Template=self.tmp_address+'/%s.tmp'
+                self.fichierOld_Template=self.tmp_address+'/%s.old'
+                
             self.fichierIp=self.root_address+"Platform/test/S24Profiles.reg"
             self.fichierIpBackup=self.root_address+"Platform/test/S24old.reg"
             self.fichierIpNew=self.root_address+"Platform/test/S24new.reg"
             self.fichierIpTemplate=self.root_address+"Application/Oyak/S24Profiles.reg"
             self.fichierAppTemplate=self.root_address+"Application/Oyak/Data/%s.bak"
             self.fichierAppOldTemplate=self.root_address+"Application/Oyak/Data/%s.old"
-            self.fichierBackup_Template='c:\Oyak\%s.bak'
-            self.fichierTemp_Template='c:\Oyak\%s.tmp'
-            self.fichierOld_Template='c:\Oyak\%s.old'
         
         self.myVendeur=0
         self.myClient=0;
