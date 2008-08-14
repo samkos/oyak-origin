@@ -35,22 +35,22 @@
 		<link>
 			<name>00Out/Oyak</name>
 			<type>2</type>
-			<location>C:/Oyak</location>
+			<location>/local00/kortas/SOFTS/eclipse/eclipse/C::/Oyak</location>
 		</link>
 		<link>
 			<name>facprint/Oyak</name>
 			<type>2</type>
-			<location>C:/Oyak</location>
+			<location>/local00/kortas/SOFTS/eclipse/eclipse/C::/Oyak</location>
 		</link>
 		<link>
 			<name>00Out/impprint</name>
 			<type>2</type>
-			<location>C:/impprint</location>
+			<location>/local00/kortas/SOFTS/eclipse/eclipse/C::/impprint</location>
 		</link>
 		<link>
 			<name>00Out/facprint</name>
 			<type>2</type>
-			<location>C:/facprint</location>
+			<location>/local00/kortas/SOFTS/eclipse/eclipse/C::/facprint</location>
 		</link>
 	</linkedResources>
 </projectDescription>

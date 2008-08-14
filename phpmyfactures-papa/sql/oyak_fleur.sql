@@ -21,24 +21,24 @@ use oyak;
 DROP TABLE IF EXISTS `pcfact_clients`;
 CREATE TABLE IF NOT EXISTS `pcfact_clients` (
   `id` int(8) NOT NULL default '0',
-  `civilite` varchar(15) collate latin1_general_ci NOT NULL default '',
-  `nom` varchar(30) collate latin1_general_ci NOT NULL default '',
-  `prenom` varchar(30) collate latin1_general_ci NOT NULL default '',
-  `societe` varchar(35) collate latin1_general_ci NOT NULL default '',
-  `adresse` varchar(155) collate latin1_general_ci NOT NULL default '',
-  `adresse2` varchar(155) collate latin1_general_ci NOT NULL default '',
-  `ville` varchar(50) collate latin1_general_ci NOT NULL default '',
-  `code_postal` varchar(15) collate latin1_general_ci NOT NULL default '',
+  `civilite` varchar(15)  NOT NULL default '',
+  `nom` varchar(30)  NOT NULL default '',
+  `prenom` varchar(30)  NOT NULL default '',
+  `societe` varchar(35)  NOT NULL default '',
+  `adresse` varchar(155)  NOT NULL default '',
+  `adresse2` varchar(155)  NOT NULL default '',
+  `ville` varchar(50)  NOT NULL default '',
+  `code_postal` varchar(15)  NOT NULL default '',
   `pays` int(3) NOT NULL default '33',
-  `telephone` varchar(15) collate latin1_general_ci NOT NULL default '',
-  `fax` varchar(15) collate latin1_general_ci NOT NULL default '',
-  `portable` varchar(15) collate latin1_general_ci NOT NULL default '',
-  `email` varchar(155) collate latin1_general_ci NOT NULL default '',
-  `clef` varchar(7) collate latin1_general_ci NOT NULL default '',
+  `telephone` varchar(15)  NOT NULL default '',
+  `fax` varchar(15)  NOT NULL default '',
+  `portable` varchar(15)  NOT NULL default '',
+  `email` varchar(155)  NOT NULL default '',
+  `clef` varchar(7)  NOT NULL default '',
   `balance` decimal(10,2) NOT NULL default '0.00',
   `timestamp` bigint(20) NOT NULL auto_increment,
   PRIMARY KEY  (`timestamp`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=2065 ;
+) ;
 
 -- 
 -- Contenu de la table `pcfact_clients`
@@ -2121,7 +2121,7 @@ CREATE TABLE IF NOT EXISTS `pcfact_compteur` (
   `vendeur` varchar(16) NOT NULL default '',
   `temps` bigint(20) default '0',
   KEY `compteur` (`compteur`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=472 ;
+) ;
 
 -- 
 -- Contenu de la table `pcfact_compteur`
@@ -2149,23 +2149,23 @@ INSERT INTO `pcfact_compteur` (`compteur`, `vendeur`, `temps`) VALUES (466, '1',
 DROP TABLE IF EXISTS `pcfact_fournisseurs`;
 CREATE TABLE IF NOT EXISTS `pcfact_fournisseurs` (
   `id` int(8) NOT NULL default '0',
-  `civilite` varchar(15) collate latin1_general_ci NOT NULL default '',
-  `nom` varchar(30) collate latin1_general_ci NOT NULL default '',
-  `prenom` varchar(30) collate latin1_general_ci NOT NULL default '',
-  `societe` varchar(35) collate latin1_general_ci NOT NULL default '',
-  `adresse` varchar(155) collate latin1_general_ci NOT NULL default '',
-  `adresse2` varchar(155) collate latin1_general_ci NOT NULL default '',
-  `ville` varchar(50) collate latin1_general_ci NOT NULL default '',
-  `code_postal` varchar(15) collate latin1_general_ci NOT NULL default '',
+  `civilite` varchar(15)  NOT NULL default '',
+  `nom` varchar(30)  NOT NULL default '',
+  `prenom` varchar(30)  NOT NULL default '',
+  `societe` varchar(35)  NOT NULL default '',
+  `adresse` varchar(155)  NOT NULL default '',
+  `adresse2` varchar(155)  NOT NULL default '',
+  `ville` varchar(50)  NOT NULL default '',
+  `code_postal` varchar(15)  NOT NULL default '',
   `pays` int(3) NOT NULL default '33',
-  `telephone` varchar(15) collate latin1_general_ci NOT NULL default '',
-  `fax` varchar(15) collate latin1_general_ci NOT NULL default '',
-  `portable` varchar(15) collate latin1_general_ci NOT NULL default '',
-  `email` varchar(155) collate latin1_general_ci NOT NULL default '',
-  `clef` varchar(7) collate latin1_general_ci NOT NULL default '',
+  `telephone` varchar(15)  NOT NULL default '',
+  `fax` varchar(15)  NOT NULL default '',
+  `portable` varchar(15)  NOT NULL default '',
+  `email` varchar(155)  NOT NULL default '',
+  `clef` varchar(7)  NOT NULL default '',
   `timestamp` bigint(20) NOT NULL auto_increment,
   PRIMARY KEY  (`timestamp`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=71 ;
+) ;
 
 -- 
 -- Contenu de la table `pcfact_fournisseurs`
@@ -2251,21 +2251,21 @@ INSERT INTO `pcfact_fournisseurs` (`id`, `civilite`, `nom`, `prenom`, `societe`,
 DROP TABLE IF EXISTS `pcfact_produits`;
 CREATE TABLE IF NOT EXISTS `pcfact_produits` (
   `id` int(8) NOT NULL default '0',
-  `titre` varchar(35) collate latin1_general_ci NOT NULL default '',
+  `titre` varchar(35)  NOT NULL default '',
   `id_cat` int(4) NOT NULL default '1',
-  `description` text collate latin1_general_ci NOT NULL,
+  `description` text  NOT NULL,
   `prix_vente_ht` decimal(20,2) NOT NULL default '0.00',
   `prix_plancher_ht` decimal(10,2) default '0.00',
   `prix_stock_ht` decimal(10,0) NOT NULL default '0',
   `id_taux_tva` decimal(4,2) NOT NULL default '19.60',
   `stock` decimal(20,3) NOT NULL default '1.000',
-  `barcode` varchar(13) collate latin1_general_ci NOT NULL default '',
-  `fournisseur` varchar(7) collate latin1_general_ci default NULL,
+  `barcode` varchar(13)  NOT NULL default '',
+  `fournisseur` varchar(7)  default NULL,
   `clef` int(11) NOT NULL default '0',
   `poids` float NOT NULL default '0',
   `timestamp` bigint(20) unsigned NOT NULL auto_increment,
   PRIMARY KEY  (`timestamp`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=874 ;
+) ;
 
 -- 
 -- Contenu de la table `pcfact_produits`
@@ -2959,7 +2959,7 @@ CREATE TABLE IF NOT EXISTS `pcfact_vendeurs` (
   `prenom` varchar(30) NOT NULL default '',
   `timestamp` bigint(20) NOT NULL auto_increment,
   PRIMARY KEY  (`timestamp`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
+) ;
 
 -- 
 -- Contenu de la table `pcfact_vendeurs`

@@ -1298,7 +1298,7 @@ class processFacture:
         if clickable:
             e = Entry(f, fg="black",textvariable=eVar)
         else:
-            e = Entry(f, fg="black",textvariable=eVar)
+            e = Label(f, fg="black",textvariable=eVar)
         e.pack(side=LEFT)
         
             
@@ -1424,8 +1424,6 @@ class processFacture:
 
         self.goToArticle()
         self.article.bind(".", self.processProduit)
-        self.fournisseur.bind(".", self.processFournisseur)
-        
         self.article.bind("<Return>", self.route)
         self.date.bind("<Return>", self.goToQuantite)
         self.quantite.bind("<Return>", self.goToPrice)
@@ -1479,11 +1477,6 @@ class processFacture:
         self.article.delete(0, END)
         oyak.myProduit.ihmShow(self, valeur)
 
-    def processFournisseur(self, event):
-                
-        valeur=self.fournisseur.get()
-        self.fournisseur.delete(0, END)
-        oyak.myFournisseur.ihmShow(self, valeur)
 
 
     def acceptProduit(self, racourci, fournisseur, autre_fournisseur=0, 
@@ -1494,9 +1487,10 @@ class processFacture:
           # que se passe-t-il si on vire la fenetre de facturation qui
           # a appelé??
           self.article.delete(0, END)
-          self.fournisseur.delete(0, END)
+          self.fournisseur_content.set('')
           self.prix.delete(0, END)
         except:
+          oyak.ihm.showMessage("produit rejeté!",self.neRienFaire)
           return
             
         oyak.ihm.show("facture%d"%self.nb, title="Oyak? Facture ")
@@ -1517,7 +1511,7 @@ class processFacture:
         if (racourci, fournisseur) in oyak.ProduitsCodes.keys() or autre_fournisseur:
 
             (societe, ville, clef)=oyak.Fournisseurs[fournisseur]
-            self.fournisseur.insert(END, societe)
+            self.fournisseur_content.set(societe)
             self.fournisseur_label.set("Fournisseur : %s"%fournisseur)
               
             self.article.insert(END, libelle)
@@ -1554,7 +1548,7 @@ class processFacture:
     def deleteCode(self, event):
         self.article.delete(0, END)
         self.article_label.set("Article :")
-        self.fournisseur.delete(0, END)
+        self.fournisseur_content.set("")
         self.fournisseur_label.set("Fournisseur :")
         self.date.delete(0, END)
         self.prix.delete(0, END)
