@@ -68,26 +68,24 @@ matcher pyw a python
 situation client, solde article
 
 
+recabler tous les fournisseurs!
 
-retailler la fenetre facture sur la device pour qu'elle occuppe tout l'ecran
 
-dans la vue facture quand on fait 'f.' ne montrer que les produit commencant par f
 
-faire apparaitre 'menu' en haut de la fenetre de choix de produit quand on a pas tapé de lettre
 
-selectionner en griser le premier de la ligne apres un filtre en succes
 
-grrossirr les boutons de selectio 'prix' qualite ou fournisseur
+selectionner en griser le premier de la ligne apres un filtre en succes ok
+retailler la fenetre facture sur la device pour qu'elle occuppe tout l'ecran ok
+dans la vue facture quand on fait 'f.' ne montrer que les produits commencant par f ok
+faire apparaitre 'menu' en haut de la fenetre de choix de produit quand on a pas tapé de lettre ok
+grrossirr les boutons de selectio 'prix' qualite ou fournisseur ok
+prq le produit n'est pas automatiquement selectionné lorsque l'on rappelle une ligne?? ok
+virer 'copier' de la vue facture ok
+cabler'effacer' de la vue facture  ok
 
-prq le produit n'est pas automatiquement selectionné lorsque l'on rappelle une ligne??
+que se passe-t-il si on fait nouvelle facture par le menu add facture? 
 
-virer 'copier' de la vue facture
-
-cabler'effacer' de la vue facture
-
-virer 
- 
-
+lorsque l'on selectionne un article le prix se refixe au prix par defaut ok
 
 
 factures 
@@ -97,3 +95,9 @@ factures
 
 
 
+Pilote 
+---------
+
+faire un lancement du pilote depuis le site web
+
+faire une touche copie light du vendeur!!! ok
