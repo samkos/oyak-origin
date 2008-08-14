@@ -522,8 +522,7 @@ class ihmRoot:
         ihm.showMessage("OK...", self.showMenu)
 
     def changeVendeur(self):
-        global myVendeur
-        myVendeur.ihmShow()
+        oyak.myVendeur.ihmShow()
 
 
 
@@ -1002,6 +1001,7 @@ class chooseProduit(chooseXXX):
         except:
             return
 
+        oyak.Factures[oyak.factureCurrent].racourci=racourci
         oyak.myFournisseur.ihmShow(self.facture, racourci)
 
 
@@ -1040,8 +1040,8 @@ class chooseFournisseur(chooseXXX):
         chooseXXX.ihmShow(self, "fournisseurs", killable=1)
         
     def initPanel(self):
-        if self.all:
-            self.fournisseurs = Fournisseurs.keys()
+        if self.all: 
+            self.fournisseurs = oyak.Fournisseurs.keys()
         else:   
             self.fournisseurs = oyak.ProduitsFournisseurs[self.racourci]
         self.filtreName="%s > "%oyak.ProduitsRacourcis[self.racourci]
@@ -1210,6 +1210,8 @@ class processFacture:
         self.buttonQuantiteContent=list()
         self.buttonProduitContent=list()
         self.buttonPrixContent=list()
+        
+        self.racourci=0
 
 
         
@@ -1264,28 +1266,37 @@ class processFacture:
         oyak.ihm.showMessageOuiNon("Annuler la \n Facture?", siOui=oyak.ihm.delCurrentFacture)
         
 
-    def addLabelEntry(self, s):
+    def addLabelEntry(self, s, clickable=TRUE):
         sVar= StringVar()
         sVar.set(s)
 
         hVar= StringVar()
         hVar.set("---")
 
-        label = Button(self.nameFrame, textvariable=sVar, fg="red")
-        label.pack(side=TOP,expand=1,fill=X)
-
+        if clickable:
+            label = Button(self.nameFrame, textvariable=sVar, fg="red")
+            label.pack(side=TOP,expand=1,fill=X)
+        else:
+            label = Label(self.nameFrame, textvariable=sVar, fg="red")
+            label.pack(side=TOP,expand=1,fill=X)
+            
         f = Frame(self.inputFrame)
         f.pack(side=TOP)
 
         eVar=StringVar()
-        
-        e = Entry(f, fg="black",textvariable=eVar)
+    
+        if clickable:
+            e = Entry(f, fg="black",textvariable=eVar)
+        else:
+            e = Entry(f, fg="black",textvariable=eVar)
         e.pack(side=LEFT)
         
+            
         button = Button(f, textvariable=hVar, fg="red",width=5)
-        button["command"]=lambda x=1:self.labelEntryFocus(e, hVar, eVar)
-        label["command"]=lambda x=1:self.labelEntryFocus(e, hVar, eVar)
-        button.pack(side=LEFT)
+        if clickable:
+            button["command"]=lambda x=1:self.labelEntryFocus(e, hVar, eVar)
+            label["command"]=lambda x=1:self.labelEntryFocus(e, hVar, eVar)
+            button.pack(side=LEFT)
         
         return (sVar, e, hVar, eVar)
 
@@ -1331,7 +1342,7 @@ class processFacture:
         # quantite, prix, article, fournisseur, date
 
         self.article_label, self.article, self.article_focus, self.article_content = self.addLabelEntry("Article:")
-        self.fournisseur_label, self.fournisseur, self.fournisseur_focus, self.fournisseur_content = self.addLabelEntry("Fournisseur:")
+        self.fournisseur_label, self.fournisseur, self.fournisseur_focus, self.fournisseur_content = self.addLabelEntry("Fournisseur:",clickable=FALSE)
         self.date_label, self.date, self.date_focus, self.date_content = self.addLabelEntry("Date:")
         self.quantite_label, self.quantite, self.quantite_focus, self.quantite_content = self.addLabelEntry("Quantite:")
         self.prix_label, self.prix, self.prix_focus, self.prix_content = self.addLabelEntry("Prix:")
@@ -1342,10 +1353,10 @@ class processFacture:
             b=Button(self.ligneFrame, text='remplir', command=lambda x=1:self.remplirFaccture())
             b.pack(side=LEFT, expand=1, fill=BOTH)
 
-        b=Button(self.ligneFrame, text='effacer', command=lambda x=1:self.addFacture(operation='supression'))
+        b=Button(self.ligneFrame, text='effacer', command=lambda x=1:self.ajouteArticle(operation='supression'))
         b.pack(side=LEFT, expand=1, fill=BOTH)
         
-        self.valider=Button(self.ligneFrame, text='Valider', command=lambda x=1:self.addFacture('creation'))
+        self.valider=Button(self.ligneFrame, text='Valider', command=lambda x=1:self.ajouteArticle('creation'))
         self.valider.bind("<Return>", lambda x="fake":self.valider.invoke())
         self.valider.pack(side=LEFT, expand=1, fill=BOTH)
         
@@ -1403,6 +1414,7 @@ class processFacture:
 
         self.goToArticle()
         self.article.bind(".", self.processProduit)
+        self.fournisseur.bind(".", self.processFournisseur)
         
         self.article.bind("<Return>", self.route)
         self.date.bind("<Return>", self.goToQuantite)
@@ -1456,6 +1468,12 @@ class processFacture:
         valeur=self.article.get()
         self.article.delete(0, END)
         oyak.myProduit.ihmShow(self, valeur)
+
+    def processFournisseur(self, event):
+                
+        valeur=self.fournisseur.get()
+        self.fournisseur.delete(0, END)
+        oyak.myFournisseur.ihmShow(self, valeur)
 
 
     def acceptProduit(self, racourci, fournisseur, autre_fournisseur=0, 
@@ -1513,6 +1531,7 @@ class processFacture:
             self.selectedRacourci[self.currentArticle]=racourci
             self.selectedFournisseur[self.currentArticle]=fournisseur    
 
+            
             if not(date=="-99"):
                 self.date.delete(0, END)
                 self.date.insert(END,date)
@@ -1520,7 +1539,7 @@ class processFacture:
             
             self.goToDate()
         else:
-            oyak.ihm.showMessage("Article a part numero %s fournisseur %s", (racourci, fournisseur), self.neRienFaire())
+            oyak.ihm.showMessage("Article a part numero %s fournisseur %s"%(racourci, fournisseur), self.neRienFaire())
                 
     def deleteCode(self, event):
         self.article.delete(0, END)
@@ -1539,6 +1558,7 @@ class processFacture:
 
 
     def goToFournisseur(self, event="fake"):
+        oyak.ihm.show("facture%d"%self.nb, title="Oyak? Facture ")
         self.labelEntryFocus(self.fournisseur, self.fournisseur_focus,self.fournisseur_content)
 
 
@@ -1547,27 +1567,12 @@ class processFacture:
         self.labelEntryFocus(self.prix, self.prix_focus,self.prix_content)
 
     def goToQuantite(self, event="fake"):
+        oyak.ihm.show("facture%d"%self.nb, title="Oyak? Facture ")
         self.labelEntryFocus(self.quantite, self.quantite_focus,self.quantite_content)
 
     def goToDate(self, event="fake"):
+        oyak.ihm.show("facture%d"%self.nb, title="Oyak? Facture ")
         self.labelEntryFocus(self.date, self.date_focus,self.date_content)
-
-    def addFacture(self, operation="creation"):
-
-        if operation=="creation":
-            try :
-              self.prix_saisi=self.prix.get()
-              if len(self.prix_saisi)==0:
-                    self.prix_saisi=self.prix_default
-              if (eval(self.prix_saisi)+0.0)<eval(self.prix_plancher)+0.:
-                oyak.ihm.showMessageOuiNon("le prix %s est inferieur au prix plancher %6.2f! \n Entrée valide?"%(self.prix_saisi, (eval(self.prix_plancher)+0.00)),
-                               siOui=self.ajouteArticle, siNon=self.goToPrice)
-                return
-            except:
-                self.prix.delete(0, END)
-                oyak.ihm.showMessage("le prix "+self.prix_saisi+" n'est pas reconnu", self.goToPrice)
-                return
-        self.ajouteArticle(operation)
 
     def remplirFacture(self):
         for i in range(self.nbLignesVisibles*3):
@@ -1627,14 +1632,50 @@ class processFacture:
 
 
     def ajouteArticle(self, operation='creation'):
-        oyak.ihm.show("facture%d"%self.nb, title="Oyak? Facture ")
-        
+
         if operation=="creation":
+            
+            # verification article
+            article=self.article.get()
+            if len(article)==0:
+                oyak.ihm.showMessage("Article vide!", self.goToArticle)
+                return FALSE
+            try:
+                article_deja_choisi=oyak.ProduitsRacourcis[self.racourci]
+            except:
+                article_deja_choisi="xxxxxxx"
+            if not(article in oyak.Produits.keys() or article_deja_choisi==article):
+                oyak.ihm.showMessage("%s n'est pas un code article reconnu!"%article, self.goToArticle)
+                return FALSE
+                           
+            # verification prix
+            try :
+              self.prix_saisi=self.prix.get()
+              if len(self.prix_saisi)==0:
+                    self.prix_saisi=self.prix_default
+              if (eval(self.prix_saisi)+0.0)<eval(self.prix_plancher)+0.:
+                oyak.ihm.showMessageOuiNon("le prix %s est inferieur au prix plancher %6.2f! \n Entrée valide?"%(self.prix_saisi, (eval(self.prix_plancher)+0.00)),
+                               siOui=self.ajouteArticle, siNon=self.goToPrice)
+                return
+            except:
+                self.prix.delete(0, END)
+                oyak.ihm.showMessage("le prix "+self.prix_saisi+" n'est pas reconnu", self.goToPrice)
+                return
+         
+            # verification quantite
             quantite=self.quantite.get()
             if len(quantite)==0:
                     quantite=self.poids
-    
+            try:
+                if eval(quantite)+0.0<0:
+                    oyak.ihm.showMessage("la quantite %s est inferieure à 0"%quantite,self.goToQuantite)
+                    return
+            except:
+                    oyak.ihm.showMessage("la quantite %s est incoherente"%quantite,self.goToQuantite)
+                    return
+            
             article=self.article.get()
+            # verifier si l'article existe
     #        try :
     #          #self.listbox.insert(END, formatFact%(float(quantite),article,float(self.prix_saisi)))
             self.ajouteLigneFacture(quantite, article, float(self.prix_saisi), self.currentArticle)
@@ -1726,54 +1767,50 @@ class processFacture:
     def route(self, event):
        
         racourci=self.article.get()
+        oyak.Factures[oyak.factureCurrent].racourci=racourci
+
         if len(racourci)==0:
             oyak.ihm.showMessage("Article vide!", self.goToArticle)
-            return
+            return FALSE
         if racourci in oyak.Produits.keys():
             (libelle, prix, racourci, prix_plancher, poids, fournisseur)=oyak.Produits[racourci]
             self.acceptProduit(racourci, fournisseur)
-            return
+            return TRUE
         fournisseur=self.fournisseur.get()
-        if racourci=="e" or fournisseur=="e":
-            l=self.listbox.size()
-            if l>1:
-                self.listbox.delete(l-1, l)
-                self.nbArticles=self.nbArticles-1
-            self.deleteCode("fake")
-            return
         # * ->  La commande est envoye
         if racourci[0]=="*" :
             self.envoyer(racourci[1:])
-            return
+            return TRUE
         # * ou x ->  on tue la facture courrante
         if racourci=="x" or fournisseur=="x":
             self.annuler()
-            return
+            return TRUE
         if racourci=="DDD" or racourci=="ddd":
             oyak.ihm.showMessage("Telechargement du serveur")
             lisData(clearAll=1, forceRecharge=1)
             self.article.delete(0, END)
             oyak.ihm.showMessage("OK...", self.goToArticle)
-            return
+            return TRUE
         if racourci=="vvv" or racourci=="vvv":
             chooseRelease(self, racourci)
-            return
+            return TRUE
         if racourci=="sss" or racourci=="sss":
             chooseRelease(self, racourci, save=1)
-            return
+            return TRUE
         # sinon on process le couple (racourci,fournisseur)
         try :
             racourci=int(racourci)
         except:
             self.article.delete(0, END)
             oyak.ihm.showMessage("%s n'est pas un code reconnu!"%racourci, self.goToArticle)
-            return
-        if racourci in oyak.ProduitsRacourcis.keys() and len(fournisseur)==0:
+            return FALSE
+        if racourci in oyak.ProduitsRacourcis.keys():
             oyak.myFournisseur.ihmShow(self, racourci)
+            return TRUE
         else:
             self.article.delete(0, END)
             oyak.ihm.showMessage("%d n'est pas un code reconnu!"%racourci, self.goToArticle)
-
+            return FALSE
 
 
         
