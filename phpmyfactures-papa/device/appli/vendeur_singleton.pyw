@@ -16,7 +16,7 @@ class singleton:
         self.cible=os.path.exists('\Platform')
         self.linux=os.path.exists('/etc/passwd')
         self.ip_serveur="77"
-        self.version="0.34 (singleton/serveur=%s)"%self.ip_serveur
+        self.version="0.35 (singleton/serveur=%s)"%self.ip_serveur
         self.time_last_key=0
         self.isServeurInjoignable=0
         
