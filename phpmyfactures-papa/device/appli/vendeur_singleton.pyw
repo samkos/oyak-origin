@@ -1622,7 +1622,7 @@ class processFacture:
         self.currentArticle=ligne
         self.acceptProduit(self.selectedRacourci[ligne], 
                            self.selectedFournisseur[ligne],
-                           00,
+                           001,
                            self.selectedDate[ligne], 
                            self.selectedQuantite[ligne],
                            self.selectedPrix[ligne])
