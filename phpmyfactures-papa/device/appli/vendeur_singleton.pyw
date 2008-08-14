@@ -1502,13 +1502,14 @@ class processFacture:
         if (racourci, fournisseur) in oyak.ProduitsCodes.keys():
             code = oyak.ProduitsCodes[racourci, fournisseur]
             (libelle, prix, racourci, prix_plancher, poids, fournisseur)=oyak.Produits[code]
-            if not(prix_input==-99):
-                prix=prix_input
 
         # le fournisseur est forcé par un appel a autre fournisseur
         if autre_fournisseur:
             code = 00
             (libelle, prix, prix_plancher, poids)=(oyak.ProduitsRacourcis[racourci], "0", "0", "0")
+
+        if not(prix_input==-99):
+            prix=prix_input
             
 
         if (racourci, fournisseur) in oyak.ProduitsCodes.keys() or autre_fournisseur:
