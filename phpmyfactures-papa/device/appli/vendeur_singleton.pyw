@@ -1781,7 +1781,16 @@ class processFacture:
     
     def route(self, event):
        
-        racourci=self.article.get()
+       
+        article=self.article.get()
+        try:
+            article_attendu=oyak.ProduitsRacourcis[self.racourci]
+            if article_attendu==article:
+                racourci="%s"%self.racourci
+            else:
+                racourci=article
+        except:
+            racourci=article
         oyak.Factures[oyak.factureCurrent].racourci=racourci
 
         if len(racourci)==0:
