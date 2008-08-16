@@ -16,7 +16,7 @@ class singleton:
         self.cible=os.path.exists('\Platform')
         self.linux=os.path.exists('/etc/passwd')
         self.ip_serveur="77"
-        self.version="0.35 (singleton/serveur=%s)"%self.ip_serveur
+        self.version="0.36 (singleton/serveur=%s)"%self.ip_serveur
         self.time_last_key=0
         self.isServeurInjoignable=0
         
@@ -334,10 +334,10 @@ class ihmRoot:
         label = Button(self.ihm, text="Nouvelle Facture", command=processFacture, height=4, width=self.Xmax)
         self.add(panelName, "autre", label, 4, 0)
 
-        label = Button(self.ihm, text="Choisir Vendeur", command=self.changeVendeur, height=4, width=self.Xmax)
+        label = Button(self.ihm, text="Choisir Vendeur", command=self.changeVendeur, height=3, width=self.Xmax)
         self.add(panelName, "vendeur", label, 5, 0)
 
-        label = Button(self.ihm, text="Relire Donnée", command=self.rechargeBase, height=4, width=self.Xmax)
+        label = Button(self.ihm, text="Relire Donnée", command=self.rechargeBase, height=3, width=self.Xmax)
         self.add(panelName, "reloader", label, 6, 0)
         
         
@@ -358,7 +358,7 @@ class ihmRoot:
 
     def addMenuInterrogation(self):
         panelName = "menu"   
-        label = Button(self.ihm, text="Interrogation", command=self.showInterrogation, height=4, width=self.Xmax)
+        label = Button(self.ihm, text="Interrogation", command=self.showInterrogation, height=3, width=self.Xmax)
         self.add(panelName, "interroger", label, 2, 0)
         self.notMenuAdded=0
 
@@ -604,7 +604,8 @@ class interrogateur:
 
     def ask(self,vendeur=0,client=0,produit=0,fournisseur=0):
         #interrogation du serveur
-        print "interrogation.... vendeur=%s,client=%s,produit=%s,fournisseur=%s"%(vendeur,client,produit,fournisseur)
+        if oyak.debugMessages:
+            print "interrogation.... vendeur=%s,client=%s,produit=%s,fournisseur=%s"%(vendeur,client,produit,fournisseur)
         s="%s%s%s%s%s%s%s"%(vendeur, oyak.sep1,client, oyak.sep1,produit, oyak.sep1,fournisseur)
         params = urllib.urlencode({'requete': s})
         try:
@@ -619,7 +620,8 @@ class interrogateur:
         ack=f.readlines()
         ok=ack[0]
         if (ok[0]=="0"):
-            print ok[2:]
+            if oyak.debugMessages:
+                print ok[2:]
             s=string.replace(ok[2:], "!","\n")
             oyak.ihm.showMessage("%s"%s, oyak.ihm.showInterrogation)
         else:
@@ -963,6 +965,7 @@ class chooseVendeur(chooseXXX):
         
         if oyak.notInterrogation:
             oyak.vendeurChoisi=choix
+#            oyak.ihm.showMessage("preparation fenetre client")
             oyak.myClient.ihmShow()
         else:
             (num,nom,prenom)=choix
