@@ -27,7 +27,8 @@ class singleton:
         
         self.notInterrogation=1  # switch saisie facture/mode interrogaation
         self.interrogateur=interrogateur()
-        
+        self.notMenuAdded=1
+                
         if self.cible:
             self.zoomedWindow=1
             self.erreurCatch=0
@@ -327,9 +328,6 @@ class ihmRoot:
         label = Button(self.ihm, text="Retour", command=self.returnPrevious, height=3, width=self.Xmax)
         self.add(panelName, "retour", label, 1, 0)
 
-        label = Button(self.ihm, text="Interrogation", command=self.showInterrogation, height=4, width=self.Xmax)
-        self.add(panelName, "interroger", label, 2, 0)
-
         label = Button(self.ihm, text="Factures en Cours", command=self.showFactureFirst, height=4, width=self.Xmax)
         self.add(panelName, "en cours", label, 3, 0)
 
@@ -356,6 +354,13 @@ class ihmRoot:
          
 #        label = Button(self.ihm, text="Administrer", command=self.showAdmin,height=5,width=self.Xmax)
 #        self.add(panelName,"admin",label,10,0)
+
+
+    def addMenuInterrogation(self):
+        panelName = "menu"   
+        label = Button(self.ihm, text="Interrogation", command=self.showInterrogation, height=4, width=self.Xmax)
+        self.add(panelName, "interroger", label, 2, 0)
+        self.notMenuAdded=0
 
     # creation fenetre type Menu
     
@@ -1336,6 +1341,8 @@ class processFacture:
 
         else:
         
+            if oyak.notMenuAdded:
+                oyak.ihm.addMenuInterrogation()
 
             self.nb=oyak.getNBfacture()
             oyak.factureCurrent=self.nb
