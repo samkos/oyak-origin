@@ -24,7 +24,10 @@ class singleton:
         self.debugFileOpen=0
         self.debugFileName="c:\\Oyak\\debug.out"
         self.debugging=0
-                
+        
+        self.notInterrogation=1  # switch saisie facture/mode interrogaation
+        self.interrogateur=interrogateur()
+        
         if self.cible:
             self.zoomedWindow=1
             self.erreurCatch=0
@@ -195,7 +198,8 @@ class ihmRoot:
        self.menuCreate()
        self.adminCreate()
        self.ipCreate()
-       
+       self.interrogationCreate()
+
        self.currentShown="message"
        
     # fonctions de Management des fenetres types
@@ -322,17 +326,21 @@ class ihmRoot:
         label = Button(self.ihm, text="Retour", command=self.returnPrevious, height=3, width=self.Xmax)
         self.add(panelName, "retour", label, 1, 0)
 
+        label = Button(self.ihm, text="Interrogation", command=self.showInterrogation, height=4, width=self.Xmax)
+        self.add(panelName, "interroger", label, 2, 0)
+
         label = Button(self.ihm, text="Factures en Cours", command=self.showFactureFirst, height=4, width=self.Xmax)
-        self.add(panelName, "en cours", label, 2, 0)
+        self.add(panelName, "en cours", label, 3, 0)
 
         label = Button(self.ihm, text="Nouvelle Facture", command=processFacture, height=4, width=self.Xmax)
-        self.add(panelName, "autre", label, 3, 0)
+        self.add(panelName, "autre", label, 4, 0)
 
         label = Button(self.ihm, text="Choisir Vendeur", command=self.changeVendeur, height=4, width=self.Xmax)
         self.add(panelName, "vendeur", label, 5, 0)
 
         label = Button(self.ihm, text="Relire Donnée", command=self.rechargeBase, height=4, width=self.Xmax)
         self.add(panelName, "reloader", label, 6, 0)
+        
         
 #        label = Button(self.ihm, text="Reglages", command=self.showIp,height=4,width=self.Xmax)
 #        self.add(panelName,"update",label,8,0)
@@ -407,6 +415,30 @@ class ihmRoot:
         label = Button(self.ihm, text="QUITTER", command=self.ihm.quit, height=4, width=self.Xmax)
         self.add(panelName, "quitter", label, 10, 0)
 
+    def interrogationCreate(self):
+
+        panelName = "interrogation"
+        
+        label = Button(self.ihm, text="Retour", command=oyak.interrogateur.close, height=3, width=self.Xmax)
+        self.add(panelName, "retour", label, 1, 0)
+
+        label = Button(self.ihm, text="info Client", 
+                       command=lambda x='client':oyak.interrogateur.compose(x), height=4, width=self.Xmax)
+        self.add(panelName, "Client", label, 2, 0)
+
+        label = Button(self.ihm, text="info Produit", 
+                       command=lambda x='produit':oyak.interrogateur.compose(x), height=4, width=self.Xmax)
+        self.add(panelName, "produit", label, 3, 0)
+
+        label = Button(self.ihm, text="info Fournisseur", 
+                       command=lambda x='fournisseur':oyak.interrogateur.compose(x), height=4, width=self.Xmax)
+        self.add(panelName, "Fournisseur", label, 4, 0)
+
+        label = Button(self.ihm, text="info Vendeur", 
+                       command=lambda x='vendeur':oyak.interrogateur.compose(x), height=4, width=self.Xmax)
+        self.add(panelName, "Vendeur", label, 5, 0)
+
+        
     # creation fenetre type menu
 
     def showMenu(self):
@@ -428,6 +460,8 @@ class ihmRoot:
         self.ipSid.set(r[2])
         self.show("ip")
 
+    def showInterrogation(self):
+        self.show("interrogation")
 
     def testReseau(self):
         os.system('\windows\nictt.exe')
@@ -534,9 +568,44 @@ class ihmRoot:
     def changeVendeur(self):
         oyak.myVendeur.ihmShow()
 
+    def interroge(self,what):
+        i=interrogateur(what)
 
+class interrogateur:
+    global oyak
+    
+    def __init__(self):
+        self.alreadyInit=0
+        pass
+    
+    def check(self):
+        if not(self.alreadyInit):
+            self.facture=processFacture()
+            self.alreadyInit=1
+            
+    def compose(self,what):
+        #self.check()
+        oyak.notInterrogation=0
+        if what=="client":
+            oyak.myClient.ihmShow()
+        if what=="produit":
+            self.client=("choix", "", "")
+            oyak.myProduit.ihmShow(self, "")            
+        if what=="fournisseur":
+            oyak.myFournisseur.ihmShow(self, "", all=1)
+        if what=="vendeur":
+            oyak.myVendeur.ihmShow()
 
-
+    def ask(self,vendeur=0,client=0,produit=0,fournisseur=0):
+        #interrogation du serveur
+        print "interrogation.... vendeur=%s,client=%s,produit=%s,fournisseur=%s"%(vendeur,client,produit,fournisseur)
+        oyak.ihm.showInterrogation()
+        pass
+    
+    def close(self):
+        oyak.notInterrogation=1
+        oyak.ihm.showFactureFirst()
+        
 ###################################################################
 #
 #  Lectures des datas
@@ -869,8 +938,12 @@ class chooseVendeur(chooseXXX):
         self.filtre=""
         self.setFiltre(self.filtre)
         
-        oyak.vendeurChoisi=choix
-        oyak.myClient.ihmShow()
+        if oyak.notInterrogation:
+            oyak.vendeurChoisi=choix
+            oyak.myClient.ihmShow()
+        else:
+            (num,nom,prenom)=choix
+            oyak.interrogateur.ask(vendeur=num)
 
     def action(self, event="fake"):
         self.listbox.delete(0, END)
@@ -939,8 +1012,12 @@ class chooseClient(chooseXXX):
 
         self.filtre=""
         self.setFiltre(self.filtre)
-                
-        processFacture(client=choix)
+        
+        if oyak.notInterrogation:        
+            processFacture(client=choix)
+        else:
+            (societe, ville, nb)=choix
+            oyak.interrogateur.ask(client=nb)
 
     def action(self, event="fake"):
         global clefsClients
@@ -1054,8 +1131,11 @@ class chooseFournisseur(chooseXXX):
             self.fournisseurs = oyak.Fournisseurs.keys()
         else:   
             self.fournisseurs = oyak.ProduitsFournisseurs[self.racourci]
-        self.filtreName="%s > "%oyak.ProduitsRacourcis[self.racourci]
-
+        if oyak.notInterrogation:
+            self.filtreName="%s > "%oyak.ProduitsRacourcis[self.racourci]
+        else:
+            self.filtreName=" ???? >"
+            
     def collect(self, article):
         (societe, ville, clef, timestamp)=article
         oyak.Fournisseurs[clef]=(societe, ville, clef)
@@ -1071,8 +1151,11 @@ class chooseFournisseur(chooseXXX):
         (societe, ville, clef) = choix
         if clef==0: # selection de tous les fournisseurs
             self.ihmShow(self.facture, self.racourci, all=1)
-        else:                
-            self.facture.acceptProduit(self.racourci, clef, autre_fournisseur=self.all)
+        else:               
+            if oyak.notInterrogation:
+                self.facture.acceptProduit(self.racourci, clef, autre_fournisseur=self.all)
+            else:
+                oyak.interrogateur.ask(produit=self.racourci,fournisseur=clef)
 
     def action(self, event="fake"):
         self.listbox.delete(0, END)
@@ -1225,7 +1308,7 @@ class processFacture:
 
 
         
-        if self.nb==0 and client==0:
+        if self.nb==0 and client==0 and oyak.notInterrogation:
             self.vendeur=oyak.vendeurChoisi
             self.clefs={}
             oyak.myClient.ihmShow()
@@ -1234,30 +1317,32 @@ class processFacture:
             return
 
         else:
-            self.client=client
-            (societe, ville, clef)=self.client
         
 
             self.nb=oyak.getNBfacture()
             oyak.factureCurrent=self.nb
             oyak.Factures[self.nb]=self
             
-            self.root=oyak.ihm.factureCreate(self.nb)
-
-            if oyak.zoomedWindow:
-                 oyak.ihm.ihm.wm_state(newstate="zoomed")
-            
             (numero, nom, prenom)=oyak.vendeurChoisi
             self.vendeur_prenom=prenom
             self.vendeur_numero=numero
+                
+            if oyak.notInterrogation:
+                self.client=client
+                (societe, ville, clef)=self.client
+                
+                self.root=oyak.ihm.factureCreate(self.nb)
 
-            self.ihmFacture()
+                if oyak.zoomedWindow:
+                     oyak.ihm.ihm.wm_state(newstate="zoomed")
 
-            oyak.ihm.factureButton[self.nb, "annuler"]["command"]=self.annuler
-            oyak.ihm.factureButton[self.nb, "envoyer"]["command"]=self.envoyer
-        
-            oyak.ihm.show("facture%d"%self.nb)
-            self.goToArticle()
+                self.ihmFacture()
+    
+                oyak.ihm.factureButton[self.nb, "annuler"]["command"]=self.annuler
+                oyak.ihm.factureButton[self.nb, "envoyer"]["command"]=self.envoyer
+            
+                oyak.ihm.show("facture%d"%self.nb)
+                self.goToArticle()
 
     def __del__(self):
         try:
