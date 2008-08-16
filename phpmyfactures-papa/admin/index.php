@@ -104,6 +104,10 @@ if (!$message) { $message="&nbsp;";}
 <tr >
       <td /> <a href="../query/unit_test.php">Créer des commandes de tests</a></td>
       <td /> <a href="../query/index.php?header=1">Tester envoi de commande a la base</a></td>
+       </tr>
+<tr >
+      
+      <td /> <a href="../query/interroge.php?header=1">Tester envoi de requete d'interrogation a la base</a></td>
   </tr>
 <tr> <td> <br />
 <br />

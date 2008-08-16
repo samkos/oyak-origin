@@ -88,6 +88,8 @@ que se passe-t-il si on fait nouvelle facture par le menu add facture?
 lorsque l'on selectionne un article le prix se refixe au prix par defaut ok
 
 
+gaffe au lancement successig d'interrogaton via le menu
+
 factures 
 --------
 

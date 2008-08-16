@@ -107,6 +107,7 @@ class singleton:
         
         self.url_send_commande=self.website_address+"/query/index.php?"
         self.url_update_commande=self.website_address+"/query/download.php?"
+        self.url_interroge=self.website_address+"/query/interroge.php?"
         
         self.url_get_Template=self.website_address+"/query/get_data.php?%s=1"
         
@@ -599,9 +600,26 @@ class interrogateur:
     def ask(self,vendeur=0,client=0,produit=0,fournisseur=0):
         #interrogation du serveur
         print "interrogation.... vendeur=%s,client=%s,produit=%s,fournisseur=%s"%(vendeur,client,produit,fournisseur)
-        oyak.ihm.showInterrogation()
-        pass
-    
+        s="%s%s%s%s%s%s%s"%(vendeur, oyak.sep1,client, oyak.sep1,produit, oyak.sep1,fournisseur)
+        params = urllib.urlencode({'requete': s})
+        try:
+            f = urllib.urlopen(oyak.url_interroge, params)
+        except:
+            oyak.ihm.showMessage("Le serveur ne répond pas!", self.goToArticle)
+            oyak.ihm.showMessage("Le serveur ne répond pas! \n url=%s \n v=%s \n s=%s"%
+                                 (oyak.url_send_commande,self.vendeur_numero,s), 
+                                 self.goToArticle)
+            oyak.writeDebug("?vendeur=1&params="+s)
+            return
+        ack=f.readlines()
+        ok=ack[0]
+        if (ok[0]=="0"):
+            print ok[2:]
+            s=string.replace(ok[2:], "!","\n")
+            oyak.ihm.showMessage("%s"%s, oyak.ihm.showInterrogation)
+        else:
+            oyak.ihm.showMessage("Echec de l'interrogation!", oyak.ihm.showInterrogation)
+       
     def close(self):
         oyak.notInterrogation=1
         oyak.ihm.showFactureFirst()
@@ -1862,7 +1880,7 @@ class processFacture:
         else:
             oyak.ihm.showMessage("Commande perdue!", oyak.ihm.delCurrentFacture)
             return
-            
+        f.close()
     
     def route(self, event):
        
