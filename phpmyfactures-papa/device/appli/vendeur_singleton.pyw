@@ -1866,14 +1866,21 @@ class processFacture:
 
         s="%s%s"%(self.clientClef, oyak.sep1)
         for l in range(0, self.nbArticles):
-             s=s+"%s%s"%(self.selectedCode[l], oyak.sep2)
-             s=s+"%s%s"%(self.selectedRacourci[l], oyak.sep2)
-             s=s+"%s%s"%(self.selectedFournisseur[l], oyak.sep2)
+             racourci=self.selectedRacourci[l]
+             fournisseur=self.selectedFournisseur[l]
+             try:
+                 barcode=oyak.ProduitsCodes[racourci, fournisseur]
+             except:
+                 barcode=-1
+             s=s+"%s%s"%(barcode, oyak.sep2)
+             s=s+"%s%s"%(racourci, oyak.sep2)
+             s=s+"%s%s"%(fournisseur, oyak.sep2)
              s=s+"%s%s"%(self.selectedDate[l], oyak.sep2)
              s=s+"%s%s"%(self.selectedQuantite[l], oyak.sep2)
              s=s+"%s%s"%(self.selectedPrix[l], oyak.sep2)
              s=s+"*%s%s"%(parametre, oyak.sep1)
         params = urllib.urlencode({'vendeur': self.vendeur_numero, 'commande':s})
+        print s
         try:
             f = urllib.urlopen(oyak.url_send_commande, params)
         except:
