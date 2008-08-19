@@ -1880,7 +1880,6 @@ class processFacture:
              s=s+"%s%s"%(self.selectedPrix[l], oyak.sep2)
              s=s+"*%s%s"%(parametre, oyak.sep1)
         params = urllib.urlencode({'vendeur': self.vendeur_numero, 'commande':s})
-        print s
         try:
             f = urllib.urlopen(oyak.url_send_commande, params)
         except:
