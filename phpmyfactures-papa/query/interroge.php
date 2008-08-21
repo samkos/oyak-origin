@@ -17,14 +17,29 @@ if ($header) {
 if ($requete) {
   $articles=split(";",$requete);
   $vendeur=$articles[0];	
-  $client=$client[1];	
+  $client=$articles[1];	
   $produit=$articles[2];	
   $fournisseur=$articles[3];	
     
 
   print "0!";
-  print "from serveur! Interrogation recue ! vendeur=$vendeur ! client=$client ! produit=$produit ! fournisseur=$fournisseur";
- 
+  if ($client) {
+  	$filename="c:/solcli/$client";
+  	if (file_exists($filename)) {
+		$lines = file($filename);
+		foreach ($lines as $line_num => $line) {
+			$line=str_replace("ı","!",$line);
+    		echo "$line\n";
+		}
+  	}
+  	else {
+  		print "Pas de renseignements disponibles! sur le client $client";	
+  	}
+  }
+  else
+  {
+	  print "from serveur! Interrogation recue ! vendeur=$vendeur ! client=$client ! produit=$produit ! fournisseur=$fournisseur";
+  }
 }
 
 	 
