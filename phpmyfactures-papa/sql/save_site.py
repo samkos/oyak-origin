@@ -79,7 +79,7 @@ def copytree(dir,from_dir,to_dir):
 
 def save_database():
 
-    os.system("save_site.bat")
+    os.system("make_7z.bat")
 
              
 if __name__ == '__main__':
