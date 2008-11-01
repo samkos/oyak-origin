@@ -567,9 +567,9 @@ class ihmRoot:
         oyak.myVendeur.ihmShow()
 
     def rechargeBase(self):
-        ihm.showMessage("Telechargement du serveur")
+        oyak.ihm.showMessage("Telechargement du serveur")
         lisData(clearAll=1, forceRecharge=1)
-        ihm.showMessage("OK...", self.showMenu)
+        oyak.ihm.showMessage("OK...", self.showMenu)
 
     def changeVendeur(self):
         oyak.myVendeur.ihmShow()
