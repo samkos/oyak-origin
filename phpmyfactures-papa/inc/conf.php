@@ -26,7 +26,7 @@ $gsprint="gsprint";
 $release_dir="../dist/releases";
 $commande_dir="c:\\ventesjour\\";
 
-require "debug.php";
+//require "debug.php";
 $version="0.3";
 
 

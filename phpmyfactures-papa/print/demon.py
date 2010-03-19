@@ -15,8 +15,8 @@ dir_etiqTODO="/etiqprint"
 dir_impTODO="/impprint"
 exe_print="\"c:\Program Files\Ghostgum\gsview\gsprint.exe\" -printer \"test1\""
 exe_print="\"c:\Program Files\Ghostgum\gsview\gsprint.exe\" -printer \"test1\""
-exe_print="print.bat "
-exe_printTo="printTo.bat "
+exe_print="\"c:/Program Files/EasyPHP1-8/www/phpmyfactures/print/print.bat \""
+exe_printTo="\"c:/Program Files/EasyPHP1-8/www/phpmyfactures/print/printTo.bat \""
 exe_facture="\"c:/Program Files/EasyPHP1-8/www/phpmyfactures/factures/traite.bat\" ";
 exe_etiq="\"c:/Program Files/EasyPHP1-8/www/phpmyfactures/barcode/traite.bat\" ";
 exe_imp="\"c:/Program Files/EasyPHP1-8/www/phpmyfactures/impression/traite.bat\" ";
@@ -104,6 +104,10 @@ def probePrint(dir_print,printer="default"):
                     print "%s"%timestamp+":"+ "Impression de %s "%filename
 
                 os.remove(filename)
+
+                if msg:
+                    print "%s"%timestamp+":"+ "Effacement de %s "%filename
+
 
     return
 

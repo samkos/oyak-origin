@@ -15,6 +15,7 @@ $nb_lignes_imprime=18;
 
 include("../inc/header.php");
 $debug=0;
+$not_deleting=0;
 
 // lecture des masques
 $dir=".";
@@ -78,8 +79,13 @@ if ($filenames) {
 			fwrite($file_portrait_out,$out);
 		}
 
-		echo "<BR> Effacement $filename NON FAIT   NON FAIT.... <BR> <BR>.";
-		//unlink($filename);
+		if ($not_deleting) {
+			echo "<BR> Effacement $filename NON FAIT   NON FAIT.... <BR> <BR>.";
+		}
+		else {
+			unlink($filename);
+			echo "<BR> Effacement $filename OK.... <BR> <BR>.";
+		}
 	}
 
 	if ($nb_pages_portrait) {
