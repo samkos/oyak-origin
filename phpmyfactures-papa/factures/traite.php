@@ -9,7 +9,7 @@ $exe_python="c:\\Python24\\python.exe ..\\print\\demon.pyw";
 $dir_facture="\facprint\*";
 
 $header=1;
-$nb_lignes_facture=18;
+$nb_lignes_facture=28;
 
 include("../inc/header.php");
 $debug=0;
