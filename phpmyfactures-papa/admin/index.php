@@ -26,7 +26,7 @@ if (!$message) { $message="&nbsp;";}
 
   <center>
   <table border="0" cellpadding="2" cellspacing="0">
-<?  
+<?php
   print "<tr>  <td colspan=10 align=center> <P style='color: #ff0000;'> $message </P> <BR> <BR></td>  </tr> \n";
 ?>
   <form  enctype="multipart/form-data"  action="update_table.php3" method="post">
@@ -99,7 +99,7 @@ if (!$message) { $message="&nbsp;";}
 <br />
 </td> </tr>
 <tr >
-    <td /> le compteur commandes est a <? echo $compteur ?> <a href="reinit_compteur.php"> <BR> Mettre a zero </a></td>
+    <td /> le compteur commandes est a <?php echo $compteur ?> <a href="reinit_compteur.php"> <BR> Mettre a zero </a></td>
 </tr>
 <tr >
       <td /> <a href="../query/unit_test.php">Créer des commandes de tests</a></td>
