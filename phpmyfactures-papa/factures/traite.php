@@ -9,7 +9,7 @@ $exe_python="c:\\Python24\\python.exe ..\\print\\demon.pyw";
 $dir_facture="\facprint\*";
 
 $header=1;
-$nb_lignes_facture=28;
+$nb_lignes_facture=30;
 
 include("../inc/header.php");
 $debug=0;
@@ -43,7 +43,9 @@ if ($filenames) {
     echo "<BR> Traitement factture $filename................................................";
     $out=make_facture($filename);
     fwrite($file_out,$out);
-    unlink($filename);
+    if (!$debug)  {
+       unlink($filename);
+    }
   }
 
   fwrite($file_out,$conclusion);
