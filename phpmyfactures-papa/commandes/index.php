@@ -39,7 +39,7 @@ if (!$commande) {
 	  <td bgcolor="#99CCCC" align="center" width="20%" ><b>Client</b></td>
 	  <td bgcolor="#99CCCC" align="center" width="40%" colspan="3"><b>Actions</b></td>
    </tr>
-<?
+<?php
 	  $clefs=array();
 	  foreach ($files as $filename) {
 		    $clef=date("YmdHis", filectime($filename));
@@ -106,7 +106,7 @@ else {
 		<br />
 		<br />
 		<table border="0" align="center" cellpadding="3" cellspacing="1" bgcolor="#000000" width="770">
-<?		 
+<?php		 
     print "<tr> ";
 	  print "<td bgcolor='#99CCCC' align='center' colspan=9>  Commande : $commande - $date</td>";
 		print "</tr>";
@@ -146,7 +146,7 @@ else {
         <td bgcolor="#99CCCC" align="center" width="15%"><b>Société</b></td>
         <td bgcolor="#99CCCC" align="center" width="15%"><b>Code</b></td>
        </tr>
-  <?
+  <?php
       $lignes=split(";",$contenu);
 	array_shift($lignes);
 	array_shift($lignes);
